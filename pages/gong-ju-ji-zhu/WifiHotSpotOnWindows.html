@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - Windows系统配置WiFi无线热点</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/pages/publications">出版</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>Windows系统配置WiFi无线热点</h1>
+Tue 21 November 2017
+
+by <a class="url fn" href="../../author/justin-c.html">Justin C.</a>
+ 
+
+
+        </div>
+	
+        <div><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
+Windows 版本： Windows 7/8/10  <br />
+前提：电脑装配无线网卡  <br />
+方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
+</font></p>
+<hr />
+<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
+<div class="highlight"><pre><span></span>netsh wlan show drivers
+</pre></div></p>
+<p>在输出信息中找到 “支持承载网络：是” 则继续。
+<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
+netsh wlan show hostednetwork setting=security
+</pre></div>
+
+<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
+
+<p>3.创建WiFi热点。命令行输入：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid=WiFi名称 key=WiFi密码
+</pre></div>
+
+<p>完成后提示承载网络设置成功。
+<hr>4.启用WiFi热点。在命令行输入：</p>
+
+<div class="highlight"><pre><span></span>netsh wlan start hostednetwork
+</pre></div>
+
+<p>完成后提示已启动承载网络。<hr></p>
+
+<p>5.启用WiFi热点共享。打开 “网络和共享中心”，在窗口左边栏找到 “更改适配器设置”，再在窗口右侧找到刚刚创建的WiFi网络，一般显示为 “本地连接”，记住。如下所示  <br />
+<img alt="windows wifi 热点 hotspot" src="http://7xq8q3.com1.z0.glb.clouddn.com/hostednetwork.jpg" />  <br />
+<br>在以太网的网络连接图标上点击右键选择属性，在弹出的窗口上方标签栏点击 “共享”。然后在下方确认框中启用 “允许其它网络用户通过此计算机的 Internet连接来连接(N)”。如下所示，下拉框中选择刚刚创建的WiFi热点，确定，完成。  <br />
+<img alt="windows wifi 热点 hotspot" src="http://7xq8q3.com1.z0.glb.clouddn.com/enablesharing.jpg" />  <br />
+<br>  <br />
+（完）</p>
+
+<p></font></div></p></div>
+	
+        <hr>
+
+    </div>
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="../../archives.html">Archives</a>
+                <li><a href="../../tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../../pages/gong-ju-ji-zhu/index.html">工具技术</a></li>
+                <li><a href="../../pages/xiang-fa-ri-ji/index.html">想法日记</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://www.imooc.com/">iMooC</a></li>
+                <li><a href="http://www.w3schools.com/">w3schools</a></li>
+                <li><a href="https://developer.cisco.com/">Cisco Lab</a></li>
+                <li><a href="https://www.coursera.org/">Coursera</a></li>
+                <li><a href="http://www.runoob.com/">RUNOOB</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="https://www.facebook.com/hao.zju">Facebook</a></li>
+                <li><a href="http://weibo.com/207575725">Weibo</a></li>
+                <li><a href="http://www.linkedin.com/in/haochiang">Linkedin</a></li>
+                <li><a href="https://github.com/Heriam">Github</a></li>
+                <li><a href="http://www.qyer.com/u/5831110/plan">Qyer</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">Heriam</a> &copy; Justin C. 2112</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="../../theme/bootstrap-collapse.js"></script>
+ 
+</body>
+</html>

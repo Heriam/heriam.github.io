@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - Install Wireshark on Ubuntu</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/pages/publications">出版</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>Install Wireshark on Ubuntu</h1>
+Fri 08 July 2016
+
+by <a class="url fn" href="../../author/justin-c.html">Justin C.</a>
+ 
+
+
+        </div>
+	
+        <div><div><font face="Times New Roman"><p><br>
+1. Download WIreshark source code on website: <a href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  <br />
+2. Extract files into targeted folder:     <br></p>
+<div class="highlight"><pre><span></span>tar -xvf wireshark-1.10.7.tar.bz2
+</pre></div>
+
+<p><br>  <br />
+3. Install compiling tools and dependencies:    <br></p>
+
+<div class="highlight"><pre><span></span>sudo apt-get install build-essential
+sudo apt-get install libgtk2.0-dev libglib2.0-dev
+sudo apt-get install checkinstall
+sudo apt-get install flex bison
+sudo apt-get build-dep wireshark
+sudo apt-get install qt5-default
+sudo apt-get install libssl-dev
+sudo apt-get install libgtk-3-dev
+</pre></div>
+
+<p><br>  <br />
+4. Go to <a href="http://www.tcpdump.org">www.tcpdump.org</a> and find newest version of libpcap(e.g., libpcap-1.5.3.tar.gz):     <br></p>
+
+<div class="highlight"><pre><span></span>#tar -xvf libpcap-1.5.3.tar.gz  
+#cd libpcap-1.5.3.tar.gz  
+#./configure  
+#make  
+#make install 
+</pre></div>
+
+<p><br>  <br />
+5. Go to wireshark folder:    <br></p>
+
+<div class="highlight"><pre><span></span>./autogen.sh
+./configure --with-ssl --enable-setcap-install
+make
+make install
+</pre></div>
+
+<p></font></div></p></div>
+	
+        <hr>
+
+    </div>
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="../../archives.html">Archives</a>
+                <li><a href="../../tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../../pages/gong-ju-ming-ling-gong-ju-xiao-lu-fang-fa/index.html">【工具】命令工具效率方法</a></li>
+                <li><a href="../../pages/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/index.html">【技术】软工算法系统设计</a></li>
+                <li><a href="../../pages/xin-zhi-ri-ji-sui-bi-ji-shi-bei-wang/index.html">【心智】日记随笔记事备忘</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://www.imooc.com/">iMooC</a></li>
+                <li><a href="http://www.w3schools.com/">w3schools</a></li>
+                <li><a href="https://developer.cisco.com/">Cisco Lab</a></li>
+                <li><a href="https://www.coursera.org/">Coursera</a></li>
+                <li><a href="http://www.runoob.com/">RUNOOB</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="https://www.facebook.com/hao.zju">Facebook</a></li>
+                <li><a href="http://weibo.com/207575725">Weibo</a></li>
+                <li><a href="http://www.linkedin.com/in/haochiang">Linkedin</a></li>
+                <li><a href="https://github.com/Heriam">Github</a></li>
+                <li><a href="http://www.qyer.com/u/5831110/plan">Qyer</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">Heriam</a> &copy; Justin C. 2112</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="../../theme/bootstrap-collapse.js"></script>
+ 
+</body>
+</html>

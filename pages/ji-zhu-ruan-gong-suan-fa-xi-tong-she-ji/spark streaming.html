@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - Spark Streaming 编程手册翻译</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/pages/publications">出版</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>Spark Streaming 编程手册翻译</h1>
+Wed 13 June 2018
+
+by <a class="url fn" href="../../author/justin-c.html">Justin C.</a>
+ 
+
+
+        </div>
+	
+        <div><h3><strong>综述 </strong></h3>
+<p>Spark Streaming是Spark API核心的扩展，支持实时数据流的可扩展，高吞吐量，容错流处理。数据可以从像卡夫卡，水槽，室壁运动，或TCP套接字许多来源摄入，并且可以使用与像高级别功能表达复杂的算法来处理<code>map</code>，<code>reduce</code>，<code>join</code>和<code>window</code>。最后，处理后的数据可以推送到文件系统，数据库和实时仪表板。实际上，您可以将Spark的 <a href="https://spark.apache.org/docs/latest/ml-guide.html">机器学习</a>和 <a href="https://spark.apache.org/docs/latest/graphx-programming-guide.html">图形处理</a>算法应用于数据流。</p>
+<p><img alt="Spark Streaming" src="https://spark.apache.org/docs/latest/img/streaming-arch.png"></p>
+<p>在内部，它的工作原理如下。Spark Streaming接收实时输入数据流并将数据分成批，然后由Spark引擎处理，以批量生成最终结果流。</p>
+<p><img alt="Spark Streaming" src="https://spark.apache.org/docs/latest/img/streaming-flow.png"></p>
+<p>Spark Streaming提供了一个高层抽象，称为<em>离散流</em>或<em>DStream</em>，它表示连续的数据流。DStream可以通过Kafka，Flume和Kinesis等来源的输入数据流创建，也可以通过在其他DStream上应用高级操作来创建。在内部，DStream表示为一系列 <a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.RDD">RDD</a>。</p>
+<p>本指南将向您介绍如何开始使用DStream编写Spark Streaming程序。您可以使用Scala，Java或Python（Spark 1.2中引入）编写Spark Streaming程序，所有这些都在本指南中介绍。您将在本指南中找到标签，让您在不同语言的代码片段之间进行选择。</p>
+<p><strong>注意：</strong> Python中有一些或者不同或者不可用的API。在本指南中，您将找到标记Python API来突出显示这些差异。</p>
+<hr>
+<h3>一个简单的例子</h3>
+<p>在介绍如何编写自己的Spark Streaming程序的细节之前，让我们快速了解一下简单的Spark Streaming程序的外观。假设我们想要统计从侦听TCP套接字的数据服务器接收到的文本数据中的单词数量。你需要做的只是如下。</p>
+<p>首先，我们创建一个 <a href="https://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/streaming/api/java/JavaStreamingContext.html">JavaStreamingContext</a>对象，它是所有流式传输功能的主要入口点。我们使用两个执行线程创建一个本地StreamingContext，批处理间隔为1秒。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">org.apache.spark.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.spark.api.java.function.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.spark.streaming.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.spark.streaming.api.java.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">scala.Tuple2</span><span class="o">;</span>
+
+<span class="c1">// Create a local StreamingContext with two working thread and batch interval of 1 second</span>
+<span class="n">SparkConf</span> <span class="n">conf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SparkConf</span><span class="o">().</span><span class="na">setMaster</span><span class="o">(</span><span class="s">&quot;local[2]&quot;</span><span class="o">).</span><span class="na">setAppName</span><span class="o">(</span><span class="s">&quot;NetworkWordCount&quot;</span><span class="o">);</span>
+<span class="n">JavaStreamingContext</span> <span class="n">jssc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JavaStreamingContext</span><span class="o">(</span><span class="n">conf</span><span class="o">,</span> <span class="n">Durations</span><span class="o">.</span><span class="na">seconds</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+</pre></div>
+
+
+<p>使用这个上下文，我们可以创建一个DStream，它表示来自某个TCP源的流数据，用主机名（例如<code>localhost</code>）和端口（例如<code>9999</code>）来指定。</p>
+<div class="highlight"><pre><span></span><span class="c1">// Create a DStream that will connect to hostname:port, like localhost:9999</span>
+<span class="n">JavaReceiverInputDStream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">jssc</span><span class="o">.</span><span class="na">socketTextStream</span><span class="o">(</span><span class="s">&quot;localhost&quot;</span><span class="o">,</span> <span class="mi">9999</span><span class="o">);</span>
+</pre></div>
+
+
+<p>这里lines`的DStream即表示将从数据服务器接收的数据流。该流中的每条记录都是一行文本。然后，我们想把空格分成单词。</p>
+<div class="highlight"><pre><span></span><span class="c1">// Split each line into words</span>
+<span class="n">JavaDStream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">&quot; &quot;</span><span class="o">)).</span><span class="na">iterator</span><span class="o">());</span>
+</pre></div>
+
+
+<p><code>flatMap</code>是一个DStream操作，它通过从源DStream中的每个记录生成多个新记录来创建一个新的DStream。在这种情况下，每行将被分割成多个单词，单词流表示为 <code>words</code> DStream。请注意，我们使用<a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.api.java.function.FlatMapFunction">FlatMapFunction</a>对象定义了转换 。正如我们将要发现的那样，Java API中有许多这样的便利类可以帮助定义DStream转换。</p>
+<p>接下来，我们要计算这些单词。</p>
+<div class="highlight"><pre><span></span><span class="c1">// Count each word in each batch</span>
+<span class="n">JavaPairDStream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">pairs</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="na">mapToPair</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;(</span><span class="n">s</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+<span class="n">JavaPairDStream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">wordCounts</span> <span class="o">=</span> <span class="n">pairs</span><span class="o">.</span><span class="na">reduceByKey</span><span class="o">((</span><span class="n">i1</span><span class="o">,</span> <span class="n">i2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span><span class="o">);</span>
+
+<span class="c1">// Print the first ten elements of each RDD generated in this DStream to the console</span>
+<span class="n">wordCounts</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+</pre></div></div>
+	
+        <hr>
+
+    </div>
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="../../archives.html">Archives</a>
+                <li><a href="../../tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../../pages/gong-ju-ming-ling-gong-ju-xiao-lu-fang-fa/index.html">【工具】命令工具效率方法</a></li>
+                <li><a href="../../pages/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/index.html">【技术】软工算法系统设计</a></li>
+                <li><a href="../../pages/xin-zhi-ri-ji-sui-bi-ji-shi-bei-wang/index.html">【心智】日记随笔记事备忘</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://www.imooc.com/">iMooC</a></li>
+                <li><a href="http://www.w3schools.com/">w3schools</a></li>
+                <li><a href="https://developer.cisco.com/">Cisco Lab</a></li>
+                <li><a href="https://www.coursera.org/">Coursera</a></li>
+                <li><a href="http://www.runoob.com/">RUNOOB</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="https://www.facebook.com/hao.zju">Facebook</a></li>
+                <li><a href="http://weibo.com/207575725">Weibo</a></li>
+                <li><a href="http://www.linkedin.com/in/haochiang">Linkedin</a></li>
+                <li><a href="https://github.com/Heriam">Github</a></li>
+                <li><a href="http://www.qyer.com/u/5831110/plan">Qyer</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">Heriam</a> &copy; Justin C. 2112</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="../../theme/bootstrap-collapse.js"></script>
+ 
+</body>
+</html>

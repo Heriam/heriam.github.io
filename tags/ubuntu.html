@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - Ubuntu</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://www.jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="http://www.jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="http://www.jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="http://www.jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="http://www.jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="http://www.jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/pages/publications">出版</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="http://www.jiang-hao.com/articles/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/Build and Install OpenDaylight on Ubuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
+Mon 01 January 2018
+
+by <a class="url fn" href="http://www.jiang-hao.com/author/justin-c.html">Justin C.</a>
+ 
+
+
+ 
+        </div>
+        
+        <div><div><font face="Times New Roman">
+<p><em><font face = "Times New Roman">Operating System：Linux x64 / Ubuntu 14.04</font></em>   <br />
+<em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
+<em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
+<hr />
+<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
+<hr />
+<p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
+<div class="highlight"><pre><span></span>sudo apt-get install git-core
+</pre></div>
+
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named "settings.xml". It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
+(under ~/ directory)</font>    </p>
+
+<div class="highlight"><pre><span></span>mkdir .m2                     
+cp -n ~/.m2/settings.xml{,.orig} ; \wget -q -O - https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml &gt; ~/.m2/settings.xml
+</pre></div>
+
+<p><font face = "Times New Roman">You can also use this command instead: </font>   </p>
+
+<div class="highlight"><pre><span></span>curl https://raw.githubusercontent.com/opendaylight/odlparent/master/settings.xml --create-dirs -o ~/.m2/settings.xml
+</pre></div>
+
+<p><font face = "Times New Roman">3. A new <em>settings.xml</em> file should now appear in the folder you just created, go and check the content, which should be something similar as below：</font>    </p>
+
+<div class="highlight"><pre><span></span># gedit ~/.m2/settings.xml
+<span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;profiles&gt;</span>
+    <span class="nt">&lt;profile&gt;</span>
+      <span class="nt">&lt;id&gt;</span>opendaylight-release<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+          <span class="nt">&lt;id&gt;</span>opendaylight-mirror<span class="nt">&lt;/id&gt;</span>
+          <span class="nt">&lt;name&gt;</span>opendaylight-mirror<span class="nt">&lt;/name&gt;</span>
+          <span class="nt">&lt;url&gt;</span>http://nexus.opendaylight.org/content/repositories/public/<span class="nt">&lt;/url&gt;</span>
+          <span class="nt">&lt;releases&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;updatePolicy&gt;</span>never<span class="nt">&lt;/updatePolicy&gt;</span>
+          <span class="nt">&lt;/releases&gt;</span>
+          <span class="nt">&lt;snapshots&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+          <span class="nt">&lt;/snapshots&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+      <span class="nt">&lt;/repositories&gt;</span>
+      <span class="nt">&lt;pluginRepositories&gt;</span>
+        <span class="nt">&lt;pluginRepository&gt;</span>
+          <span class="nt">&lt;id&gt;</span>opendaylight-mirror<span class="nt">&lt;/id&gt;</span>
+          <span class="nt">&lt;name&gt;</span>opendaylight-mirror<span class="nt">&lt;/name&gt;</span>
+          <span class="nt">&lt;url&gt;</span>http://nexus.opendaylight.org/content/repositories/public/<span class="nt">&lt;/url&gt;</span>
+          <span class="nt">&lt;releases&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+            <span class="nt">&lt;updatePolicy&gt;</span>never<span class="nt">&lt;/updatePolicy&gt;</span>
+          <span class="nt">&lt;/releases&gt;</span>
+          <span class="nt">&lt;snapshots&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+          <span class="nt">&lt;/snapshots&gt;</span>
+        <span class="nt">&lt;/pluginRepository&gt;</span>
+      <span class="nt">&lt;/pluginRepositories&gt;</span>
+    <span class="nt">&lt;/profile&gt;</span>
+
+    <span class="nt">&lt;profile&gt;</span>
+      <span class="nt">&lt;id&gt;</span>opendaylight-snapshots<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;repositories&gt;</span>
+        <span class="nt">&lt;repository&gt;</span>
+          <span class="nt">&lt;id&gt;</span>opendaylight-snapshot<span class="nt">&lt;/id&gt;</span>
+          <span class="nt">&lt;name&gt;</span>opendaylight-snapshot<span class="nt">&lt;/name&gt;</span>
+          <span class="nt">&lt;url&gt;</span>http://nexus.opendaylight.org/content/repositories/opendaylight.snapshot/<span class="nt">&lt;/url&gt;</span>
+          <span class="nt">&lt;releases&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+          <span class="nt">&lt;/releases&gt;</span>
+          <span class="nt">&lt;snapshots&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+          <span class="nt">&lt;/snapshots&gt;</span>
+        <span class="nt">&lt;/repository&gt;</span>
+      <span class="nt">&lt;/repositories&gt;</span>
+      <span class="nt">&lt;pluginRepositories&gt;</span>
+        <span class="nt">&lt;pluginRepository&gt;</span>
+          <span class="nt">&lt;id&gt;</span>opendaylight-snapshot<span class="nt">&lt;/id&gt;</span>
+          <span class="nt">&lt;name&gt;</span>opendaylight-snapshot<span class="nt">&lt;/name&gt;</span>
+          <span class="nt">&lt;url&gt;</span>http://nexus.opendaylight.org/content/repositories/opendaylight.snapshot/<span class="nt">&lt;/url&gt;</span>
+          <span class="nt">&lt;releases&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+          <span class="nt">&lt;/releases&gt;</span>
+          <span class="nt">&lt;snapshots&gt;</span>
+            <span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+          <span class="nt">&lt;/snapshots&gt;</span>
+        <span class="nt">&lt;/pluginRepository&gt;</span>
+      <span class="nt">&lt;/pluginRepositories&gt;</span>
+    <span class="nt">&lt;/profile&gt;</span>
+  <span class="nt">&lt;/profiles&gt;</span>
+
+  <span class="nt">&lt;activeProfiles&gt;</span>
+    <span class="nt">&lt;activeProfile&gt;</span>opendaylight-release<span class="nt">&lt;/activeProfile&gt;</span>
+    <span class="nt">&lt;activeProfile&gt;</span>opendaylight-snapshots<span class="nt">&lt;/activeProfile&gt;</span>
+  <span class="nt">&lt;/activeProfiles&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>  
+</pre></div>
+
+<p><hr />
+<p><font face = "Times New Roman"><strong>STEP 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
+<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next STEP.</font></p>
+<hr />
+<p><font face = "Times New Roman">1.Create a directory for your project and get the source code of OpenDaylight controller:</font>      </p>
+<div class="highlight"><pre><span></span>mkdir openDayLight
+cd openDayLight
+git clone https://git.opendaylight.org/gerrit/p/controller.git
+</pre></div></p>
+<p><font face = "Times New Roman">2.Specify the version of OpenDaylight you want to build and check:</font>  </p>
+
+<div class="highlight"><pre><span></span>cd controller
+git checkout stable/lithium    //here I specify stable/lithium version
+git branch
+</pre></div>
+
+<p><font face = "Times New Roman">3.Make sure your <em>settings.xml</em> file is right in place. Build the code with Internet connecdtion:</font>     </p>
+
+<div class="highlight"><pre><span></span>mvn clean install -DskipTests
+</pre></div>
+
+<p><font face = "Times New Roman">4.Now run your controller:</font>        </p>
+
+<div class="highlight"><pre><span></span>cd controller/karaf/opendaylight-karaf/target/assembly    
+./bin/karaf
+</pre></div>
+
+<p><font face = "Times New Roman">5.And after a while you will enter the OpenDaylight command line mode as shown below:</font>    </p>
+
+<div class="highlight"><pre><span></span>opendaylight-user@root&gt;
+</pre></div>
+
+<p><font face = "Times New Roman">6.Some useful command lines to check and install features:</font>    </p>
+
+<div class="highlight"><pre><span></span><span class="n">feature</span><span class="o">:</span><span class="n">list</span> <span class="o">-</span><span class="n">i</span>   <span class="c1">//show the features which are already installed</span>
+<span class="n">feature</span><span class="o">:</span><span class="n">list</span>      <span class="c1">//show all available features (installed ones are marked with &quot;x&quot;)</span>
+<span class="n">feature</span><span class="o">:</span><span class="n">list</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">&lt;</span><span class="n">keyword</span><span class="o">&gt;</span>   <span class="c1">//show features that contains &lt;keyword&gt;</span>
+<span class="n">feature</span><span class="o">:</span><span class="n">install</span> <span class="o">&lt;</span><span class="n">feature</span><span class="o">&gt;</span>   <span class="c1">//install a &lt;feature&gt;</span>
+</pre></div>
+
+<p><hr />
+<p><font face = "Times New Roman"><strong>STEP 3, Build and Install OpenDaylight Integration Project</strong></font></p>
+<hr />
+<p><font face = "Times New Roman">Integration Project is more like a framework project which is to integrate all other projects into OpenDaylight. With Integration project you can modify or put your own features under this project directory and test with the controller.</font>    </p>
+<p><font face = "Times New Roman">1.Download the Integration source code:</font> </p>
+<div class="highlight"><pre><span></span>git clone https://git.opendaylight.org/gerrit/p/integration.git
+</pre></div></p>
+<p><font face = "Times New Roman">2.Get into the integration directory and specify the version you want:</font>    </p>
+
+<div class="highlight"><pre><span></span>cd integration
+git checkout stable/lithium
+mvn clean install -DskipTests
+</pre></div>
+
+<p><font face = "Times New Roman">3.After previous step is done, you may would like to run the controller:</font>    </p>
+
+<div class="highlight"><pre><span></span>cd integration/distributions/karaf/target/assembly
+./bin/karaf
+</pre></div>
+
+<p><font face = "Times New Roman">4.Finally you can now begin your development and replace original features with your own ones under this directory, after which you would be able to build and run the controller for testing:</font>    </p>
+
+<div class="highlight"><pre><span></span>username@ubuntu:~/developApps/openDayLight/integration/distributions/karaf/target/assembly/system/org/opendaylight$ ls
+aaa               integration      neutron         sdninterfaceapp  usc
+bgpcep            iotdm            nic             sfc              vpnservice
+capwap            l2switch         odlparent       snmp             vtn
+controller        lacp             sxp             yangtools
+coretutorials     lispflow         mapping         tcpmd5
+didm              mdsal            ovsdb           topoprocessing
+dlux              nemo             packetcable     tsdr
+groupbasedpolicy  netconf          reservation     ttp
+</pre></div>
+
+<p><font face = "Times New Roman">（END）</font></p>
+
+<p></font></div></p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.jiang-hao.com/articles/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache Maven安装</h2></a>
+        <div class= "well small"> Tue 24 October 2017
+
+by <a class="url fn" href="http://www.jiang-hao.com/author/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman">
+<p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>
+<em><font face = "Times New Roman">Apache Maven版本：3.3.9</font></em>  <br />
+<em><font face = "Times New Roman">建议预先搭建Java开发环境：详见<a href="http://www.hao-jiang.com/pages/2016/01/13/ubuntuxi-tong-javakai-fa-huan-jing-de-da-jian.html">《Linux Ubuntu系统下Java开发环境搭建》</a></font></em></p>
+<hr />
+<p><font face = "Times New Roman">1. 前往Apache Maven官网下载最新版本：https://maven.apache.org/download.cgi，本文以apache-maven-3.3.9-bin.tar.gz为例。</font>    </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建MVN子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<div class="highlight"><pre><span></span>cd /opt                       #进入到opt目录
+sudo mkdir mvn                #新建一个mvn文件夹
+ls                            #显示成功新建的mvn文件夹
+cd mvn                        #进入mvn文件夹
+</pre></div>
+
+<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="http://www.jiang-hao.com/articles/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/Ubuntu系统Apache Maven安装.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.jiang-hao.com/articles/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/Ubuntu系统Java开发环境的搭建.html"><h2>Ubuntu系统Java开发环境的搭建</h2></a>
+        <div class= "well small"> Mon 23 October 2017
+
+by <a class="url fn" href="http://www.jiang-hao.com/author/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman">
+<p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>  <br />
+<em><font face = "Times New Roman">Java JDK版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
+<hr />
+<p><font face = "Times New Roman">1. 前往ORACLE官网下载最新版本的Java JDK：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java JDK，本例选择在/opt目录下新建JVM子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<div class="highlight"><pre><span></span>cd /opt                     
+sudo mkdir jvm              
+ls                            
+cd jvm
+</pre></div>
+
+<p><font face = "Times New Roman">3.将下载的JDK压缩包拷贝到jvm目录下。新建另一个Terminal窗口（T2）并输入：</font>    </p>
+
+<div class="highlight"><pre><span></span>cd Downloads                       
+ls                         
+sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="http://www.jiang-hao.com/articles/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/Ubuntu系统Java开发环境的搭建.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.jiang-hao.com/articles/gong-ju-ming-ling-gong-ju-xiao-lu-fang-fa/Install Wireshark on Ubuntu.html"><h2>Install Wireshark on Ubuntu</h2></a>
+        <div class= "well small"> Fri 08 July 2016
+
+by <a class="url fn" href="http://www.jiang-hao.com/author/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman"><p><br>
+1. Download WIreshark source code on website: <a href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  <br />
+2. Extract files into targeted folder:     <br></p>
+<div class="highlight"><pre><span></span>tar -xvf wireshark-1.10.7.tar.bz2
+</pre></div>
+
+<p><br>  <br />
+3. Install compiling tools and dependencies:    <br></p>
+
+<div class="highlight"><pre><span></span>sudo apt-get install build-essential
+sudo apt-get install libgtk2.0-dev libglib2.0-dev
+sudo apt-get install checkinstall
+sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall" href="http://www.jiang-hao.com/articles/gong-ju-ming-ling-gong-ju-xiao-lu-fang-fa/Install Wireshark on Ubuntu.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="http://www.jiang-hao.com/articles/gong-ju-ming-ling-gong-ju-xiao-lu-fang-fa/Install VMware Workstation in Ubuntu 14.04.html"><h2>Install VMware Workstation in Ubuntu 14.04</h2></a>
+        <div class= "well small"> Thu 21 April 2016
+
+by <a class="url fn" href="http://www.jiang-hao.com/author/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman"><p><br>
+1. Use <code>apt-get</code>  update system:    </p>
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
+linuxidc@localhost:~$ sudo apt-get upgrade
+</pre></div>
+
+<p><br><br>
+2. Download VMware Workstation bundle.<br><br>
+3. Make bundle executable:    </p>
+
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
+</pre></div>
+
+<p><br><br>
+4. Run the bundle:    </p>
+
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
+</pre></div>
+
+<p><br><br>
+5. Installation:  <br />
+<img alt="VMware Station Installation" src="http://www.linuxidc.com/upload/2015_01/150114174598326.jpg" /></p>
+
+<p></font></div></p> <a class="btn btn-info xsmall" href="http://www.jiang-hao.com/articles/gong-ju-ming-ling-gong-ju-xiao-lu-fang-fa/Install VMware Workstation in Ubuntu 14.04.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="http://www.jiang-hao.com/tags/ubuntu.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Site
+                </li>
+            
+                <li><a href="http://www.jiang-hao.com/archives.html">Archives</a>
+                <li><a href="http://www.jiang-hao.com/tags.html">Tags</a>
+
+
+
+
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="http://www.jiang-hao.com/gong-ju-ming-ling-gong-ju-xiao-lu-fang-fa/index.html">【工具】命令工具效率方法</a></li>
+                <li><a href="http://www.jiang-hao.com/ji-zhu-ruan-gong-suan-fa-xi-tong-she-ji/index.html">【技术】软工算法系统设计</a></li>
+                <li><a href="http://www.jiang-hao.com/xin-zhi-ri-ji-sui-bi-ji-shi-bei-wang/index.html">【心智】日记随笔记事备忘</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://getpelican.com/">Pelican</a></li>
+                <li><a href="http://python.org/">Python.org</a></li>
+                <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                <li><a href="#">You can modify those links in your config file</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="#">You can add links in your config file</a></li>
+                <li><a href="#">Another social link</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="http://www.jiang-hao.com">Heriam</a> &copy; Justin C. 2018</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://www.jiang-hao.com/theme/bootstrap-collapse.js"></script>
+ 
+</body>
+</html>

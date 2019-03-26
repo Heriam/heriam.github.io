@@ -115,31 +115,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/spark streaming.html"><h2>Spark Streaming 编程手册翻译</h2></a>
-        <div class= "well small"> Wed 13 June 2018
-
-by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
- 
-
-
- </div>
-        <div class="summary"><h3><strong>综述 </strong></h3>
-<p>Spark Streaming是Spark API核心的扩展，支持实时数据流的可扩展，高吞吐量，容错流处理。数据可以从像卡夫卡，水槽，室壁运动，或TCP套接字许多来源摄入，并且可以使用与像高级别功能表达复杂的算法来处理<code>map</code>，<code>reduce</code>，<code>join</code>和<code>window</code>。最后，处理后的数据可以推送到文件系统，数据库和实时仪表板。实际上，您可以将Spark的 <a href="https://spark.apache.org/docs/latest/ml-guide.html">机器学习</a>和 <a href="https://spark.apache.org/docs/latest/graphx-programming-guide.html">图形处理</a>算法应用于数据流。</p>
-<p><img alt="Spark Streaming" src="https://spark.apache.org/docs/latest/img/streaming-arch.png"></p>
-<p>在内部，它的工作原理如下。Spark Streaming接收实时输入数据流并将数据分成批，然后由Spark引擎处理，以批量生成最终结果流。</p>
-<p><img alt="Spark Streaming" src="https://spark.apache.org/docs/latest/img/streaming-flow.png"></p>
-<p>Spark Streaming提供了一个高层抽象，称为<em>离散流</em>或<em>DStream</em>，它表示连续的数据流。DStream可以通过Kafka，Flume和Kinesis等来源的输入数据流创建，也可以通过在其他DStream上应用高级操作来创建。在内部，DStream表示为一系列 <a href="https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.rdd.RDD">RDD</a>。</p>
-<p>本指南将向您介绍如何开始使用DStream编写Spark Streaming程序。您可以使用Scala，Java或Python（Spark …</p> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/spark streaming.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/JQCloud.html"><h2>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h2></a>
+        <a href="../pages/bo-ke-da-jian/JQCloud.html"><h2>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h2></a>
         <div class= "well small"> Sun 25 February 2018
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
@@ -157,7 +133,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/JQCloud.html">read more</a></div>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="../pages/bo-ke-da-jian/JQCloud.html">read more</a></div>
     </div>	
 				
 
@@ -167,7 +143,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
+        <a href="../pages/bo-ke-da-jian/使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
         <div class= "well small"> Mon 05 February 2018
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
@@ -194,7 +170,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
   <br>   </li>
 <li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
 </ol>
-<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="../pages/bo-ke-da-jian/使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
     </div>	
 				
 
@@ -204,7 +180,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github Pages搭建博客教程</h2></a>
+        <a href="../pages/bo-ke-da-jian/使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github Pages搭建博客教程</h2></a>
         <div class= "well small"> Mon 05 February 2018
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
@@ -226,7 +202,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 10.Disqus——用来提供博客评论功能  <br>
 11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
 12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
-<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/使用Pelican基于Github Pages搭建博客教程.html">read more</a></div>
+<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="../pages/bo-ke-da-jian/使用Pelican基于Github Pages搭建博客教程.html">read more</a></div>
     </div>	
 				
 
@@ -236,7 +212,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/Build and Install OpenDaylight on Ubuntu.html"><h2>Build and Install OpenDaylight on Ubuntu</h2></a>
+        <a href="../pages/ruan-jian-gong-ju/Build and Install OpenDaylight on Ubuntu.html"><h2>Build and Install OpenDaylight on Ubuntu</h2></a>
         <div class= "well small"> Mon 01 January 2018
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
@@ -255,7 +231,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 <div class="highlight"><pre><span></span>sudo apt-get install git-core
 </pre></div>
 
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/Build and Install OpenDaylight on Ubuntu.html">read more</a></div>
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="../pages/ruan-jian-gong-ju/Build and Install OpenDaylight on Ubuntu.html">read more</a></div>
     </div>	
 				
 
@@ -265,7 +241,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/WifiHotSpotOnWindows.html"><h2>Windows系统配置WiFi无线热点</h2></a>
+        <a href="../pages/ruan-jian-gong-ju/WifiHotSpotOnWindows.html"><h2>Windows系统配置WiFi无线热点</h2></a>
         <div class= "well small"> Tue 21 November 2017
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
@@ -293,7 +269,7 @@ netsh wlan show hostednetwork setting=security
 
 <p>3.创建WiFi热点。命令行输入：    </p>
 
-<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/WifiHotSpotOnWindows.html">read more</a></div>
+<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="../pages/ruan-jian-gong-ju/WifiHotSpotOnWindows.html">read more</a></div>
     </div>	
 				
 
@@ -303,7 +279,7 @@ netsh wlan show hostednetwork setting=security
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache Maven安装</h2></a>
+        <a href="../pages/bian-cheng-kai-fa/Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache Maven安装</h2></a>
         <div class= "well small"> Tue 24 October 2017
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
@@ -324,7 +300,7 @@ ls                            #显示成功新建的mvn文件夹
 cd mvn                        #进入mvn文件夹
 </pre></div>
 
-<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/Ubuntu系统Apache Maven安装.html">read more</a></div>
+<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="../pages/bian-cheng-kai-fa/Ubuntu系统Apache Maven安装.html">read more</a></div>
     </div>	
 				
 
@@ -334,7 +310,7 @@ cd mvn                        #进入mvn文件夹
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/Ubuntu系统Java开发环境的搭建.html"><h2>Ubuntu系统Java开发环境的搭建</h2></a>
+        <a href="../pages/bian-cheng-kai-fa/Ubuntu系统Java开发环境的搭建.html"><h2>Ubuntu系统Java开发环境的搭建</h2></a>
         <div class= "well small"> Mon 23 October 2017
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
@@ -358,7 +334,7 @@ cd jvm
 
 <div class="highlight"><pre><span></span>cd Downloads                       
 ls                         
-sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/Ubuntu系统Java开发环境的搭建.html">read more</a></div>
+sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="../pages/bian-cheng-kai-fa/Ubuntu系统Java开发环境的搭建.html">read more</a></div>
     </div>	
 				
 
@@ -368,20 +344,64 @@ sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="../pages/
  
 
     <div class='article'>
-        <a href="../pages/gong-ju-ji-zhu/jacpolslides.html"><h2>JACPoL: A Simple but Expressive JSON-based Access Control Policy Language</h2></a>
-        <div class= "well small"> Thu 28 September 2017
+        <a href="../pages/ruan-jian-gong-ju/InstallAndRunGeditOnMac.html"><h2>Install & Run Gedit from Terminal on Mac</h2></a>
+        <div class= "well small"> Tue 15 August 2017
 
 by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
  
 
 
  </div>
-        <div class="summary"><p><object data="http://p6gi3pu6v.bkt.clouddn.com/WISTP_2017_JACPoL.pdf#page=1" type="application/pdf" width="100%" height="600px">
-<iframe src="http://p6gi3pu6v.bkt.clouddn.com/WISTP_2017_JACPoL.pdf#page=1" width="600px" height="100%" style="border: none;">
-This browser does not support PDFs. Please download the PDF to view it: <a href="http://p6gi3pu6v.bkt.clouddn.com/WISTP_2017_JACPoL.pdf">Download PDF</a>
-</iframe>
-</object>
-<hr></p> <a class="btn btn-info xsmall" href="../pages/gong-ju-ji-zhu/jacpolslides.html">read more</a></div>
+        <div class="summary"><div><font face="Times New Roman"><p><em>App description: gedit (App: gedit.app)</em>   <br />
+<em>App website: <a href="https://wiki.gnome.org/Apps/Gedit">https://wiki.gnome.org/Apps/Gedit</a></em>     </p>
+<hr />
+<p><strong>Install from Terminal</strong></p>
+<hr />
+<p><br>  <br />
+1.Run:    </p>
+<div class="highlight"><pre><span></span><span class="nt">ruby</span> <span class="nt">-e</span> <span class="s2">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span> <span class="o">&lt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="o">;</span> <span class="nt">brew</span> <span class="nt">install</span> <span class="nt">caskroom</span><span class="o">/</span><span class="nt">cask</span><span class="o">/</span><span class="nt">brew-cask</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span>
+</pre></div>
+
+<p><br>  <br />
+2.After the command finishes, run …</p></font></div> <a class="btn btn-info xsmall" href="../pages/ruan-jian-gong-ju/InstallAndRunGeditOnMac.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../pages/bo-ke-da-jian/网页BackToTop返回顶部按钮的简单实现.html"><h2>网页 BacktoTop 返回顶部按钮的简单实现</h2></a>
+        <div class= "well small"> Fri 30 June 2017
+
+by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>在较长的网页页面中往往需要一个固定漂浮在显示屏右下侧位置的返回顶部按钮。</p>
+<p>下面介绍一种简单实现：</p>
+<p><strong>HTML 部分：</strong>  </p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>Top<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  ...
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p><strong>CSS 部分：</strong></p>
+<div class="highlight"><pre><span></span><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
+    <span class="k">right</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">cursor</span><span class="p">:</span><span class="kc">pointer</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span><span class="mh">#2E435E</span><span class="p">;</span>
+    <span class="k">text-indent</span><span class="p">:</span><span class="mi">-9999</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span><span class="kc">none …</span></pre></div> <a class="btn btn-info xsmall" href="../pages/bo-ke-da-jian/网页BackToTop返回顶部按钮的简单实现.html">read more</a></div>
     </div>	
 				
 <div class="pagination">
@@ -390,8 +410,6 @@ This browser does not support PDFs. Please download the PDF to view it: <a href=
 
     <li class="active"><a href="../author/justin-c.html">1</a></li>
     <li class=""><a href="../author/justin-c2.html">2</a></li>
-    <li class=""><a href="../author/justin-c3.html">3</a></li>
-    <li class=""><a href="../author/justin-c4.html">4</a></li>
 
     <li class="next"><a href="../author/justin-c2.html">Next &rarr;</a></li>
 
@@ -425,7 +443,9 @@ This browser does not support PDFs. Please download the PDF to view it: <a href=
                 Categories
                 </li>
                 
-                <li><a href="../pages/gong-ju-ji-zhu/index.html">工具技术</a></li>
+                <li><a href="../pages/bian-cheng-kai-fa/index.html">编程开发</a></li>
+                <li><a href="../pages/bo-ke-da-jian/index.html">博客搭建</a></li>
+                <li><a href="../pages/ruan-jian-gong-ju/index.html">软件工具</a></li>
                 <li><a href="../pages/xiang-fa-ri-ji/index.html">想法日记</a></li>
                    
             </ul>

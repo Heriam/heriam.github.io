@@ -54,28 +54,40 @@
     <div class="row">
 
         <div class="span9">
-<ul>
-    <li><a href="https://jiang-hao.com/tags/aaa.html">AAA</a></li>
-    <li><a href="https://jiang-hao.com/tags/blog.html">Blog</a></li>
-    <li><a href="https://jiang-hao.com/tags/gedit.html">Gedit</a></li>
-    <li><a href="https://jiang-hao.com/tags/github.html">Github</a></li>
-    <li><a href="https://jiang-hao.com/tags/java.html">Java</a></li>
-    <li><a href="https://jiang-hao.com/tags/jqcloud.html">JQCloud</a></li>
-    <li><a href="https://jiang-hao.com/tags/jquery.html">JQuery</a></li>
-    <li><a href="https://jiang-hao.com/tags/macos.html">MacOS</a></li>
-    <li><a href="https://jiang-hao.com/tags/maven.html">Maven</a></li>
-    <li><a href="https://jiang-hao.com/tags/mysql.html">MySQL</a></li>
-    <li><a href="https://jiang-hao.com/tags/opendaylight.html">OpenDaylight</a></li>
-    <li><a href="https://jiang-hao.com/tags/pelican.html">Pelican</a></li>
-    <li><a href="https://jiang-hao.com/tags/sdn.html">SDN</a></li>
-    <li><a href="https://jiang-hao.com/tags/shiro.html">Shiro</a></li>
-    <li><a href="https://jiang-hao.com/tags/tagcloud.html">TagCloud</a></li>
-    <li><a href="https://jiang-hao.com/tags/ubuntu.html">Ubuntu</a></li>
-    <li><a href="https://jiang-hao.com/tags/vmware.html">VMware</a></li>
-    <li><a href="https://jiang-hao.com/tags/wifi.html">WiFi</a></li>
-    <li><a href="https://jiang-hao.com/tags/windows.html">Windows</a></li>
-    <li><a href="https://jiang-hao.com/tags/wireshark.html">Wireshark</a></li>
-</ul>
+<script src="https://jiang-hao.com/theme/jqcloud/jqcloud.js"></script>
+<link href="https://jiang-hao.com/theme/jqcloud/jqcloud.css" rel="stylesheet">
+<script>
+    var words = [];
+        words.push({text: "AAA", weight: Math.random(), link: 'https://jiang-hao.com/tags/aaa.html'});
+        words.push({text: "Blog", weight: Math.random(), link: 'https://jiang-hao.com/tags/blog.html'});
+        words.push({text: "Gedit", weight: Math.random(), link: 'https://jiang-hao.com/tags/gedit.html'});
+        words.push({text: "Github", weight: Math.random(), link: 'https://jiang-hao.com/tags/github.html'});
+        words.push({text: "Java", weight: Math.random(), link: 'https://jiang-hao.com/tags/java.html'});
+        words.push({text: "JQCloud", weight: Math.random(), link: 'https://jiang-hao.com/tags/jqcloud.html'});
+        words.push({text: "JQuery", weight: Math.random(), link: 'https://jiang-hao.com/tags/jquery.html'});
+        words.push({text: "MacOS", weight: Math.random(), link: 'https://jiang-hao.com/tags/macos.html'});
+        words.push({text: "Maven", weight: Math.random(), link: 'https://jiang-hao.com/tags/maven.html'});
+        words.push({text: "MySQL", weight: Math.random(), link: 'https://jiang-hao.com/tags/mysql.html'});
+        words.push({text: "OpenDaylight", weight: Math.random(), link: 'https://jiang-hao.com/tags/opendaylight.html'});
+        words.push({text: "Pelican", weight: Math.random(), link: 'https://jiang-hao.com/tags/pelican.html'});
+        words.push({text: "SDN", weight: Math.random(), link: 'https://jiang-hao.com/tags/sdn.html'});
+        words.push({text: "Shiro", weight: Math.random(), link: 'https://jiang-hao.com/tags/shiro.html'});
+        words.push({text: "TagCloud", weight: Math.random(), link: 'https://jiang-hao.com/tags/tagcloud.html'});
+        words.push({text: "Ubuntu", weight: Math.random(), link: 'https://jiang-hao.com/tags/ubuntu.html'});
+        words.push({text: "VMware", weight: Math.random(), link: 'https://jiang-hao.com/tags/vmware.html'});
+        words.push({text: "WiFi", weight: Math.random(), link: 'https://jiang-hao.com/tags/wifi.html'});
+        words.push({text: "Windows", weight: Math.random(), link: 'https://jiang-hao.com/tags/windows.html'});
+        words.push({text: "Wireshark", weight: Math.random(), link: 'https://jiang-hao.com/tags/wireshark.html'});
+        words.push({text: "Blog", weight: Math.random(), link: 'https://jiang-hao.com/categories/blog.html'});
+        words.push({text: "Coding", weight: Math.random(), link: 'https://jiang-hao.com/categories/coding.html'});
+        words.push({text: "Notes", weight: Math.random(), link: 'https://jiang-hao.com/categories/notes.html'});
+        words.push({text: "Tools", weight: Math.random(), link: 'https://jiang-hao.com/categories/tools.html'});
+    $(function() {
+        $("#tagcloud").jQCloud(words, {
+            autoResize: true
+        }); 
+    });
+</script>
         </div>
         
         <div class="span3">

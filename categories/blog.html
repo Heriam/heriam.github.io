@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+        
+
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2018/blog-JQCloud.html"><h1>JQCloud:&nbsp;一个前端生成美化标签云的简单JQuery插件</h1></a>
+Sun 25 February 2018
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ 
+        </div>
+        
+        <div><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
+官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
+<p>使用方法很简单，可以把<span class="caps">JS</span>和<span class="caps">CSS</span>文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>具体的使用方法官网都能查到。</p>
+<p>贴出自己微博使用JQCloud的前端代码：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag.url }}&#39;</span><span class="p">});</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">category</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">categories</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{category}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ category.url }}&#39;</span><span class="p">});</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#tagcloud&quot;</span><span class="p">).</span><span class="nx">jQCloud</span><span class="p">(</span><span class="nx">words</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">autoResize</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">});</span> 
+    <span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tagcloud&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 80%; height: 450px; align-self: center;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。</p></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2018/blog-使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
+        <div class= "well small"> Mon 05 February 2018
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
+- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
+- 配置<span class="caps">DNS</span>解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
+- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
+  ​        <br>
+  <br>   </p>
+<hr>
+<p><strong>一、</strong><a href="http://www.jianshu.com/p/fd8ed9855f44">《Pelican＋Github博客搭建详细教程》</a>      </p>
+<hr>
+<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
+<br>   </p>
+<hr>
+<p><strong>二、在Coding创建一个新的项目</strong></p>
+<hr>
+<ol>
+<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
+  <br>   </li>
+<li>将本地<span class="caps">SSH</span>公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝 …</li></ol> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/blog-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github&nbsp;Pages搭建博客教程</h2></a>
+        <div class= "well small"> Mon 05 February 2018
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p><strong>操作系统：</strong>Mac <span class="caps">OS</span> / Linux    <br>
+<strong>工具集：</strong>  <br>
+1.Pelican——基于Python的静态网页生成器 <br>
+2.马克飞象——Evernote出的Markdown文本编辑器 <br>
+3.GoDaddy——域名供应商 <br>
+4.DNSPod——提供免费域名解析注册服务 <br>
+5.Github Pages——Github为每个注册用户提供300M的站点空间 <br>
+6.Python——Pelican工具需要Python运行环境 <br>
+7.Google Analytics——谷歌站点数据监测分析工具 <br>
+8.Google Custom Search——谷歌自定义搜索引擎可用作站内搜索工具 <br>
+9.Google Webmasters——谷歌站长工具  <br>
+10.Disqus——用来提供博客评论功能  <br>
+11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
+12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
+<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2017/blog-网页BackToTop返回顶部按钮的简单实现.html"><h2>网页 BacktoTop&nbsp;返回顶部按钮的简单实现</h2></a>
+        <div class= "well small"> Fri 30 June 2017
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>在较长的网页页面中往往需要一个固定漂浮在显示屏右下侧位置的返回顶部按钮。</p>
+<p>下面介绍一种简单实现：</p>
+<p><strong><span class="caps">HTML</span>&nbsp;部分：</strong>  </p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>Top<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  ...
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p><strong><span class="caps">CSS</span>&nbsp;部分：</strong></p>
+<div class="highlight"><pre><span></span><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
+    <span class="k">right</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">cursor</span><span class="p">:</span><span class="kc">pointer</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span><span class="mh">#2E435E</span><span class="p">;</span>
+    <span class="k">text-indent</span><span class="p">:</span><span class="mi">-9999</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span><span class="kc">none …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/blog-网页BackToTop返回顶部按钮的简单实现.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2017/blog-CSS伪类content url放图片如何改变图的大小.html"><h2><span class="caps">CSS</span>伪类content:&nbsp;url放图片如何改变图的大小</h2></a>
+        <div class= "well small"> Tue 21 February 2017
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>遇到过一个问题：用before after&nbsp;之类的伪类的content里放一个图的链接，如何去改图的大小？比如：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">nav</span> <span class="nt">ul</span> <span class="nt">li</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">../img/nav_fg.png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>事实上，如果想要设置前端页面通过content：url显示出来的图片大小，那只能修改图片的大小。因为它是直接读取的图片，并不是代入到html中再显示出来。但可以采用background的方式调整图片的大小，比如本博客中学术社交网站ResearchGate的Logo的<span class="caps">CSS</span>显示代码如下：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">social</span> <span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">*=</span><span class="s1">&#39;researchgate.net&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="s1">&#39;./images/icons/researchgate.png&#39;</span><span class="p">);</span> 
+  <span class="k">background-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span> 
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span> 
+  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">vertical-align</span><span class="p">:</span> <span class="mi">-3</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">height</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/blog-CSS伪类content url放图片如何改变图的大小.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+
+    <li class="active"><a href="https://jiang-hao.com/categories/blog.html">1</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="https://jiang-hao.com/categories/blog.html">Blog</a></li>
+                <li><a href="https://jiang-hao.com/categories/coding.html">Coding</a></li>
+                <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
+                <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://www.imooc.com/">iMooC</a></li>
+                <li><a href="http://www.w3schools.com/">w3schools</a></li>
+                <li><a href="https://developer.cisco.com/">Cisco Lab</a></li>
+                <li><a href="https://www.coursera.org/">Coursera</a></li>
+                <li><a href="http://www.runoob.com/">RUNOOB</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="https://www.facebook.com/hao.zju">Facebook</a></li>
+                <li><a href="http://weibo.com/207575725">Weibo</a></li>
+                <li><a href="http://www.linkedin.com/in/haochiang">Linkedin</a></li>
+                <li><a href="https://github.com/Heriam">Github</a></li>
+                <li><a href="http://www.qyer.com/u/5831110/plan">Qyer</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin C. 2018</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://jiang-hao.com/theme/bootstrap-collapse.js"></script>
+ 
+</body>
+</html>

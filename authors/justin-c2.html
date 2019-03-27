@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - Justin C.</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="https://jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+        
+
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2017/blog-CSS伪类content url放图片如何改变图的大小.html"><h2><span class="caps">CSS</span>伪类content:&nbsp;url放图片如何改变图的大小</h2></a>
+        <div class= "well small"> Tue 21 February 2017
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p>遇到过一个问题：用before after&nbsp;之类的伪类的content里放一个图的链接，如何去改图的大小？比如：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">nav</span> <span class="nt">ul</span> <span class="nt">li</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">../img/nav_fg.png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>事实上，如果想要设置前端页面通过content：url显示出来的图片大小，那只能修改图片的大小。因为它是直接读取的图片，并不是代入到html中再显示出来。但可以采用background的方式调整图片的大小，比如本博客中学术社交网站ResearchGate的Logo的<span class="caps">CSS</span>显示代码如下：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">social</span> <span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">*=</span><span class="s1">&#39;researchgate.net&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="s1">&#39;./images/icons/researchgate.png&#39;</span><span class="p">);</span> 
+  <span class="k">background-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span> 
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span> 
+  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">vertical-align</span><span class="p">:</span> <span class="mi">-3</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">height</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/blog-CSS伪类content url放图片如何改变图的大小.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html"><h2>Install Wireshark on&nbsp;Ubuntu</h2></a>
+        <div class= "well small"> Fri 08 July 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman"><p><br>
+1. Download WIreshark source code on website: <a href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  <br />
+2. Extract files into targeted folder:     <br></p>
+<div class="highlight"><pre><span></span>tar -xvf wireshark-1.10.7.tar.bz2
+</pre></div>
+
+<p><br>  <br />
+3. Install compiling tools and dependencies:    <br></p>
+
+<div class="highlight"><pre><span></span>sudo apt-get install build-essential
+sudo apt-get install libgtk2.0-dev libglib2.0-dev
+sudo apt-get install checkinstall
+sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/notes-法国的一些精油品牌.html"><h2>法国的一些著名的精油品牌</h2></a>
+        <div class= "well small"> Fri 10 June 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman">
+<p>法国精油品牌：  <br />
+<a href="http://www.florihana.com">Florial (Florihana)</a>(芙梦丽娜) <br />
+<a href="http://fr.loccitane.com/">L&#8217;<span class="caps">OCCITANE</span></a> (<a href="http://www.loccitane.cn/">欧舒丹</a>)  <br />
+<a href="www. Sanoflore .com">Sanoflore</a>(圣芙兰)   <br />
+<a href="http://www.camenae.com.cn/"><span class="caps">CAMENAE</span></a> (嘉媚乐)  <br />
+<a href="https://fr.nuxe.com/"><span class="caps">NUXE</span></a> (<a href="http://www.nuxechina.com/">欧树</a>)  <br />
+<a href="http://world.sisley.com/"><span class="caps">SISLEY</span></a> (<a href="http://www.sisley.com.cn/">希思黎</a>)    </p>
+<hr />
+<p><strong>1. Florial (Florihana) ——&nbsp;F家</strong>    </p>
+<hr />
+<p><strong>品牌：</strong>  <br />
+在欧洲被视为法国第一医疗等级的有机认证植物精油品牌，多年来一直深受着各国芳疗界的喜爱。拥有世界上独一无二的特殊蒸馏技术，采用人工采集和产油率极低的低温、低压、缓慢的蒸馏技术来提炼精油。包装瓶选用一种特殊的绿色玻璃来装载精油，此种瓶子不但可阻挡一般的阳光，还有过滤紫外线和红外线的作用，方便精油更好的保持原型状态。此外，F家的有机精油品种丰富，其中尤其纯露做的非常好，属于世界顶级行列。唯一的一点瑕疵是这家的产地有些并不是非常好（其实也很好理解，算是多品种的机会成本吧）。  <br />
+<br>  <br />
+<strong>公司：</strong>  <br />
+J.E Internatioanl (Florihana、Florial商标所有人)公司总部设立在法国的南部，于国家级自然保护区内的科斯高山（Caussols plateau）上。创办人<span class="caps">MR …</span></p></font></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/notes-法国的一些精油品牌.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html"><h2>Install VMware Workstation in Ubuntu&nbsp;14.04</h2></a>
+        <div class= "well small"> Thu 21 April 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman"><p><br>
+1. Use <code>apt-get</code>  update&nbsp;system:    </p>
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
+linuxidc@localhost:~$ sudo apt-get upgrade
+</pre></div>
+
+<p><br><br>
+2. Download VMware Workstation bundle.<br><br>
+3. Make bundle&nbsp;executable:    </p>
+
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
+</pre></div>
+
+<p><br><br>
+4. Run the&nbsp;bundle:    </p>
+
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
+</pre></div>
+
+<p><br><br>
+5. Installation:  <br />
+<img alt="VMware Station Installation" src="http://www.linuxidc.com/upload/2015_01/150114174598326.jpg" /></p>
+
+<p></font></div></p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/tools-OpenDaylight AAA Configuration and Practice.html"><h2>OpenDaylight <span class="caps">AAA</span> Configuration and&nbsp;Practice</h2></a>
+        <div class= "well small"> Mon 21 March 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p><div><font face="Times New Roman">
+<p><font face="Times New Roman"><b><span class="caps">ODL</span> Version: </b>Lithium-<span class="caps">SR3</span>   <br />
+<b>Tool Used: </b>Postman    <br />
+<b>About: </b>There are few documents about <span class="caps">AAA</span> related features of OpenDaylight online. This article is to study <span class="caps">AAA</span> related features through Northbound <span class="caps">REST</span> <span class="caps">API</span> using Postman, in order to explore the possibility of further integrating <span class="caps">AAA</span> function into <span class="caps">VTN</span> project. 
+</font></p>
+<hr />
+<p><strong>1. OpenDaylight <span class="caps">AAA …</span></strong></p></font></div></p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/tools-OpenDaylight AAA Configuration and Practice.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/coding-Shiro.html"><h2>Apache Shiro Multi-tenancy with <span class="caps">JDBC</span>&nbsp;MySQL</h2></a>
+        <div class= "well small"> Sun 21 February 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p><b>0. <span class="caps">GOALS</span></b><hr>
+- Provide user authentication and authorization for <strong>multi-tenant</strong> scenarios     <br> <br />
+- Provide easy-to-maintain data storage with only <strong>one database</strong>    <br> <br />
+- Provide <strong>domain-differentiated, credential-based</strong> authentication    <br> <br />
+- Provide <strong>domain-differentiated, role-based, service-specific</strong> authorization;    <br>   </p>
+
+<p><p><br><br><br><b>1. QuickStart with Apache Shiro</b><hr>
+- <a href="http://shiro.apache.org/reference.html">English Documentation</a>    <br> <br />
+- <a href="http://jinnianshilongnian.iteye.com/blog/2018398">Chinese Documentation</a>    <br> <br />
+- <a href="https://github.com/zhangkaitao/shiro-example">Example Applications</a>    <br><br />
+- <a href="http://shiro.apache.org/architecture.html">Architecture:</a>    <br><br>  <br />
+  <img alt="Shiro Architecture" src="http://shiro.apache.org/assets/images/ShiroArchitecture.png" />  <br />
+  <br><br>    </p>
+  <p><br><b>2. Environment Prerequisites</b><hr></p></p>
+<div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41 …</pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/coding-Shiro.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/notes-心路.html"><h2>在难搞的日子里他们这样对你说</h2></a>
+        <div class= "well small"> Mon 01 February 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-c.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>城市：雷恩<br><br>2016年2月1日晚，距国内过新年还有7天。原本只是想要找一封早时候的项目电邮，结果不小心没把持住，泛滥着感慨时光飞逝的小情绪翻阅了一遍以往的邮件，感觉就像是在看旧照片，就像把从大一开始到现在的生活重新走了一遍。至今有很多需要感谢的人，值得纪念的事，我不想在忙碌中就这样让它们随时间流走。因为手里的东西总是忙不完，那些让你成长的却不总有机会不被遗忘。</font><br><br><br>    </p>
+<div class="highlight"><pre><span></span>2012-09-01/2013-08-27  大三
+</pre></div>
+
+<p><font face="Times New Roman">2012年大二暑假，由于本专业大类被限制转专业，我决定通过考取思科认证来自学网络技术。11月，虽然国创(<span class="caps">SIETP</span>)项目才刚立项一个月，<span class="caps">SRTP</span>项目已经立项半年，但是学习的重心从十月份起已经向网络方向偏移，整天脑子里除了思科的路由交换就是国创的建筑涂料，闲暇之余才能稍微顾及一下专业课程实习和考试，而<span class="caps">SRTP</span>项目已经打算彻底水漂过去了。这个过程持续了一年，准备出国又花了一年，期间发生了许多事——得到了许多人的帮助，也犯了不少傻事。</font> </p>
+
+<p><br><br><br>
+<strong>2012-09-Inquiry to Prof.&nbsp;Bai</strong></p>
+
+<p><hr />
+<p>我希望在本科毕业后往网络工程方向走。我的专业是农业资源与环境，但出于个人兴趣并且经过了慎重考虑后，我想在大学接下来的两年内考取<span class="caps">CCIE</span>，可自己目前几乎是零基础，暂时打算到欧朋兰博先报一个<span class="caps">CCNA</span>的培训班作为入门 …</p></p></font></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/notes-心路.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
+<ul>
+    <li class="prev"><a href="https://jiang-hao.com/authors/justin-c.html">&larr; Previous</a></li>
+
+    <li class=""><a href="https://jiang-hao.com/authors/justin-c.html">1</a></li>
+    <li class="active"><a href="https://jiang-hao.com/authors/justin-c2.html">2</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
+        </div>
+        
+        <div class="span3">
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="https://jiang-hao.com/categories/blog.html">Blog</a></li>
+                <li><a href="https://jiang-hao.com/categories/coding.html">Coding</a></li>
+                <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
+                <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
+                   
+            </ul>
+            </div>
+
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Links
+                </li>
+            
+                <li><a href="http://www.imooc.com/">iMooC</a></li>
+                <li><a href="http://www.w3schools.com/">w3schools</a></li>
+                <li><a href="https://developer.cisco.com/">Cisco Lab</a></li>
+                <li><a href="https://www.coursera.org/">Coursera</a></li>
+                <li><a href="http://www.runoob.com/">RUNOOB</a></li>
+            </ul>
+            </div>
+
+
+            <div class="social">
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Social
+                </li>
+           
+                <li><a href="https://www.facebook.com/hao.zju">Facebook</a></li>
+                <li><a href="http://weibo.com/207575725">Weibo</a></li>
+                <li><a href="http://www.linkedin.com/in/haochiang">Linkedin</a></li>
+                <li><a href="https://github.com/Heriam">Github</a></li>
+                <li><a href="http://www.qyer.com/u/5831110/plan">Qyer</a></li>
+            </ul>
+            </div>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin C. 2112</p>
+</footer>
+
+</div> <!-- /container -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://jiang-hao.com/theme/bootstrap-collapse.js"></script>
+ 
+</body>
+</html>

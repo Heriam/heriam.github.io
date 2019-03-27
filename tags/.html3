@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Authors</title>
+    <title>Heriam - JQCloud</title>
     <meta name="description" content="">
     <meta name="author" content="Justin C.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,10 +52,84 @@
     <div class="row">
 
         <div class="span9">
-    <h1>Authors on Heriam</h1>
-    <ul>
-        <li><a href="https://jiang-hao.com/authors/-.html">Justin C.</a> (17)</li>
-    </ul>
+        
+
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/-Shiro.html"><h2>Apache Shiro Multi-tenancy with <span class="caps">JDBC</span>&nbsp;MySQL</h2></a>
+        <div class= "well small"> Sun 21 February 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/-.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p><b>0. <span class="caps">GOALS</span></b><hr>
+- Provide user authentication and authorization for <strong>multi-tenant</strong> scenarios     <br> <br />
+- Provide easy-to-maintain data storage with only <strong>one database</strong>    <br> <br />
+- Provide <strong>domain-differentiated, credential-based</strong> authentication    <br> <br />
+- Provide <strong>domain-differentiated, role-based, service-specific</strong> authorization;    <br>   </p>
+
+<p><p><br><br><br><b>1. QuickStart with Apache Shiro</b><hr>
+- <a href="http://shiro.apache.org/reference.html">English Documentation</a>    <br> <br />
+- <a href="http://jinnianshilongnian.iteye.com/blog/2018398">Chinese Documentation</a>    <br> <br />
+- <a href="https://github.com/zhangkaitao/shiro-example">Example Applications</a>    <br><br />
+- <a href="http://shiro.apache.org/architecture.html">Architecture:</a>    <br><br>  <br />
+  <img alt="Shiro Architecture" src="http://shiro.apache.org/assets/images/ShiroArchitecture.png" />  <br />
+  <br><br>    </p>
+  <p><br><b>2. Environment Prerequisites</b><hr></p></p>
+<div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41 …</pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/-Shiro.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="https://jiang-hao.com/articles/2016/-Shiro.html"><h2>Apache Shiro Multi-tenancy with <span class="caps">JDBC</span>&nbsp;MySQL</h2></a>
+        <div class= "well small"> Sun 21 February 2016
+
+by <a class="url fn" href="https://jiang-hao.com/authors/-.html">Justin C.</a>
+ 
+
+
+ </div>
+        <div class="summary"><p><b>0. <span class="caps">GOALS</span></b><hr>
+- Provide user authentication and authorization for <strong>multi-tenant</strong> scenarios     <br> <br />
+- Provide easy-to-maintain data storage with only <strong>one database</strong>    <br> <br />
+- Provide <strong>domain-differentiated, credential-based</strong> authentication    <br> <br />
+- Provide <strong>domain-differentiated, role-based, service-specific</strong> authorization;    <br>   </p>
+
+<p><p><br><br><br><b>1. QuickStart with Apache Shiro</b><hr>
+- <a href="http://shiro.apache.org/reference.html">English Documentation</a>    <br> <br />
+- <a href="http://jinnianshilongnian.iteye.com/blog/2018398">Chinese Documentation</a>    <br> <br />
+- <a href="https://github.com/zhangkaitao/shiro-example">Example Applications</a>    <br><br />
+- <a href="http://shiro.apache.org/architecture.html">Architecture:</a>    <br><br>  <br />
+  <img alt="Shiro Architecture" src="http://shiro.apache.org/assets/images/ShiroArchitecture.png" />  <br />
+  <br><br>    </p>
+  <p><br><b>2. Environment Prerequisites</b><hr></p></p>
+<div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41 …</pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/-Shiro.html">read more</a></div>
+    </div>	
+				
+<div class="pagination">
+<ul>
+    <li class="prev"><a href="https://jiang-hao.com/tags/2.html">&larr; Previous</a></li>
+
+    <li class=""><a href="https://jiang-hao.com/tags/.html">1</a></li>
+    <li class=""><a href="https://jiang-hao.com/tags/2.html">2</a></li>
+    <li class="active"><a href="https://jiang-hao.com/tags/3.html">3</a></li>
+
+    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+
+</ul>
+</div>
+ 
+  
         </div>
         
         <div class="span3">
@@ -124,7 +198,7 @@
     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin C. 2112</p>
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin C. 2018</p>
 </footer>
 
 </div> <!-- /container -->

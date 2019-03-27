@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Build and Install OpenDaylight on Ubuntu</title>
+    <title>Heriam - Build and Install OpenDaylight on&nbsp;Ubuntu</title>
     <meta name="description" content="">
     <meta name="author" content="Justin C.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>Build and Install OpenDaylight on Ubuntu</h1>
+            <h1>Build and Install OpenDaylight on&nbsp;Ubuntu</h1>
 Mon 01 January 2018
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -68,13 +68,13 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 <em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
 <em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
 <hr />
-<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 1, Environment Tuning</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
 <div class="highlight"><pre><span></span>sudo apt-get install git-core
 </pre></div>
 
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named "settings.xml". It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named &#8220;settings.xml&#8221;. It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
 (under ~/ directory)</font>    </p>
 
 <div class="highlight"><pre><span></span>mkdir .m2                     
@@ -165,8 +165,8 @@ cp -n ~/.m2/settings.xml{,.orig} ; \wget -q -O - https://raw.githubusercontent.c
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
-<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next STEP.</font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
+<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next <span class="caps">STEP</span>.</font></p>
 <hr />
 <p><font face = "Times New Roman">1.Create a directory for your project and get the source code of OpenDaylight controller:</font>      </p>
 <div class="highlight"><pre><span></span>mkdir openDayLight
@@ -205,7 +205,7 @@ git branch
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 3, Build and Install OpenDaylight Integration Project</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 3, Build and Install OpenDaylight Integration Project</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">Integration Project is more like a framework project which is to integrate all other projects into OpenDaylight. With Integration project you can modify or put your own features under this project directory and test with the controller.</font>    </p>
 <p><font face = "Times New Roman">1.Download the Integration source code:</font> </p>
@@ -237,7 +237,7 @@ dlux              nemo             packetcable     tsdr
 groupbasedpolicy  netconf          reservation     ttp
 </pre></div>
 
-<p><font face = "Times New Roman">（END）</font></p>
+<p><font face = "Times New Roman">（<span class="caps">END</span>）</font></p>
 
 <p></font></div></p></div>
 	

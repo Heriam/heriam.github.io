@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="jiang-hao.com/articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
+            <a href="jiang-hao.com/articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html"><h1>Build and Install OpenDaylight on&nbsp;Ubuntu</h1></a>
 Mon 01 January 2018
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -74,13 +74,13 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 <em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
 <em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
 <hr />
-<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 1, Environment Tuning</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
 <div class="highlight"><pre><span></span>sudo apt-get install git-core
 </pre></div>
 
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named "settings.xml". It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named &#8220;settings.xml&#8221;. It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
 (under ~/ directory)</font>    </p>
 
 <div class="highlight"><pre><span></span>mkdir .m2                     
@@ -171,8 +171,8 @@ cp -n ~/.m2/settings.xml{,.orig} ; \wget -q -O - https://raw.githubusercontent.c
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
-<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next STEP.</font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
+<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next <span class="caps">STEP</span>.</font></p>
 <hr />
 <p><font face = "Times New Roman">1.Create a directory for your project and get the source code of OpenDaylight controller:</font>      </p>
 <div class="highlight"><pre><span></span>mkdir openDayLight
@@ -211,7 +211,7 @@ git branch
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 3, Build and Install OpenDaylight Integration Project</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 3, Build and Install OpenDaylight Integration Project</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">Integration Project is more like a framework project which is to integrate all other projects into OpenDaylight. With Integration project you can modify or put your own features under this project directory and test with the controller.</font>    </p>
 <p><font face = "Times New Roman">1.Download the Integration source code:</font> </p>
@@ -243,7 +243,7 @@ dlux              nemo             packetcable     tsdr
 groupbasedpolicy  netconf          reservation     ttp
 </pre></div>
 
-<p><font face = "Times New Roman">（END）</font></p>
+<p><font face = "Times New Roman">（<span class="caps">END</span>）</font></p>
 
 <p></font></div></p></div>
         <hr />
@@ -270,21 +270,21 @@ Windows 版本： Windows 7/8/10  <br />
 方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
 </font></p>
 <hr />
-<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
+<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的<span class="caps">CMD</span>窗口输入命令：    </p>
 <div class="highlight"><pre><span></span>netsh wlan show drivers
 </pre></div></p>
 <p>在输出信息中找到 “支持承载网络：是” 则继续。
-<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
+<hr>2.确定电脑是否已经配置承载网络。同样在<span class="caps">CMD</span>窗口分别输入命令：    </p>
 
 <div class="highlight"><pre><span></span>netsh wlan show hostednetwork
 netsh wlan show hostednetwork setting=security
 </pre></div>
 
-<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
+<p>如果看到第一条命令输出已经配置好的WiFi热点的<span class="caps">SSID</span>，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
 
 <p>3.创建WiFi热点。命令行输入：    </p>
 
-<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/tools-Wifi HotSpot On Windows.html">read more</a></div>
+<div class="highlight"><pre><span></span>netsh wlan …</pre></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/tools-Wifi HotSpot On Windows.html">read more</a></div>
     </div>	
 				
 
@@ -294,7 +294,7 @@ netsh wlan show hostednetwork setting=security
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2017/tools-Install And Run Gedit On Mac.html"><h2>Install & Run Gedit from Terminal on Mac</h2></a>
+        <a href="jiang-hao.com/articles/2017/tools-Install And Run Gedit On Mac.html"><h2>Install <span class="amp">&amp;</span> Run Gedit from Terminal on&nbsp;Mac</h2></a>
         <div class= "well small"> Tue 15 August 2017
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -305,15 +305,14 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
         <div class="summary"><div><font face="Times New Roman"><p><em>App description: gedit (App: gedit.app)</em>   <br />
 <em>App website: <a href="https://wiki.gnome.org/Apps/Gedit">https://wiki.gnome.org/Apps/Gedit</a></em>     </p>
 <hr />
-<p><strong>Install from Terminal</strong></p>
+<p><strong>Install from&nbsp;Terminal</strong></p>
 <hr />
-<p><br>  <br />
-1.Run:    </p>
+<p><br>  <br />&nbsp;1.Run:    </p>
 <div class="highlight"><pre><span></span><span class="nt">ruby</span> <span class="nt">-e</span> <span class="s2">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span> <span class="o">&lt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="o">;</span> <span class="nt">brew</span> <span class="nt">install</span> <span class="nt">caskroom</span><span class="o">/</span><span class="nt">cask</span><span class="o">/</span><span class="nt">brew-cask</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span>
 </pre></div>
 
 <p><br>  <br />
-2.After the command finishes, run …</p></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/tools-Install And Run Gedit On Mac.html">read more</a></div>
+2.After the command finishes,&nbsp;run …</p></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/tools-Install And Run Gedit On Mac.html">read more</a></div>
     </div>	
 				
 
@@ -323,7 +322,7 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html"><h2>Install Wireshark on Ubuntu</h2></a>
+        <a href="jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html"><h2>Install Wireshark on&nbsp;Ubuntu</h2></a>
         <div class= "well small"> Fri 08 July 2016
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -353,7 +352,7 @@ sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall"
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html"><h2>Install VMware Workstation in Ubuntu 14.04</h2></a>
+        <a href="jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html"><h2>Install VMware Workstation in Ubuntu&nbsp;14.04</h2></a>
         <div class= "well small"> Thu 21 April 2016
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -362,20 +361,20 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 
  </div>
         <div class="summary"><div><font face="Times New Roman"><p><br>
-1. Use <code>apt-get</code>  update system:    </p>
+1. Use <code>apt-get</code>  update&nbsp;system:    </p>
 <div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
 linuxidc@localhost:~$ sudo apt-get upgrade
 </pre></div>
 
 <p><br><br>
 2. Download VMware Workstation bundle.<br><br>
-3. Make bundle executable:    </p>
+3. Make bundle&nbsp;executable:    </p>
 
 <div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
 </pre></div>
 
 <p><br><br>
-4. Run the bundle:    </p>
+4. Run the&nbsp;bundle:    </p>
 
 <div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
 </pre></div>
@@ -394,7 +393,7 @@ linuxidc@localhost:~$ sudo apt-get upgrade
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2016/tools-OpenDaylight AAA Configuration and Practice.html"><h2>OpenDaylight AAA Configuration and Practice</h2></a>
+        <a href="jiang-hao.com/articles/2016/tools-OpenDaylight AAA Configuration and Practice.html"><h2>OpenDaylight <span class="caps">AAA</span> Configuration and&nbsp;Practice</h2></a>
         <div class= "well small"> Mon 21 March 2016
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -403,12 +402,12 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 
  </div>
         <div class="summary"><p><div><font face="Times New Roman">
-<p><font face="Times New Roman"><b>ODL Version: </b>Lithium-SR3   <br />
+<p><font face="Times New Roman"><b><span class="caps">ODL</span> Version: </b>Lithium-<span class="caps">SR3</span>   <br />
 <b>Tool Used: </b>Postman    <br />
-<b>About: </b>There are few documents about AAA related features of OpenDaylight online. This article is to study AAA related features through Northbound REST API using Postman, in order to explore the possibility of further integrating AAA function into VTN project. 
+<b>About: </b>There are few documents about <span class="caps">AAA</span> related features of OpenDaylight online. This article is to study <span class="caps">AAA</span> related features through Northbound <span class="caps">REST</span> <span class="caps">API</span> using Postman, in order to explore the possibility of further integrating <span class="caps">AAA</span> function into <span class="caps">VTN</span> project. 
 </font></p>
 <hr />
-<p><strong>1. OpenDaylight AAA Documentation …</strong></p></font></div></p> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2016/tools-OpenDaylight AAA Configuration and Practice.html">read more</a></div>
+<p><strong>1. OpenDaylight <span class="caps">AAA …</span></strong></p></font></div></p> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2016/tools-OpenDaylight AAA Configuration and Practice.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

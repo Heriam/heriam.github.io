@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html"><h1>Ubuntu系统Apache Maven安装</h1></a>
+            <a href="jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html"><h1>Ubuntu系统Apache&nbsp;Maven安装</h1></a>
 Tue 24 October 2017
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -75,14 +75,14 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 <em><font face = "Times New Roman">建议预先搭建Java开发环境：详见<a href="http://www.hao-jiang.com/pages/2016/01/13/ubuntuxi-tong-javakai-fa-huan-jing-de-da-jian.html">《Linux Ubuntu系统下Java开发环境搭建》</a></font></em></p>
 <hr />
 <p><font face = "Times New Roman">1. 前往Apache Maven官网下载最新版本：https://maven.apache.org/download.cgi，本文以apache-maven-3.3.9-bin.tar.gz为例。</font>    </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建MVN子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建<span class="caps">MVN</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
 <div class="highlight"><pre><span></span>cd /opt                       #进入到opt目录
 sudo mkdir mvn                #新建一个mvn文件夹
 ls                            #显示成功新建的mvn文件夹
 cd mvn                        #进入mvn文件夹
 </pre></div>
 
-<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下。新建另一个Terminal窗口（T2）并输入：</font></p>
+<p><font face = "Times New Roman">3.将下载的<span class="caps">MVN</span>压缩包拷贝到mvn目录下。新建另一个Terminal窗口（T2）并输入：</font></p>
 
 <div class="highlight"><pre><span></span>cd Downloads                                               #进入Downloads文件夹
 ls                                                         #显示刚刚下载的MVN文件，
@@ -90,7 +90,7 @@ sudo cp apache-maven-3.3.9-bin.tar.gz /opt/mvn             #将文件拷贝到�
 sudo rm apache-maven-3.3.9-bin.tar.gz                      #删除本目录下的安装包（可选）  
 </pre></div>
 
-<p><font face = "Times New Roman">4.解压安装MVN，配置环境变量。回到第一个Terminal（T1），输入：</font>  </p>
+<p><font face = "Times New Roman">4.解压安装<span class="caps">MVN</span>，配置环境变量。回到第一个Terminal（T1），输入：</font>  </p>
 
 <div class="highlight"><pre><span></span>ls                                                   #显示拷贝过来的MVN安装包
 sudo tar -zxvf apache-maven-3.3.9-bin.tar.gz         #将安装包解压
@@ -99,7 +99,7 @@ sudo rm apache-maven-3.3.9-bin.tar.gz                #删除原安装包
 sudo gedit /etc/profile                              #打开etc目录下的profile文件
 </pre></div>
 
-<p><font face = "Times New Roman">5.配置全局环境变量。在打开的profile文档末尾添加MVN安装路径（需仔细确认）：</font>  </p>
+<p><font face = "Times New Roman">5.配置全局环境变量。在打开的profile文档末尾添加<span class="caps">MVN</span>安装路径（需仔细确认）：</font>  </p>
 
 <div class="highlight"><pre><span></span>#set maven environment
 export M2_HOME=/opt/mvn/apache-maven-3.3.9
@@ -107,7 +107,7 @@ export MAVEN_OPTS=&quot;-Xmx1024m&quot;                           #避免内存�
 export PATH=<span class="cp">${</span><span class="n">M2_HOME</span><span class="cp">}</span>/bin:<span class="cp">${</span><span class="n">PATH</span><span class="cp">}</span>
 </pre></div>
 
-<p><font face = "Times New Roman">6.保存并关闭文档。（注：也可以通过vim 命令编辑etc/profile，打开命令：sudo vim /etc/profile，按<Insert>键进入编辑模式，<Esc>键退出编辑模式，接着按":"再输入”wq!“保存并退出；输入"q!"不保存退出）</font>     </p>
+<p><font face = "Times New Roman">6.保存并关闭文档。（注：也可以通过vim 命令编辑etc/profile，打开命令：sudo vim /etc/profile，按<Insert>键进入编辑模式，<Esc>键退出编辑模式，接着按&#8221;:&#8221;再输入”wq!“保存并退出；输入&#8221;q!&#8221;不保存退出）</font>     </p>
 
 <p><font face = "Times New Roman">7.启用配置并验证。在Terminal输入：</font>    </p>
 
@@ -147,21 +147,17 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  </div>
         <div class="summary"><div><font face="Times New Roman">
 <p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>  <br />
-<em><font face = "Times New Roman">Java JDK版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
+<em><font face = "Times New Roman">Java <span class="caps">JDK</span>版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
 <hr />
-<p><font face = "Times New Roman">1. 前往ORACLE官网下载最新版本的Java JDK：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java JDK，本例选择在/opt目录下新建JVM子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<p><font face = "Times New Roman">1. 前往<span class="caps">ORACLE</span>官网下载最新版本的Java <span class="caps">JDK</span>：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java <span class="caps">JDK</span>，本例选择在/opt目录下新建<span class="caps">JVM</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
 <div class="highlight"><pre><span></span>cd /opt                     
 sudo mkdir jvm              
 ls                            
 cd jvm
 </pre></div>
 
-<p><font face = "Times New Roman">3.将下载的JDK压缩包拷贝到jvm目录下。新建另一个Terminal窗口（T2）并输入：</font>    </p>
-
-<div class="highlight"><pre><span></span>cd Downloads                       
-ls                         
-sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">read more</a></div>
+<p><font face = "Times New Roman">3.将下载的<span class="caps">JDK</span>压缩包拷贝到jvm目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">read more</a></div>
     </div>	
 				
 
@@ -171,7 +167,7 @@ sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="jiang-hao
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2016/coding-Shiro.html"><h2>Apache Shiro Multi-tenancy with JDBC MySQL</h2></a>
+        <a href="jiang-hao.com/articles/2016/coding-Shiro.html"><h2>Apache Shiro Multi-tenancy with <span class="caps">JDBC</span>&nbsp;MySQL</h2></a>
         <div class= "well small"> Sun 21 February 2016
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -179,7 +175,7 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 
 
  </div>
-        <div class="summary"><p><b>0. GOALS</b><hr>
+        <div class="summary"><p><b>0. <span class="caps">GOALS</span></b><hr>
 - Provide user authentication and authorization for <strong>multi-tenant</strong> scenarios     <br> <br />
 - Provide easy-to-maintain data storage with only <strong>one database</strong>    <br> <br />
 - Provide <strong>domain-differentiated, credential-based</strong> authentication    <br> <br />

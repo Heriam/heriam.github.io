@@ -59,7 +59,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="jiang-hao.com/articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
+            <a href="jiang-hao.com/articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html"><h1>Build and Install OpenDaylight on&nbsp;Ubuntu</h1></a>
 Mon 01 January 2018
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -74,13 +74,13 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 <em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
 <em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
 <hr />
-<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 1, Environment Tuning</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
 <div class="highlight"><pre><span></span>sudo apt-get install git-core
 </pre></div>
 
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named "settings.xml". It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named &#8220;settings.xml&#8221;. It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
 (under ~/ directory)</font>    </p>
 
 <div class="highlight"><pre><span></span>mkdir .m2                     
@@ -171,8 +171,8 @@ cp -n ~/.m2/settings.xml{,.orig} ; \wget -q -O - https://raw.githubusercontent.c
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
-<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next STEP.</font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
+<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next <span class="caps">STEP</span>.</font></p>
 <hr />
 <p><font face = "Times New Roman">1.Create a directory for your project and get the source code of OpenDaylight controller:</font>      </p>
 <div class="highlight"><pre><span></span>mkdir openDayLight
@@ -211,7 +211,7 @@ git branch
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 3, Build and Install OpenDaylight Integration Project</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 3, Build and Install OpenDaylight Integration Project</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">Integration Project is more like a framework project which is to integrate all other projects into OpenDaylight. With Integration project you can modify or put your own features under this project directory and test with the controller.</font>    </p>
 <p><font face = "Times New Roman">1.Download the Integration source code:</font> </p>
@@ -243,7 +243,7 @@ dlux              nemo             packetcable     tsdr
 groupbasedpolicy  netconf          reservation     ttp
 </pre></div>
 
-<p><font face = "Times New Roman">（END）</font></p>
+<p><font face = "Times New Roman">（<span class="caps">END</span>）</font></p>
 
 <p></font></div></p></div>
         <hr />
@@ -256,7 +256,7 @@ groupbasedpolicy  netconf          reservation     ttp
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache Maven安装</h2></a>
+        <a href="jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache&nbsp;Maven安装</h2></a>
         <div class= "well small"> Tue 24 October 2017
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -270,14 +270,11 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 <em><font face = "Times New Roman">建议预先搭建Java开发环境：详见<a href="http://www.hao-jiang.com/pages/2016/01/13/ubuntuxi-tong-javakai-fa-huan-jing-de-da-jian.html">《Linux Ubuntu系统下Java开发环境搭建》</a></font></em></p>
 <hr />
 <p><font face = "Times New Roman">1. 前往Apache Maven官网下载最新版本：https://maven.apache.org/download.cgi，本文以apache-maven-3.3.9-bin.tar.gz为例。</font>    </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建MVN子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建<span class="caps">MVN</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
 <div class="highlight"><pre><span></span>cd /opt                       #进入到opt目录
 sudo mkdir mvn                #新建一个mvn文件夹
 ls                            #显示成功新建的mvn文件夹
-cd mvn                        #进入mvn文件夹
-</pre></div>
-
-<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html">read more</a></div>
+cd mvn                        #进入mvn文件夹 …</pre></div></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html">read more</a></div>
     </div>	
 				
 
@@ -297,21 +294,17 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  </div>
         <div class="summary"><div><font face="Times New Roman">
 <p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>  <br />
-<em><font face = "Times New Roman">Java JDK版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
+<em><font face = "Times New Roman">Java <span class="caps">JDK</span>版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
 <hr />
-<p><font face = "Times New Roman">1. 前往ORACLE官网下载最新版本的Java JDK：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java JDK，本例选择在/opt目录下新建JVM子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<p><font face = "Times New Roman">1. 前往<span class="caps">ORACLE</span>官网下载最新版本的Java <span class="caps">JDK</span>：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java <span class="caps">JDK</span>，本例选择在/opt目录下新建<span class="caps">JVM</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
 <div class="highlight"><pre><span></span>cd /opt                     
 sudo mkdir jvm              
 ls                            
 cd jvm
 </pre></div>
 
-<p><font face = "Times New Roman">3.将下载的JDK压缩包拷贝到jvm目录下。新建另一个Terminal窗口（T2）并输入：</font>    </p>
-
-<div class="highlight"><pre><span></span>cd Downloads                       
-ls                         
-sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">read more</a></div>
+<p><font face = "Times New Roman">3.将下载的<span class="caps">JDK</span>压缩包拷贝到jvm目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">read more</a></div>
     </div>	
 				
 
@@ -321,7 +314,7 @@ sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="jiang-hao
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html"><h2>Install Wireshark on Ubuntu</h2></a>
+        <a href="jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html"><h2>Install Wireshark on&nbsp;Ubuntu</h2></a>
         <div class= "well small"> Fri 08 July 2016
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -351,7 +344,7 @@ sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall"
  
 
     <div class='article'>
-        <a href="jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html"><h2>Install VMware Workstation in Ubuntu 14.04</h2></a>
+        <a href="jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html"><h2>Install VMware Workstation in Ubuntu&nbsp;14.04</h2></a>
         <div class= "well small"> Thu 21 April 2016
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -360,20 +353,20 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 
  </div>
         <div class="summary"><div><font face="Times New Roman"><p><br>
-1. Use <code>apt-get</code>  update system:    </p>
+1. Use <code>apt-get</code>  update&nbsp;system:    </p>
 <div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
 linuxidc@localhost:~$ sudo apt-get upgrade
 </pre></div>
 
 <p><br><br>
 2. Download VMware Workstation bundle.<br><br>
-3. Make bundle executable:    </p>
+3. Make bundle&nbsp;executable:    </p>
 
 <div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
 </pre></div>
 
 <p><br><br>
-4. Run the bundle:    </p>
+4. Run the&nbsp;bundle:    </p>
 
 <div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
 </pre></div>

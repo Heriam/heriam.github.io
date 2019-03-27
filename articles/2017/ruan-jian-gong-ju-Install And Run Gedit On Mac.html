@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Wireshark</title>
+    <title>Heriam - Install <span class="amp">&amp;</span> Run Gedit from Terminal on&nbsp;Mac</title>
     <meta name="description" content="">
     <meta name="author" content="Justin C.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,77 +52,75 @@
     <div class="row">
 
         <div class="span9">
-        
-
-        
-
-
     <div class='article'>
         <div class="content-title">
-            <a href="jiang-hao.com/articles/2016/ruan-jian-gong-ju-Install Wireshark on Ubuntu.html"><h1>Install Wireshark on&nbsp;Ubuntu</h1></a>
-Fri 08 July 2016
+            <h1>Install <span class="amp">&amp;</span> Run Gedit from Terminal on&nbsp;Mac</h1>
+Tue 15 August 2017
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  
 
 
- 
         </div>
-        
-        <div><div><font face="Times New Roman"><p><br>
-1. Download WIreshark source code on website: <a href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  <br />
-2. Extract files into targeted folder:     <br></p>
-<div class="highlight"><pre><span></span>tar -xvf wireshark-1.10.7.tar.bz2
+	
+        <div><div><font face="Times New Roman"><p><em>App description: gedit (App: gedit.app)</em>   <br />
+<em>App website: <a href="https://wiki.gnome.org/Apps/Gedit">https://wiki.gnome.org/Apps/Gedit</a></em>     </p>
+<hr />
+<p><strong>Install from&nbsp;Terminal</strong></p>
+<hr />
+<p><br>  <br />&nbsp;1.Run:    </p>
+<div class="highlight"><pre><span></span><span class="nt">ruby</span> <span class="nt">-e</span> <span class="s2">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span> <span class="o">&lt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="o">;</span> <span class="nt">brew</span> <span class="nt">install</span> <span class="nt">caskroom</span><span class="o">/</span><span class="nt">cask</span><span class="o">/</span><span class="nt">brew-cask</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span>
 </pre></div>
 
 <p><br>  <br />
-3. Install compiling tools and dependencies:    <br></p>
+2.After the command finishes,&nbsp;run:    </p>
 
-<div class="highlight"><pre><span></span>sudo apt-get install build-essential
-sudo apt-get install libgtk2.0-dev libglib2.0-dev
-sudo apt-get install checkinstall
-sudo apt-get install flex bison
-sudo apt-get build-dep wireshark
-sudo apt-get install qt5-default
-sudo apt-get install libssl-dev
-sudo apt-get install libgtk-3-dev
+<div class="highlight"><pre><span></span>brew cask install gedit
 </pre></div>
 
 <p><br>  <br />
-4. Go to <a href="http://www.tcpdump.org">www.tcpdump.org</a> and find newest version of libpcap(e.g., libpcap-1.5.3.tar.gz):     <br></p>
+Now Gedit is installed.   <br />
+<br>    </p>
 
-<div class="highlight"><pre><span></span>#tar -xvf libpcap-1.5.3.tar.gz  
-#cd libpcap-1.5.3.tar.gz  
-#./configure  
-#make  
-#make install 
+<p><hr />
+<p><strong>Run Gedit from&nbsp;Terminal</strong></p>
+<hr />
+<p><br>
+<strong>Solution 1.</strong> Add the following line to ~/.profile or&nbsp;~/.bash_profile:    </p>
+<div class="highlight"><pre><span></span><span class="x">export PATH=/Users/&lt;Username&gt;/Applications/gedit.app/Contents/MacOS/gedit:</span><span class="p">$</span><span class="nv">PATH</span><span class="x"></span>
+</pre></div></p>
+<p><br>  <br />
+<strong>Solution 2.</strong> Create a script named <code>gedit</code> in <code>/usr/local/bin</code> and make it executable:  <br />
+<br> <br />
+a. Create a new&nbsp;file:     </p>
+
+<div class="highlight"><pre><span></span>sudo vim /usr/local/bin/gedit
 </pre></div>
 
 <p><br>  <br />
-5. Go to wireshark folder:    <br></p>
+b. Add content as below, save and&nbsp;quit:    </p>
 
-<div class="highlight"><pre><span></span>./autogen.sh
-./configure --with-ssl --enable-setcap-install
-make
-make install
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash    </span>
+/Users/&lt;Username&gt;/Applications/gedit.app/Contents/MacOS/gedit    
 </pre></div>
+</td></tr></table>
+
+<p><br>  <br />
+c. Make it&nbsp;executable:    </p>
+
+<div class="highlight"><pre><span></span>sudo chmod 755 /usr/local/bin/gedit
+</pre></div>
+
+<p><br>
+<br>
+(<span class="caps">END</span>)</p>
 
 <p></font></div></p></div>
-        <hr />
+	
+        <hr>
+
     </div>
-		
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="jiang-hao.com/tags/wireshark.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
- 
-  
         </div>
         
         <div class="span3">
@@ -193,7 +191,7 @@ make install
     </div>     </div> 
 <footer>
 <br />
-<p><a href="jiang-hao.com">Heriam</a> &copy; Justin C. 2016</p>
+<p><a href="jiang-hao.com">Heriam</a> &copy; Justin C. 2112</p>
 </footer>
 
 </div> <!-- /container -->

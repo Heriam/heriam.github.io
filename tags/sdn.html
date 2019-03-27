@@ -9,14 +9,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="jiang-hao.com/theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/pygments.css" rel="stylesheet">
 
     <!-- So Firefox can bookmark->"abo this site" -->
 
@@ -34,11 +34,11 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">Heriam</a>
+        <a class="brand" href="jiang-hao.com">Heriam</a>
 
         <div class="nav-collapse">
         <ul class="nav">
-            <li><a href="/pages/publications">出版</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
             
         </ul>
         </div>
@@ -59,10 +59,10 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../pages/ruan-jian-gong-ju/Build and Install OpenDaylight on Ubuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
+            <a href="jiang-hao.com/articles/2018/ruan-jian-gong-ju-Build and Install OpenDaylight on Ubuntu.html"><h1>Build and Install OpenDaylight on&nbsp;Ubuntu</h1></a>
 Mon 01 January 2018
 
-by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
+by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  
 
 
@@ -74,13 +74,13 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 <em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
 <em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
 <hr />
-<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 1, Environment Tuning</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
 <div class="highlight"><pre><span></span>sudo apt-get install git-core
 </pre></div>
 
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named "settings.xml". It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a very important file for OpenDaylight which is named &#8220;settings.xml&#8221;. It can customize the behavior of Maven at system level. But we often choose to make it in <em>~/.m2</em> folder under your <em>home</em> directory to limit it in user scope：  <br />
 (under ~/ directory)</font>    </p>
 
 <div class="highlight"><pre><span></span>mkdir .m2                     
@@ -171,8 +171,8 @@ cp -n ~/.m2/settings.xml{,.orig} ; \wget -q -O - https://raw.githubusercontent.c
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
-<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next STEP.</font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 2, Build and Install OpenDaylight Controller Project</strong></font>    </p>
+<p><font face = "Times New Roman" size=2>Please keep in mind that here controller really means core controller without many other additional features, such as WebUI(dlux). As for the development of other features in OpenDaylight and if you need dlux, please refer to next <span class="caps">STEP</span>.</font></p>
 <hr />
 <p><font face = "Times New Roman">1.Create a directory for your project and get the source code of OpenDaylight controller:</font>      </p>
 <div class="highlight"><pre><span></span>mkdir openDayLight
@@ -211,7 +211,7 @@ git branch
 </pre></div>
 
 <p><hr />
-<p><font face = "Times New Roman"><strong>STEP 3, Build and Install OpenDaylight Integration Project</strong></font></p>
+<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 3, Build and Install OpenDaylight Integration Project</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">Integration Project is more like a framework project which is to integrate all other projects into OpenDaylight. With Integration project you can modify or put your own features under this project directory and test with the controller.</font>    </p>
 <p><font face = "Times New Roman">1.Download the Integration source code:</font> </p>
@@ -243,7 +243,7 @@ dlux              nemo             packetcable     tsdr
 groupbasedpolicy  netconf          reservation     ttp
 </pre></div>
 
-<p><font face = "Times New Roman">（END）</font></p>
+<p><font face = "Times New Roman">（<span class="caps">END</span>）</font></p>
 
 <p></font></div></p></div>
         <hr />
@@ -256,28 +256,28 @@ groupbasedpolicy  netconf          reservation     ttp
  
 
     <div class='article'>
-        <a href="../pages/ruan-jian-gong-ju/OpenDaylight AAA Configuration and Practice.html"><h2>OpenDaylight AAA Configuration and Practice</h2></a>
+        <a href="jiang-hao.com/articles/2016/ruan-jian-gong-ju-OpenDaylight AAA Configuration and Practice.html"><h2>OpenDaylight <span class="caps">AAA</span> Configuration and&nbsp;Practice</h2></a>
         <div class= "well small"> Mon 21 March 2016
 
-by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
+by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  
 
 
  </div>
         <div class="summary"><p><div><font face="Times New Roman">
-<p><font face="Times New Roman"><b>ODL Version: </b>Lithium-SR3   <br />
+<p><font face="Times New Roman"><b><span class="caps">ODL</span> Version: </b>Lithium-<span class="caps">SR3</span>   <br />
 <b>Tool Used: </b>Postman    <br />
-<b>About: </b>There are few documents about AAA related features of OpenDaylight online. This article is to study AAA related features through Northbound REST API using Postman, in order to explore the possibility of further integrating AAA function into VTN project. 
+<b>About: </b>There are few documents about <span class="caps">AAA</span> related features of OpenDaylight online. This article is to study <span class="caps">AAA</span> related features through Northbound <span class="caps">REST</span> <span class="caps">API</span> using Postman, in order to explore the possibility of further integrating <span class="caps">AAA</span> function into <span class="caps">VTN</span> project. 
 </font></p>
 <hr />
-<p><strong>1. OpenDaylight AAA Documentation …</strong></p></font></div></p> <a class="btn btn-info xsmall" href="../pages/ruan-jian-gong-ju/OpenDaylight AAA Configuration and Practice.html">read more</a></div>
+<p><strong>1. OpenDaylight <span class="caps">AAA …</span></strong></p></font></div></p> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2016/ruan-jian-gong-ju-OpenDaylight AAA Configuration and Practice.html">read more</a></div>
     </div>	
 				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../tags/sdn.html">1</a></li>
+    <li class="active"><a href="jiang-hao.com/tags/sdn.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
@@ -295,8 +295,8 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
                 Site
                 </li>
             
-                <li><a href="../archives.html">Archives</a>
-                <li><a href="../tags.html">Tags</a>
+                <li><a href="jiang-hao.com/archives.html">Archives</a>
+                <li><a href="jiang-hao.com/tags.html">Tags</a>
 
 
 
@@ -311,11 +311,10 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
                 Categories
                 </li>
                 
-                <li><a href="../pages/2019/index.html">2019</a></li>
-                <li><a href="../pages/bian-cheng-kai-fa/index.html">编程开发</a></li>
-                <li><a href="../pages/bo-ke-da-jian/index.html">博客搭建</a></li>
-                <li><a href="../pages/ruan-jian-gong-ju/index.html">软件工具</a></li>
-                <li><a href="../pages/xiang-fa-ri-ji/index.html">想法日记</a></li>
+                <li><a href="jiang-hao.com/categories/bian-cheng-kai-fa.html">编程开发</a></li>
+                <li><a href="jiang-hao.com/categories/bo-ke-da-jian.html">博客搭建</a></li>
+                <li><a href="jiang-hao.com/categories/ruan-jian-gong-ju.html">软件工具</a></li>
+                <li><a href="jiang-hao.com/categories/xiang-fa-ri-ji.html">想法日记</a></li>
                    
             </ul>
             </div>
@@ -356,12 +355,12 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
     </div>     </div> 
 <footer>
 <br />
-<p><a href="..">Heriam</a> &copy; Justin C. 2018</p>
+<p><a href="jiang-hao.com">Heriam</a> &copy; Justin C. 2018</p>
 </footer>
 
 </div> <!-- /container -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="../theme/bootstrap-collapse.js"></script>
+<script src="jiang-hao.com/theme/bootstrap-collapse.js"></script>
  
 </body>
 </html>

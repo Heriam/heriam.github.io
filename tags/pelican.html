@@ -9,14 +9,14 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="jiang-hao.com/theme/html5.js"></script>
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="jiang-hao.com/theme/pygments.css" rel="stylesheet">
 
     <!-- So Firefox can bookmark->"abo this site" -->
 
@@ -34,11 +34,11 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">Heriam</a>
+        <a class="brand" href="jiang-hao.com">Heriam</a>
 
         <div class="nav-collapse">
         <ul class="nav">
-            <li><a href="/pages/publications">出版</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
             
         </ul>
         </div>
@@ -59,10 +59,10 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../pages/bo-ke-da-jian/使用Pelican在Github和Coding同步托管博客.html"><h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1></a>
+            <a href="jiang-hao.com/articles/2018/bo-ke-da-jian-使用Pelican在Github和Coding同步托管博客.html"><h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1></a>
 Mon 05 February 2018
 
-by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
+by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  
 
 
@@ -71,7 +71,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
         
         <div><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
 - 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
-- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
+- 配置<span class="caps">DNS</span>解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
 - 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
   ​        <br>
   <br>   </p>
@@ -86,7 +86,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 <ol>
 <li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
   <br>   </li>
-<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
+<li>将本地<span class="caps">SSH</span>公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
 </ol>
 <div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF+FDA。。(省略)。。Ksap Heriam@users.noreply.github.com
 </pre></div>
@@ -97,7 +97,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 <p><strong>三、将仓库拷贝到Coding</strong></p>
 <hr>
 <ol>
-<li>进入Pelican的output目录下的本地博客仓库，打开.git/config，修改远程仓库，将 origin 改为 github，并添加 coding：   </li>
+<li>进入Pelican的output目录下的本地博客仓库，打开.git/config，修改远程仓库，将 origin 改为 github，并添加&nbsp;coding：   </li>
 </ol>
 <div class="highlight"><pre><span></span><span class="k">[core]</span>
         <span class="na">repositoryformatversion</span> <span class="o">=</span> <span class="s">0</span>
@@ -119,7 +119,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 
 
 <p><br>  <br>
-2. 然后将仓库 push 到 Coding上，在Coding新建一个 coding-pages 分支：    </p>
+2. 然后将仓库 push 到 Coding上，在Coding新建一个 coding-pages&nbsp;分支：    </p>
 <div class="highlight"><pre><span></span>git push -u coding master:coding-pages
 </pre></div>
 
@@ -131,7 +131,7 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 <p><strong>四、配置域名</strong></p>
 <hr>
 <ol>
-<li>登录到网站的域名解析管理页面（我用的是DNSPOD，后来转向Cloudxns），然后添加两条域名解析记录：</li>
+<li>登录到网站的域名解析管理页面（我用的是<span class="caps">DNSPOD</span>，后来转向Cloudxns），然后添加两条域名解析记录：</li>
 </ol>
 <div class="highlight"><pre><span></span>@       CNAME  国内  coding.me
 www     CNAME  国内  coding.me
@@ -140,7 +140,7 @@ www     CNAME  国内  coding.me
 
 <p><br>   </p>
 <ol>
-<li>在Coding 上“项目管理”中找到“自定义域名／Pages”，添加要绑定的域名，比如我是 hao-jiang.com和www.hao-jiang.com。注意这些域名也就是我们刚刚在dnspod中设置的解析域名。</li>
+<li>在Coding 上“项目管理”中找到“自定义域名／Pages”，添加要绑定的域名，比如我是&nbsp;hao-jiang.com和www.hao-jiang.com。注意这些域名也就是我们刚刚在dnspod中设置的解析域名。</li>
 </ol>
 <p><br>   </p>
 <hr>
@@ -148,20 +148,20 @@ www     CNAME  国内  coding.me
 <hr>
 <p>设置一键上传：（如有疑问参见<a href="http://www.jianshu.com/p/fd8ed9855f44">《Pelican＋Github博客搭建详细教程》</a>第三部分第4点）打开根目录下的Makefile文件，修改以下三个地方： <br>
 <br>  <br>
-- OUTPUTDIR        </p>
+- <span class="caps">OUTPUTDIR</span>        </p>
 <div class="highlight"><pre><span></span><span class="nv">OUTPUTDIR</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/output/&lt;username&gt;.github.io    <span class="c1">#本地博客仓库路径</span>
 </pre></div>
 
 
 <p><br> <br>
--  publish    </p>
+-&nbsp;publish    </p>
 <div class="highlight"><pre><span></span><span class="nf">publish</span><span class="o">:</span>    
  <span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>    
 </pre></div>
 
 
 <p><br> <br>
-- github: publish</p>
+- github:&nbsp;publish</p>
 <div class="highlight"><pre><span></span><span class="n">github</span><span class="o">:</span> <span class="n">publish</span>
     <span class="n">cd</span> <span class="n">$</span><span class="o">(</span><span class="n">OUTPUTDIR</span><span class="o">)</span> <span class="o">;</span> <span class="n">git</span> <span class="n">add</span> <span class="o">.</span> <span class="o">;</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">am</span> <span class="s1">&#39;&lt;添加自己的备注&gt;&#39;</span> <span class="o">;</span> <span class="n">git</span> <span class="n">push</span> <span class="n">github</span> <span class="n">master</span><span class="o">:</span><span class="n">master</span> <span class="o">;</span> <span class="n">git</span> <span class="n">push</span> <span class="n">coding</span> <span class="n">master</span><span class="o">:</span><span class="n">coding</span><span class="o">-</span><span class="n">pages</span> 
 </pre></div>
@@ -179,15 +179,15 @@ www     CNAME  国内  coding.me
  
 
     <div class='article'>
-        <a href="../pages/bo-ke-da-jian/使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github Pages搭建博客教程</h2></a>
+        <a href="jiang-hao.com/articles/2018/bo-ke-da-jian-使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github&nbsp;Pages搭建博客教程</h2></a>
         <div class= "well small"> Mon 05 February 2018
 
-by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
+by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  
 
 
  </div>
-        <div class="summary"><p><strong>操作系统：</strong>Mac OS / Linux    <br>
+        <div class="summary"><p><strong>操作系统：</strong>Mac <span class="caps">OS</span> / Linux    <br>
 <strong>工具集：</strong>  <br>
 1.Pelican——基于Python的静态网页生成器 <br>
 2.马克飞象——Evernote出的Markdown文本编辑器 <br>
@@ -201,14 +201,14 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
 10.Disqus——用来提供博客评论功能  <br>
 11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
 12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
-<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="../pages/bo-ke-da-jian/使用Pelican基于Github Pages搭建博客教程.html">read more</a></div>
+<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="jiang-hao.com/articles/2018/bo-ke-da-jian-使用Pelican基于Github Pages搭建博客教程.html">read more</a></div>
     </div>	
 				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&larr; Previous</a></li>
 
-    <li class="active"><a href="../tags/pelican.html">1</a></li>
+    <li class="active"><a href="jiang-hao.com/tags/pelican.html">1</a></li>
 
     <li class="next disabled"><a href="#">&rarr; Next</a></li>
 
@@ -226,8 +226,8 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
                 Site
                 </li>
             
-                <li><a href="../archives.html">Archives</a>
-                <li><a href="../tags.html">Tags</a>
+                <li><a href="jiang-hao.com/archives.html">Archives</a>
+                <li><a href="jiang-hao.com/tags.html">Tags</a>
 
 
 
@@ -242,11 +242,10 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
                 Categories
                 </li>
                 
-                <li><a href="../pages/2019/index.html">2019</a></li>
-                <li><a href="../pages/bian-cheng-kai-fa/index.html">编程开发</a></li>
-                <li><a href="../pages/bo-ke-da-jian/index.html">博客搭建</a></li>
-                <li><a href="../pages/ruan-jian-gong-ju/index.html">软件工具</a></li>
-                <li><a href="../pages/xiang-fa-ri-ji/index.html">想法日记</a></li>
+                <li><a href="jiang-hao.com/categories/bian-cheng-kai-fa.html">编程开发</a></li>
+                <li><a href="jiang-hao.com/categories/bo-ke-da-jian.html">博客搭建</a></li>
+                <li><a href="jiang-hao.com/categories/ruan-jian-gong-ju.html">软件工具</a></li>
+                <li><a href="jiang-hao.com/categories/xiang-fa-ri-ji.html">想法日记</a></li>
                    
             </ul>
             </div>
@@ -287,12 +286,12 @@ by <a class="url fn" href="../author/justin-c.html">Justin C.</a>
     </div>     </div> 
 <footer>
 <br />
-<p><a href="..">Heriam</a> &copy; Justin C. 2018</p>
+<p><a href="jiang-hao.com">Heriam</a> &copy; Justin C. 2018</p>
 </footer>
 
 </div> <!-- /container -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="../theme/bootstrap-collapse.js"></script>
+<script src="jiang-hao.com/theme/bootstrap-collapse.js"></script>
  
 </body>
 </html>

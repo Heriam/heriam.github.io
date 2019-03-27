@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - 人之一生</title>
+    <title>Heriam - CSS伪类content: url放图片如何改变图的大小</title>
     <meta name="description" content="">
     <meta name="author" content="Justin C.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,8 +54,8 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>人之一生</h1>
-Sat 16 July 2112
+            <h1>CSS伪类content: url放图片如何改变图的大小</h1>
+Tue 21 February 2017
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
  
@@ -63,40 +63,28 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 
         </div>
 	
-        <div><h3>热爱生命</h3>
+        <div><p>遇到过一个问题：用before after 之类的伪类的content里放一个图的链接，如何去改图的大小？比如：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">nav</span> <span class="nt">ul</span> <span class="nt">li</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">../img/nav_fg.png</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
 
-<p>我不去想，
-是否能够成功 ，
-既然选择了远方 ，&nbsp;便只顾风雨兼程。</p>
-<p>我不去想，
-能否赢得爱情 ，
-既然钟情于玫瑰 ，
-就勇敢地吐露真诚&nbsp;。</p>
-<p>我不去想，
-身后会不会袭来寒风冷雨 ，
-既然目标是地平线，
-留给世界的只能是背影&nbsp;。</p>
-<p>我不去想，
-未来是平坦还是泥泞 ，
-只要热爱生命 ，&nbsp;一切，都在意料之中。</p>
-<hr>
-<h3>决心</h3>
 
-<p>人之一生，总会有许多困惑不已、纠缠不清的琐事，难免受其影响，绝不为其左右。</p>
-<p>此时所需的就是断然的取舍与明智的抉择，唯一会限制我们的，是我们自己的决心。</p>
-<hr>
-<h3>延续</h3>
+<p>事实上，如果想要设置前端页面通过content：url显示出来的图片大小，那只能修改图片的大小。因为它是直接读取的图片，并不是代入到html中再显示出来。但可以采用background的方式调整图片的大小，比如本博客中学术社交网站ResearchGate的Logo的CSS显示代码如下：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">social</span> <span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">*=</span><span class="s1">&#39;researchgate.net&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="s1">&#39;./images/icons/researchgate.png&#39;</span><span class="p">);</span> 
+  <span class="k">background-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span> 
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span> 
+  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">vertical-align</span><span class="p">:</span> <span class="mi">-3</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">height</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">width</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 
-<p>万物善变，人生泛滥的是那些冲动和急躁：即兴的热情、肤浅的思考、仓促的决定、敷衍的搪塞和最终的草草了事；</p>
-<p>而珍贵的是生命中那些经久和坚持，一种信仰，一段情感，一个习惯。一句独白自视为约定，一段感情权当作余生。</p>
-<hr>
-<h3>动力</h3>
 
-<p>如果说不清追逐的动力源于何处，就至少要让优秀成为自己的习惯，要乐观阳光，要知道自己身在何处，路在何方。</p>
-<hr>
-<h3>初心</h3>
-
-<p>愿我们在心底埋下的勇气、乐观和向善的种子，最后都成长为自己一直所追寻的最喜欢的样子。</p></div>
+<p>其中 content="", height, width, background-size, display, background-image 都必须显示指定。这样，就可以通过 height, width 来分别设置图片的长和宽了。</p></div>
 	
         <hr>
 
@@ -127,10 +115,10 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
                 Categories
                 </li>
                 
-                <li><a href="jiang-hao.com/categories/bian-cheng-kai-fa.html">编程开发</a></li>
-                <li><a href="jiang-hao.com/categories/bo-ke-da-jian.html">博客搭建</a></li>
-                <li><a href="jiang-hao.com/categories/ruan-jian-gong-ju.html">软件工具</a></li>
-                <li><a href="jiang-hao.com/categories/xiang-fa-ri-ji.html">想法日记</a></li>
+                <li><a href="jiang-hao.com/categories/blog.html">Blog</a></li>
+                <li><a href="jiang-hao.com/categories/coding.html">Coding</a></li>
+                <li><a href="jiang-hao.com/categories/notes.html">Notes</a></li>
+                <li><a href="jiang-hao.com/categories/tools.html">Tools</a></li>
                    
             </ul>
             </div>

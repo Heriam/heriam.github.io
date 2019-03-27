@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - 使用Pelican基于Github&nbsp;Pages搭建博客教程</title>
+    <title>Heriam - 使用Pelican基于Github Pages搭建博客教程</title>
     <meta name="description" content="">
     <meta name="author" content="Justin C.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>使用Pelican基于Github&nbsp;Pages搭建博客教程</h1>
+            <h1>使用Pelican基于Github Pages搭建博客教程</h1>
 Mon 05 February 2018
 
 by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
@@ -63,7 +63,7 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 
         </div>
 	
-        <div><p><strong>操作系统：</strong>Mac <span class="caps">OS</span> / Linux    <br>
+        <div><p><strong>操作系统：</strong>Mac OS / Linux    <br>
 <strong>工具集：</strong>  <br>
 1.Pelican——基于Python的静态网页生成器 <br>
 2.马克飞象——Evernote出的Markdown文本编辑器 <br>
@@ -79,29 +79,29 @@ by <a class="url fn" href="jiang-hao.com/authors/justin-c.html">Justin C.</a>
 12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
 <strong>最终效果展示：</strong><a href="http://www.hao-jiang.com">欢迎访问我的博客</a>：http://www.hao-jiang.com</p>
 <hr>
-<p><strong>一、使用Github&nbsp;Pages创建个人博客页面</strong>  </p>
+<p><strong>一、使用Github Pages创建个人博客页面</strong>  </p>
 <hr>
 <p>Git是一个开源的分布式版本控制系统，用以有效、高速的处理从很小到非常大的项目版本管理。GitHub可以托管各种git库的站点。通过GitHub Pages生成的静态站点，可以免费托管、自定义主题、并且自制网页界面。 <br>
 ​   <br>
 1.首先到Github进行账号注册：<a href="https://github.com/">https://github.com/</a>。     <br>
-2.注册后登录Github，右上角点击“Creat a new repo”，跳转到新页面后填写相关内容，注意版本库名使用&#8217;username.github.io&#8217;的格式，这里将username替换成自己的用户名即可。  <br>
+2.注册后登录Github，右上角点击“Creat a new repo”，跳转到新页面后填写相关内容，注意版本库名使用'username.github.io'的格式，这里将username替换成自己的用户名即可。  <br>
 3.设置和选择好页面模板后就可以生成然后发布新网页了。  <br>
-4.创建<span class="caps">SSH</span>密钥并上传到Github。 <br>
+4.创建SSH密钥并上传到Github。 <br>
 ​  <br>
 ​  <br>
 *以上内容都很简单，有问题可以参照：   <br>
 关于Github注册登录：<a href="http://www.linuxidc.com/Linux/2015-02/114121.htm">通过GitHub创建个人技术博客图文详解1</a> <br>
 关于Github页面生成：<a href="http://www.linuxidc.com/Linux/2015-02/114121p2.htm">通过GitHub创建个人技术博客图文详解2</a>  <br>
-关于<span class="caps">SSH</span>认证：<a href="http://www.xuanfengge.com/using-ssh-key-link-github-photo-tour.html">Windows/Mac下使用<span class="caps">SSH</span>密钥连接Github</a>   <br>
+关于SSH认证：<a href="http://www.xuanfengge.com/using-ssh-key-link-github-photo-tour.html">Windows/Mac下使用SSH密钥连接Github</a>   <br>
 官方文档：<a href="https://help.github.com/articles/generating-ssh-keys/">Github官方文档在这里</a>       </p>
 <hr>
 <p><strong>二、安装Python、Pelican和Markdown</strong></p>
 <hr>
-<p>Pelican是一套开源的使用Python编写的博客静态生成, 可以添加文章和和创建页面, 可以使用MarkDown reStructuredText 和 AsiiDoc 的格式来抒写, 同时使用 Disqus评论系统, 支持 <span class="caps">RSS</span>和Atom输出, 插件, 主题, 代码高亮等功能, 采用Jajin2模板引擎, 可以很容易的更改模板。  <br>
+<p>Pelican是一套开源的使用Python编写的博客静态生成, 可以添加文章和和创建页面, 可以使用MarkDown reStructuredText 和 AsiiDoc 的格式来抒写, 同时使用 Disqus评论系统, 支持 RSS和Atom输出, 插件, 主题, 代码高亮等功能, 采用Jajin2模板引擎, 可以很容易的更改模板。  <br>
 ​  <br>
-1.安装Python。最新的Mac <span class="caps">OS</span> 一般都自带Python环境。在终端输入&#8221;python&#8221;即可确认Python版本。如有需要可以到官网安装：http://www.python.org/。    <br>
+1.安装Python。最新的Mac OS 一般都自带Python环境。在终端输入"python"即可确认Python版本。如有需要可以到官网安装：http://www.python.org/。    <br>
 ​  <br>
-2.安装Pelican。可以从github克隆最新的代码安装, 并且建议在virtualenv下使用。首先建立&nbsp;virtualenv（Python虚拟环境）:         </p>
+2.安装Pelican。可以从github克隆最新的代码安装, 并且建议在virtualenv下使用。首先建立 virtualenv（Python虚拟环境）:         </p>
 <div class="highlight"><pre><span></span>virtualenv pelican      # 创建
 cd pelican
 sh bin/activate            # 激活虚拟环境
@@ -124,7 +124,8 @@ python setup.py install
 <p><strong>三、创建博客骨架</strong>     </p>
 <hr>
 <p>接下来将通过初始化Pelican设置来生成一个基本的博客框架。   <br>
-​   <br>&nbsp;1.搭建博客目录：     </p>
+​   <br>
+1.搭建博客目录：     </p>
 <div class="highlight"><pre><span></span>mkdir blog
 cd blog
 pelican-quickstart
@@ -158,18 +159,19 @@ git clone https://github.com/username/username.github.io.git
 </pre></div>
 
 
-<p>5.设置完后，以后写完文章就可以通过在blog根目录下执行“make&nbsp;github”进行一键部署了。     </p>
+<p>5.设置完后，以后写完文章就可以通过在blog根目录下执行“make github”进行一键部署了。     </p>
 <hr>
 <p><strong>四、通过Markdown试写博文并上传Github发布</strong>    </p>
 <hr>
-<p>Markdown是当下非常流行的一种文本编辑语法，支持<span class="caps">HTML</span>转换，书写博文排版也方便快捷。  <br>&nbsp;​      </p>
+<p>Markdown是当下非常流行的一种文本编辑语法，支持HTML转换，书写博文排版也方便快捷。  <br>
+​      </p>
 <p>1.写一篇文章：用<a href="http://pan.baidu.com/s/16soGY#path=%252F%25E9%25A9%25AC%25E5%2585%258B%25E9%25A3%259E%25E8%25B1%25A1%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF">马克飞象</a>编辑器用Markdown语法来写一篇文章保存为.md格式放在content目录下。写完后，执行以下命令，即可在本机http://127.0.0.1:8000看到效果。    </p>
 <div class="highlight"><pre><span></span>make publish
 make serve
 </pre></div>
 
 
-<p>2.创建一个页面：这里以创建&nbsp;About页面为例。在content目录创建pages子目录：    </p>
+<p>2.创建一个页面：这里以创建 About页面为例。在content目录创建pages子目录：    </p>
 <div class="highlight"><pre><span></span>mkdir content/pages
 </pre></div>
 
@@ -196,7 +198,7 @@ make serve
 
 <p>相关介绍请参见官方文档：http://pelican-zh.readthedocs.org/en/latest/zh-cn/ 。完成后同样可以在本机http://127.0.0.1:8000看效果。  <br>
 ​    <br>
-3.创建导航目录项：Menu&nbsp;Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：      </p>
+3.创建导航目录项：Menu Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：      </p>
 <div class="highlight"><pre><span></span>MENUITEMS = ((&quot;ITEM1&quot;,&quot;http://github.com&quot;),
              (&quot;ITEM2&quot;,URL),
             ......)
@@ -221,26 +223,27 @@ pelican-themes -i bootstrap2
 <hr>
 <p><strong>六、安装第三方评论系统Disqus</strong>    </p>
 <hr>
-<p>在Disqus上申请一个站点，记住shortname。&nbsp;在pelicanconf.py添加：     </p>
+<p>在Disqus上申请一个站点，记住shortname。 在pelicanconf.py添加：     </p>
 <div class="highlight"><pre><span></span>DISQUS_SITENAME = Shortname
 </pre></div>
 
 
 <hr>
-<p><strong>七、添加Google&nbsp;Analytics</strong>    </p>
+<p><strong>七、添加Google Analytics</strong>    </p>
 <hr>
-<p>去Google Analytics申请账号并通过验证，记下跟踪<span class="caps">ID</span>（Track <span class="caps">ID</span>），&nbsp;在pelicanconf.py添加：    </p>
+<p>去Google Analytics申请账号并通过验证，记下跟踪ID（Track ID）， 在pelicanconf.py添加：    </p>
 <div class="highlight"><pre><span></span>GOOGLE_ANALYTICS = &#39;跟踪ID&#39;
 </pre></div>
 
 
 <hr>
-<p><strong>八、添加Google&nbsp;Webmasters和百度站长收录</strong>    </p>
+<p><strong>八、添加Google Webmasters和百度站长收录</strong>    </p>
 <hr>
 <p>为了让博客被Google更好的收录，比如手动让Googlebot抓取、提交Robots、更新Sitemap等等。      <br>
 ​  <br>
 1.在Google Webmasters上注册并通过验证。  <br>
-​  <br>&nbsp;2.添加sitemap插件。还是到/blog目录下执行：    </p>
+​  <br>
+2.添加sitemap插件。还是到/blog目录下执行：    </p>
 <div class="highlight"><pre><span></span>cd ~/blog
 git clone git://github.com/getpelican/pelican-plugins.git
 </pre></div>
@@ -266,7 +269,8 @@ SITEMAP = {
 
 
 <p>3.将make github命令后在output目录下生成的sitemap文件上传到Google Webmasters。    <br>
-​  <br>&nbsp;4.对于百度。它是宣称支持sitemap的，但是网上相关问题一大堆，要么格式不对要么就是抓取失败，要么突然不开放支持。在几次尝试失败以后，我是通过添加JavaScript代码来自动推送网站链接的。具体是在主题模板（base.html）面最后添加代码：    </p>
+​  <br>
+4.对于百度。它是宣称支持sitemap的，但是网上相关问题一大堆，要么格式不对要么就是抓取失败，要么突然不开放支持。在几次尝试失败以后，我是通过添加JavaScript代码来自动推送网站链接的。具体是在主题模板（base.html）面最后添加代码：    </p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;script&gt;</span>
 (function(){
     var bp = document.createElement(&#39;script&#39;);
@@ -290,7 +294,7 @@ SITEMAP = {
 </pre></div>
 
 
-<p>2.创建search.html。之后，在output目录下，新建一个名为search.html的文件，写入下面的内容，其中需要你自己修改的是google站内搜索的<span class="caps">ID</span>号，需要自己在<a href="https://cse.google.com">google站内搜索</a>的网站上自己申请。     </p>
+<p>2.创建search.html。之后，在output目录下，新建一个名为search.html的文件，写入下面的内容，其中需要你自己修改的是google站内搜索的ID号，需要自己在<a href="https://cse.google.com">google站内搜索</a>的网站上自己申请。     </p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;zh_CN&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
@@ -370,7 +374,8 @@ SITEMAP = {
 </pre></div>
 
 
-<p>3.将GOOGLE_CUSTOM_SEARCH_SIDEBAR = &#8220;001578481551708017171:axpo6yvtdyg&#8221; 添加到pelicanconf.py文件。注意, 引号里的那一串字符是之前申请的自定义搜索引擎的id。  <br>&nbsp;4.最后发布后就可以看到搜索框了。      </p>
+<p>3.将GOOGLE_CUSTOM_SEARCH_SIDEBAR = "001578481551708017171:axpo6yvtdyg" 添加到pelicanconf.py文件。注意, 引号里的那一串字符是之前申请的自定义搜索引擎的id。  <br>
+4.最后发布后就可以看到搜索框了。      </p>
 <hr>
 <p>​  <br>
 <strong>百度站内搜索</strong>  <br>
@@ -389,7 +394,8 @@ SITEMAP = {
 <p><strong>十、添加Tags侧边栏</strong>    </p>
 <hr>
 <p>在其他一些pelican主题中，看到有标签云，想到Tags的链接可能比Categories的链接更有用，通过更改主题，添加了侧栏中红框内的Tags链接框。  <br>
-​  <br>&nbsp;1.还是找到base.html，找到categories部分：    </p>
+​  <br>
+1.还是找到base.html，找到categories部分：    </p>
 <div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">categories</span> <span class="cp">%}</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;well&quot;</span> <span class="na">style=</span><span class="s">&quot;padding: 8px 0; background-color: #FBFBFB;&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav nav-list&quot;</span><span class="nt">&gt;</span>
@@ -427,18 +433,18 @@ SITEMAP = {
 <hr>
 <p><strong>十一、插入视频</strong>    </p>
 <hr>
-<p>其实很简单, 只需要把html代码放进markdown源文件就行了!&nbsp;而视频的html代码在视频网站上一般都会提供。复制下来放进源文件即可。    </p>
+<p>其实很简单, 只需要把html代码放进markdown源文件就行了! 而视频的html代码在视频网站上一般都会提供。复制下来放进源文件即可。    </p>
 <hr>
 <p><strong>十二、拷贝静态文件</strong>    </p>
 <hr>
-<p>如果我们定义静态的文件，该如何将它在每次生成的时候拷贝到 output 目录呢，我们以网站logo图片sitelogo.ico为例，在我们的 content/extra 下放置网站的静态资源文件：sitelogo.ico，在pelicanconf.py更改或添加&nbsp;FILES_TO_COPY项：    </p>
+<p>如果我们定义静态的文件，该如何将它在每次生成的时候拷贝到 output 目录呢，我们以网站logo图片sitelogo.ico为例，在我们的 content/extra 下放置网站的静态资源文件：sitelogo.ico，在pelicanconf.py更改或添加 FILES_TO_COPY项：    </p>
 <div class="highlight"><pre><span></span>FILES_TO_COPY = (
     (&quot;extra/sitelogo.ico&quot;, &quot;sitelogo.ico&quot;),
 )
 </pre></div>
 
 
-<p>这样在每次生成html的时候都会把 content/extra下的 sitelogo.ico 拷贝到&nbsp;output目录下。    </p>
+<p>这样在每次生成html的时候都会把 content/extra下的 sitelogo.ico 拷贝到 output目录下。    </p>
 <hr>
 <p><strong>十三、资源目录管理</strong>    </p>
 <hr>
@@ -466,9 +472,9 @@ TAGS_SAVE_AS = &#39;tag/index.html&#39;
 
 
 <hr>
-<p><strong>十四、指定文章或页面<span class="caps">URL</span></strong>    </p>
+<p><strong>十四、指定文章或页面URL</strong>    </p>
 <hr>
-<p>在需要指定<span class="caps">URL</span>的文章或者页面中包括两个元数据url与save_as，例如：    </p>
+<p>在需要指定URL的文章或者页面中包括两个元数据url与save_as，例如：    </p>
 <div class="highlight"><pre><span></span><span class="n">url</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/</span>
 <span class="n">save_as</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/i</span><span class="n">ndex</span><span class="o">.</span><span class="na">html</span>
 </pre></div>
@@ -487,24 +493,25 @@ save_as: index.html
 
 <p>*另外还可以通过template:关键字来指定要使用的模板。    </p>
 <hr>
-<p><strong>十五、独立域名设置</strong>  <br>&nbsp;详见：http://www.jianshu.com/p/252b542b1abf </p>
+<p><strong>十五、独立域名设置</strong>  <br>
+详见：http://www.jianshu.com/p/252b542b1abf </p>
 <hr>
 <p>Godaddy上购买专属域名，用dnspod进行动态域名解析，步骤如下:    </p>
-<p>步骤1：修改Godaddy中的NameServers的两个地址为dnspod的<span class="caps">DNS</span>地址：    </p>
+<p>步骤1：修改Godaddy中的NameServers的两个地址为dnspod的DNS地址：    </p>
 <div class="highlight"><pre><span></span>f1g1ns1.dnspod.net
 f1g1ns2.dnspod.net
 </pre></div>
 
 
-<p>步骤2：在Dnspod中添加一条A记录，指向Github <span class="caps">URL</span>      </p>
+<p>步骤2：在Dnspod中添加一条A记录，指向Github URL      </p>
 <div class="highlight"><pre><span></span>username.github.io
 </pre></div>
 
 
-<p>步骤3：在Pelican主目录，即上面创建的blog/output/username.github.io目录，添加<span class="caps">CNAME</span>文件，在文件中添加你的独立域名。    <br>
+<p>步骤3：在Pelican主目录，即上面创建的blog/output/username.github.io目录，添加CNAME文件，在文件中添加你的独立域名。    <br>
 ​  <br>
 ​  <br>
-*注意这里的<span class="caps">CNAME</span>建议放在第十二步提到的content目录下的静态子目录<code>content/extra</code>下，并在配置文件中添加相关条目。     </p>
+*注意这里的CNAME建议放在第十二步提到的content目录下的静态子目录<code>content/extra</code>下，并在配置文件中添加相关条目。     </p>
 <hr>
 <p><strong>十六、相关文章、上下文导航</strong>    </p>
 <hr>
@@ -598,10 +605,10 @@ RELATED_POSTS_MAX = 10
                 Categories
                 </li>
                 
-                <li><a href="jiang-hao.com/categories/bian-cheng-kai-fa.html">编程开发</a></li>
-                <li><a href="jiang-hao.com/categories/bo-ke-da-jian.html">博客搭建</a></li>
-                <li><a href="jiang-hao.com/categories/ruan-jian-gong-ju.html">软件工具</a></li>
-                <li><a href="jiang-hao.com/categories/xiang-fa-ri-ji.html">想法日记</a></li>
+                <li><a href="jiang-hao.com/categories/blog.html">Blog</a></li>
+                <li><a href="jiang-hao.com/categories/coding.html">Coding</a></li>
+                <li><a href="jiang-hao.com/categories/notes.html">Notes</a></li>
+                <li><a href="jiang-hao.com/categories/tools.html">Tools</a></li>
                    
             </ul>
             </div>

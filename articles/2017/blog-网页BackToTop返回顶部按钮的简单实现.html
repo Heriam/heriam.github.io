@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 网页 BacktoTop&nbsp;返回顶部按钮的简单实现</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="../../theme/bootstrap-collapse.js"></script>
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>网页 BacktoTop&nbsp;返回顶部按钮的简单实现</h1>
+2017-06-30 Fri
+
+by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
+ 
+
+
+        </div>
+		
+		
+        <div><p>在较长的网页页面中往往需要一个固定漂浮在显示屏右下侧位置的返回顶部按钮。</p>
+<p>下面介绍一种简单实现：</p>
+<p><strong><span class="caps">HTML</span>&nbsp;部分：</strong>  </p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>Top<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  ...
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p><strong><span class="caps">CSS</span>&nbsp;部分：</strong></p>
+<div class="highlight"><pre><span></span><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
+    <span class="k">right</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">cursor</span><span class="p">:</span><span class="kc">pointer</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span><span class="mh">#2E435E</span><span class="p">;</span>
+    <span class="k">text-indent</span><span class="p">:</span><span class="mi">-9999</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span><span class="kc">none</span><span class="p">;</span>
+    <span class="kp">-webkit-</span><span class="k">border-radius</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+    <span class="kp">-moz-</span><span class="k">border-radius</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border-radius</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">#</span><span class="nn">scroll</span> <span class="nt">span</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span><span class="kc">absolute</span><span class="p">;</span>
+    <span class="k">top</span><span class="p">:</span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">left</span><span class="p">:</span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">margin-left</span><span class="p">:</span><span class="mi">-8</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">margin-top</span><span class="p">:</span><span class="mi">-12</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span><span class="mi">8</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">transparent</span><span class="p">;</span>
+    <span class="k">border-bottom-color</span><span class="p">:</span><span class="mh">#ffffff</span>
+<span class="p">}</span>
+<span class="p">#</span><span class="nn">scroll</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span>
+    <span class="k">background-color</span><span class="p">:</span><span class="mh">#3498db</span><span class="p">;</span>
+    <span class="k">opacity</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">filter</span><span class="p">:</span><span class="s2">&quot;alpha(opacity=100)&quot;</span><span class="p">;</span>
+    <span class="kp">-ms-</span><span class="k">filter</span><span class="p">:</span><span class="s2">&quot;alpha(opacity=100)&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong>JavaScript&nbsp;部分：</strong></p>
+<div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scroll</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">){</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#scroll&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">();</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#scroll&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#scroll&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;html, body&quot;</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">scrollTop</span><span class="o">:</span> <span class="mi">0</span> <span class="p">},</span> <span class="mi">600</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+
+<p>最后的显示效果可以参照本博客：）</p></div>
+	
+        <hr>
+
+    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+			<a href="/" class="profilepic">
+				<img src="https://raw.githubusercontent.com/Heriam/images/master/portrait/photo.png" />
+			</a>
+			<h2 style="text-align: center;"><span>Hao Jiang</span><span class="subTitle">Justin C.</span></h2>
+            </div>
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../../categories/blog.html">Blog</a></li>
+                <li><a href="../../categories/coding.html">Coding</a></li>
+                <li><a href="../../categories/notes.html">Notes</a></li>
+                <li><a href="../../categories/tools.html">Tools</a></li>
+                   
+            </ul>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">Heriam</a> &copy; Justin C. 2019</p>
+</footer>
+
+</div> <!-- /container -->
+ 
+</body>
+</html>

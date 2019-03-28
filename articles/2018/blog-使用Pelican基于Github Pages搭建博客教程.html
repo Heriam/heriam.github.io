@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 使用Pelican基于Github&nbsp;Pages搭建博客教程</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin C.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="../../theme/bootstrap-collapse.js"></script>
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            
+        </ul>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>使用Pelican基于Github&nbsp;Pages搭建博客教程</h1>
+2018-02-05 Mon
+
+by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
+ 
+
+
+        </div>
+		
+		
+        <div><p><strong>操作系统：</strong>Mac <span class="caps">OS</span> / Linux    <br>
+<strong>工具集：</strong>  <br>
+1.Pelican——基于Python的静态网页生成器 <br>
+2.马克飞象——Evernote出的Markdown文本编辑器 <br>
+3.GoDaddy——域名供应商 <br>
+4.DNSPod——提供免费域名解析注册服务 <br>
+5.Github Pages——Github为每个注册用户提供300M的站点空间 <br>
+6.Python——Pelican工具需要Python运行环境 <br>
+7.Google Analytics——谷歌站点数据监测分析工具 <br>
+8.Google Custom Search——谷歌自定义搜索引擎可用作站内搜索工具 <br>
+9.Google Webmasters——谷歌站长工具  <br>
+10.Disqus——用来提供博客评论功能  <br>
+11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
+12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
+<strong>最终效果展示：</strong><a href="http://www.hao-jiang.com">欢迎访问我的博客</a>：http://www.hao-jiang.com</p>
+<hr>
+<p><strong>一、使用Github&nbsp;Pages创建个人博客页面</strong>  </p>
+<hr>
+<p>Git是一个开源的分布式版本控制系统，用以有效、高速的处理从很小到非常大的项目版本管理。GitHub可以托管各种git库的站点。通过GitHub Pages生成的静态站点，可以免费托管、自定义主题、并且自制网页界面。 <br>
+​   <br>
+1.首先到Github进行账号注册：<a href="https://github.com/">https://github.com/</a>。     <br>
+2.注册后登录Github，右上角点击“Creat a new repo”，跳转到新页面后填写相关内容，注意版本库名使用&#8217;username.github.io&#8217;的格式，这里将username替换成自己的用户名即可。  <br>
+3.设置和选择好页面模板后就可以生成然后发布新网页了。  <br>
+4.创建<span class="caps">SSH</span>密钥并上传到Github。 <br>
+​  <br>
+​  <br>
+*以上内容都很简单，有问题可以参照：   <br>
+关于Github注册登录：<a href="http://www.linuxidc.com/Linux/2015-02/114121.htm">通过GitHub创建个人技术博客图文详解1</a> <br>
+关于Github页面生成：<a href="http://www.linuxidc.com/Linux/2015-02/114121p2.htm">通过GitHub创建个人技术博客图文详解2</a>  <br>
+关于<span class="caps">SSH</span>认证：<a href="http://www.xuanfengge.com/using-ssh-key-link-github-photo-tour.html">Windows/Mac下使用<span class="caps">SSH</span>密钥连接Github</a>   <br>
+官方文档：<a href="https://help.github.com/articles/generating-ssh-keys/">Github官方文档在这里</a>       </p>
+<hr>
+<p><strong>二、安装Python、Pelican和Markdown</strong></p>
+<hr>
+<p>Pelican是一套开源的使用Python编写的博客静态生成, 可以添加文章和和创建页面, 可以使用MarkDown reStructuredText 和 AsiiDoc 的格式来抒写, 同时使用 Disqus评论系统, 支持 <span class="caps">RSS</span>和Atom输出, 插件, 主题, 代码高亮等功能, 采用Jajin2模板引擎, 可以很容易的更改模板。  <br>
+​  <br>
+1.安装Python。最新的Mac <span class="caps">OS</span> 一般都自带Python环境。在终端输入&#8221;python&#8221;即可确认Python版本。如有需要可以到官网安装：http://www.python.org/。    <br>
+​  <br>
+2.安装Pelican。可以从github克隆最新的代码安装, 并且建议在virtualenv下使用。首先建立&nbsp;virtualenv（Python虚拟环境）:         </p>
+<div class="highlight"><pre><span></span>virtualenv pelican      # 创建
+cd pelican
+sh bin/activate            # 激活虚拟环境
+</pre></div>
+
+
+<p>从github克隆最新代码安装Pelican：      </p>
+<div class="highlight"><pre><span></span>git clone git://github.com/getpelican/pelican.git          # 下载代码
+cd pelican
+python setup.py install
+</pre></div>
+
+
+<p>3.安装Markdown:        </p>
+<div class="highlight"><pre><span></span>pip install markdown
+</pre></div>
+
+
+<hr>
+<p><strong>三、创建博客骨架</strong>     </p>
+<hr>
+<p>接下来将通过初始化Pelican设置来生成一个基本的博客框架。   <br>
+​   <br>&nbsp;1.搭建博客目录：     </p>
+<div class="highlight"><pre><span></span>mkdir blog
+cd blog
+pelican-quickstart
+</pre></div>
+
+
+<p>2.根据提示一步步输入相应的配置项，不知道如何设置的接受默认即可，后续可以通过编辑pelicanconf.py文件更改配置。完成后将会在根目录生成以下文件：     </p>
+<div class="highlight"><pre><span></span>.
+|-- content                # 所有文章放于此目录
+│   └── (pages)            # 存放手工创建的静态页面
+|-- develop_server.sh      # 用于开启测试服务器
+|-- Makefile               # 方便管理博客的Makefile
+|-- output                 # 静态生成文件
+|-- pelicanconf.py         # 配置文件
+|-- publishconf.py         # 配置文件
+</pre></div>
+
+
+<p>3.进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意这里以及后文中的username要替换成自己的Github用户名：      </p>
+<div class="highlight"><pre><span></span>cd output
+git clone https://github.com/username/username.github.io.git
+</pre></div>
+
+
+<p>4.设置一键上传部署到Github。打开根目录下的Makefile文件，修改以下三个地方：     </p>
+<div class="highlight"><pre><span></span> <span class="nv">OUTPUTDIR</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/output/username.github.io    
+ publish:    
+ <span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>    
+ github: publish    
+ <span class="nb">cd</span> OUTPUTDIR <span class="p">;</span> git add . <span class="p">;</span>  git commit -am <span class="s1">&#39;your comments&#39;</span> <span class="p">;</span> git push    
+</pre></div>
+
+
+<p>5.设置完后，以后写完文章就可以通过在blog根目录下执行“make&nbsp;github”进行一键部署了。     </p>
+<hr>
+<p><strong>四、通过Markdown试写博文并上传Github发布</strong>    </p>
+<hr>
+<p>Markdown是当下非常流行的一种文本编辑语法，支持<span class="caps">HTML</span>转换，书写博文排版也方便快捷。  <br>&nbsp;​      </p>
+<p>1.写一篇文章：用<a href="http://pan.baidu.com/s/16soGY#path=%252F%25E9%25A9%25AC%25E5%2585%258B%25E9%25A3%259E%25E8%25B1%25A1%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF">马克飞象</a>编辑器用Markdown语法来写一篇文章保存为.md格式放在content目录下。写完后，执行以下命令，即可在本机http://127.0.0.1:8000看到效果。    </p>
+<div class="highlight"><pre><span></span>make publish
+make serve
+</pre></div>
+
+
+<p>2.创建一个页面：这里以创建&nbsp;About页面为例。在content目录创建pages子目录：    </p>
+<div class="highlight"><pre><span></span>mkdir content/pages
+</pre></div>
+
+
+<p>*然后创建About.md并填入下面内容：     </p>
+<div class="highlight"><pre><span></span><span class="n">title</span><span class="o">:</span> <span class="n">About</span> <span class="n">Me</span>        
+<span class="n">date</span><span class="o">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">18</span>       
+
+<span class="n">About</span> <span class="n">me</span> <span class="n">content</span>
+</pre></div>
+
+
+<p>*注意上面title和date是.md文件的重要参数，需要写在文档开头。比如：    </p>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">Pelican</span><span class="o">+</span><span class="n">Github</span>
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">22</span><span class="o">:</span><span class="mi">20</span>
+<span class="n">Modified</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">23</span><span class="o">:</span><span class="mi">04</span>
+<span class="n">Tags</span><span class="o">:</span> <span class="n">python</span><span class="o">,</span> <span class="n">pelican</span>
+<span class="n">Slug</span><span class="o">:</span> <span class="n">build</span><span class="o">-</span><span class="n">blog</span><span class="o">-</span><span class="n">system</span><span class="o">-</span><span class="n">by</span><span class="o">-</span><span class="n">pelican</span>
+<span class="n">Authors</span><span class="o">:</span> <span class="n">Joey</span> <span class="n">Huang</span>
+<span class="n">Summary</span><span class="o">:</span> <span class="n">blablablablablablablabla</span><span class="o">...</span>
+<span class="n">Status</span><span class="o">:</span> <span class="n">draft</span>
+</pre></div>
+
+
+<p>相关介绍请参见官方文档：http://pelican-zh.readthedocs.org/en/latest/zh-cn/ 。完成后同样可以在本机http://127.0.0.1:8000看效果。  <br>
+​    <br>
+3.创建导航目录项：Menu&nbsp;Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：      </p>
+<div class="highlight"><pre><span></span>MENUITEMS = ((&quot;ITEM1&quot;,&quot;http://github.com&quot;),
+             (&quot;ITEM2&quot;,URL),
+            ......)
+</pre></div>
+
+
+<hr>
+<p><strong>五、安装主题</strong>    </p>
+<hr>
+<p>这里以主题bootstrap2为例，同样还在blog目录下：     </p>
+<div class="highlight"><pre><span></span>git clone https://github.com/getpelican/pelican-themes.git
+cd pelican-themes
+pelican-themes -i bootstrap2
+</pre></div>
+
+
+<p>对应在在pelicanconf.py中添加主题选择条目：    </p>
+<div class="highlight"><pre><span></span>THEME = &#39;bootstrap2&#39;
+</pre></div>
+
+
+<hr>
+<p><strong>六、安装第三方评论系统Disqus</strong>    </p>
+<hr>
+<p>在Disqus上申请一个站点，记住shortname。&nbsp;在pelicanconf.py添加：     </p>
+<div class="highlight"><pre><span></span>DISQUS_SITENAME = Shortname
+</pre></div>
+
+
+<hr>
+<p><strong>七、添加Google&nbsp;Analytics</strong>    </p>
+<hr>
+<p>去Google Analytics申请账号并通过验证，记下跟踪<span class="caps">ID</span>（Track <span class="caps">ID</span>），&nbsp;在pelicanconf.py添加：    </p>
+<div class="highlight"><pre><span></span>GOOGLE_ANALYTICS = &#39;跟踪ID&#39;
+</pre></div>
+
+
+<hr>
+<p><strong>八、添加Google&nbsp;Webmasters和百度站长收录</strong>    </p>
+<hr>
+<p>为了让博客被Google更好的收录，比如手动让Googlebot抓取、提交Robots、更新Sitemap等等。      <br>
+​  <br>
+1.在Google Webmasters上注册并通过验证。  <br>
+​  <br>&nbsp;2.添加sitemap插件。还是到/blog目录下执行：    </p>
+<div class="highlight"><pre><span></span>cd ~/blog
+git clone git://github.com/getpelican/pelican-plugins.git
+</pre></div>
+
+
+<p>*然后在pelicanconf.py里配置如下：    </p>
+<div class="highlight"><pre><span></span>PLUGIN_PATH = u&quot;pelican-plugins&quot;
+PLUGINS = [&quot;sitemap&quot;]
+SITEMAP = {
+    &quot;format&quot;: &quot;xml&quot;,
+    &quot;priorities&quot;: {
+        &quot;articles&quot;: 0.7,
+        &quot;indexes&quot;: 0.5,
+        &quot;pages&quot;: 0.3,
+    },
+    &quot;changefreqs&quot;: {
+        &quot;articles&quot;: &quot;monthly&quot;,
+        &quot;indexes&quot;: &quot;daily&quot;,
+        &quot;pages&quot;: &quot;monthly&quot;,
+    }
+}
+</pre></div>
+
+
+<p>3.将make github命令后在output目录下生成的sitemap文件上传到Google Webmasters。    <br>
+​  <br>&nbsp;4.对于百度。它是宣称支持sitemap的，但是网上相关问题一大堆，要么格式不对要么就是抓取失败，要么突然不开放支持。在几次尝试失败以后，我是通过添加JavaScript代码来自动推送网站链接的。具体是在主题模板（base.html）面最后添加代码：    </p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;script&gt;</span>
+(function(){
+    var bp = document.createElement(&#39;script&#39;);
+    bp.src = &#39;//push.zhanzhang.baidu.com/push.js&#39;;
+    var s = document.getElementsByTagName(&quot;script&quot;)[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+
+<p>*我还是比较推崇这种方法的，因为比sitemap方法被抓取收录的时间短很多。谷歌的sitemap是xml格式。  </p>
+<hr>
+<p><strong>九、添加谷歌／百度站内搜索</strong>    </p>
+<hr>
+<p><strong>谷歌站内搜索</strong>  <br>
+1.修改主题。找到这个主题的templates文件夹中的base.html，在<code>&lt;div class="nav-collapse"&gt;</code>的最后，添加以下内容：    </p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;navbar-search pull-right&quot;</span> <span class="na">action=</span><span class="s">&quot;/search.html&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">class=</span><span class="s">&quot;search-query&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">id=</span><span class="s">&quot;s&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+
+
+<p>2.创建search.html。之后，在output目录下，新建一个名为search.html的文件，写入下面的内容，其中需要你自己修改的是google站内搜索的<span class="caps">ID</span>号，需要自己在<a href="https://cse.google.com">google站内搜索</a>的网站上自己申请。     </p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;zh_CN&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;title&gt;</span>站内搜索<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+#search-box {
+    position: relative;
+    width: 50%;
+    margin: 0;
+    padding: 1em;
+}
+
+#search-form {
+    height: 30px;
+    border: 1px solid #999;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+#search-text {
+    font-size: 14px;
+    color: #ddd;
+    border-width: 0;
+    background: transparent;
+}
+
+#search-box input[type=&quot;text&quot;] {
+    width: 90%;
+    padding: 4px 0 12px 1em;
+    color: #333;
+    outline: none;
+}
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;search-box&#39;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&#39;/search.html&#39;</span> <span class="na">id=</span><span class="s">&#39;search-form&#39;</span> <span class="na">method=</span><span class="s">&#39;get&#39;</span> <span class="na">target=</span><span class="s">&#39;_top&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&#39;search-text&#39;</span> <span class="na">name=</span><span class="s">&#39;q&#39;</span> <span class="na">placeholder=</span><span class="s">&#39;Search&#39;</span> <span class="na">type=</span><span class="s">&#39;text&#39;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;cse&quot;</span> <span class="na">style=</span><span class="s">&quot;width: 100%;&quot;</span><span class="nt">&gt;</span>Loading<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;http://www.google.com/jsapi&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span> 
+  google.load(&#39;search&#39;, &#39;1&#39;, {language : &#39;zh-CN&#39;, style : google.loader.themes.V2_DEFAULT});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+      &#39;012191777864628038963:**********<span class="cp">&lt;!写入你申请的google站内搜索的ID号&gt;</span>）&#39;, customSearchOptions);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.enableSearchResultsOnly(); 
+    customSearchControl.draw(&#39;cse&#39;, options);
+    function parseParamsFromUrl() {
+      var params = {};
+      var parts = window.location.search.substr(1).split(&#39;\x26&#39;);
+      for (var i = 0; i <span class="nt">&lt; parts.length</span><span class="err">;</span> <span class="err">i++)</span> <span class="err">{</span>
+        <span class="err">var</span> <span class="na">keyValuePair =</span> <span class="s">parts[i].split(&#39;=&#39;);</span>
+        <span class="err">var</span> <span class="na">key =</span> <span class="s">decodeURIComponent(keyValuePair[0]);</span>
+        <span class="err">params[key]</span> <span class="err">=</span> <span class="err">keyValuePair[1]</span> <span class="err">?</span>
+            <span class="err">decodeURIComponent(keyValuePair[1].replace(/\+/g,</span> <span class="err">&#39;</span> <span class="err">&#39;))</span> <span class="err">:</span>
+            <span class="err">keyValuePair[1];</span>
+      <span class="err">}</span>
+      <span class="err">return</span> <span class="err">params;</span>
+    <span class="err">}</span>
+
+    <span class="err">var</span> <span class="na">urlParams =</span> <span class="s">parseParamsFromUrl();</span>
+    <span class="err">var</span> <span class="na">queryParamName =</span> <span class="s">&quot;q&quot;</span><span class="err">;</span>
+    <span class="err">if</span> <span class="err">(urlParams[queryParamName])</span> <span class="err">{</span>
+      <span class="err">customSearchControl.execute(urlParams[queryParamName]);</span>
+    <span class="err">}</span>
+  <span class="err">},</span> <span class="err">true);</span>
+<span class="err">&lt;/script</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+
+<p>3.将GOOGLE_CUSTOM_SEARCH_SIDEBAR = &#8220;001578481551708017171:axpo6yvtdyg&#8221; 添加到pelicanconf.py文件。注意, 引号里的那一串字符是之前申请的自定义搜索引擎的id。  <br>&nbsp;4.最后发布后就可以看到搜索框了。      </p>
+<hr>
+<p>​  <br>
+<strong>百度站内搜索</strong>  <br>
+1.在百度站长平台中注册一个账号，之后添加网站，按照提示验证网站。之后左侧<code>其他工具</code>中找到<code>站内搜索</code>，按照提示填写基本信息，选择搜索框样式，之后点击<code>查看代码</code>，复制其中内容，留用。  <br>
+2.同样在base.html的这个<code>&lt;div class="nav-collapse"&gt;</code>的最后，新建一个<code>div</code>，刚才注册最后复制的代码粘贴到这个<code>div</code>中：    </p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-search pull-right&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script&gt;</span>  
+        <span class="cp">&lt;!略&gt;</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<p>3.发布验证。    </p>
+<hr>
+<p><strong>十、添加Tags侧边栏</strong>    </p>
+<hr>
+<p>在其他一些pelican主题中，看到有标签云，想到Tags的链接可能比Categories的链接更有用，通过更改主题，添加了侧栏中红框内的Tags链接框。  <br>
+​  <br>&nbsp;1.还是找到base.html，找到categories部分：    </p>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">categories</span> <span class="cp">%}</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;well&quot;</span> <span class="na">style=</span><span class="s">&quot;padding: 8px 0; background-color: #FBFBFB;&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav nav-list&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;nav-header&quot;</span><span class="nt">&gt;</span> 
+    Categories
+    <span class="nt">&lt;/li&gt;</span>
+
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">cat</span><span class="o">,</span> <span class="nv">null</span> <span class="k">in</span> <span class="nv">categories</span> <span class="cp">%}</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">cat.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">cat</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>                   
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+
+
+<p>2.在这段后面添加：    </p>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">tags</span> <span class="cp">%}</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;well&quot;</span> <span class="na">style=</span><span class="s">&quot;padding: 8px 0; background-color: #FBFBFB;&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav nav-list&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;nav-header&quot;</span><span class="nt">&gt;</span> 
+    Tags
+    <span class="nt">&lt;/li&gt;</span>
+
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">name</span><span class="o">,</span> <span class="nv">tag</span> <span class="k">in</span> <span class="nv">tags</span> <span class="cp">%}</span>
+    <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">name.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">name</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</pre></div>
+
+
+<p>3.保存，重新发布网页验证。    </p>
+<hr>
+<p><strong>十一、插入视频</strong>    </p>
+<hr>
+<p>其实很简单, 只需要把html代码放进markdown源文件就行了!&nbsp;而视频的html代码在视频网站上一般都会提供。复制下来放进源文件即可。    </p>
+<hr>
+<p><strong>十二、拷贝静态文件</strong>    </p>
+<hr>
+<p>如果我们定义静态的文件，该如何将它在每次生成的时候拷贝到 output 目录呢，我们以网站logo图片sitelogo.ico为例，在我们的 content/extra 下放置网站的静态资源文件：sitelogo.ico，在pelicanconf.py更改或添加&nbsp;FILES_TO_COPY项：    </p>
+<div class="highlight"><pre><span></span>FILES_TO_COPY = (
+    (&quot;extra/sitelogo.ico&quot;, &quot;sitelogo.ico&quot;),
+)
+</pre></div>
+
+
+<p>这样在每次生成html的时候都会把 content/extra下的 sitelogo.ico 拷贝到&nbsp;output目录下。    </p>
+<hr>
+<p><strong>十三、资源目录管理</strong>    </p>
+<hr>
+<p>使用目录名作为文章的分类名    </p>
+<div class="highlight"><pre><span></span>USE_FOLDER_AS_CATEGORY = True
+</pre></div>
+
+
+<p>使用文件名作为文章或页面的<code>slug（url）</code>    </p>
+<div class="highlight"><pre><span></span>FILENAME_METADATA = &#39;(?P&lt;slug&gt;.*)&#39;
+</pre></div>
+
+
+<p>页面的显示路径和保存路径，推荐下面的方式     </p>
+<div class="highlight"><pre><span></span>ARTICLE_URL = &#39;{category}/{slug}.html&#39;
+ARTICLE_SAVE_AS = ARTICLE_URL
+PAGE_URL = &#39;{slug}.html&#39;
+PAGE_SAVE_AS = PAGE_URL
+CATEGORY_URL = &#39;{slug}/index.html&#39;
+CATEGORY_SAVE_AS = CATEGORY_URL
+TAG_URL = &#39;tag/{slug}.html&#39;
+TAG_SAVE_AS = TAG_URL
+TAGS_SAVE_AS = &#39;tag/index.html&#39;
+</pre></div>
+
+
+<hr>
+<p><strong>十四、指定文章或页面<span class="caps">URL</span></strong>    </p>
+<hr>
+<p>在需要指定<span class="caps">URL</span>的文章或者页面中包括两个元数据url与save_as，例如：    </p>
+<div class="highlight"><pre><span></span><span class="n">url</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/</span>
+<span class="n">save_as</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/i</span><span class="n">ndex</span><span class="o">.</span><span class="na">html</span>
+</pre></div>
+
+
+<p>*这个代码指定了本篇文章的url为pages/url/index.html     <br>
+​   <br>
+​    <br>
+根据上面很容易推断如何将一篇文章设置为网站的主页，如下代码即可实现将 <code>content/pages/home.md</code>设为主页：     </p>
+<div class="highlight"><pre><span></span>Title: [www.yanyulin.info](http://www.yanyulin.info)
+Date: 2014-01-08
+URL:
+save_as: index.html
+</pre></div>
+
+
+<p>*另外还可以通过template:关键字来指定要使用的模板。    </p>
+<hr>
+<p><strong>十五、独立域名设置</strong>  <br>&nbsp;详见：http://www.jianshu.com/p/252b542b1abf </p>
+<hr>
+<p>Godaddy上购买专属域名，用dnspod进行动态域名解析，步骤如下:    </p>
+<p>步骤1：修改Godaddy中的NameServers的两个地址为dnspod的<span class="caps">DNS</span>地址：    </p>
+<div class="highlight"><pre><span></span>f1g1ns1.dnspod.net
+f1g1ns2.dnspod.net
+</pre></div>
+
+
+<p>步骤2：在Dnspod中添加一条A记录，指向Github <span class="caps">URL</span>      </p>
+<div class="highlight"><pre><span></span>username.github.io
+</pre></div>
+
+
+<p>步骤3：在Pelican主目录，即上面创建的blog/output/username.github.io目录，添加<span class="caps">CNAME</span>文件，在文件中添加你的独立域名。    <br>
+​  <br>
+​  <br>
+*注意这里的<span class="caps">CNAME</span>建议放在第十二步提到的content目录下的静态子目录<code>content/extra</code>下，并在配置文件中添加相关条目。     </p>
+<hr>
+<p><strong>十六、相关文章、上下文导航</strong>    </p>
+<hr>
+<p>1.打开pelicanconf.py，定义插件目录和启用插件：     </p>
+<div class="highlight"><pre><span></span>#加载plugins
+PLUGIN_PATH = &quot;plugins&quot;
+PLUGINS = [&quot;sitemap&quot;,&quot;neighbors&quot;,&quot;related_posts&quot;]
+#sitemap
+SITEMAP = {
+    &#39;format&#39;: &#39;xml&#39;,
+    &#39;priorities&#39;: {
+        &#39;articles&#39;: 0.7,
+        &#39;indexes&#39;: 0.8,
+        &#39;pages&#39;: 0.5
+    },
+    &#39;changefreqs&#39;: {
+        &#39;articles&#39;: &#39;monthly&#39;,
+        &#39;indexes&#39;: &#39;daily&#39;,
+        &#39;pages&#39;: &#39;monthly&#39;
+    }
+}
+#相关文章
+RELATED_POSTS_MAX = 10
+</pre></div>
+
+
+<p>2.邻居导航，在主题模版中调用如下代码，可根据自己的情况修改：     </p>
+<div class="highlight"><pre><span></span>   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      <span class="cp">{%</span> <span class="k">if</span> <span class="nv">article.prev_article</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;prev&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">article.prev_article.url</span><span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>← Previous<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;prev&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>← Previous<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/archives.html&quot;</span><span class="nt">&gt;</span>Archive<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">article.next_article</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;next&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">article.next_article.url</span><span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>Next →<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;next&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>Next →<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+</pre></div>
+
+
+<p>3.相关文章：    </p>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">article.related_posts</span> <span class="cp">%}</span>
+    <span class="nt">&lt;h4&gt;</span>Related Articles<span class="nt">&lt;/h4&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+    <span class="cp">{%</span> <span class="k">for</span> <span class="nv">related_post</span> <span class="k">in</span> <span class="nv">article.related_posts</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">related_post.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">related_post.title</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+    <span class="nt">&lt;/ul&gt;</span>
+<span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span> 
+</pre></div>
+
+
+<p><br>
+<br>
+<strong>十七、最后，一些比较占空间的资源文件（图片、媒体等）可以用七牛来进行存储管理</strong>
+<br>
+<br>
+<br></p></div>
+	
+        <hr>
+
+    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+			<a href="/" class="profilepic">
+				<img src="https://raw.githubusercontent.com/Heriam/images/master/portrait/photo.png" />
+			</a>
+			<h2 style="text-align: center;"><span>Hao Jiang</span><span class="subTitle">Justin C.</span></h2>
+            </div>
+
+            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+            <ul class="nav nav-list">
+                <li class="nav-header"> 
+                Categories
+                </li>
+                
+                <li><a href="../../categories/blog.html">Blog</a></li>
+                <li><a href="../../categories/coding.html">Coding</a></li>
+                <li><a href="../../categories/notes.html">Notes</a></li>
+                <li><a href="../../categories/tools.html">Tools</a></li>
+                   
+            </ul>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">Heriam</a> &copy; Justin C. 2019</p>
+</footer>
+
+</div> <!-- /container -->
+ 
+</body>
+</html>

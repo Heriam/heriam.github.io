@@ -92,7 +92,9 @@ by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
 </pre></div>
 
 
-<p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。</p></div>
+<p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。&nbsp;踩坑1：因为要基于JQuery，注意引用的JQuery库可用。由于之前引用的是外网谷歌的库，国内被墙导致标签云一直没有刷出来，后来换成了bootcdn的JQuery库就成功了：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div></div>
 	
         <hr>
 

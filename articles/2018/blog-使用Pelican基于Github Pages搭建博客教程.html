@@ -107,21 +107,21 @@ by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
 1.安装Python。最新的Mac <span class="caps">OS</span> 一般都自带Python环境。在终端输入&#8221;python&#8221;即可确认Python版本。如有需要可以到官网安装：http://www.python.org/。    <br>
 ​  <br>
 2.安装Pelican。可以从github克隆最新的代码安装, 并且建议在virtualenv下使用。首先建立&nbsp;virtualenv（Python虚拟环境）:         </p>
-<div class="codehilite"><pre><span></span>virtualenv pelican      # 创建
+<div class="highlight"><pre><span></span>virtualenv pelican      # 创建
 cd pelican
 sh bin/activate            # 激活虚拟环境
 </pre></div>
 
 
 <p>从github克隆最新代码安装Pelican：      </p>
-<div class="codehilite"><pre><span></span>git clone git://github.com/getpelican/pelican.git          # 下载代码
+<div class="highlight"><pre><span></span>git clone git://github.com/getpelican/pelican.git          # 下载代码
 cd pelican
 python setup.py install
 </pre></div>
 
 
 <p>3.安装Markdown:        </p>
-<div class="codehilite"><pre><span></span>pip install markdown
+<div class="highlight"><pre><span></span>pip install markdown
 </pre></div>
 
 
@@ -130,14 +130,14 @@ python setup.py install
 <hr>
 <p>接下来将通过初始化Pelican设置来生成一个基本的博客框架。   <br>
 ​   <br>&nbsp;1.搭建博客目录：     </p>
-<div class="codehilite"><pre><span></span>mkdir blog
+<div class="highlight"><pre><span></span>mkdir blog
 cd blog
 pelican-quickstart
 </pre></div>
 
 
 <p>2.根据提示一步步输入相应的配置项，不知道如何设置的接受默认即可，后续可以通过编辑pelicanconf.py文件更改配置。完成后将会在根目录生成以下文件：     </p>
-<div class="codehilite"><pre><span></span>.
+<div class="highlight"><pre><span></span>.
 |-- content                # 所有文章放于此目录
 │   └── (pages)            # 存放手工创建的静态页面
 |-- develop_server.sh      # 用于开启测试服务器
@@ -149,13 +149,13 @@ pelican-quickstart
 
 
 <p>3.进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意这里以及后文中的username要替换成自己的Github用户名：      </p>
-<div class="codehilite"><pre><span></span>cd output
+<div class="highlight"><pre><span></span>cd output
 git clone https://github.com/username/username.github.io.git
 </pre></div>
 
 
 <p>4.设置一键上传部署到Github。打开根目录下的Makefile文件，修改以下三个地方：     </p>
-<div class="codehilite"><pre><span></span> <span class="nv">OUTPUTDIR</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/output/username.github.io    
+<div class="highlight"><pre><span></span> <span class="nv">OUTPUTDIR</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/output/username.github.io    
  publish:    
  <span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>    
  github: publish    
@@ -169,18 +169,18 @@ git clone https://github.com/username/username.github.io.git
 <hr>
 <p>Markdown是当下非常流行的一种文本编辑语法，支持<span class="caps">HTML</span>转换，书写博文排版也方便快捷。  <br>&nbsp;​      </p>
 <p>1.写一篇文章：用<a href="http://pan.baidu.com/s/16soGY#path=%252F%25E9%25A9%25AC%25E5%2585%258B%25E9%25A3%259E%25E8%25B1%25A1%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF">马克飞象</a>编辑器用Markdown语法来写一篇文章保存为.md格式放在content目录下。写完后，执行以下命令，即可在本机http://127.0.0.1:8000看到效果。    </p>
-<div class="codehilite"><pre><span></span>make publish
+<div class="highlight"><pre><span></span>make publish
 make serve
 </pre></div>
 
 
 <p>2.创建一个页面：这里以创建&nbsp;About页面为例。在content目录创建pages子目录：    </p>
-<div class="codehilite"><pre><span></span>mkdir content/pages
+<div class="highlight"><pre><span></span>mkdir content/pages
 </pre></div>
 
 
 <p>*然后创建About.md并填入下面内容：     </p>
-<div class="codehilite"><pre><span></span><span class="n">title</span><span class="o">:</span> <span class="n">About</span> <span class="n">Me</span>        
+<div class="highlight"><pre><span></span><span class="n">title</span><span class="o">:</span> <span class="n">About</span> <span class="n">Me</span>        
 <span class="n">date</span><span class="o">:</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">18</span>       
 
 <span class="n">About</span> <span class="n">me</span> <span class="n">content</span>
@@ -188,7 +188,7 @@ make serve
 
 
 <p>*注意上面title和date是.md文件的重要参数，需要写在文档开头。比如：    </p>
-<div class="codehilite"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">Pelican</span><span class="o">+</span><span class="n">Github</span>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">Pelican</span><span class="o">+</span><span class="n">Github</span>
 <span class="n">Date</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">22</span><span class="o">:</span><span class="mi">20</span>
 <span class="n">Modified</span><span class="o">:</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">07</span> <span class="mi">23</span><span class="o">:</span><span class="mi">04</span>
 <span class="n">Tags</span><span class="o">:</span> <span class="n">python</span><span class="o">,</span> <span class="n">pelican</span>
@@ -202,7 +202,7 @@ make serve
 <p>相关介绍请参见官方文档：http://pelican-zh.readthedocs.org/en/latest/zh-cn/ 。完成后同样可以在本机http://127.0.0.1:8000看效果。  <br>
 ​    <br>
 3.创建导航目录项：Menu&nbsp;Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：      </p>
-<div class="codehilite"><pre><span></span>MENUITEMS = ((&quot;ITEM1&quot;,&quot;http://github.com&quot;),
+<div class="highlight"><pre><span></span>MENUITEMS = ((&quot;ITEM1&quot;,&quot;http://github.com&quot;),
              (&quot;ITEM2&quot;,URL),
             ......)
 </pre></div>
@@ -212,14 +212,14 @@ make serve
 <p><strong>五、安装主题</strong>    </p>
 <hr>
 <p>这里以主题bootstrap2为例，同样还在blog目录下：     </p>
-<div class="codehilite"><pre><span></span>git clone https://github.com/getpelican/pelican-themes.git
+<div class="highlight"><pre><span></span>git clone https://github.com/getpelican/pelican-themes.git
 cd pelican-themes
 pelican-themes -i bootstrap2
 </pre></div>
 
 
 <p>对应在在pelicanconf.py中添加主题选择条目：    </p>
-<div class="codehilite"><pre><span></span>THEME = &#39;bootstrap2&#39;
+<div class="highlight"><pre><span></span>THEME = &#39;bootstrap2&#39;
 </pre></div>
 
 
@@ -227,7 +227,7 @@ pelican-themes -i bootstrap2
 <p><strong>六、安装第三方评论系统Disqus</strong>    </p>
 <hr>
 <p>在Disqus上申请一个站点，记住shortname。&nbsp;在pelicanconf.py添加：     </p>
-<div class="codehilite"><pre><span></span>DISQUS_SITENAME = Shortname
+<div class="highlight"><pre><span></span>DISQUS_SITENAME = Shortname
 </pre></div>
 
 
@@ -235,7 +235,7 @@ pelican-themes -i bootstrap2
 <p><strong>七、添加Google&nbsp;Analytics</strong>    </p>
 <hr>
 <p>去Google Analytics申请账号并通过验证，记下跟踪<span class="caps">ID</span>（Track <span class="caps">ID</span>），&nbsp;在pelicanconf.py添加：    </p>
-<div class="codehilite"><pre><span></span>GOOGLE_ANALYTICS = &#39;跟踪ID&#39;
+<div class="highlight"><pre><span></span>GOOGLE_ANALYTICS = &#39;跟踪ID&#39;
 </pre></div>
 
 
@@ -246,13 +246,13 @@ pelican-themes -i bootstrap2
 ​  <br>
 1.在Google Webmasters上注册并通过验证。  <br>
 ​  <br>&nbsp;2.添加sitemap插件。还是到/blog目录下执行：    </p>
-<div class="codehilite"><pre><span></span>cd ~/blog
+<div class="highlight"><pre><span></span>cd ~/blog
 git clone git://github.com/getpelican/pelican-plugins.git
 </pre></div>
 
 
 <p>*然后在pelicanconf.py里配置如下：    </p>
-<div class="codehilite"><pre><span></span>PLUGIN_PATH = u&quot;pelican-plugins&quot;
+<div class="highlight"><pre><span></span>PLUGIN_PATH = u&quot;pelican-plugins&quot;
 PLUGINS = [&quot;sitemap&quot;]
 SITEMAP = {
     &quot;format&quot;: &quot;xml&quot;,
@@ -272,7 +272,7 @@ SITEMAP = {
 
 <p>3.将make github命令后在output目录下生成的sitemap文件上传到Google Webmasters。    <br>
 ​  <br>&nbsp;4.对于百度。它是宣称支持sitemap的，但是网上相关问题一大堆，要么格式不对要么就是抓取失败，要么突然不开放支持。在几次尝试失败以后，我是通过添加JavaScript代码来自动推送网站链接的。具体是在主题模板（base.html）面最后添加代码：    </p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;script&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;script&gt;</span>
 (function(){
     var bp = document.createElement(&#39;script&#39;);
     bp.src = &#39;//push.zhanzhang.baidu.com/push.js&#39;;
@@ -289,14 +289,14 @@ SITEMAP = {
 <hr>
 <p><strong>谷歌站内搜索</strong>  <br>
 1.修改主题。找到这个主题的templates文件夹中的base.html，在<code>&lt;div class="nav-collapse"&gt;</code>的最后，添加以下内容：    </p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;navbar-search pull-right&quot;</span> <span class="na">action=</span><span class="s">&quot;/search.html&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">&quot;navbar-search pull-right&quot;</span> <span class="na">action=</span><span class="s">&quot;/search.html&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">class=</span><span class="s">&quot;search-query&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">id=</span><span class="s">&quot;s&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
 
 
 <p>2.创建search.html。之后，在output目录下，新建一个名为search.html的文件，写入下面的内容，其中需要你自己修改的是google站内搜索的<span class="caps">ID</span>号，需要自己在<a href="https://cse.google.com">google站内搜索</a>的网站上自己申请。     </p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;zh_CN&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;zh_CN&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;title&gt;</span>站内搜索<span class="nt">&lt;/title&gt;</span>
@@ -381,7 +381,7 @@ SITEMAP = {
 <strong>百度站内搜索</strong>  <br>
 1.在百度站长平台中注册一个账号，之后添加网站，按照提示验证网站。之后左侧<code>其他工具</code>中找到<code>站内搜索</code>，按照提示填写基本信息，选择搜索框样式，之后点击<code>查看代码</code>，复制其中内容，留用。  <br>
 2.同样在base.html的这个<code>&lt;div class="nav-collapse"&gt;</code>的最后，新建一个<code>div</code>，刚才注册最后复制的代码粘贴到这个<code>div</code>中：    </p>
-<div class="codehilite"><pre><span></span><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-search pull-right&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-search pull-right&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;script&gt;</span>  
         <span class="cp">&lt;!略&gt;</span>
     <span class="nt">&lt;/script&gt;</span>
@@ -395,7 +395,7 @@ SITEMAP = {
 <hr>
 <p>在其他一些pelican主题中，看到有标签云，想到Tags的链接可能比Categories的链接更有用，通过更改主题，添加了侧栏中红框内的Tags链接框。  <br>
 ​  <br>&nbsp;1.还是找到base.html，找到categories部分：    </p>
-<div class="codehilite"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">categories</span> <span class="cp">%}</span>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">categories</span> <span class="cp">%}</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;well&quot;</span> <span class="na">style=</span><span class="s">&quot;padding: 8px 0; background-color: #FBFBFB;&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav nav-list&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;nav-header&quot;</span><span class="nt">&gt;</span> 
@@ -412,7 +412,7 @@ SITEMAP = {
 
 
 <p>2.在这段后面添加：    </p>
-<div class="codehilite"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">tags</span> <span class="cp">%}</span>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">tags</span> <span class="cp">%}</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;well&quot;</span> <span class="na">style=</span><span class="s">&quot;padding: 8px 0; background-color: #FBFBFB;&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;nav nav-list&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;nav-header&quot;</span><span class="nt">&gt;</span> 
@@ -437,7 +437,7 @@ SITEMAP = {
 <p><strong>十二、拷贝静态文件</strong>    </p>
 <hr>
 <p>如果我们定义静态的文件，该如何将它在每次生成的时候拷贝到 output 目录呢，我们以网站logo图片sitelogo.ico为例，在我们的 content/extra 下放置网站的静态资源文件：sitelogo.ico，在pelicanconf.py更改或添加&nbsp;FILES_TO_COPY项：    </p>
-<div class="codehilite"><pre><span></span>FILES_TO_COPY = (
+<div class="highlight"><pre><span></span>FILES_TO_COPY = (
     (&quot;extra/sitelogo.ico&quot;, &quot;sitelogo.ico&quot;),
 )
 </pre></div>
@@ -448,17 +448,17 @@ SITEMAP = {
 <p><strong>十三、资源目录管理</strong>    </p>
 <hr>
 <p>使用目录名作为文章的分类名    </p>
-<div class="codehilite"><pre><span></span>USE_FOLDER_AS_CATEGORY = True
+<div class="highlight"><pre><span></span>USE_FOLDER_AS_CATEGORY = True
 </pre></div>
 
 
 <p>使用文件名作为文章或页面的<code>slug（url）</code>    </p>
-<div class="codehilite"><pre><span></span>FILENAME_METADATA = &#39;(?P&lt;slug&gt;.*)&#39;
+<div class="highlight"><pre><span></span>FILENAME_METADATA = &#39;(?P&lt;slug&gt;.*)&#39;
 </pre></div>
 
 
 <p>页面的显示路径和保存路径，推荐下面的方式     </p>
-<div class="codehilite"><pre><span></span>ARTICLE_URL = &#39;{category}/{slug}.html&#39;
+<div class="highlight"><pre><span></span>ARTICLE_URL = &#39;{category}/{slug}.html&#39;
 ARTICLE_SAVE_AS = ARTICLE_URL
 PAGE_URL = &#39;{slug}.html&#39;
 PAGE_SAVE_AS = PAGE_URL
@@ -474,7 +474,7 @@ TAGS_SAVE_AS = &#39;tag/index.html&#39;
 <p><strong>十四、指定文章或页面<span class="caps">URL</span></strong>    </p>
 <hr>
 <p>在需要指定<span class="caps">URL</span>的文章或者页面中包括两个元数据url与save_as，例如：    </p>
-<div class="codehilite"><pre><span></span><span class="n">url</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/</span>
+<div class="highlight"><pre><span></span><span class="n">url</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/</span>
 <span class="n">save_as</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/i</span><span class="n">ndex</span><span class="o">.</span><span class="na">html</span>
 </pre></div>
 
@@ -483,7 +483,7 @@ TAGS_SAVE_AS = &#39;tag/index.html&#39;
 ​   <br>
 ​    <br>
 根据上面很容易推断如何将一篇文章设置为网站的主页，如下代码即可实现将 <code>content/pages/home.md</code>设为主页：     </p>
-<div class="codehilite"><pre><span></span>Title: [www.yanyulin.info](http://www.yanyulin.info)
+<div class="highlight"><pre><span></span>Title: [www.yanyulin.info](http://www.yanyulin.info)
 Date: 2014-01-08
 URL:
 save_as: index.html
@@ -496,13 +496,13 @@ save_as: index.html
 <hr>
 <p>Godaddy上购买专属域名，用dnspod进行动态域名解析，步骤如下:    </p>
 <p>步骤1：修改Godaddy中的NameServers的两个地址为dnspod的<span class="caps">DNS</span>地址：    </p>
-<div class="codehilite"><pre><span></span>f1g1ns1.dnspod.net
+<div class="highlight"><pre><span></span>f1g1ns1.dnspod.net
 f1g1ns2.dnspod.net
 </pre></div>
 
 
 <p>步骤2：在Dnspod中添加一条A记录，指向Github <span class="caps">URL</span>      </p>
-<div class="codehilite"><pre><span></span>username.github.io
+<div class="highlight"><pre><span></span>username.github.io
 </pre></div>
 
 
@@ -514,7 +514,7 @@ f1g1ns2.dnspod.net
 <p><strong>十六、相关文章、上下文导航</strong>    </p>
 <hr>
 <p>1.打开pelicanconf.py，定义插件目录和启用插件：     </p>
-<div class="codehilite"><pre><span></span>#加载plugins
+<div class="highlight"><pre><span></span>#加载plugins
 PLUGIN_PATH = &quot;plugins&quot;
 PLUGINS = [&quot;sitemap&quot;,&quot;neighbors&quot;,&quot;related_posts&quot;]
 #sitemap
@@ -537,7 +537,7 @@ RELATED_POSTS_MAX = 10
 
 
 <p>2.邻居导航，在主题模版中调用如下代码，可根据自己的情况修改：     </p>
-<div class="codehilite"><pre><span></span>   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span>   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;ul&gt;</span>
       <span class="cp">{%</span> <span class="k">if</span> <span class="nv">article.prev_article</span> <span class="cp">%}</span>
         <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&quot;prev&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">article.prev_article.url</span><span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>← Previous<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
@@ -556,7 +556,7 @@ RELATED_POSTS_MAX = 10
 
 
 <p>3.相关文章：    </p>
-<div class="codehilite"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">article.related_posts</span> <span class="cp">%}</span>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">article.related_posts</span> <span class="cp">%}</span>
     <span class="nt">&lt;h4&gt;</span>Related Articles<span class="nt">&lt;/h4&gt;</span>
     <span class="nt">&lt;ul&gt;</span>
     <span class="cp">{%</span> <span class="k">for</span> <span class="nv">related_post</span> <span class="k">in</span> <span class="nv">article.related_posts</span> <span class="cp">%}</span>

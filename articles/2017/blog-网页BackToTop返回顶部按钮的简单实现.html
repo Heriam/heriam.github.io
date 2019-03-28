@@ -71,7 +71,7 @@ by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
         <div><p>在较长的网页页面中往往需要一个固定漂浮在显示屏右下侧位置的返回顶部按钮。</p>
 <p>下面介绍一种简单实现：</p>
 <p><strong><span class="caps">HTML</span>&nbsp;部分：</strong>  </p>
-<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>Top<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
   ...
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
@@ -79,7 +79,7 @@ by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
 
 
 <p><strong><span class="caps">CSS</span>&nbsp;部分：</strong></p>
-<div class="codehilite"><pre><span></span><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
     <span class="k">position</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
     <span class="k">right</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
     <span class="k">bottom</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
@@ -114,7 +114,7 @@ by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
 
 
 <p><strong>JavaScript&nbsp;部分：</strong></p>
-<div class="codehilite"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
     <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scroll</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">){</span>
             <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#scroll&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">();</span>

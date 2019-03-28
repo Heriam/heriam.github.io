@@ -73,7 +73,7 @@ by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
 <p>使用方法很简单，可以把<span class="caps">JS</span>和<span class="caps">CSS</span>文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
 <p>具体的使用方法官网都能查到。</p>
 <p>贴出自己微博使用JQCloud的前端代码：</p>
-<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
@@ -94,7 +94,7 @@ by <a class="url fn" href="../../authors/justin-c.html">Justin C.</a>
 
 
 <p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。&nbsp;踩坑1：因为要基于JQuery，注意引用的JQuery库可用。由于之前引用的是外网谷歌的库，国内被墙导致标签云一直没有刷出来，后来换成了bootcdn的JQuery库就成功了：</p>
-<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div></div>
 	
         <hr>

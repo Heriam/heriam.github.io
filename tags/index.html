@@ -40,6 +40,7 @@
 
         <div class="nav-collapse">
         <ul class="nav">
+
             <li><a href="/articles">Archives</a></li>
             <li><a href="/tags">Tags</a></li>
             <li><a href="/pages/publications">Publications</a></li>
@@ -80,10 +81,6 @@
         words.push({text: "WiFi", weight: Math.random(), link: '../tags/wifi.html'});
         words.push({text: "Windows", weight: Math.random(), link: '../tags/windows.html'});
         words.push({text: "Wireshark", weight: Math.random(), link: '../tags/wireshark.html'});
-        words.push({text: "Blog", weight: Math.random(), link: '../categories/blog.html'});
-        words.push({text: "Coding", weight: Math.random(), link: '../categories/coding.html'});
-        words.push({text: "Notes", weight: Math.random(), link: '../categories/notes.html'});
-        words.push({text: "Tools", weight: Math.random(), link: '../categories/tools.html'});
     $(function() {
         $("#tagcloud").jQCloud(words, {
             autoResize: true

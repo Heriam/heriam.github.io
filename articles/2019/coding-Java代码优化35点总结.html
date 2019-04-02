@@ -2,23 +2,23 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Justin Time</title>
+    <title>Heriam - Java代码优化35点总结</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="../../theme/html5.js"></script>
     <![endif]-->
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-	<script src="../theme/bootstrap-collapse.js"></script>
+	<script src="../../theme/bootstrap-collapse.js"></script>
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
 
     <!-- So Firefox can bookmark->"abo this site" -->
 
@@ -36,16 +36,16 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">Heriam</a>
+        <a class="brand" href="../..">Heriam</a>
 
         <div class="nav-collapse">
         <ul class="nav">
             <li class="dropdown"><a>Categories</a>
                 <ul class="dropdown-content">
-                    <li><a href="../categories/blog.html">Blog</a></li>
-                    <li><a href="../categories/coding.html">Coding</a></li>
-                    <li><a href="../categories/notes.html">Notes</a></li>
-                    <li><a href="../categories/tools.html">Tools</a></li>
+                    <li><a href="../../categories/blog.html">Blog</a></li>
+                    <li><a href="../../categories/coding.html">Coding</a></li>
+                    <li><a href="../../categories/notes.html">Notes</a></li>
+                    <li><a href="../../categories/tools.html">Tools</a></li>
                 </ul>
             </li>
 
@@ -65,27 +65,69 @@
     <div class="row">
 
         <div class="span9">
-        
-
-        
-
-
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/2019/coding-Java代码优化35点总结.html"><h1>Java代码优化35点总结</h1></a>
+            <h1>Java代码优化35点总结</h1>
 <span class="metadata">
 2019-04-02 Tue&nbsp;&nbsp;&nbsp;
 
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
 
  
  
-    Tags: <a href="../tags/java.html">Java</a>,&nbsp;</span> 
-        </div>
-        
+    Tags: <a href="../../tags/java.html">Java</a>,&nbsp;</span>        </div>
+		
+		<hr />
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#_1">前言</a></li>
+<li><a href="#_2">代码优化细节</a><ul>
+<li><a href="#1final">1、尽量指定类、方法的final修饰符</a></li>
+<li><a href="#2">2、尽量重用对象</a></li>
+<li><a href="#3">3、尽可能使用局部变量</a></li>
+<li><a href="#4">4、及时关闭流</a></li>
+<li><a href="#5">5、尽量减少对变量的重复计算</a></li>
+<li><a href="#6">6、尽量采用懒加载的策略，即在需要的时候才创建</a></li>
+<li><a href="#7">7、慎用异常</a></li>
+<li><a href="#8trycatch">8、不要在循环中使用try…catch…，应该把其放在最外层</a></li>
+<li><a href="#9">9、如果能估计到待添加的内容长度，为底层以数组方式实现的集合、工具类指定初始长度</a></li>
+<li><a href="#10systemarraycopy">10、当复制大量数据时，使用System.arraycopy()命令</a></li>
+<li><a href="#11">11、乘法和除法使用移位操作</a></li>
+<li><a href="#12">12、循环内不要不断创建对象引用</a></li>
+<li><a href="#13array">13、基于效率和类型检查的考虑，应该尽可能使用array</a></li>
+<li><a href="#14hashmaparrayliststringbuilder">14、尽量使用HashMap、ArrayList、StringBuilder</a></li>
+<li><a href="#15public-static-final">15、不要将数组声明为public static final</a></li>
+<li><a href="#16">16、尽量在合适的场合使用单例</a></li>
+<li><a href="#17">17、尽量避免随意使用静态变量</a></li>
+<li><a href="#18">18、及时清除不再需要的会话</a></li>
+<li><a href="#19randomaccessarraylistforforeach">19、实现RandomAccess接口的集合比如ArrayList，应当使用最普通的for循环而不是foreach循环来遍历</a></li>
+<li><a href="#20">20、使用同步代码块替代同步方法</a></li>
+<li><a href="#21static-final">21、将常量声明为static final，并以大写命名</a></li>
+<li><a href="#22">22、不要创建一些不使用的对象，不要导入一些不使用的类</a></li>
+<li><a href="#23">23、程序运行过程中避免使用反射</a></li>
+<li><a href="#24">24、使用数据库连接池和线程池</a></li>
+<li><a href="#25io">25、使用带缓冲的输入输出流进行<span class="caps">IO</span>操作</a></li>
+<li><a href="#26arraylistlinkedlist">26、顺序插入和随机访问比较多的场景使用ArrayList，元素删除和中间插入比较多的场景使用LinkedList</a></li>
+<li><a href="#27public">27、不要让public方法中有太多的形参</a></li>
+<li><a href="#28equals">28、字符串变量和字符串常量equals的时候将字符串常量写在前面</a></li>
+<li><a href="#29javaif-i-1if-1-i">29、请知道，在java中if (i == 1)和if (1 == i)是没有区别的，但从阅读习惯上讲，建议使用前者</a></li>
+<li><a href="#30tostring">30、不要对数组使用toString()方法</a></li>
+<li><a href="#31">31、不要对超出范围的基本数据类型做向下强制转型</a></li>
+<li><a href="#32remove">32、公用的集合类中不使用的数据一定要及时remove掉</a></li>
+<li><a href="#33tostringstringvalueof">33、把一个基本数据类型转为字符串，基本数据类型.toString()是最快的方式、String.valueOf(数据)次之、数据+”“最慢</a></li>
+<li><a href="#34map">34、使用最有效率的方式去遍历Map</a></li>
+<li><a href="#35close">35、对资源的close()建议分开操作</a></li>
+</ul>
+</li>
+</ul>
+</div>
+			</nav>
+		<br />
+		<hr />
+		
         <div>
 <h3 id="_1">前言</h3>
 <p>代码优化，一个很重要的课题。可能有些人觉得没用，一些细小的地方有什么好修改的，改与不改对于代码的运行效率有什么影响呢？这个问题我是这么考虑的，就像大海里面的鲸鱼一样，它吃一条小虾米有用吗？没用，但是，吃的小虾米一多之后，鲸鱼就被喂饱了。代码优化也是一样，如果项目着眼于尽快无<span class="caps">BUG</span>上线，那么此时可以抓大放小，代码的细节可以不精打细磨；但是如果有足够的时间开发、维护代码，这时候就必须考虑每个可以优化的细节了，一个一个细小的优化点累积起来，对于代码的运行效率绝对是有提升的。</p>
@@ -447,356 +489,26 @@ YYY.close();
 <div class="highlight"><pre><span></span><span class="k">try</span><span class="o">{</span> <span class="n">XXX</span><span class="o">.</span><span class="na">close</span><span class="o">();}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span> <span class="o">...}</span><span class="k">try</span><span class="o">{</span> <span class="n">YYY</span><span class="o">.</span><span class="na">close</span><span class="o">();}</span><span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">){</span> <span class="o">...}</span>
 </pre></div>
 <p>虽然有些麻烦，却能避免资源泄露。我们想，如果没有修改过的代码，万一<span class="caps">XXX</span>.close()抛异常了，那么就进入了cath块中了，<span class="caps">YYY</span>.close()不会执行，<span class="caps">YYY</span>这块资源就不会回收了，一直占用着，这样的代码一多，是可能引起资源句柄泄露的。而改为下面的写法之后，就保证了无论如何<span class="caps">XXX</span>和<span class="caps">YYY</span>都会被close掉。</p></div>
-        <hr />
-    </div>
-		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2019/notes-人之一生.html"><h2>人之一生</h2></a>
-        <div class= "well small"> <span class="metadata">
-2019-03-16 Sat&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
-
- 
-</span> </div>
-        <div class="summary"><h3>热爱生命</h3>
-
-<p>我不去想，
-是否能够成功 ，
-既然选择了远方 ，&nbsp;便只顾风雨兼程。</p>
-<p>我不去想，
-能否赢得爱情 ，
-既然钟情于玫瑰 ，
-就勇敢地吐露真诚&nbsp;。</p>
-<p>我不去想，
-身后会不会袭来寒风冷雨 ，
-既然目标是地平线，
-留给世界的只能是背影&nbsp;。</p>
-<p>我不去想，
-未来是平坦还是泥泞 ，
-只要热爱生命 ，&nbsp;一切，都在意料之中。</p>
-<hr>
-<h3>决心</h3>
-
-<p>人之一生，总会有许多困惑不已、纠缠不清的琐事，难免受其影响，绝不为其左右。</p>
-<p>此时所需的就是断然的取舍与明智的抉择，唯一会限制我们的，是我们自己的决心。</p>
-<hr>
-<h3>延续</h3>
-
-<p>万物善变，人生泛滥的是那些冲动和急躁：即兴的热情、肤浅的思考、仓促的决定、敷衍的搪塞和最终的草草了事；</p>
-<p>而珍贵的是生命中那些经久和坚持，一种信仰，一段情感，一个习惯。一句独白自视为约定，一段感情权当作余生。</p>
-<hr>
-<h3>动力</h3>
-
-<p>如果说不清追逐的动力源于何处，就至少要让优秀成为自己的习惯，要乐观阳光，要知道自己身在何处，路在何方。</p>
-<hr>
-<h3>初心</h3>
-
-<p>愿我们在心底埋下的勇气、乐观和向善的种子，最后都成长为自己一直所追寻的最喜欢的样子 …</p> <a class="btn btn-info xsmall" href="../articles/2019/notes-人之一生.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/blog-JQCloud.html"><h2>JQCloud:&nbsp;一个前端生成美化标签云的简单JQuery插件</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-25 Sun&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/jquery.html">JQuery</a>,&nbsp;<a href="../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../tags/html.html">HTML</a>,&nbsp;</span> </div>
-        <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
-官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
-<p>使用方法很简单，可以把<span class="caps">JS</span>和<span class="caps">CSS</span>文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
-<p>具体的使用方法官网都能查到。</p>
-<p>贴出自己微博使用JQCloud的前端代码：</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2018/blog-JQCloud.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/blog-使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;<a href="../tags/git.html">Git</a>,&nbsp;</span> </div>
-        <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
-- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
-- 配置<span class="caps">DNS</span>解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
-- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
-  ​        <br>
-  <br>   </p>
-<hr>
-<p><strong>一、</strong><a href="http://www.jianshu.com/p/fd8ed9855f44">《Pelican＋Github博客搭建详细教程》</a>      </p>
-<hr>
-<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
-<br>   </p>
-<hr>
-<p><strong>二、在Coding创建一个新的项目</strong></p>
-<hr>
-<ol>
-<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
-  <br>   </li>
-<li>将本地<span class="caps">SSH</span>公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝 …</li></ol> <a class="btn btn-info xsmall" href="../articles/2018/blog-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github&nbsp;Pages搭建博客教程</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;</span> </div>
-        <div class="summary"><p><strong>操作系统：</strong>Mac <span class="caps">OS</span> / Linux    <br>
-<strong>工具集：</strong>  <br>
-1.Pelican——基于Python的静态网页生成器 <br>
-2.马克飞象——Evernote出的Markdown文本编辑器 <br>
-3.GoDaddy——域名供应商 <br>
-4.DNSPod——提供免费域名解析注册服务 <br>
-5.Github Pages——Github为每个注册用户提供300M的站点空间 <br>
-6.Python——Pelican工具需要Python运行环境 <br>
-7.Google Analytics——谷歌站点数据监测分析工具 <br>
-8.Google Custom Search——谷歌自定义搜索引擎可用作站内搜索工具 <br>
-9.Google Webmasters——谷歌站长工具  <br>
-10.Disqus——用来提供博客评论功能  <br>
-11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
-12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
-<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="../articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html"><h2>Build and Install OpenDaylight on&nbsp;Ubuntu</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-01-01 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/opendaylight.html">OpenDaylight</a>,&nbsp;<a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="../tags/sdn.html">SDN</a>,&nbsp;</span> </div>
-        <div class="summary"><div><font face="Times New Roman">
-<p><em><font face = "Times New Roman">Operating System：Linux x64 / Ubuntu 14.04</font></em>   <br />
-<em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
-<em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
-<hr />
-<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 1, Environment Tuning</strong></font></p>
-<hr />
-<p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
-<div class="highlight"><pre><span></span>sudo apt-get install git-core
-</pre></div>
-
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="../articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2017/tools-Wifi HotSpot On Windows.html"><h2>Windows系统配置WiFi无线热点</h2></a>
-        <div class= "well small"> <span class="metadata">
-2017-11-21 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/wifi.html">WiFi</a>,&nbsp;<a href="../tags/windows.html">Windows</a>,&nbsp;</span> </div>
-        <div class="summary"><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
-Windows 版本： Windows 7/8/10  <br />
-前提：电脑装配无线网卡  <br />
-方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
-</font></p>
-<hr />
-<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的<span class="caps">CMD</span>窗口输入命令：    </p>
-<div class="highlight"><pre><span></span>netsh wlan show drivers
-</pre></div></p>
-<p>在输出信息中找到 “支持承载网络：是” 则继续。
-<hr>2.确定电脑是否已经配置承载网络。同样在<span class="caps">CMD</span>窗口分别输入命令：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
-netsh wlan show hostednetwork setting=security
-</pre></div>
-
-<p>如果看到第一条命令输出已经配置好的WiFi热点的<span class="caps">SSID</span>，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
-
-<p>3.创建WiFi热点。命令行输入：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan …</pre></div> <a class="btn btn-info xsmall" href="../articles/2017/tools-Wifi HotSpot On Windows.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2017/coding-Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache&nbsp;Maven安装</h2></a>
-        <div class= "well small"> <span class="metadata">
-2017-10-24 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="../tags/maven.html">Maven</a>,&nbsp;</span> </div>
-        <div class="summary"><div><font face="Times New Roman">
-<p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>
-<em><font face = "Times New Roman">Apache Maven版本：3.3.9</font></em>  <br />
-<em><font face = "Times New Roman">建议预先搭建Java开发环境：详见<a href="http://www.hao-jiang.com/pages/2016/01/13/ubuntuxi-tong-javakai-fa-huan-jing-de-da-jian.html">《Linux Ubuntu系统下Java开发环境搭建》</a></font></em></p>
-<hr />
-<p><font face = "Times New Roman">1. 前往Apache Maven官网下载最新版本：https://maven.apache.org/download.cgi，本文以apache-maven-3.3.9-bin.tar.gz为例。</font>    </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建<span class="caps">MVN</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
-<div class="highlight"><pre><span></span>cd /opt                       #进入到opt目录
-sudo mkdir mvn                #新建一个mvn文件夹
-ls                            #显示成功新建的mvn文件夹
-cd mvn                        #进入mvn文件夹 …</pre></div></font></div> <a class="btn btn-info xsmall" href="../articles/2017/coding-Ubuntu系统Apache Maven安装.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2017/coding-Ubuntu系统Java开发环境的搭建.html"><h2>Ubuntu系统Java开发环境的搭建</h2></a>
-        <div class= "well small"> <span class="metadata">
-2017-10-23 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="../tags/java.html">Java</a>,&nbsp;</span> </div>
-        <div class="summary"><div><font face="Times New Roman">
-<p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>  <br />
-<em><font face = "Times New Roman">Java <span class="caps">JDK</span>版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
-<hr />
-<p><font face = "Times New Roman">1. 前往<span class="caps">ORACLE</span>官网下载最新版本的Java <span class="caps">JDK</span>：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java <span class="caps">JDK</span>，本例选择在/opt目录下新建<span class="caps">JVM</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
-<div class="highlight"><pre><span></span>cd /opt                     
-sudo mkdir jvm              
-ls                            
-cd jvm
-</pre></div>
-
-<p><font face = "Times New Roman">3.将下载的<span class="caps">JDK</span>压缩包拷贝到jvm目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="../articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2017/tools-Install And Run Gedit On Mac.html"><h2>Install <span class="amp">&amp;</span> Run Gedit from Terminal on&nbsp;Mac</h2></a>
-        <div class= "well small"> <span class="metadata">
-2017-08-15 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/gedit.html">Gedit</a>,&nbsp;<a href="../tags/macos.html">MacOS</a>,&nbsp;</span> </div>
-        <div class="summary"><div><font face="Times New Roman"><p><em>App description: gedit (App: gedit.app)</em>   <br />
-<em>App website: <a href="https://wiki.gnome.org/Apps/Gedit">https://wiki.gnome.org/Apps/Gedit</a></em>     </p>
-<hr />
-<p><strong>Install from&nbsp;Terminal</strong></p>
-<hr />
-<p><br>  <br />&nbsp;1.Run:    </p>
-<div class="highlight"><pre><span></span><span class="nt">ruby</span> <span class="nt">-e</span> <span class="s2">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span> <span class="o">&lt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span> <span class="o">;</span> <span class="nt">brew</span> <span class="nt">install</span> <span class="nt">caskroom</span><span class="o">/</span><span class="nt">cask</span><span class="o">/</span><span class="nt">brew-cask</span> <span class="nt">2</span><span class="o">&gt;</span> <span class="o">/</span><span class="nt">dev</span><span class="o">/</span><span class="nt">null</span>
-</pre></div>
-
-<p><br>  <br />
-2.After the command finishes,&nbsp;run …</p></font></div> <a class="btn btn-info xsmall" href="../articles/2017/tools-Install And Run Gedit On Mac.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../authors/justin-time.html">1</a></li>
-    <li class=""><a href="../authors/justin-time2.html">2</a></li>
-
-    <li class="next"><a href="../authors/justin-time2.html">Next &rarr;</a></li>
-
-</ul>
-</div>
- 
-  
+	
+        <hr>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '41ee3ed1d0800f3cbd44bfa58d3462aefc3d42e7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
         </div>
         
         <div class="span3">
@@ -810,46 +522,46 @@ Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
 						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
 						<p class="motto">We only live once, and time just goes by.</p>
 						<ul class="biography">
-						<li><span><img src="../theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
-						<li><span><img src="../theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+						<li><span><img src="../../theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="../../theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
 
 					<hr>
 
 						<div class="tooltip">
 							<span class="tooltiptext">Facebook</span>
-							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Facebook.svg) center no-repeat"></a>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Facebook.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">微博</span>
-							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(../theme/images/icons/微博.svg) center no-repeat"></a>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/微博.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Linkedin</span>
-							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Linkedin.svg) center no-repeat"></a>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Linkedin.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Github</span>
-							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Github.svg) center no-repeat"></a>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Github.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Email</span>
-							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Email.svg) center no-repeat"></a>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Email.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Instagram</span>
-							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Instagram.svg) center no-repeat"></a>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Instagram.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">ResearchGate</span>
-							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(../theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/ResearchGate.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">知乎</span>
-							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(../theme/images/icons/知乎.svg) center no-repeat"></a>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/知乎.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">OSChina</span>
-							<a href="https://my.oschina.net/u/4108498" target="_blank" class="socialLink" style="background: url(../theme/images/icons/OSChina.svg) center no-repeat"></a>
+							<a href="https://my.oschina.net/u/4108498" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/OSChina.svg) center no-repeat"></a>
 						</div>
 					</div>
                 </div>
@@ -859,7 +571,7 @@ Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
     </div>     </div> 
 <footer>
 <br />
-<p><a href="..">Heriam</a> &copy; Justin Time 2019</p>
+<p><a href="../..">Heriam</a> &copy; Justin Time 2019</p>
 </footer>
 
 </div> <!-- /container -->

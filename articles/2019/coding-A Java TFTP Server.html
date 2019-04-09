@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - A Java <span class="caps">TFTP</span>&nbsp;Server</title>
+    <title>Heriam - A Java TFTP Server</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,7 +103,7 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>A Java <span class="caps">TFTP</span>&nbsp;Server</h1>
+            <h1>A Java TFTP Server</h1>
 <span class="metadata">
 2019-04-09 Tue&nbsp;&nbsp;&nbsp;
 
@@ -129,7 +129,7 @@ Category: <a href="../../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
 		
         <div>
 <h3 id="_1">简介</h3>
-<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 <span class="caps">RFC</span> 1350 并包装块号以获得大文件支持。</p>
+<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
 <p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
 <p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
 <p>要停止，请使用shutdown方法。</p>

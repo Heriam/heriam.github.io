@@ -108,7 +108,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/2019/coding-A Java TFTP Server.html"><h1>A Java <span class="caps">TFTP</span>&nbsp;Server</h1></a>
+            <a href="../articles/2019/coding-A Java TFTP Server.html"><h1>A Java TFTP Server</h1></a>
 <span class="metadata">
 2019-04-09 Tue&nbsp;&nbsp;&nbsp;
 
@@ -124,7 +124,7 @@ Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
         
         <div>
 <h3 id="_1">简介</h3>
-<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 <span class="caps">RFC</span> 1350 并包装块号以获得大文件支持。</p>
+<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
 <p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
 <p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
 <p>要停止，请使用shutdown方法。</p>
@@ -1140,13 +1140,15 @@ Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
     Tags: <a href="../tags/java.html">Java</a>,&nbsp;</span> </div>
         <div class="summary">
 <h3 id="_1">前言</h3>
-<p>代码优化，一个很重要的课题。可能有些人觉得没用，一些细小的地方有什么好修改的，改与不改对于代码的运行效率有什么影响呢？这个问题我是这么考虑的，就像大海里面的鲸鱼一样，它吃一条小虾米有用吗？没用，但是，吃的小虾米一多之后，鲸鱼就被喂饱了。代码优化也是一样，如果项目着眼于尽快无<span class="caps">BUG</span>上线，那么此时可以抓大放小，代码的细节可以不精打细磨；但是如果有足够的时间开发、维护代码，这时候就必须考虑每个可以优化的细节了，一个一个细小的优化点累积起来，对于代码的运行效率绝对是有提升的。</p>
+<p>代码优化，一个很重要的课题。可能有些人觉得没用，一些细小的地方有什么好修改的，改与不改对于代码的运行效率有什么影响呢？这个问题我是这么考虑的，就像大海里面的鲸鱼一样，它吃一条小虾米有用吗？没用，但是，吃的小虾米一多之后，鲸鱼就被喂饱了。代码优化也是一样，如果项目着眼于尽快无BUG上线，那么此时可以抓大放小，代码的细节可以不精打细磨；但是如果有足够的时间开发、维护代码，这时候就必须考虑每个可以优化的细节了，一个一个细小的优化点累积起来，对于代码的运行效率绝对是有提升的。</p>
 <p>代码优化的目标是：</p>
 <p>1、减小代码的体积</p>
 <p>2、提高代码运行的效率</p>
 <h3 id="_2">代码优化细节</h3>
 <h5 id="1final">1、尽量指定类、方法的final修饰符</h5>
-<p>带有final修饰符的类是不可派生的。在Java核心<span class="caps">API</span>中，有许多应用final的例子，例如java.lang.String，整个类都是final的。为类指定final修饰符可以让类不可以被继承，为方法指定final修饰符可以让方法不可以被重写。如果指定了一个类为final，则该类所有的方法都是final的。Java编译器会寻找机会内联所有的final方法，内联对于提升Java运行效率作用重大，具体参见Java运行期优化。此举能够使性能平均提高50 …</p> <a class="btn btn-info xsmall" href="../articles/2019/coding-Java代码优化35点总结.html">read more</a></div>
+<p>带有final修饰符的类是不可派生的。在Java核心API中，有许多应用final的例子，例如java.lang.String，整个类都是final的。为类指定final修饰符可以让类不可以被继承，为方法指定final修饰符可以让方法不可以被重写。如果指定了一个类为final，则该类所有的方法都是final的。Java编译器会寻找机会内联所有的final方法，内联对于提升Java运行效率作用重大，具体参见Java运行期优化。此举能够使性能平均提高50%。</p>
+<h5 id="2">2、尽量重用对象</h5>
+<p>特别是String对象的使用，出现字符串连接时应该使用StringBuilder …</p> <a class="btn btn-info xsmall" href="../articles/2019/coding-Java代码优化35点总结.html">read more</a></div>
     </div>	
 				
 
@@ -1171,18 +1173,20 @@ Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
 
 <p>我不去想，
 是否能够成功 ，
-既然选择了远方 ，&nbsp;便只顾风雨兼程。</p>
+既然选择了远方 ，
+便只顾风雨兼程。</p>
 <p>我不去想，
 能否赢得爱情 ，
 既然钟情于玫瑰 ，
-就勇敢地吐露真诚&nbsp;。</p>
+就勇敢地吐露真诚 。</p>
 <p>我不去想，
 身后会不会袭来寒风冷雨 ，
 既然目标是地平线，
-留给世界的只能是背影&nbsp;。</p>
+留给世界的只能是背影 。</p>
 <p>我不去想，
 未来是平坦还是泥泞 ，
-只要热爱生命 ，&nbsp;一切，都在意料之中。</p>
+只要热爱生命 ，
+一切，都在意料之中。</p>
 <hr>
 <h3>决心</h3>
 
@@ -1210,7 +1214,7 @@ Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
  
 
     <div class='article'>
-        <a href="../articles/2018/blog-JQCloud.html"><h2>JQCloud:&nbsp;一个前端生成美化标签云的简单JQuery插件</h2></a>
+        <a href="../articles/2018/blog-JQCloud.html"><h2>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h2></a>
         <div class= "well small"> <span class="metadata">
 2018-02-25 Sun&nbsp;&nbsp;&nbsp;
 
@@ -1224,7 +1228,7 @@ Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
     Tags: <a href="../tags/jquery.html">JQuery</a>,&nbsp;<a href="../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../tags/html.html">HTML</a>,&nbsp;</span> </div>
         <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
 官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
-<p>使用方法很简单，可以把<span class="caps">JS</span>和<span class="caps">CSS</span>文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
 <p>具体的使用方法官网都能查到。</p>
 <p>贴出自己微博使用JQCloud的前端代码：</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -1232,7 +1236,7 @@ Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2018/blog-JQCloud.html">read more</a></div>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2018/blog-JQCloud.html">read more</a></div>
     </div>	
 				
 
@@ -1256,7 +1260,7 @@ Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
     Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;<a href="../tags/git.html">Git</a>,&nbsp;</span> </div>
         <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
 - 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
-- 配置<span class="caps">DNS</span>解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
+- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
 - 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
   ​        <br>
   <br>   </p>
@@ -1271,7 +1275,9 @@ Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
 <ol>
 <li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
   <br>   </li>
-<li>将本地<span class="caps">SSH</span>公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝 …</li></ol> <a class="btn btn-info xsmall" href="../articles/2018/blog-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
+</ol>
+<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="../articles/2018/blog-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
     </div>	
 				
 
@@ -1281,7 +1287,7 @@ Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
  
 
     <div class='article'>
-        <a href="../articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github&nbsp;Pages搭建博客教程</h2></a>
+        <a href="../articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html"><h2>使用Pelican基于Github Pages搭建博客教程</h2></a>
         <div class= "well small"> <span class="metadata">
 2018-02-05 Mon&nbsp;&nbsp;&nbsp;
 
@@ -1293,7 +1299,7 @@ Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
  
  
     Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;</span> </div>
-        <div class="summary"><p><strong>操作系统：</strong>Mac <span class="caps">OS</span> / Linux    <br>
+        <div class="summary"><p><strong>操作系统：</strong>Mac OS / Linux    <br>
 <strong>工具集：</strong>  <br>
 1.Pelican——基于Python的静态网页生成器 <br>
 2.马克飞象——Evernote出的Markdown文本编辑器 <br>
@@ -1317,7 +1323,7 @@ Category: <a href="../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
  
 
     <div class='article'>
-        <a href="../articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html"><h2>Build and Install OpenDaylight on&nbsp;Ubuntu</h2></a>
+        <a href="../articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html"><h2>Build and Install OpenDaylight on Ubuntu</h2></a>
         <div class= "well small"> <span class="metadata">
 2018-01-01 Mon&nbsp;&nbsp;&nbsp;
 
@@ -1334,7 +1340,7 @@ Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
 <em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
 <em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
 <hr />
-<p><font face = "Times New Roman"><strong><span class="caps">STEP</span> 1, Environment Tuning</strong></font></p>
+<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
 <hr />
 <p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
 <div class="highlight"><pre><span></span>sudo apt-get install git-core
@@ -1368,21 +1374,21 @@ Windows 版本： Windows 7/8/10  <br />
 方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
 </font></p>
 <hr />
-<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的<span class="caps">CMD</span>窗口输入命令：    </p>
+<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
 <div class="highlight"><pre><span></span>netsh wlan show drivers
 </pre></div></p>
 <p>在输出信息中找到 “支持承载网络：是” 则继续。
-<hr>2.确定电脑是否已经配置承载网络。同样在<span class="caps">CMD</span>窗口分别输入命令：    </p>
+<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
 
 <div class="highlight"><pre><span></span>netsh wlan show hostednetwork
 netsh wlan show hostednetwork setting=security
 </pre></div>
 
-<p>如果看到第一条命令输出已经配置好的WiFi热点的<span class="caps">SSID</span>，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
+<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
 
 <p>3.创建WiFi热点。命令行输入：    </p>
 
-<div class="highlight"><pre><span></span>netsh wlan …</pre></div> <a class="btn btn-info xsmall" href="../articles/2017/tools-Wifi HotSpot On Windows.html">read more</a></div>
+<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="../articles/2017/tools-Wifi HotSpot On Windows.html">read more</a></div>
     </div>	
 				
 
@@ -1392,7 +1398,7 @@ netsh wlan show hostednetwork setting=security
  
 
     <div class='article'>
-        <a href="../articles/2017/coding-Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache&nbsp;Maven安装</h2></a>
+        <a href="../articles/2017/coding-Ubuntu系统Apache Maven安装.html"><h2>Ubuntu系统Apache Maven安装</h2></a>
         <div class= "well small"> <span class="metadata">
 2017-10-24 Tue&nbsp;&nbsp;&nbsp;
 
@@ -1410,11 +1416,14 @@ Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
 <em><font face = "Times New Roman">建议预先搭建Java开发环境：详见<a href="http://www.hao-jiang.com/pages/2016/01/13/ubuntuxi-tong-javakai-fa-huan-jing-de-da-jian.html">《Linux Ubuntu系统下Java开发环境搭建》</a></font></em></p>
 <hr />
 <p><font face = "Times New Roman">1. 前往Apache Maven官网下载最新版本：https://maven.apache.org/download.cgi，本文以apache-maven-3.3.9-bin.tar.gz为例。</font>    </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建<span class="caps">MVN</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建MVN子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
 <div class="highlight"><pre><span></span>cd /opt                       #进入到opt目录
 sudo mkdir mvn                #新建一个mvn文件夹
 ls                            #显示成功新建的mvn文件夹
-cd mvn                        #进入mvn文件夹 …</pre></div></font></div> <a class="btn btn-info xsmall" href="../articles/2017/coding-Ubuntu系统Apache Maven安装.html">read more</a></div>
+cd mvn                        #进入mvn文件夹
+</pre></div>
+
+<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="../articles/2017/coding-Ubuntu系统Apache Maven安装.html">read more</a></div>
     </div>	
 				
 
@@ -1438,17 +1447,21 @@ Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
     Tags: <a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="../tags/java.html">Java</a>,&nbsp;</span> </div>
         <div class="summary"><div><font face="Times New Roman">
 <p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>  <br />
-<em><font face = "Times New Roman">Java <span class="caps">JDK</span>版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
+<em><font face = "Times New Roman">Java JDK版本：jdk-8u65-linux-x64.tar.gz</font></em>    </p>
 <hr />
-<p><font face = "Times New Roman">1. 前往<span class="caps">ORACLE</span>官网下载最新版本的Java <span class="caps">JDK</span>：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java <span class="caps">JDK</span>，本例选择在/opt目录下新建<span class="caps">JVM</span>子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<p><font face = "Times New Roman">1. 前往ORACLE官网下载最新版本的Java JDK：http://www.oracle.com/technetwork/java/javase/downloads/index.html，默认下载到Downloads文件夹。</font>   </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Java JDK，本例选择在/opt目录下新建JVM子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
 <div class="highlight"><pre><span></span>cd /opt                     
 sudo mkdir jvm              
 ls                            
 cd jvm
 </pre></div>
 
-<p><font face = "Times New Roman">3.将下载的<span class="caps">JDK</span>压缩包拷贝到jvm目录下 …</font></p></font></div> <a class="btn btn-info xsmall" href="../articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">read more</a></div>
+<p><font face = "Times New Roman">3.将下载的JDK压缩包拷贝到jvm目录下。新建另一个Terminal窗口（T2）并输入：</font>    </p>
+
+<div class="highlight"><pre><span></span>cd Downloads                       
+ls                         
+sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="../articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

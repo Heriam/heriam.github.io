@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - 2017 archives</title>
+    <title>Heriam - JQCloud: 一个前端生成美化标签云的简单JQuery插件</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,22 +101,73 @@
     <div class="row">
 
         <div class="span9">
-<h1>Archives for 2017</h1>
+    <div class='article'>
+        <div class="content-title">
+            <h1>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h1>
+<span class="metadata">
+2018-02-25 Sun&nbsp;&nbsp;&nbsp;
 
-<dl>
-    <dt>2017-11-21 Tue</dt>
-    <dd><a href="../../articles/2017/tools-Wifi HotSpot On Windows.html">Windows系统配置WiFi无线热点</a></dd>
-    <dt>2017-10-24 Tue</dt>
-    <dd><a href="../../articles/2017/coding-Ubuntu系统Apache Maven安装.html">Ubuntu系统Apache Maven安装</a></dd>
-    <dt>2017-10-23 Mon</dt>
-    <dd><a href="../../articles/2017/coding-Ubuntu系统Java开发环境的搭建.html">Ubuntu系统Java开发环境的搭建</a></dd>
-    <dt>2017-08-15 Tue</dt>
-    <dd><a href="../../articles/2017/tools-Install And Run Gedit On Mac.html">Install & Run Gedit from Terminal on Mac</a></dd>
-    <dt>2017-06-30 Fri</dt>
-    <dd><a href="../../articles/2017/blog-网页BackToTop返回顶部按钮的简单实现.html">网页 BacktoTop 返回顶部按钮的简单实现</a></dd>
-    <dt>2017-02-21 Tue</dt>
-    <dd><a href="../../articles/2017/blog-CSS伪类content url放图片如何改变图的大小.html">CSS伪类content: url放图片如何改变图的大小</a></dd>
-</dl>
+by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../../categories/blog.html">Blog</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../../tags/jquery.html">JQuery</a>,&nbsp;<a href="../../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../../tags/html.html">HTML</a>,&nbsp;</span>        </div>
+		
+		<br />
+		<hr />
+		
+        <div><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
+官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
+<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>具体的使用方法官网都能查到。</p>
+<p>贴出自己微博使用JQCloud的前端代码：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag.url }}&#39;</span><span class="p">});</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">category</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">categories</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{category}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ category.url }}&#39;</span><span class="p">});</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#tagcloud&quot;</span><span class="p">).</span><span class="nx">jQCloud</span><span class="p">(</span><span class="nx">words</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">autoResize</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">});</span> 
+    <span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tagcloud&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 80%; height: 450px; align-self: center;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。
+踩坑1：因为要基于JQuery，注意引用的JQuery库可用。由于之前引用的是外网谷歌的库，国内被墙导致标签云一直没有刷出来，后来换成了bootcdn的JQuery库就成功了：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div></div>
+	
+        <hr>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
         </div>
         
         <div class="span3">
@@ -177,11 +228,13 @@
 
             <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- right-banner-page -->
+                <!-- right-banner-article -->
                 <ins class="adsbygoogle"
-                     style="display:inline-block;width:268px;height:268px"
+                     style="display:block"
                      data-ad-client="ca-pub-8958123988900703"
-                     data-ad-slot="3077290298"></ins>
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -191,7 +244,7 @@
     </div>     </div> 
 <footer>
 <br />
-<p><a href="../..">Heriam</a> &copy; Justin Time 2017</p>
+<p><a href="../..">Heriam</a> &copy; Justin Time 2019</p>
 </footer>
 
 </div> <!-- /container -->

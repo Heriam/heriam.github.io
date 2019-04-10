@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jiang-hao.com/</loc>
-<lastmod>2019-04-10T14:39:43-00:00</lastmod>
+<lastmod>2019-04-10T14:41:45-00:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.1</priority>
 </url>
@@ -39,126 +39,126 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2019/-------A Java TFTP Server.html</loc>
+<loc>https://jiang-hao.com/articles/2019/coding-A Java TFTP Server.html</loc>
 <lastmod>2019-04-09T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2019/-------Java代码优化35点总结.html</loc>
+<loc>https://jiang-hao.com/articles/2019/coding-Java代码优化35点总结.html</loc>
 <lastmod>2019-04-02T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2019/------人之一生.html</loc>
+<loc>https://jiang-hao.com/articles/2019/notes-人之一生.html</loc>
 <lastmod>2019-03-16T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2018/-----JQCloud.html</loc>
+<loc>https://jiang-hao.com/articles/2018/blog-JQCloud.html</loc>
 <lastmod>2018-02-25T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2018/-----使用Pelican在Github和Coding同步托管博客.html</loc>
+<loc>https://jiang-hao.com/articles/2018/blog-使用Pelican在Github和Coding同步托管博客.html</loc>
 <lastmod>2018-02-05T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2018/-----使用Pelican基于Github Pages搭建博客教程.html</loc>
+<loc>https://jiang-hao.com/articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html</loc>
 <lastmod>2018-02-05T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2018/------Build and Install OpenDaylight on Ubuntu.html</loc>
+<loc>https://jiang-hao.com/articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html</loc>
 <lastmod>2018-01-01T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/------Wifi HotSpot On Windows.html</loc>
+<loc>https://jiang-hao.com/articles/2017/tools-Wifi HotSpot On Windows.html</loc>
 <lastmod>2017-11-21T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/-------Ubuntu系统Apache Maven安装.html</loc>
+<loc>https://jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html</loc>
 <lastmod>2017-10-24T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/-------Ubuntu系统Java开发环境的搭建.html</loc>
+<loc>https://jiang-hao.com/articles/2017/coding-Ubuntu系统Java开发环境的搭建.html</loc>
 <lastmod>2017-10-23T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/------Install And Run Gedit On Mac.html</loc>
+<loc>https://jiang-hao.com/articles/2017/tools-Install And Run Gedit On Mac.html</loc>
 <lastmod>2017-08-15T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/-----网页BackToTop返回顶部按钮的简单实现.html</loc>
+<loc>https://jiang-hao.com/articles/2017/blog-网页BackToTop返回顶部按钮的简单实现.html</loc>
 <lastmod>2017-06-30T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/-----CSS伪类content url放图片如何改变图的大小.html</loc>
+<loc>https://jiang-hao.com/articles/2017/blog-CSS伪类content url放图片如何改变图的大小.html</loc>
 <lastmod>2017-02-21T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2016/------Install Wireshark on Ubuntu.html</loc>
+<loc>https://jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html</loc>
 <lastmod>2016-07-08T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2016/------法国的一些精油品牌.html</loc>
+<loc>https://jiang-hao.com/articles/2016/notes-法国的一些精油品牌.html</loc>
 <lastmod>2016-06-10T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2016/------Install VMware Workstation in Ubuntu 14.04.html</loc>
+<loc>https://jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html</loc>
 <lastmod>2016-04-21T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2016/-------Shiro.html</loc>
+<loc>https://jiang-hao.com/articles/2016/coding-Shiro.html</loc>
 <lastmod>2016-02-21T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2016/------心路.html</loc>
+<loc>https://jiang-hao.com/articles/2016/notes-心路.html</loc>
 <lastmod>2016-02-01T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>

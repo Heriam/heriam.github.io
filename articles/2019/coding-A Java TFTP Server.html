@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - A Java TFTP Server</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin Time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="OGeiccsh1O" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <script src="../../tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="../../theme/tipuesearch/tipuesearch.css">
+    <script src="../../theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="../../theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="../../theme/bootstrap-collapse.js"></script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8958123988900703",
+        enable_page_level_ads: true
+      });
+    </script>
+    <script>
+        function validateForm(query)
+        {
+            return (query.length > 0);
+        }
+    </script>
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="dropdown-jh"><a>Categories</a>
+                <ul class="dropdown-content-jh">
+                    <li><a href="../../categories/blog.html">Blog</a></li>
+                    <li><a href="../../categories/coding.html">Coding</a></li>
+                    <li><a href="../../categories/notes.html">Notes</a></li>
+                    <li><a href="../../categories/tools.html">Tools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            
+        </ul>
+
+        <form class="navbar-search pull-right" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
+        </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>A Java TFTP Server</h1>
+<span class="metadata">
+2019-04-09 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../../tags/java.html">Java</a>,&nbsp;<a href="../../tags/tftp.html">TFTP</a>,&nbsp;</span>        </div>
+		
+		<hr />
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#_1">简介</a></li>
+<li><a href="#_2">代码</a></li>
+</ul>
+</div>
+			</nav>
+		<br />
+		<hr />
+		
+        <div>
+<h3 id="_1">简介</h3>
+<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
+<p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
+<p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
+<p>要停止，请使用shutdown方法。</p>
+<p>要检查服务器是否仍在运行（或者由于错误而停止），请调用isRunning方法。</p>
+<p>默认情况下，事件不会记录到stdout/stderr。可以使用setLog和setLogError方法更改此设置。</p>
+<p>示例用法如下：</p>
+<div class="highlight"><pre><span></span> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+  <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span>
+                  <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"You must provide 1 argument - the base path for the server to serve from."</span><span class="o">);</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+      <span class="o">}</span>
+
+      <span class="n">TFTPServer</span> <span class="n">ts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTPServer</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]),</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]),</span> <span class="n">GET_AND_PUT</span><span class="o">);</span>
+      <span class="n">ts</span><span class="o">.</span><span class="na">setSocketTimeout</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TFTP Server running.  Press enter to stop."</span><span class="o">);</span>
+      <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">).</span><span class="na">read</span><span class="o">();</span>
+
+      <span class="n">ts</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Server shut down."</span><span class="o">);</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></div>
+<h3 id="_2">代码</h3>
+<div class="highlight"><pre><span></span> <span class="cm">/*</span>
+<span class="cm">  * Licensed to the Apache Software Foundation (ASF) under one or more</span>
+<span class="cm">  * contributor license agreements.  See the NOTICE file distributed with</span>
+<span class="cm">  * this work for additional information regarding copyright ownership.</span>
+<span class="cm">  * The ASF licenses this file to You under the Apache License, Version 2.0</span>
+<span class="cm">  * (the "License"); you may not use this file except in compliance with</span>
+<span class="cm">  * the License.  You may obtain a copy of the License at</span>
+<span class="cm">  *</span>
+<span class="cm">  *      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">  *</span>
+<span class="cm">  * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">  * distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="cm">  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">  * See the License for the specific language governing permissions and</span>
+<span class="cm">  * limitations under the License.</span>
+<span class="cm">  */</span>
+
+ <span class="kn">package</span> <span class="nn">org.apache.commons.net.tftp</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">java.io.BufferedInputStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.BufferedOutputStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.File</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.FileInputStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.FileNotFoundException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.FileOutputStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.InputStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.OutputStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.io.PrintStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.net.InetAddress</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.net.NetworkInterface</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.net.SocketTimeoutException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.HashSet</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.Enumeration</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+
+ <span class="kn">import</span> <span class="nn">org.apache.commons.net.io.FromNetASCIIOutputStream</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.apache.commons.net.io.ToNetASCIIInputStream</span><span class="o">;</span>
+
+ <span class="cm">/**</span>
+<span class="cm">  * A fully multi-threaded tftp server. Can handle multiple clients at the same time. Implements RFC</span>
+<span class="cm">  * 1350 and wrapping block numbers for large file support.</span>
+<span class="cm">  *</span>
+<span class="cm">  * To launch, just create an instance of the class. An IOException will be thrown if the server</span>
+<span class="cm">  * fails to start for reasons such as port in use, port denied, etc.</span>
+<span class="cm">  *</span>
+<span class="cm">  * To stop, use the shutdown method.</span>
+<span class="cm">  *</span>
+<span class="cm">  * To check to see if the server is still running (or if it stopped because of an error), call the</span>
+<span class="cm">  * isRunning() method.</span>
+<span class="cm">  *</span>
+<span class="cm">  * By default, events are not logged to stdout/stderr. This can be changed with the</span>
+<span class="cm">  * setLog and setLogError methods.</span>
+<span class="cm">  *</span>
+<span class="cm">  * &lt;p&gt;</span>
+<span class="cm">  * Example usage is below:</span>
+<span class="cm">  *</span>
+<span class="cm">  * &lt;code&gt;</span>
+<span class="cm">  * public static void main(String[] args) throws Exception</span>
+<span class="cm">  *  {</span>
+<span class="cm">  *      if (args.length != 1)</span>
+<span class="cm">  *      {</span>
+<span class="cm">  *          System.out</span>
+<span class="cm">  *                  .println("You must provide 1 argument - the base path for the server to serve from.");</span>
+<span class="cm">  *          System.exit(1);</span>
+<span class="cm">  *      }</span>
+<span class="cm">  *</span>
+<span class="cm">  *      TFTPServer ts = new TFTPServer(new File(args[0]), new File(args[0]), GET_AND_PUT);</span>
+<span class="cm">  *      ts.setSocketTimeout(2000);</span>
+<span class="cm">  *</span>
+<span class="cm">  *      System.out.println("TFTP Server running.  Press enter to stop.");</span>
+<span class="cm">  *      new InputStreamReader(System.in).read();</span>
+<span class="cm">  *</span>
+<span class="cm">  *      ts.shutdown();</span>
+<span class="cm">  *      System.out.println("Server shut down.");</span>
+<span class="cm">  *      System.exit(0);</span>
+<span class="cm">  *  }</span>
+<span class="cm">  *</span>
+<span class="cm">  * &lt;/code&gt;</span>
+<span class="cm">  *</span>
+<span class="cm">  * @since 2.0</span>
+<span class="cm">  */</span>
+
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TFTPServer</span> <span class="kd">implements</span> <span class="n">Runnable</span>
+ <span class="o">{</span>
+     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_TFTP_PORT</span> <span class="o">=</span> <span class="mi">69</span><span class="o">;</span>
+     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">ServerMode</span> <span class="o">{</span> <span class="n">GET_ONLY</span><span class="o">,</span> <span class="n">PUT_ONLY</span><span class="o">,</span> <span class="n">GET_AND_PUT</span><span class="o">;</span> <span class="o">}</span>
+
+     <span class="kd">private</span> <span class="kd">final</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">TFTPTransfer</span><span class="o">&gt;</span> <span class="n">transfers_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;</span><span class="n">TFTPTransfer</span><span class="o">&gt;();</span>
+     <span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">boolean</span> <span class="n">shutdownServer</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="n">TFTP</span> <span class="n">serverTftp_</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="n">File</span> <span class="n">serverReadDirectory_</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="n">File</span> <span class="n">serverWriteDirectory_</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">port_</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="kd">final</span> <span class="n">InetAddress</span> <span class="n">laddr_</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="n">Exception</span> <span class="n">serverException</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="kd">final</span> <span class="n">ServerMode</span> <span class="n">mode_</span><span class="o">;</span>
+
+     <span class="cm">/* /dev/null output stream (default) */</span>
+     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">PrintStream</span> <span class="n">nullStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintStream</span><span class="o">(</span>
+             <span class="k">new</span> <span class="n">OutputStream</span><span class="o">()</span> <span class="o">{</span>
+                 <span class="nd">@Override</span>
+                 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">int</span> <span class="n">b</span><span class="o">){}</span>
+                 <span class="nd">@Override</span>
+                 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{}</span>
+                 <span class="o">}</span>
+             <span class="o">);</span>
+
+     <span class="c1">// don't have access to a logger api, so we will log to these streams, which</span>
+     <span class="c1">// by default are set to a no-op logger</span>
+     <span class="kd">private</span> <span class="n">PrintStream</span> <span class="n">log_</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="n">PrintStream</span> <span class="n">logError_</span><span class="o">;</span>
+
+     <span class="kd">private</span> <span class="kt">int</span> <span class="n">maxTimeoutRetries_</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="kt">int</span> <span class="n">socketTimeout_</span><span class="o">;</span>
+     <span class="kd">private</span> <span class="n">Thread</span> <span class="n">serverThread</span><span class="o">;</span>
+
+
+     <span class="cm">/**</span>
+<span class="cm">      * Start a TFTP Server on the default port (69). Gets and Puts occur in the specified</span>
+<span class="cm">      * directories.</span>
+<span class="cm">      *</span>
+<span class="cm">      * The server will start in another thread, allowing this constructor to return immediately.</span>
+<span class="cm">      *</span>
+<span class="cm">      * If a get or a put comes in with a relative path that tries to get outside of the</span>
+<span class="cm">      * serverDirectory, then the get or put will be denied.</span>
+<span class="cm">      *</span>
+<span class="cm">      * GET_ONLY mode only allows gets, PUT_ONLY mode only allows puts, and GET_AND_PUT allows both.</span>
+<span class="cm">      * Modes are defined as int constants in this class.</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param serverReadDirectory directory for GET requests</span>
+<span class="cm">      * @param serverWriteDirectory directory for PUT requests</span>
+<span class="cm">      * @param mode A value as specified above.</span>
+<span class="cm">      * @throws IOException if the server directory is invalid or does not exist.</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="nf">TFTPServer</span><span class="o">(</span><span class="n">File</span> <span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">File</span> <span class="n">serverWriteDirectory</span><span class="o">,</span> <span class="n">ServerMode</span> <span class="n">mode</span><span class="o">)</span>
+             <span class="kd">throws</span> <span class="n">IOException</span>
+     <span class="o">{</span>
+         <span class="k">this</span><span class="o">(</span><span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">serverWriteDirectory</span><span class="o">,</span> <span class="n">DEFAULT_TFTP_PORT</span><span class="o">,</span> <span class="n">mode</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Start a TFTP Server on the specified port. Gets and Puts occur in the specified directory.</span>
+<span class="cm">      *</span>
+<span class="cm">      * The server will start in another thread, allowing this constructor to return immediately.</span>
+<span class="cm">      *</span>
+<span class="cm">      * If a get or a put comes in with a relative path that tries to get outside of the</span>
+<span class="cm">      * serverDirectory, then the get or put will be denied.</span>
+<span class="cm">      *</span>
+<span class="cm">      * GET_ONLY mode only allows gets, PUT_ONLY mode only allows puts, and GET_AND_PUT allows both.</span>
+<span class="cm">      * Modes are defined as int constants in this class.</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param serverReadDirectory directory for GET requests</span>
+<span class="cm">      * @param serverWriteDirectory directory for PUT requests</span>
+<span class="cm">      * @param port the port to use</span>
+<span class="cm">      * @param mode A value as specified above.</span>
+<span class="cm">      * @param log Stream to write log message to. If not provided, uses System.out</span>
+<span class="cm">      * @param errorLog Stream to write error messages to. If not provided, uses System.err.</span>
+<span class="cm">      * @throws IOException if the server directory is invalid or does not exist.</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="nf">TFTPServer</span><span class="o">(</span><span class="n">File</span> <span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">File</span> <span class="n">serverWriteDirectory</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">,</span> <span class="n">ServerMode</span> <span class="n">mode</span><span class="o">,</span>
+             <span class="n">PrintStream</span> <span class="n">log</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">errorLog</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span>
+     <span class="o">{</span>
+         <span class="n">port_</span> <span class="o">=</span> <span class="n">port</span><span class="o">;</span>
+         <span class="n">mode_</span> <span class="o">=</span> <span class="n">mode</span><span class="o">;</span>
+         <span class="n">log_</span> <span class="o">=</span> <span class="o">(</span><span class="n">log</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">nullStream</span><span class="o">:</span> <span class="n">log</span><span class="o">);</span>
+         <span class="n">logError_</span> <span class="o">=</span> <span class="o">(</span><span class="n">errorLog</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">nullStream</span> <span class="o">:</span> <span class="n">errorLog</span><span class="o">);</span>
+         <span class="n">laddr_</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+         <span class="n">launch</span><span class="o">(</span><span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">serverWriteDirectory</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Start a TFTP Server on the specified port. Gets and Puts occur in the specified directory.</span>
+<span class="cm">      *</span>
+<span class="cm">      * The server will start in another thread, allowing this constructor to return immediately.</span>
+<span class="cm">      *</span>
+<span class="cm">      * If a get or a put comes in with a relative path that tries to get outside of the</span>
+<span class="cm">      * serverDirectory, then the get or put will be denied.</span>
+<span class="cm">      *</span>
+<span class="cm">      * GET_ONLY mode only allows gets, PUT_ONLY mode only allows puts, and GET_AND_PUT allows both.</span>
+<span class="cm">      * Modes are defined as int constants in this class.</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param serverReadDirectory directory for GET requests</span>
+<span class="cm">      * @param serverWriteDirectory directory for PUT requests</span>
+<span class="cm">      * @param port The local port to bind to.</span>
+<span class="cm">      * @param localaddr The local address to bind to.</span>
+<span class="cm">      * @param mode A value as specified above.</span>
+<span class="cm">      * @param log Stream to write log message to. If not provided, uses System.out</span>
+<span class="cm">      * @param errorLog Stream to write error messages to. If not provided, uses System.err.</span>
+<span class="cm">      * @throws IOException if the server directory is invalid or does not exist.</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="nf">TFTPServer</span><span class="o">(</span><span class="n">File</span> <span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">File</span> <span class="n">serverWriteDirectory</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">,</span>
+         <span class="n">InetAddress</span> <span class="n">localaddr</span><span class="o">,</span> <span class="n">ServerMode</span> <span class="n">mode</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">log</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">errorLog</span><span class="o">)</span>
+         <span class="kd">throws</span> <span class="n">IOException</span>
+     <span class="o">{</span>
+         <span class="n">port_</span> <span class="o">=</span> <span class="n">port</span><span class="o">;</span>
+         <span class="n">mode_</span> <span class="o">=</span> <span class="n">mode</span><span class="o">;</span>
+         <span class="n">laddr_</span> <span class="o">=</span> <span class="n">localaddr</span><span class="o">;</span>
+         <span class="n">log_</span> <span class="o">=</span> <span class="o">(</span><span class="n">log</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">nullStream</span><span class="o">:</span> <span class="n">log</span><span class="o">);</span>
+         <span class="n">logError_</span> <span class="o">=</span> <span class="o">(</span><span class="n">errorLog</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">nullStream</span> <span class="o">:</span> <span class="n">errorLog</span><span class="o">);</span>
+         <span class="n">launch</span><span class="o">(</span><span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">serverWriteDirectory</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Start a TFTP Server on the specified port. Gets and Puts occur in the specified directory.</span>
+<span class="cm">      *</span>
+<span class="cm">      * The server will start in another thread, allowing this constructor to return immediately.</span>
+<span class="cm">      *</span>
+<span class="cm">      * If a get or a put comes in with a relative path that tries to get outside of the</span>
+<span class="cm">      * serverDirectory, then the get or put will be denied.</span>
+<span class="cm">      *</span>
+<span class="cm">      * GET_ONLY mode only allows gets, PUT_ONLY mode only allows puts, and GET_AND_PUT allows both.</span>
+<span class="cm">      * Modes are defined as int constants in this class.</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param serverReadDirectory directory for GET requests</span>
+<span class="cm">      * @param serverWriteDirectory directory for PUT requests</span>
+<span class="cm">      * @param port the port to use</span>
+<span class="cm">      * @param localiface The local network interface to bind to.</span>
+<span class="cm">      *  The interface's first address wil be used.</span>
+<span class="cm">      * @param mode A value as specified above.</span>
+<span class="cm">      * @param log Stream to write log message to. If not provided, uses System.out</span>
+<span class="cm">      * @param errorLog Stream to write error messages to. If not provided, uses System.err.</span>
+<span class="cm">      * @throws IOException if the server directory is invalid or does not exist.</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="nf">TFTPServer</span><span class="o">(</span><span class="n">File</span> <span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">File</span> <span class="n">serverWriteDirectory</span><span class="o">,</span> <span class="kt">int</span> <span class="n">port</span><span class="o">,</span>
+         <span class="n">NetworkInterface</span> <span class="n">localiface</span><span class="o">,</span> <span class="n">ServerMode</span> <span class="n">mode</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">log</span><span class="o">,</span> <span class="n">PrintStream</span> <span class="n">errorLog</span><span class="o">)</span>
+         <span class="kd">throws</span> <span class="n">IOException</span>
+     <span class="o">{</span>
+         <span class="n">mode_</span> <span class="o">=</span> <span class="n">mode</span><span class="o">;</span>
+         <span class="n">port_</span><span class="o">=</span> <span class="n">port</span><span class="o">;</span>
+         <span class="n">InetAddress</span> <span class="n">iaddr</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">localiface</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">InetAddress</span><span class="o">&gt;</span> <span class="n">ifaddrs</span> <span class="o">=</span> <span class="n">localiface</span><span class="o">.</span><span class="na">getInetAddresses</span><span class="o">();</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">ifaddrs</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="k">if</span> <span class="o">(</span><span class="n">ifaddrs</span><span class="o">.</span><span class="na">hasMoreElements</span><span class="o">())</span> <span class="n">iaddr</span> <span class="o">=</span> <span class="n">ifaddrs</span><span class="o">.</span><span class="na">nextElement</span><span class="o">();</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+         <span class="n">log_</span> <span class="o">=</span> <span class="o">(</span><span class="n">log</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">nullStream</span><span class="o">:</span> <span class="n">log</span><span class="o">);</span>
+         <span class="n">logError_</span> <span class="o">=</span> <span class="o">(</span><span class="n">errorLog</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">nullStream</span> <span class="o">:</span> <span class="n">errorLog</span><span class="o">);</span>
+         <span class="n">laddr_</span> <span class="o">=</span> <span class="n">iaddr</span><span class="o">;</span>
+         <span class="n">launch</span><span class="o">(</span><span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">serverWriteDirectory</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Set the max number of retries in response to a timeout. Default 3. Min 0.</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param retries number of retries, must be &amp;gt; 0</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMaxTimeoutRetries</span><span class="o">(</span><span class="kt">int</span> <span class="n">retries</span><span class="o">)</span>
+     <span class="o">{</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">retries</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">"Invalid Value"</span><span class="o">);</span>
+         <span class="o">}</span>
+         <span class="n">maxTimeoutRetries_</span> <span class="o">=</span> <span class="n">retries</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Get the current value for maxTimeoutRetries</span>
+<span class="cm">      * @return the max allowed number of retries</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getMaxTimeoutRetries</span><span class="o">()</span>
+     <span class="o">{</span>
+         <span class="k">return</span> <span class="n">maxTimeoutRetries_</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Set the socket timeout in milliseconds used in transfers. Defaults to the value here:</span>
+<span class="cm">      * http://commons.apache.org/net/apidocs/org/apache/commons/net/tftp/TFTP.html#DEFAULT_TIMEOUT</span>
+<span class="cm">      * (5000 at the time I write this) Min value of 10.</span>
+<span class="cm">      * @param timeout the timeout; must be larger than 10</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSocketTimeout</span><span class="o">(</span><span class="kt">int</span> <span class="n">timeout</span><span class="o">)</span>
+     <span class="o">{</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">timeout</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">"Invalid Value"</span><span class="o">);</span>
+         <span class="o">}</span>
+         <span class="n">socketTimeout_</span> <span class="o">=</span> <span class="n">timeout</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * The current socket timeout used during transfers in milliseconds.</span>
+<span class="cm">      * @return the timeout value</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getSocketTimeout</span><span class="o">()</span>
+     <span class="o">{</span>
+         <span class="k">return</span> <span class="n">socketTimeout_</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="cm">/*</span>
+<span class="cm">      * start the server, throw an error if it can't start.</span>
+<span class="cm">      */</span>
+     <span class="kd">private</span> <span class="kt">void</span> <span class="nf">launch</span><span class="o">(</span><span class="n">File</span> <span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">File</span> <span class="n">serverWriteDirectory</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span>
+     <span class="o">{</span>
+         <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Starting TFTP Server on port "</span> <span class="o">+</span> <span class="n">port_</span> <span class="o">+</span> <span class="s">".  Read directory: "</span>
+                 <span class="o">+</span> <span class="n">serverReadDirectory</span> <span class="o">+</span> <span class="s">" Write directory: "</span> <span class="o">+</span> <span class="n">serverWriteDirectory</span>
+                 <span class="o">+</span> <span class="s">" Server Mode is "</span> <span class="o">+</span> <span class="n">mode_</span><span class="o">);</span>
+
+         <span class="n">serverReadDirectory_</span> <span class="o">=</span> <span class="n">serverReadDirectory</span><span class="o">.</span><span class="na">getCanonicalFile</span><span class="o">();</span>
+         <span class="k">if</span> <span class="o">(!</span><span class="n">serverReadDirectory_</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">serverReadDirectory</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span>
+         <span class="o">{</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"The server read directory "</span> <span class="o">+</span> <span class="n">serverReadDirectory_</span>
+                     <span class="o">+</span> <span class="s">" does not exist"</span><span class="o">);</span>
+         <span class="o">}</span>
+
+         <span class="n">serverWriteDirectory_</span> <span class="o">=</span> <span class="n">serverWriteDirectory</span><span class="o">.</span><span class="na">getCanonicalFile</span><span class="o">();</span>
+         <span class="k">if</span> <span class="o">(!</span><span class="n">serverWriteDirectory_</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">serverWriteDirectory</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span>
+         <span class="o">{</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"The server write directory "</span> <span class="o">+</span> <span class="n">serverWriteDirectory_</span>
+                     <span class="o">+</span> <span class="s">" does not exist"</span><span class="o">);</span>
+         <span class="o">}</span>
+
+         <span class="n">serverTftp_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTP</span><span class="o">();</span>
+
+         <span class="c1">// This is the value used in response to each client.</span>
+         <span class="n">socketTimeout_</span> <span class="o">=</span> <span class="n">serverTftp_</span><span class="o">.</span><span class="na">getDefaultTimeout</span><span class="o">();</span>
+
+         <span class="c1">// we want the server thread to listen forever.</span>
+         <span class="n">serverTftp_</span><span class="o">.</span><span class="na">setDefaultTimeout</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+         <span class="k">if</span> <span class="o">(</span><span class="n">laddr_</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+             <span class="n">serverTftp_</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="n">port_</span><span class="o">,</span> <span class="n">laddr_</span><span class="o">);</span>
+         <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+             <span class="n">serverTftp_</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="n">port_</span><span class="o">);</span>
+         <span class="o">}</span>
+
+         <span class="n">serverThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+         <span class="n">serverThread</span><span class="o">.</span><span class="na">setDaemon</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+         <span class="n">serverThread</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+     <span class="o">}</span>
+
+     <span class="nd">@Override</span>
+     <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">finalize</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Throwable</span>
+     <span class="o">{</span>
+         <span class="n">shutdown</span><span class="o">();</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * check if the server thread is still running.</span>
+<span class="cm">      *</span>
+<span class="cm">      * @return true if running, false if stopped.</span>
+<span class="cm">      * @throws Exception throws the exception that stopped the server if the server is stopped from</span>
+<span class="cm">      *             an exception.</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isRunning</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span>
+     <span class="o">{</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">shutdownServer</span> <span class="o">&amp;&amp;</span> <span class="n">serverException</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="k">throw</span> <span class="n">serverException</span><span class="o">;</span>
+         <span class="o">}</span>
+         <span class="k">return</span> <span class="o">!</span><span class="n">shutdownServer</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span>
+     <span class="o">{</span>
+         <span class="k">try</span>
+         <span class="o">{</span>
+             <span class="k">while</span> <span class="o">(!</span><span class="n">shutdownServer</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="n">TFTPPacket</span> <span class="n">tftpPacket</span><span class="o">;</span>
+
+                 <span class="n">tftpPacket</span> <span class="o">=</span> <span class="n">serverTftp_</span><span class="o">.</span><span class="na">receive</span><span class="o">();</span>
+
+                 <span class="n">TFTPTransfer</span> <span class="n">tt</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTPTransfer</span><span class="o">(</span><span class="n">tftpPacket</span><span class="o">);</span>
+                 <span class="kd">synchronized</span><span class="o">(</span><span class="n">transfers_</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">transfers_</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">tt</span><span class="o">);</span>
+                 <span class="o">}</span>
+
+                 <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">tt</span><span class="o">);</span>
+                 <span class="n">thread</span><span class="o">.</span><span class="na">setDaemon</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+                 <span class="n">thread</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+         <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownServer</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="n">serverException</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+                 <span class="n">logError_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected Error in TFTP Server - Server shut down! + "</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+         <span class="k">finally</span>
+         <span class="o">{</span>
+             <span class="n">shutdownServer</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// set this to true, so the launching thread can check to see if it started.</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">serverTftp_</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">serverTftp_</span><span class="o">.</span><span class="na">isOpen</span><span class="o">())</span>
+             <span class="o">{</span>
+                 <span class="n">serverTftp_</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Stop the tftp server (and any currently running transfers) and release all opened network</span>
+<span class="cm">      * resources.</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shutdown</span><span class="o">()</span>
+     <span class="o">{</span>
+         <span class="n">shutdownServer</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+         <span class="kd">synchronized</span><span class="o">(</span><span class="n">transfers_</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">TFTPTransfer</span><span class="o">&gt;</span> <span class="n">it</span> <span class="o">=</span> <span class="n">transfers_</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+             <span class="k">while</span> <span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>
+             <span class="o">{</span>
+                 <span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">().</span><span class="na">shutdown</span><span class="o">();</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+
+         <span class="k">try</span>
+         <span class="o">{</span>
+             <span class="n">serverTftp_</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+         <span class="o">}</span>
+         <span class="k">catch</span> <span class="o">(</span><span class="n">RuntimeException</span> <span class="n">e</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="c1">// noop</span>
+         <span class="o">}</span>
+
+         <span class="k">try</span> <span class="o">{</span>
+             <span class="n">serverThread</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+             <span class="c1">// we've done the best we could, return</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+
+     <span class="cm">/*</span>
+<span class="cm">      * An instance of an ongoing transfer.</span>
+<span class="cm">      */</span>
+     <span class="kd">private</span> <span class="kd">class</span> <span class="nc">TFTPTransfer</span> <span class="kd">implements</span> <span class="n">Runnable</span>
+     <span class="o">{</span>
+         <span class="kd">private</span> <span class="kd">final</span> <span class="n">TFTPPacket</span> <span class="n">tftpPacket_</span><span class="o">;</span>
+
+         <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">shutdownTransfer</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+         <span class="n">TFTP</span> <span class="n">transferTftp_</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+         <span class="kd">public</span> <span class="nf">TFTPTransfer</span><span class="o">(</span><span class="n">TFTPPacket</span> <span class="n">tftpPacket</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="n">tftpPacket_</span> <span class="o">=</span> <span class="n">tftpPacket</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shutdown</span><span class="o">()</span>
+         <span class="o">{</span>
+             <span class="n">shutdownTransfer</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+             <span class="k">try</span>
+             <span class="o">{</span>
+                 <span class="n">transferTftp_</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+             <span class="o">}</span>
+             <span class="k">catch</span> <span class="o">(</span><span class="n">RuntimeException</span> <span class="n">e</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="c1">// noop</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+
+         <span class="nd">@Override</span>
+         <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span>
+         <span class="o">{</span>
+             <span class="k">try</span>
+             <span class="o">{</span>
+                 <span class="n">transferTftp_</span> <span class="o">=</span> <span class="n">newTFTP</span><span class="o">();</span>
+
+                 <span class="n">transferTftp_</span><span class="o">.</span><span class="na">beginBufferedOps</span><span class="o">();</span>
+                 <span class="n">transferTftp_</span><span class="o">.</span><span class="na">setDefaultTimeout</span><span class="o">(</span><span class="n">socketTimeout_</span><span class="o">);</span>
+
+                 <span class="n">transferTftp_</span><span class="o">.</span><span class="na">open</span><span class="o">();</span>
+
+                 <span class="k">if</span> <span class="o">(</span><span class="n">tftpPacket_</span> <span class="k">instanceof</span> <span class="n">TFTPReadRequestPacket</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">handleRead</span><span class="o">(((</span><span class="n">TFTPReadRequestPacket</span><span class="o">)</span> <span class="n">tftpPacket_</span><span class="o">));</span>
+                 <span class="o">}</span>
+                 <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">tftpPacket_</span> <span class="k">instanceof</span> <span class="n">TFTPWriteRequestPacket</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">handleWrite</span><span class="o">((</span><span class="n">TFTPWriteRequestPacket</span><span class="o">)</span> <span class="n">tftpPacket_</span><span class="o">);</span>
+                 <span class="o">}</span>
+                 <span class="k">else</span>
+                 <span class="o">{</span>
+                     <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unsupported TFTP request ("</span> <span class="o">+</span> <span class="n">tftpPacket_</span> <span class="o">+</span> <span class="s">") - ignored."</span><span class="o">);</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+             <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownTransfer</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">logError_</span>
+                             <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected Error in during TFTP file transfer.  Transfer aborted. "</span>
+                                     <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+             <span class="k">finally</span>
+             <span class="o">{</span>
+                 <span class="k">try</span>
+                 <span class="o">{</span>
+                     <span class="k">if</span> <span class="o">(</span><span class="n">transferTftp_</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">transferTftp_</span><span class="o">.</span><span class="na">isOpen</span><span class="o">())</span>
+                     <span class="o">{</span>
+                         <span class="n">transferTftp_</span><span class="o">.</span><span class="na">endBufferedOps</span><span class="o">();</span>
+                         <span class="n">transferTftp_</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                     <span class="o">}</span>
+                 <span class="o">}</span>
+                 <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="c1">// noop</span>
+                 <span class="o">}</span>
+                 <span class="kd">synchronized</span><span class="o">(</span><span class="n">transfers_</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">transfers_</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+
+         <span class="cm">/*</span>
+<span class="cm">          * Handle a tftp read request.</span>
+<span class="cm">          */</span>
+         <span class="kd">private</span> <span class="kt">void</span> <span class="nf">handleRead</span><span class="o">(</span><span class="n">TFTPReadRequestPacket</span> <span class="n">trrp</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">TFTPPacketException</span>
+         <span class="o">{</span>
+             <span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+             <span class="k">try</span>
+             <span class="o">{</span>
+                 <span class="k">if</span> <span class="o">(</span><span class="n">mode_</span> <span class="o">==</span> <span class="n">ServerMode</span><span class="o">.</span><span class="na">PUT_ONLY</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">trrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">trrp</span>
+                             <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">ILLEGAL_OPERATION</span><span class="o">,</span>
+                             <span class="s">"Read not allowed by server."</span><span class="o">));</span>
+                     <span class="k">return</span><span class="o">;</span>
+                 <span class="o">}</span>
+
+                 <span class="k">try</span>
+                 <span class="o">{</span>
+                     <span class="n">is</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="n">buildSafeFile</span><span class="o">(</span>
+                             <span class="n">serverReadDirectory_</span><span class="o">,</span> <span class="n">trrp</span><span class="o">.</span><span class="na">getFilename</span><span class="o">(),</span> <span class="kc">false</span><span class="o">)));</span>
+                 <span class="o">}</span>
+                 <span class="k">catch</span> <span class="o">(</span><span class="n">FileNotFoundException</span> <span class="n">e</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">trrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">trrp</span>
+                             <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">FILE_NOT_FOUND</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()));</span>
+                     <span class="k">return</span><span class="o">;</span>
+                 <span class="o">}</span>
+                 <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">trrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">trrp</span>
+                             <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNDEFINED</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()));</span>
+                     <span class="k">return</span><span class="o">;</span>
+                 <span class="o">}</span>
+
+                 <span class="k">if</span> <span class="o">(</span><span class="n">trrp</span><span class="o">.</span><span class="na">getMode</span><span class="o">()</span> <span class="o">==</span> <span class="n">TFTP</span><span class="o">.</span><span class="na">NETASCII_MODE</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">is</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ToNetASCIIInputStream</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+                 <span class="o">}</span>
+
+                 <span class="kt">byte</span><span class="o">[]</span> <span class="n">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">TFTPDataPacket</span><span class="o">.</span><span class="na">MAX_DATA_LENGTH</span><span class="o">];</span>
+
+                 <span class="n">TFTPPacket</span> <span class="n">answer</span><span class="o">;</span>
+
+                 <span class="kt">int</span> <span class="n">block</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+                 <span class="kt">boolean</span> <span class="n">sendNext</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+                 <span class="kt">int</span> <span class="n">readLength</span> <span class="o">=</span> <span class="n">TFTPDataPacket</span><span class="o">.</span><span class="na">MAX_DATA_LENGTH</span><span class="o">;</span>
+
+                 <span class="n">TFTPDataPacket</span> <span class="n">lastSentData</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+                 <span class="c1">// We are reading a file, so when we read less than the</span>
+                 <span class="c1">// requested bytes, we know that we are at the end of the file.</span>
+                 <span class="k">while</span> <span class="o">(</span><span class="n">readLength</span> <span class="o">==</span> <span class="n">TFTPDataPacket</span><span class="o">.</span><span class="na">MAX_DATA_LENGTH</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">shutdownTransfer</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="k">if</span> <span class="o">(</span><span class="n">sendNext</span><span class="o">)</span>
+                     <span class="o">{</span>
+                         <span class="n">readLength</span> <span class="o">=</span> <span class="n">is</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">temp</span><span class="o">);</span>
+                         <span class="k">if</span> <span class="o">(</span><span class="n">readLength</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="n">readLength</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                         <span class="o">}</span>
+
+                         <span class="n">lastSentData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTPDataPacket</span><span class="o">(</span><span class="n">trrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">trrp</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">block</span><span class="o">,</span>
+                                 <span class="n">temp</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">readLength</span><span class="o">);</span>
+                         <span class="n">sendData</span><span class="o">(</span><span class="n">transferTftp_</span><span class="o">,</span> <span class="n">lastSentData</span><span class="o">);</span> <span class="c1">// send the data</span>
+                     <span class="o">}</span>
+
+                     <span class="n">answer</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+                     <span class="kt">int</span> <span class="n">timeoutCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+                     <span class="k">while</span> <span class="o">(!</span><span class="n">shutdownTransfer</span>
+                             <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">answer</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">answer</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">trrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">())</span> <span class="o">||</span> <span class="n">answer</span>
+                                     <span class="o">.</span><span class="na">getPort</span><span class="o">()</span> <span class="o">!=</span> <span class="n">trrp</span><span class="o">.</span><span class="na">getPort</span><span class="o">()))</span>
+                     <span class="o">{</span>
+                         <span class="c1">// listen for an answer.</span>
+                         <span class="k">if</span> <span class="o">(</span><span class="n">answer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="c1">// The answer that we got didn't come from the</span>
+                             <span class="c1">// expected source, fire back an error, and continue</span>
+                             <span class="c1">// listening.</span>
+                             <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TFTP Server ignoring message from unexpected source."</span><span class="o">);</span>
+                             <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span>
+                                     <span class="n">answer</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNKNOWN_TID</span><span class="o">,</span>
+                                     <span class="s">"Unexpected Host or Port"</span><span class="o">));</span>
+                         <span class="o">}</span>
+                         <span class="k">try</span>
+                         <span class="o">{</span>
+                             <span class="n">answer</span> <span class="o">=</span> <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedReceive</span><span class="o">();</span>
+                         <span class="o">}</span>
+                         <span class="k">catch</span> <span class="o">(</span><span class="n">SocketTimeoutException</span> <span class="n">e</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="k">if</span> <span class="o">(</span><span class="n">timeoutCount</span> <span class="o">&gt;=</span> <span class="n">maxTimeoutRetries_</span><span class="o">)</span>
+                             <span class="o">{</span>
+                                 <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+                             <span class="o">}</span>
+                             <span class="c1">// didn't get an ack for this data. need to resend</span>
+                             <span class="c1">// it.</span>
+                             <span class="n">timeoutCount</span><span class="o">++;</span>
+                             <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="n">lastSentData</span><span class="o">);</span>
+                             <span class="k">continue</span><span class="o">;</span>
+                         <span class="o">}</span>
+                     <span class="o">}</span>
+
+                     <span class="k">if</span> <span class="o">(</span><span class="n">answer</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!(</span><span class="n">answer</span> <span class="k">instanceof</span> <span class="n">TFTPAckPacket</span><span class="o">))</span>
+                     <span class="o">{</span>
+                         <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownTransfer</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="n">logError_</span>
+                                     <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected response from tftp client during transfer ("</span>
+                                             <span class="o">+</span> <span class="n">answer</span> <span class="o">+</span> <span class="s">").  Transfer aborted."</span><span class="o">);</span>
+                         <span class="o">}</span>
+                         <span class="k">break</span><span class="o">;</span>
+                     <span class="o">}</span>
+                     <span class="k">else</span>
+                     <span class="o">{</span>
+                         <span class="c1">// once we get here, we know we have an answer packet</span>
+                         <span class="c1">// from the correct host.</span>
+                         <span class="n">TFTPAckPacket</span> <span class="n">ack</span> <span class="o">=</span> <span class="o">(</span><span class="n">TFTPAckPacket</span><span class="o">)</span> <span class="n">answer</span><span class="o">;</span>
+                         <span class="k">if</span> <span class="o">(</span><span class="n">ack</span><span class="o">.</span><span class="na">getBlockNumber</span><span class="o">()</span> <span class="o">!=</span> <span class="n">block</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="cm">/*</span>
+<span class="cm">                              * The origional tftp spec would have called on us to resend the</span>
+<span class="cm">                              * previous data here, however, that causes the SAS Syndrome.</span>
+<span class="cm">                              * http://www.faqs.org/rfcs/rfc1123.html section 4.2.3.1 The modified</span>
+<span class="cm">                              * spec says that we ignore a duplicate ack. If the packet was really</span>
+<span class="cm">                              * lost, we will time out on receive, and resend the previous data at</span>
+<span class="cm">                              * that point.</span>
+<span class="cm">                              */</span>
+                             <span class="n">sendNext</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                         <span class="o">}</span>
+                         <span class="k">else</span>
+                         <span class="o">{</span>
+                             <span class="c1">// send the next block</span>
+                             <span class="n">block</span><span class="o">++;</span>
+                             <span class="k">if</span> <span class="o">(</span><span class="n">block</span> <span class="o">&gt;</span> <span class="mi">65535</span><span class="o">)</span>
+                             <span class="o">{</span>
+                                 <span class="c1">// wrap the block number</span>
+                                 <span class="n">block</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                             <span class="o">}</span>
+                             <span class="n">sendNext</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                         <span class="o">}</span>
+                     <span class="o">}</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+             <span class="k">finally</span>
+             <span class="o">{</span>
+                 <span class="k">try</span>
+                 <span class="o">{</span>
+                     <span class="k">if</span> <span class="o">(</span><span class="n">is</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                     <span class="o">{</span>
+                         <span class="n">is</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                     <span class="o">}</span>
+                 <span class="o">}</span>
+                 <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="c1">// noop</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+
+         <span class="cm">/*</span>
+<span class="cm">          * handle a tftp write request.</span>
+<span class="cm">          */</span>
+         <span class="kd">private</span> <span class="kt">void</span> <span class="nf">handleWrite</span><span class="o">(</span><span class="n">TFTPWriteRequestPacket</span> <span class="n">twrp</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span>
+                 <span class="n">TFTPPacketException</span>
+         <span class="o">{</span>
+             <span class="n">OutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+             <span class="k">try</span>
+             <span class="o">{</span>
+                 <span class="k">if</span> <span class="o">(</span><span class="n">mode_</span> <span class="o">==</span> <span class="n">ServerMode</span><span class="o">.</span><span class="na">GET_ONLY</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span>
+                             <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">ILLEGAL_OPERATION</span><span class="o">,</span>
+                             <span class="s">"Write not allowed by server."</span><span class="o">));</span>
+                     <span class="k">return</span><span class="o">;</span>
+                 <span class="o">}</span>
+
+                 <span class="kt">int</span> <span class="n">lastBlock</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                 <span class="n">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">twrp</span><span class="o">.</span><span class="na">getFilename</span><span class="o">();</span>
+
+                 <span class="k">try</span>
+                 <span class="o">{</span>
+                     <span class="n">File</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">buildSafeFile</span><span class="o">(</span><span class="n">serverWriteDirectory_</span><span class="o">,</span> <span class="n">fileName</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+                     <span class="k">if</span> <span class="o">(</span><span class="n">temp</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span>
+                     <span class="o">{</span>
+                         <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span>
+                                 <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">FILE_EXISTS</span><span class="o">,</span> <span class="s">"File already exists"</span><span class="o">));</span>
+                         <span class="k">return</span><span class="o">;</span>
+                     <span class="o">}</span>
+                     <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">temp</span><span class="o">));</span>
+
+                     <span class="k">if</span> <span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getMode</span><span class="o">()</span> <span class="o">==</span> <span class="n">TFTP</span><span class="o">.</span><span class="na">NETASCII_MODE</span><span class="o">)</span>
+                     <span class="o">{</span>
+                         <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FromNetASCIIOutputStream</span><span class="o">(</span><span class="n">bos</span><span class="o">);</span>
+                     <span class="o">}</span>
+                 <span class="o">}</span>
+                 <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span>
+                             <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNDEFINED</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()));</span>
+                     <span class="k">return</span><span class="o">;</span>
+                 <span class="o">}</span>
+
+                 <span class="n">TFTPAckPacket</span> <span class="n">lastSentAck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTPAckPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="mi">0</span><span class="o">);</span>
+                 <span class="n">sendData</span><span class="o">(</span><span class="n">transferTftp_</span><span class="o">,</span> <span class="n">lastSentAck</span><span class="o">);</span> <span class="c1">// send the data</span>
+
+                 <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="c1">// get the response - ensure it is from the right place.</span>
+                     <span class="n">TFTPPacket</span> <span class="n">dataPacket</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+                     <span class="kt">int</span> <span class="n">timeoutCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+                     <span class="k">while</span> <span class="o">(!</span><span class="n">shutdownTransfer</span>
+                             <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">dataPacket</span> <span class="o">==</span> <span class="kc">null</span>
+                                     <span class="o">||</span> <span class="o">!</span><span class="n">dataPacket</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">())</span> <span class="o">||</span> <span class="n">dataPacket</span>
+                                     <span class="o">.</span><span class="na">getPort</span><span class="o">()</span> <span class="o">!=</span> <span class="n">twrp</span><span class="o">.</span><span class="na">getPort</span><span class="o">()))</span>
+                     <span class="o">{</span>
+                         <span class="c1">// listen for an answer.</span>
+                         <span class="k">if</span> <span class="o">(</span><span class="n">dataPacket</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="c1">// The data that we got didn't come from the</span>
+                             <span class="c1">// expected source, fire back an error, and continue</span>
+                             <span class="c1">// listening.</span>
+                             <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TFTP Server ignoring message from unexpected source."</span><span class="o">);</span>
+                             <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">dataPacket</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span>
+                                     <span class="n">dataPacket</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNKNOWN_TID</span><span class="o">,</span>
+                                     <span class="s">"Unexpected Host or Port"</span><span class="o">));</span>
+                         <span class="o">}</span>
+
+                         <span class="k">try</span>
+                         <span class="o">{</span>
+                             <span class="n">dataPacket</span> <span class="o">=</span> <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedReceive</span><span class="o">();</span>
+                         <span class="o">}</span>
+                         <span class="k">catch</span> <span class="o">(</span><span class="n">SocketTimeoutException</span> <span class="n">e</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="k">if</span> <span class="o">(</span><span class="n">timeoutCount</span> <span class="o">&gt;=</span> <span class="n">maxTimeoutRetries_</span><span class="o">)</span>
+                             <span class="o">{</span>
+                                 <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+                             <span class="o">}</span>
+                             <span class="c1">// It didn't get our ack. Resend it.</span>
+                             <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="n">lastSentAck</span><span class="o">);</span>
+                             <span class="n">timeoutCount</span><span class="o">++;</span>
+                             <span class="k">continue</span><span class="o">;</span>
+                         <span class="o">}</span>
+                     <span class="o">}</span>
+
+                     <span class="k">if</span> <span class="o">(</span><span class="n">dataPacket</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">dataPacket</span> <span class="k">instanceof</span> <span class="n">TFTPWriteRequestPacket</span><span class="o">)</span>
+                     <span class="o">{</span>
+                         <span class="c1">// it must have missed our initial ack. Send another.</span>
+                         <span class="n">lastSentAck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTPAckPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="mi">0</span><span class="o">);</span>
+                         <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="n">lastSentAck</span><span class="o">);</span>
+                     <span class="o">}</span>
+                     <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">dataPacket</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!(</span><span class="n">dataPacket</span> <span class="k">instanceof</span> <span class="n">TFTPDataPacket</span><span class="o">))</span>
+                     <span class="o">{</span>
+                         <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownTransfer</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="n">logError_</span>
+                                     <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected response from tftp client during transfer ("</span>
+                                             <span class="o">+</span> <span class="n">dataPacket</span> <span class="o">+</span> <span class="s">").  Transfer aborted."</span><span class="o">);</span>
+                         <span class="o">}</span>
+                         <span class="k">break</span><span class="o">;</span>
+                     <span class="o">}</span>
+                     <span class="k">else</span>
+                     <span class="o">{</span>
+                         <span class="kt">int</span> <span class="n">block</span> <span class="o">=</span> <span class="o">((</span><span class="n">TFTPDataPacket</span><span class="o">)</span> <span class="n">dataPacket</span><span class="o">).</span><span class="na">getBlockNumber</span><span class="o">();</span>
+                         <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="o">((</span><span class="n">TFTPDataPacket</span><span class="o">)</span> <span class="n">dataPacket</span><span class="o">).</span><span class="na">getData</span><span class="o">();</span>
+                         <span class="kt">int</span> <span class="n">dataLength</span> <span class="o">=</span> <span class="o">((</span><span class="n">TFTPDataPacket</span><span class="o">)</span> <span class="n">dataPacket</span><span class="o">).</span><span class="na">getDataLength</span><span class="o">();</span>
+                         <span class="kt">int</span> <span class="n">dataOffset</span> <span class="o">=</span> <span class="o">((</span><span class="n">TFTPDataPacket</span><span class="o">)</span> <span class="n">dataPacket</span><span class="o">).</span><span class="na">getDataOffset</span><span class="o">();</span>
+
+                         <span class="k">if</span> <span class="o">(</span><span class="n">block</span> <span class="o">&gt;</span> <span class="n">lastBlock</span> <span class="o">||</span> <span class="o">(</span><span class="n">lastBlock</span> <span class="o">==</span> <span class="mi">65535</span> <span class="o">&amp;&amp;</span> <span class="n">block</span> <span class="o">==</span> <span class="mi">0</span><span class="o">))</span>
+                         <span class="o">{</span>
+                             <span class="c1">// it might resend a data block if it missed our ack</span>
+                             <span class="c1">// - don't rewrite the block.</span>
+                             <span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">dataOffset</span><span class="o">,</span> <span class="n">dataLength</span><span class="o">);</span>
+                             <span class="n">lastBlock</span> <span class="o">=</span> <span class="n">block</span><span class="o">;</span>
+                         <span class="o">}</span>
+
+                         <span class="n">lastSentAck</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTPAckPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">block</span><span class="o">);</span>
+                         <span class="n">sendData</span><span class="o">(</span><span class="n">transferTftp_</span><span class="o">,</span> <span class="n">lastSentAck</span><span class="o">);</span> <span class="c1">// send the data</span>
+                         <span class="k">if</span> <span class="o">(</span><span class="n">dataLength</span> <span class="o">&lt;</span> <span class="n">TFTPDataPacket</span><span class="o">.</span><span class="na">MAX_DATA_LENGTH</span><span class="o">)</span>
+                         <span class="o">{</span>
+                             <span class="c1">// end of stream signal - The tranfer is complete.</span>
+                             <span class="n">bos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+
+                             <span class="c1">// But my ack may be lost - so listen to see if I</span>
+                             <span class="c1">// need to resend the ack.</span>
+                             <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">maxTimeoutRetries_</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                             <span class="o">{</span>
+                                 <span class="k">try</span>
+                                 <span class="o">{</span>
+                                     <span class="n">dataPacket</span> <span class="o">=</span> <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedReceive</span><span class="o">();</span>
+                                 <span class="o">}</span>
+                                 <span class="k">catch</span> <span class="o">(</span><span class="n">SocketTimeoutException</span> <span class="n">e</span><span class="o">)</span>
+                                 <span class="o">{</span>
+                                     <span class="c1">// this is the expected route - the client</span>
+                                     <span class="c1">// shouldn't be sending any more packets.</span>
+                                     <span class="k">break</span><span class="o">;</span>
+                                 <span class="o">}</span>
+
+                                 <span class="k">if</span> <span class="o">(</span><span class="n">dataPacket</span> <span class="o">!=</span> <span class="kc">null</span>
+                                         <span class="o">&amp;&amp;</span> <span class="o">(!</span><span class="n">dataPacket</span><span class="o">.</span><span class="na">getAddress</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">())</span> <span class="o">||</span> <span class="n">dataPacket</span>
+                                                 <span class="o">.</span><span class="na">getPort</span><span class="o">()</span> <span class="o">!=</span> <span class="n">twrp</span><span class="o">.</span><span class="na">getPort</span><span class="o">()))</span>
+                                 <span class="o">{</span>
+                                     <span class="c1">// make sure it was from the right client...</span>
+                                     <span class="n">transferTftp_</span>
+                                             <span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">dataPacket</span>
+                                                     <span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">dataPacket</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span>
+                                                     <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNKNOWN_TID</span><span class="o">,</span>
+                                                     <span class="s">"Unexpected Host or Port"</span><span class="o">));</span>
+                                 <span class="o">}</span>
+                                 <span class="k">else</span>
+                                 <span class="o">{</span>
+                                     <span class="c1">// This means they sent us the last</span>
+                                     <span class="c1">// datapacket again, must have missed our</span>
+                                     <span class="c1">// ack. resend it.</span>
+                                     <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="n">lastSentAck</span><span class="o">);</span>
+                                 <span class="o">}</span>
+                             <span class="o">}</span>
+
+                             <span class="c1">// all done.</span>
+                             <span class="k">break</span><span class="o">;</span>
+                         <span class="o">}</span>
+                     <span class="o">}</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+             <span class="k">finally</span>
+             <span class="o">{</span>
+                 <span class="k">if</span> <span class="o">(</span><span class="n">bos</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="n">bos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+
+         <span class="cm">/*</span>
+<span class="cm">          * Utility method to make sure that paths provided by tftp clients do not get outside of the</span>
+<span class="cm">          * serverRoot directory.</span>
+<span class="cm">          */</span>
+         <span class="kd">private</span> <span class="n">File</span> <span class="nf">buildSafeFile</span><span class="o">(</span><span class="n">File</span> <span class="n">serverDirectory</span><span class="o">,</span> <span class="n">String</span> <span class="n">fileName</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">createSubDirs</span><span class="o">)</span>
+                 <span class="kd">throws</span> <span class="n">IOException</span>
+         <span class="o">{</span>
+             <span class="n">File</span> <span class="n">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">serverDirectory</span><span class="o">,</span> <span class="n">fileName</span><span class="o">);</span>
+             <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="na">getCanonicalFile</span><span class="o">();</span>
+
+             <span class="k">if</span> <span class="o">(!</span><span class="n">isSubdirectoryOf</span><span class="o">(</span><span class="n">serverDirectory</span><span class="o">,</span> <span class="n">temp</span><span class="o">))</span>
+             <span class="o">{</span>
+                 <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"Cannot access files outside of tftp server root."</span><span class="o">);</span>
+             <span class="o">}</span>
+
+             <span class="c1">// ensure directory exists (if requested)</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">createSubDirs</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="n">createDirectory</span><span class="o">(</span><span class="n">temp</span><span class="o">.</span><span class="na">getParentFile</span><span class="o">());</span>
+             <span class="o">}</span>
+
+             <span class="k">return</span> <span class="n">temp</span><span class="o">;</span>
+         <span class="o">}</span>
+
+         <span class="cm">/*</span>
+<span class="cm">          * recursively create subdirectories</span>
+<span class="cm">          */</span>
+         <span class="kd">private</span> <span class="kt">void</span> <span class="nf">createDirectory</span><span class="o">(</span><span class="n">File</span> <span class="n">file</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span>
+         <span class="o">{</span>
+             <span class="n">File</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">getParentFile</span><span class="o">();</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">parent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"Unexpected error creating requested directory"</span><span class="o">);</span>
+             <span class="o">}</span>
+             <span class="k">if</span> <span class="o">(!</span><span class="n">parent</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span>
+             <span class="o">{</span>
+                 <span class="c1">// recurse...</span>
+                 <span class="n">createDirectory</span><span class="o">(</span><span class="n">parent</span><span class="o">);</span>
+             <span class="o">}</span>
+
+             <span class="k">if</span> <span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span>
+             <span class="o">{</span>
+                 <span class="k">if</span> <span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span>
+                 <span class="o">{</span>
+                     <span class="k">return</span><span class="o">;</span>
+                 <span class="o">}</span>
+                 <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">mkdir</span><span class="o">();</span>
+                 <span class="k">if</span> <span class="o">(!</span><span class="n">result</span><span class="o">)</span>
+                 <span class="o">{</span>
+                     <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"Couldn't create requested directory"</span><span class="o">);</span>
+                 <span class="o">}</span>
+             <span class="o">}</span>
+             <span class="k">else</span>
+             <span class="o">{</span>
+                 <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span>
+                         <span class="s">"Invalid directory path - file in the way of requested folder"</span><span class="o">);</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+
+         <span class="cm">/*</span>
+<span class="cm">          * recursively check to see if one directory is a parent of another.</span>
+<span class="cm">          */</span>
+         <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isSubdirectoryOf</span><span class="o">(</span><span class="n">File</span> <span class="n">parent</span><span class="o">,</span> <span class="n">File</span> <span class="n">child</span><span class="o">)</span>
+         <span class="o">{</span>
+             <span class="n">File</span> <span class="n">childsParent</span> <span class="o">=</span> <span class="n">child</span><span class="o">.</span><span class="na">getParentFile</span><span class="o">();</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">childsParent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+             <span class="o">{</span>
+                 <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+             <span class="o">}</span>
+             <span class="k">if</span> <span class="o">(</span><span class="n">childsParent</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">parent</span><span class="o">))</span>
+             <span class="o">{</span>
+                 <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+             <span class="o">}</span>
+             <span class="k">else</span>
+             <span class="o">{</span>
+                 <span class="k">return</span> <span class="n">isSubdirectoryOf</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">childsParent</span><span class="o">);</span>
+             <span class="o">}</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Set the stream object to log debug / informational messages. By default, this is a no-op</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param log the stream to use for logging</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLog</span><span class="o">(</span><span class="n">PrintStream</span> <span class="n">log</span><span class="o">)</span>
+     <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">log_</span> <span class="o">=</span> <span class="n">log</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="cm">/**</span>
+<span class="cm">      * Set the stream object to log error messsages. By default, this is a no-op</span>
+<span class="cm">      *</span>
+<span class="cm">      * @param logError the stream to use for logging errors</span>
+<span class="cm">      */</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLogError</span><span class="o">(</span><span class="n">PrintStream</span> <span class="n">logError</span><span class="o">)</span>
+     <span class="o">{</span>
+         <span class="k">this</span><span class="o">.</span><span class="na">logError_</span> <span class="o">=</span> <span class="n">logError</span><span class="o">;</span>
+     <span class="o">}</span>
+
+     <span class="cm">/*</span>
+<span class="cm">      * Allow test code to customise the TFTP instance</span>
+<span class="cm">      */</span>
+     <span class="n">TFTP</span> <span class="nf">newTFTP</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="k">new</span> <span class="n">TFTP</span><span class="o">();</span>
+     <span class="o">}</span>
+
+     <span class="cm">/*</span>
+<span class="cm">      * Also allow customisation of sending data/ack so can generate errors if needed</span>
+<span class="cm">      */</span>
+     <span class="kt">void</span> <span class="nf">sendData</span><span class="o">(</span><span class="n">TFTP</span> <span class="n">tftp</span><span class="o">,</span> <span class="n">TFTPPacket</span> <span class="n">data</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+         <span class="n">tftp</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</pre></div></div>
+	
+        <hr>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+    			<div style="width:80%; margin:0 auto;">
+                    <div style="text-align: center;">
+						<a href="/" class="profilepic">
+                            <img src="https://i.loli.net/2019/03/31/5ca03b154a620.png" alt="photo-zzz.png" title="photo-zzz.png" />
+						</a>
+						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
+						<p class="motto">We only live once, and time just goes by.</p>
+						<ul class="biography">
+						<li><span><img src="../../theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="../../theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+
+					<hr>
+
+						<div class="tooltip">
+							<span class="tooltiptext">Facebook</span>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Facebook.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">微博</span>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/微博.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Linkedin</span>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Linkedin.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Github</span>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Github.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Email</span>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Email.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Instagram</span>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Instagram.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">ResearchGate</span>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">知乎</span>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/知乎.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">OSChina</span>
+							<a href="https://my.oschina.net/u/4108498" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/OSChina.svg) center no-repeat"></a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+            <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- right-banner-article -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8958123988900703"
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">Heriam</a> &copy; Justin Time 2019</p>
+</footer>
+
+</div> <!-- /container -->
+<script>var _gaq=[['_setAccount','UA-137721527-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+</body>
+</html>

@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jiang-hao.com/</loc>
-<lastmod>2019-04-10T15:32:31-00:00</lastmod>
+<lastmod>2019-04-10T15:35:23-00:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.1</priority>
 </url>
@@ -39,7 +39,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2019/coding-A Java TFTP Server.html</loc>
+<loc>https://jiang-hao.com/articles/2019/coding-AJavaTFTPServer.html</loc>
 <lastmod>2019-04-09T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
@@ -74,28 +74,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2018/blog-使用Pelican基于Github Pages搭建博客教程.html</loc>
+<loc>https://jiang-hao.com/articles/2018/blog-使用Pelican基于GithubPages搭建博客教程.html</loc>
 <lastmod>2018-02-05T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2018/tools-Build and Install OpenDaylight on Ubuntu.html</loc>
+<loc>https://jiang-hao.com/articles/2018/tools-BuildandInstallOpenDaylightonUbuntu.html</loc>
 <lastmod>2018-01-01T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/tools-Wifi HotSpot On Windows.html</loc>
+<loc>https://jiang-hao.com/articles/2017/tools-WifiHotSpotOnWindows.html</loc>
 <lastmod>2017-11-21T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/coding-Ubuntu系统Apache Maven安装.html</loc>
+<loc>https://jiang-hao.com/articles/2017/coding-Ubuntu系统ApacheMaven安装.html</loc>
 <lastmod>2017-10-24T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
@@ -109,7 +109,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/tools-Install And Run Gedit On Mac.html</loc>
+<loc>https://jiang-hao.com/articles/2017/tools-InstallAndRunGeditOnMac.html</loc>
 <lastmod>2017-08-15T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
@@ -123,14 +123,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2017/blog-CSS伪类content url放图片如何改变图的大小.html</loc>
+<loc>https://jiang-hao.com/articles/2017/blog-CSS伪类contenturl放图片如何改变图的大小.html</loc>
 <lastmod>2017-02-21T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2016/tools-Install Wireshark on Ubuntu.html</loc>
+<loc>https://jiang-hao.com/articles/2016/tools-InstallWiresharkonUbuntu.html</loc>
 <lastmod>2016-07-08T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>
@@ -144,7 +144,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2016/tools-Install VMware Workstation in Ubuntu 14.04.html</loc>
+<loc>https://jiang-hao.com/articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html</loc>
 <lastmod>2016-04-21T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>

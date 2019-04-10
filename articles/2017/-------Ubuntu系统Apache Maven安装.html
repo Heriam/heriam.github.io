@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - 2017 archives</title>
+    <title>Heriam - Ubuntu系统Apache Maven安装</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,22 +100,102 @@
     <div class="row">
 
         <div class="span9">
-<h1>Archives for 2017</h1>
+    <div class='article'>
+        <div class="content-title">
+            <h1>Ubuntu系统Apache Maven安装</h1>
+<span class="metadata">
+2017-10-24 Tue&nbsp;&nbsp;&nbsp;
 
-<dl>
-    <dt>2017-11-21 Tue</dt>
-    <dd><a href="../../articles/2017/------Wifi HotSpot On Windows.html">Windows系统配置WiFi无线热点</a></dd>
-    <dt>2017-10-24 Tue</dt>
-    <dd><a href="../../articles/2017/-------Ubuntu系统Apache Maven安装.html">Ubuntu系统Apache Maven安装</a></dd>
-    <dt>2017-10-23 Mon</dt>
-    <dd><a href="../../articles/2017/-------Ubuntu系统Java开发环境的搭建.html">Ubuntu系统Java开发环境的搭建</a></dd>
-    <dt>2017-08-15 Tue</dt>
-    <dd><a href="../../articles/2017/------Install And Run Gedit On Mac.html">Install & Run Gedit from Terminal on Mac</a></dd>
-    <dt>2017-06-30 Fri</dt>
-    <dd><a href="../../articles/2017/-----网页BackToTop返回顶部按钮的简单实现.html">网页 BacktoTop 返回顶部按钮的简单实现</a></dd>
-    <dt>2017-02-21 Tue</dt>
-    <dd><a href="../../articles/2017/-----CSS伪类content url放图片如何改变图的大小.html">CSS伪类content: url放图片如何改变图的大小</a></dd>
-</dl>
+by <a class="url fn" href="../../authors/-----------.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../../categories/------.html">Coding</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../../tags/------.html">Ubuntu</a>,&nbsp;<a href="../../tags/-----.html">Maven</a>,&nbsp;</span>        </div>
+		
+		<br />
+		<hr />
+		
+        <div><div><font face="Times New Roman">
+<p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>
+<em><font face = "Times New Roman">Apache Maven版本：3.3.9</font></em>  <br />
+<em><font face = "Times New Roman">建议预先搭建Java开发环境：详见<a href="http://www.hao-jiang.com/pages/2016/01/13/ubuntuxi-tong-javakai-fa-huan-jing-de-da-jian.html">《Linux Ubuntu系统下Java开发环境搭建》</a></font></em></p>
+<hr />
+<p><font face = "Times New Roman">1. 前往Apache Maven官网下载最新版本：https://maven.apache.org/download.cgi，本文以apache-maven-3.3.9-bin.tar.gz为例。</font>    </p>
+<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建MVN子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
+<div class="highlight"><pre><span></span>cd /opt                       #进入到opt目录
+sudo mkdir mvn                #新建一个mvn文件夹
+ls                            #显示成功新建的mvn文件夹
+cd mvn                        #进入mvn文件夹
+</pre></div>
+
+<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下。新建另一个Terminal窗口（T2）并输入：</font></p>
+
+<div class="highlight"><pre><span></span>cd Downloads                                               #进入Downloads文件夹
+ls                                                         #显示刚刚下载的MVN文件，
+sudo cp apache-maven-3.3.9-bin.tar.gz /opt/mvn             #将文件拷贝到刚刚新建的mvn文件夹中(这里将“&lt; &gt;”部分替代为自己对应的MVN文件名，后同)
+sudo rm apache-maven-3.3.9-bin.tar.gz                      #删除本目录下的安装包（可选）  
+</pre></div>
+
+<p><font face = "Times New Roman">4.解压安装MVN，配置环境变量。回到第一个Terminal（T1），输入：</font>  </p>
+
+<div class="highlight"><pre><span></span>ls                                                   #显示拷贝过来的MVN安装包
+sudo tar -zxvf apache-maven-3.3.9-bin.tar.gz         #将安装包解压
+ls                                                   #显示解压出的MVN文件夹，以及原安装包
+sudo rm apache-maven-3.3.9-bin.tar.gz                #删除原安装包
+sudo gedit /etc/profile                              #打开etc目录下的profile文件
+</pre></div>
+
+<p><font face = "Times New Roman">5.配置全局环境变量。在打开的profile文档末尾添加MVN安装路径（需仔细确认）：</font>  </p>
+
+<div class="highlight"><pre><span></span>#set maven environment
+export M2_HOME=/opt/mvn/apache-maven-3.3.9
+export MAVEN_OPTS=&quot;-Xmx1024m&quot;                           #避免内存溢出错误（可选）
+export PATH=<span class="cp">${</span><span class="n">M2_HOME</span><span class="cp">}</span>/bin:<span class="cp">${</span><span class="n">PATH</span><span class="cp">}</span>
+</pre></div>
+
+<p><font face = "Times New Roman">6.保存并关闭文档。（注：也可以通过vim 命令编辑etc/profile，打开命令：sudo vim /etc/profile，按<Insert>键进入编辑模式，<Esc>键退出编辑模式，接着按":"再输入”wq!“保存并退出；输入"q!"不保存退出）</font>     </p>
+
+<p><font face = "Times New Roman">7.启用配置并验证。在Terminal输入：</font>    </p>
+
+<div class="highlight"><pre><span></span>mvn -v
+</pre></div>
+
+<p><font face = "Times New Roman">8.显示效果类似如下：</font>    </p>
+
+<div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41:47-08:00)
+Maven home: /opt/developTools/jvm/apache-maven-3.3.9
+Java version: 1.8.0_65, vendor: Oracle Corporation
+Java home: /opt/developTools/jvm/jdk1.8.0_65/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: &quot;linux&quot;, version: &quot;3.19.0-25-generic&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;
+</pre></div>
+
+<p><font face = "Times New Roman">（完）</font></p>
+
+<p></font></div></p></div>
+	
+        <hr>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
         </div>
         
         <div class="span3">
@@ -176,11 +256,13 @@
 
             <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- right-banner-page -->
+                <!-- right-banner-article -->
                 <ins class="adsbygoogle"
-                     style="display:inline-block;width:268px;height:268px"
+                     style="display:block"
                      data-ad-client="ca-pub-8958123988900703"
-                     data-ad-slot="3077290298"></ins>
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -190,7 +272,7 @@
     </div>     </div> 
 <footer>
 <br />
-<p><a href="../..">Heriam</a> &copy; Justin Time 2017</p>
+<p><a href="../..">Heriam</a> &copy; Justin Time 2019</p>
 </footer>
 
 </div> <!-- /container -->

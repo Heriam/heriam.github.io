@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jiang-hao.com/</loc>
-<lastmod>2019-04-10T22:07:00-00:00</lastmod>
+<lastmod>2019-04-10T22:10:54-00:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.1</priority>
 </url>
@@ -88,7 +88,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2018/tools-BuildandInstallOpenDaylightonUbuntu.html</loc>
+<loc>https://jiang-hao.com/articles/2018/coding-BuildandInstallOpenDaylightonUbuntu.html</loc>
 <lastmod>2018-01-01T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>

@@ -13,6 +13,7 @@
     <![endif]-->
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
     <script src="../tipuesearch_content.js"></script>
     <link rel="stylesheet" href="../theme/tipuesearch/tipuesearch.css">
     <script src="../theme/tipuesearch/tipuesearch_set.js"></script>
@@ -108,6 +109,62 @@
     </h1>
     
 <h3 id="1-skill-tree">1. <a href="https://github.com/TeamStuQ/skill-map">Skill Tree</a></h3>
+<div id="skillTree"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('skillTree'));
+    myChart.showLoading();
+    $.get('https://echarts.baidu.com/data/asset/data/flare.json', function (data) {
+        myChart.hideLoading();
+
+        echarts.util.each(data.children, function (datum, index) {
+            index % 2 === 0 && (datum.collapsed = true);
+        });
+
+        myChart.setOption(option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+            series: [
+                {
+                    type: 'tree',
+
+                    data: [data],
+
+                    top: '1%',
+                    left: '7%',
+                    bottom: '1%',
+                    right: '20%',
+
+                    symbolSize: 7,
+
+                    label: {
+                        normal: {
+                            position: 'left',
+                            verticalAlign: 'middle',
+                            align: 'right',
+                            fontSize: 9
+                        }
+                    },
+
+                    leaves: {
+                        label: {
+                            normal: {
+                                position: 'right',
+                                verticalAlign: 'middle',
+                                align: 'left'
+                            }
+                        }
+                    },
+
+                    expandAndCollapse: true,
+                    animationDuration: 550,
+                    animationDurationUpdate: 750
+                }
+            ]
+        });
+    });
+</script>
 <h4 id="11-operations">1.1 Operations</h4>
 <h5 id="111-linux">1.1.1 Linux</h5>
 <h5 id="112-database">1.1.2 Database</h5>

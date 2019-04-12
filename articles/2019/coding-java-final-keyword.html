@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 详解Java中的final关键字</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin Time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="OGeiccsh1O" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="../../theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+	<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script src="../../tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="../../theme/tipuesearch/tipuesearch.css">
+    <script src="../../theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="../../theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="../../theme/bootstrap-collapse.js"></script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8958123988900703",
+        enable_page_level_ads: true
+      });
+    </script>
+    <script>
+        function validateForm(query)
+        {
+            return (query.length > 0);
+        }
+    </script>
+
+    <!-- Le styles -->
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="../..">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="dropdown-jh"><a>Categories</a>
+                <ul class="dropdown-content-jh">
+                    <li><a href="../../categories/blog.html">Blog</a></li>
+                    <li><a href="../../categories/coding.html">Coding</a></li>
+                    <li><a href="../../categories/notes.html">Notes</a></li>
+                    <li><a href="../../categories/tools.html">Tools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            <li><a href="/pages/management">Self-Management</a></li>
+            
+        </ul>
+
+        <form class="navbar-search pull-right" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
+        </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>详解Java中的final关键字</h1>
+<span class="metadata">
+2019-04-12 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../../tags/java.html">Java</a>,&nbsp;</span>        </div>
+		
+		<hr />
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#final">final 简介</a></li>
+<li><a href="#final_1">final 修饰变量</a></li>
+</ul>
+</div>
+			</nav>
+		<br />
+		<hr />
+		
+        <div>
+<h3 id="final"><em>final</em> 简介</h3>
+<p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
+<p><img alt="java中的final关键字" src="https://www.geeksforgeeks.org/wp-content/uploads/final-keyword-in-java.jpg"/></p>
+<p>上面这张图可以概括成：</p>
+<ul>
+<li>当<em>final</em>修饰<strong>变量</strong>时，被修饰的变量必须被初始化(赋值)，且后续不能修改其值，实质上是常量；</li>
+<li>当<em>final</em>修饰<strong>方法</strong>时，被修饰的方法无法被所在类的子类重写（覆写）；</li>
+<li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且<em>final</em>类中的所有成员方法都会被隐式地指定为<em>final</em>方法，但成员变量则不会变。</li>
+</ul>
+<h3 id="final_1"><em>final</em> 修饰变量</h3>
+<p>当使用<em>final</em>关键字声明变量后，其值不能被再次修改，实质上是常量。这也意味着你必须在声明的时候初始化被<em>final</em>修饰的变量。如果<em>final</em>变量是引用，这意味着该变量不能重新绑定到引用另一个对象，但是可以更改该引用变量指向的对象的内部状态，即可以从<a href="https://www.geeksforgeeks.org/final-arrays-in-java/"><em>final</em>数组</a>或<em>final</em>集合中添加或删除元素。最好用全部大写来表示<em>final</em>变量，使用下划线来分隔单词。</p>
+<p><strong>例子</strong>：</p>
+<div class="highlight"><pre><span></span><span class="c1">//一个final变量</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">THRESHOLD</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+<span class="c1">//一个空的final变量</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">THRESHOLD</span><span class="o">;</span>
+<span class="c1">//一个静态final变量</span>
+<span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="mf">3.141592653589793</span><span class="o">;</span>
+<span class="c1">//一个空的静态final变量</span>
+<span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">PI</span><span class="o">;</span>
+</pre></div>
+<p><strong>初始化final变量</strong>：</p>
+<p>我们必须初始化一个<em>final</em>变量，否则编译器将抛出编译时错误。<em>final</em>变量只能通过<a href="https://www.geeksforgeeks.org/g-fact-26-the-initializer-block-in-java/">初始化器</a>或赋值语句初始化一次。初始化<em>final</em>变量有三种方法：</p>
+<ol>
+<li>可以在声明它时初始化<em>final</em>变量。这种方法是最常见的。如果在声明时<strong>未</strong>初始化，则该变量称为<strong>空<em>final</em>变量</strong>。下面是初始化空<em>final</em>变量的两种方法。</li>
+<li>可以在<a href="https://www.geeksforgeeks.org/instance-initialization-block-iib-java/">instance-initializer块</a> 或内部构造函数中<a href="https://www.geeksforgeeks.org/instance-initialization-block-iib-java/">初始化</a>空的<em>final</em>变量。如果您的类中有多个构造函数，则必须在所有构造函数中初始化它，否则将抛出编译时错误。</li>
+<li>可以在<a href="https://www.geeksforgeeks.org/g-fact-79/">静态块</a>内初始化空的<em>final</em>静态变量。</li>
+</ol>
+<p>让我们通过一个例子看上面初始化<em>final</em>变量的不同方法。</p>
+<div class="highlight"><pre><span></span><span class="c1">// Java program to demonstrate different </span>
+<span class="c1">// ways of initializing a final variable </span>
+
+<span class="kd">class</span> <span class="nc">Gfg</span>  
+<span class="o">{</span> 
+    <span class="c1">// a final variable direct initialize </span>
+    <span class="c1">// 直接赋值</span>
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">THRESHOLD</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span> 
+
+    <span class="c1">// a blank final variable </span>
+    <span class="c1">// 空final变量</span>
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">CAPACITY</span><span class="o">;</span> 
+
+    <span class="c1">// another blank final variable </span>
+    <span class="kd">final</span> <span class="kt">int</span>  <span class="n">MINIMUM</span><span class="o">;</span> 
+
+    <span class="c1">// a final static variable PI direct initialize </span>
+    <span class="c1">// 直接赋值的静态final变量</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">PI</span> <span class="o">=</span> <span class="mf">3.141592653589793</span><span class="o">;</span> 
+
+    <span class="c1">// a  blank final static variable </span>
+    <span class="c1">// 空的静态final变量</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">EULERCONSTANT</span><span class="o">;</span> 
+
+    <span class="c1">// instance initializer block for initializing CAPACITY </span>
+    <span class="c1">// 用来赋值空final变量的实例初始化块</span>
+    <span class="o">{</span> 
+        <span class="n">CAPACITY</span> <span class="o">=</span> <span class="mi">25</span><span class="o">;</span> 
+    <span class="o">}</span> 
+
+    <span class="c1">// static initializer block for initializing EULERCONSTANT</span>
+    <span class="c1">// 用来赋值空final变量的静态初始化块</span>
+    <span class="kd">static</span><span class="o">{</span> 
+        <span class="n">EULERCONSTANT</span> <span class="o">=</span> <span class="mf">2.3</span><span class="o">;</span> 
+    <span class="o">}</span> 
+
+    <span class="c1">// constructor for initializing MINIMUM </span>
+    <span class="c1">// Note that if there are more than one </span>
+    <span class="c1">// constructor, you must initialize MINIMUM </span>
+    <span class="c1">// in them also </span>
+    <span class="c1">// 构造函数内初始化空final变量；注意如果有多个</span>
+    <span class="c1">// 构造函数时，必须在每个中都初始化该final变量</span>
+    <span class="kd">public</span> <span class="nf">GFG</span><span class="o">()</span>  
+    <span class="o">{</span> 
+        <span class="n">MINIMUM</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span> 
+    <span class="o">}</span> 
+
+<span class="o">}</span> 
+</pre></div>
+<p><strong>何时使用最终变量：</strong></p>
+<p>普通变量和<em>final</em>变量之间的唯一区别是我们可以将值重新赋值给普通变量；但是对于<em>final</em>变量，一旦赋值，我们就不能改变<em>final</em>变量的值。因此，<em>final</em>变量必须仅用于我们希望在整个程序执行期间保持不变的值。</p>
+<p><strong><em>final</em>引用变量：</strong>
+当<em>final</em>变量是对象的引用时，则此变量称为<em>final</em>引用变量。例如，<em>final</em>的<em>StringBuffer</em>变量：</p>
+<div class="highlight"><pre><span></span><span class="kd">final</span> <span class="n">StringBuffer</span> <span class="n">sb</span><span class="o">;</span>
+</pre></div>
+<p><em>final</em>变量无法重新赋值。但是对于<em>final</em>的引用变量，可以更改该引用变量指向的对象的内部状态。请注意，这不是重新赋值。<em>final的</em>这个属性称为<em>非传递性</em>。要了解对象内部状态的含义，请参阅下面的示例：</p>
+<div class="highlight"><pre><span></span><span class="c1">// Java program to demonstrate  </span>
+<span class="c1">// reference final variable </span>
+
+<span class="kd">class</span> <span class="nc">Gfg</span> 
+<span class="o">{</span> 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span>  
+    <span class="o">{</span> 
+        <span class="c1">// a final reference variable sb </span>
+        <span class="kd">final</span> <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">(</span><span class="s">"Geeks"</span><span class="o">);</span> 
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span> 
+
+        <span class="c1">// changing internal state of object </span>
+        <span class="c1">// reference by final reference variable sb </span>
+        <span class="c1">// 更改final变量sb引用的对象的内部状态</span>
+        <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"ForGeeks"</span><span class="o">);</span> 
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sb</span><span class="o">);</span> 
+    <span class="o">}</span>     
+<span class="o">}</span> 
+</pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span>Geeks
+GeeksForGeeks
+</pre></div>
+<p><em>非传递</em>属性也适用于数组，因为在Java中<a href="https://www.geeksforgeeks.org/arrays-in-java/">数组也是对象</a>。带有<em>final</em>关键字的数组也称为<a href="https://www.geeksforgeeks.org/final-arrays-in-java/"><em>final</em>数组</a>。</p>
+<p><strong>注意 ：</strong></p>
+<ol>
+<li>如上所述，最终变量不能重新分配，这样做会抛出编译时错误。</li>
+</ol></div>
+	
+        <hr>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+    			<div style="width:80%; margin:0 auto;">
+                    <div style="text-align: center;">
+						<a href="/" class="profilepic">
+                            <img src="https://raw.githubusercontent.com/Heriam/images/master/portrait/photo-zzz.png" alt="photo-zzz.png" title="photo-zzz.png" />
+						</a>
+						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
+						<p class="motto">We only live once, and time just goes by.</p>
+						<ul class="biography">
+						<li><span><img src="../../theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="../../theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+
+					<hr>
+
+						<div class="tooltip">
+							<span class="tooltiptext">Facebook</span>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Facebook.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">微博</span>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/微博.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Linkedin</span>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Linkedin.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Github</span>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Github.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Email</span>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Email.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Instagram</span>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Instagram.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">ResearchGate</span>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">知乎</span>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/知乎.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">OSChina</span>
+							<a href="https://my.oschina.net/u/4108498" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/OSChina.svg) center no-repeat"></a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+            <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- right-banner-article -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8958123988900703"
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="../..">Heriam</a> &copy; Justin Time 2019</p>
+</footer>
+
+</div> <!-- /container -->
+<script>var _gaq=[['_setAccount','UA-137721527-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+</body>
+</html>

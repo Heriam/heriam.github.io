@@ -238,7 +238,47 @@ GeeksForGeeks
 <p><em>非传递</em>属性也适用于数组，因为在Java中<a href="https://www.geeksforgeeks.org/arrays-in-java/">数组也是对象</a>。带有<em>final</em>关键字的数组也称为<a href="https://www.geeksforgeeks.org/final-arrays-in-java/"><em>final</em>数组</a>。</p>
 <p><strong>注意 ：</strong></p>
 <ol>
-<li>如上所述，最终变量不能重新分配，这样做会抛出编译时错误。</li>
+<li>如上所述，<em>final</em>变量不能重新赋值，这样做会抛出编译时错误。</li>
+</ol>
+<p>```java
+   // Java program to demonstrate re-assigning 
+   // final variable will throw compile-time error </p>
+<p>class Gfg 
+   { 
+    static final int CAPACITY = 4; </p>
+<div class="highlight"><pre><span></span>public static void main(String args[]) 
+{ 
+    // re-assigning final variable 
+    // will throw compile-time error 
+    CAPACITY = 5; 
+}
+</pre></div>
+<p>} 
+   ```</p>
+<p>输出：</p>
+<p><code>Compiler Error: cannot assign a value to final variable CAPACITY</code></p>
+<ol>
+<li>当在方法/构造函数/块中创建<em>final</em>变量时，它被称为局部<em>final</em>变量，并且必须在创建它的位置初始化一次。参见下面的局部<em>final</em>变量程序：</li>
+</ol>
+<p>```java
+   // Java program to demonstrate 
+   // local final variable </p>
+<p>// The following program compiles and runs fine </p>
+<p>class Gfg 
+   { 
+    public static void main(String args[]) 
+    { 
+        // local final variable 
+        final int i; 
+        i = 20; 
+        System.out.println(i); 
+    } 
+   } 
+   ```</p>
+<p>输出：</p>
+<p><code>20</code></p>
+<ol>
+<li>注意C ++ <em>const</em>变量和Java <em>final</em>变量之间的区别。声明时，必须为C ++中的const变量赋值。对于Java中的<em>final</em>变量，正如我们在上面的示例中所看到的那样，可以稍后赋值，但只能分配一次。</li>
 </ol></div>
         <hr />
     </div>

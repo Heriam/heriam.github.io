@@ -245,43 +245,46 @@ GeeksForGeeks
 <ol>
 <li>如上所述，<em>final</em>变量不能重新赋值，这样做会抛出编译时错误。</li>
 </ol>
-<p>```java
-   // Java program to demonstrate re-assigning 
-   // final variable will throw compile-time error </p>
-<p>class Gfg 
-   { 
-    static final int CAPACITY = 4; </p>
-<div class="highlight"><pre><span></span>public static void main(String args[]) 
-{ 
-    // re-assigning final variable 
-    // will throw compile-time error 
-    CAPACITY = 5; 
-}
+<div class="highlight"><pre><span></span>   <span class="c1">// Java program to demonstrate re-assigning </span>
+   <span class="c1">// final variable will throw compile-time error </span>
+
+   <span class="kd">class</span> <span class="nc">Gfg</span> 
+   <span class="o">{</span> 
+     <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CAPACITY</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span> 
+
+     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> 
+     <span class="o">{</span> 
+       <span class="c1">// re-assigning final variable </span>
+       <span class="c1">// will throw compile-time error </span>
+       <span class="n">CAPACITY</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span> 
+     <span class="o">}</span> 
+   <span class="o">}</span> 
 </pre></div>
-<p>} 
-   ```</p>
 <p>输出：</p>
-<p><code>Compiler Error: cannot assign a value to final variable CAPACITY</code></p>
+<div class="highlight"><pre><span></span>   Compiler Error: cannot assign a value to final variable CAPACITY
+</pre></div>
 <ol>
 <li>当在方法/构造函数/块中创建<em>final</em>变量时，它被称为局部<em>final</em>变量，并且必须在创建它的位置初始化一次。参见下面的局部<em>final</em>变量程序：</li>
 </ol>
-<p>```java
-   // Java program to demonstrate 
-   // local final variable </p>
-<p>// The following program compiles and runs fine </p>
-<p>class Gfg 
-   { 
-    public static void main(String args[]) 
-    { 
-        // local final variable 
-        final int i; 
-        i = 20; 
-        System.out.println(i); 
-    } 
-   } 
-   ```</p>
+<div class="highlight"><pre><span></span>   <span class="c1">// Java program to demonstrate </span>
+   <span class="c1">// local final variable </span>
+
+   <span class="c1">// The following program compiles and runs fine </span>
+
+   <span class="kd">class</span> <span class="nc">Gfg</span> 
+   <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> 
+    <span class="o">{</span> 
+        <span class="c1">// local final variable </span>
+        <span class="kd">final</span> <span class="kt">int</span> <span class="n">i</span><span class="o">;</span> 
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span> 
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> 
+    <span class="o">}</span> 
+   <span class="o">}</span> 
+</pre></div>
 <p>输出：</p>
-<p><code>20</code></p>
+<div class="highlight"><pre><span></span>   20
+</pre></div>
 <ol>
 <li>注意C ++ <em>const</em>变量和Java <em>final</em>变量之间的区别。声明时，必须为C ++中的const变量赋值。对于Java中的<em>final</em>变量，正如我们在上面的示例中所看到的那样，可以稍后赋值，但只能分配一次。</li>
 </ol></div>

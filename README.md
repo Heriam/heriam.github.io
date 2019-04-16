@@ -1,5 +1,5 @@
 # heriam.github.io
-personal website 
+personal website: https://jiang-hao.com
 
-Blog framework: pelican(Python)  
-Blog theme: tuxlite_tbs
+blog framework: pelican(Python)  
+blog theme: tuxlite_tbs

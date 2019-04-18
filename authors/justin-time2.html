@@ -76,6 +76,7 @@
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
                     <li><a href="../categories/blog.html">Blog</a></li>
+                    <li><a href="../categories/cloud.html">Cloud</a></li>
                     <li><a href="../categories/coding.html">Coding</a></li>
                     <li><a href="../categories/notes.html">Notes</a></li>
                     <li><a href="../categories/tools.html">Tools</a></li>
@@ -105,6 +106,48 @@
         <div class="span9">
         
 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2017/tools-WifiHotSpotOnWindows.html"><h2>Windows系统配置WiFi无线热点</h2></a>
+        <div class= "well small"> <span class="metadata">
+2017-11-21 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/wifi.html">WiFi</a>,&nbsp;<a href="../tags/windows.html">Windows</a>,&nbsp;</span> </div>
+        <div class="summary"><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
+Windows 版本： Windows 7/8/10  <br />
+前提：电脑装配无线网卡  <br />
+方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
+</font></p>
+<hr />
+<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
+<div class="highlight"><pre><span></span>netsh wlan show drivers
+</pre></div></p>
+<p>在输出信息中找到 “支持承载网络：是” 则继续。
+<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
+netsh wlan show hostednetwork setting=security
+</pre></div>
+
+<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
+
+<p>3.创建WiFi热点。命令行输入：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="../articles/2017/tools-WifiHotSpotOnWindows.html">read more</a></div>
+    </div>	
+				
+
+ 
         
 
  
@@ -439,40 +482,15 @@ Category: <a href="../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
 <div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41 …</pre></div> <a class="btn btn-info xsmall" href="../articles/2016/coding-Shiro.html">read more</a></div>
     </div>	
 				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2016/notes-心路.html"><h2>在难搞的日子里他们这样对你说</h2></a>
-        <div class= "well small"> <span class="metadata">
-2016-02-01 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
-
- 
-</span> </div>
-        <div class="summary">
-<p>城市：雷恩<br/><br/>2016年2月1日晚，距国内过新年还有7天。原本只是想要找一封早时候的项目电邮，结果不小心没把持住，泛滥着感慨时光飞逝的小情绪翻阅了一遍以往的邮件，感觉就像是在看旧照片，就像把从大一开始到现在的生活重新走了一遍。至今有很多需要感谢的人，值得纪念的事，我不想在忙碌中就这样让它们随时间流走。因为手里的东西总是忙不完，那些让你成长的却不总有机会不被遗忘。</p>
-<h1 id="2012-09-012013-08-27">2012-09-01/2013-08-27  大三</h1>
-<p>2012年大二暑假，由于本专业大类被限制转专业，我决定通过考取思科认证来自学网络技术。11月，虽然国创(SIETP)项目才刚立项一个月，SRTP项目已经立项半年，但是学习的重心从十月份起已经向网络方向偏移，整天脑子里除了思科的路由交换就是国创的建筑涂料，闲暇之余才能稍微顾及一下专业课程实习和考试，而SRTP项目已经打算彻底水漂过去了。这个过程持续了一年，准备出国又花了一年，期间发生了许多事——得到了许多人的帮助，也犯了不少傻事。</p>
-<h2 id="2012-09-inquiry-to-prof-bai">2012-09-Inquiry to Prof. Bai</h2>
-<p>我希望在本科毕业后往网络工程方向走。我的专业是农业资源与环境，但出于个人兴趣并且经过了慎重考虑后，我想在大学接下来的两年内考取CCIE，可自己目前几乎是零基础，暂时打算到欧朋兰博先报一个CCNA的培训班作为入门。我有一位高中同学（专业与计算机网络无关）在今年暑假拿到了CCIE认证，虽然有了他的建议和引导可以少走些弯路，但他毕竟不在自己身边许多事情还是需要自己去摸索。下面是我想咨询您的问题 …</p> <a class="btn btn-info xsmall" href="../articles/2016/notes-心路.html">read more</a></div>
-    </div>	
-				
 <div class="pagination">
 <ul>
     <li class="prev"><a href="../authors/justin-time.html">&larr; Previous</a></li>
 
     <li class=""><a href="../authors/justin-time.html">1</a></li>
     <li class="active"><a href="../authors/justin-time2.html">2</a></li>
+    <li class=""><a href="../authors/justin-time3.html">3</a></li>
 
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
+    <li class="next"><a href="../authors/justin-time3.html">Next &rarr;</a></li>
 
 </ul>
 </div>

@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - JQCloud: 一个前端生成美化标签云的简单JQuery插件</title>
+    <title>Heriam - 人之一生</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,11 +53,11 @@
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
-                    <li><a href="../../categories/bian-cheng-yu-yan.html">编程语言</a></li>
-                    <li><a href="../../categories/bo-ke-jian-zhan.html">博客建站</a></li>
+                    <li><a href="../../categories/backend.html">Backend</a></li>
                     <li><a href="../../categories/cloud.html">Cloud</a></li>
-                    <li><a href="../../categories/ruan-jian-gong-ju.html">软件工具</a></li>
-                    <li><a href="../../categories/sheng-huo-sui-bi.html">生活随笔</a></li>
+                    <li><a href="../../categories/frontend.html">Frontend</a></li>
+                    <li><a href="../../categories/notes.html">Notes</a></li>
+                    <li><a href="../../categories/tools.html">Tools</a></li>
                 </ul>
             </li>
 
@@ -83,51 +83,57 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h1>
+            <h1>人之一生</h1>
 <span class="metadata">
-2018-02-25 Sun&nbsp;&nbsp;&nbsp;
+2019-03-16 Sat&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../../categories/bo-ke-jian-zhan.html">博客建站</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
 
  
- 
-    Tags: <a href="../../tags/jquery.html">JQuery</a>,&nbsp;<a href="../../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../../tags/html.html">HTML</a>,&nbsp;</span>        </div>
+</span>        </div>
 		
 		<br />
 		<hr />
 		
-        <div><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
-官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
-<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
-<p>具体的使用方法官网都能查到。</p>
-<p>贴出自己微博使用JQCloud的前端代码：</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag.url }}&#39;</span><span class="p">});</span>
-    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">category</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">categories</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{category}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ category.url }}&#39;</span><span class="p">});</span>
-    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
-    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#tagcloud&quot;</span><span class="p">).</span><span class="nx">jQCloud</span><span class="p">(</span><span class="nx">words</span><span class="p">,</span> <span class="p">{</span>
-            <span class="nx">autoResize</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">});</span> 
-    <span class="p">});</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tagcloud&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 80%; height: 450px; align-self: center;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
+        <div><h3>热爱生命</h3>
 
+<p>我不去想，
+是否能够成功 ，
+既然选择了远方 ，
+便只顾风雨兼程。</p>
+<p>我不去想，
+能否赢得爱情 ，
+既然钟情于玫瑰 ，
+就勇敢地吐露真诚 。</p>
+<p>我不去想，
+身后会不会袭来寒风冷雨 ，
+既然目标是地平线，
+留给世界的只能是背影 。</p>
+<p>我不去想，
+未来是平坦还是泥泞 ，
+只要热爱生命 ，
+一切，都在意料之中。</p>
+<hr>
+<h3>决心</h3>
 
-<p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。
-踩坑1：因为要基于JQuery，注意引用的JQuery库可用。由于之前引用的是外网谷歌的库，国内被墙导致标签云一直没有刷出来，后来换成了bootcdn的JQuery库就成功了：</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</pre></div></div>
+<p>人之一生，总会有许多困惑不已、纠缠不清的琐事，难免受其影响，绝不为其左右。</p>
+<p>此时所需的就是断然的取舍与明智的抉择，唯一会限制我们的，是我们自己的决心。</p>
+<hr>
+<h3>延续</h3>
+
+<p>万物善变，人生泛滥的是那些冲动和急躁：即兴的热情、肤浅的思考、仓促的决定、敷衍的搪塞和最终的草草了事；</p>
+<p>而珍贵的是生命中那些经久和坚持，一种信仰，一段情感，一个习惯。一句独白自视为约定，一段感情权当作余生。</p>
+<hr>
+<h3>动力</h3>
+
+<p>如果说不清追逐的动力源于何处，就至少要让优秀成为自己的习惯，要乐观阳光，要知道自己身在何处，路在何方。</p>
+<hr>
+<h3>初心</h3>
+
+<p>愿我们在心底埋下的勇气、乐观和向善的种子，最后都成长为自己一直所追寻的最喜欢的样子。</p></div>
 	
         <hr>
 

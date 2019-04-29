@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - 使用Pelican在Github(国外)和Coding(国内)同步托管博客</title>
+    <title>Heriam - Install VMware Workstation in Ubuntu 14.04</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,11 +53,11 @@
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
-                    <li><a href="../../categories/bian-cheng-yu-yan.html">编程语言</a></li>
-                    <li><a href="../../categories/bo-ke-jian-zhan.html">博客建站</a></li>
+                    <li><a href="../../categories/backend.html">Backend</a></li>
                     <li><a href="../../categories/cloud.html">Cloud</a></li>
-                    <li><a href="../../categories/ruan-jian-gong-ju.html">软件工具</a></li>
-                    <li><a href="../../categories/sheng-huo-sui-bi.html">生活随笔</a></li>
+                    <li><a href="../../categories/frontend.html">Frontend</a></li>
+                    <li><a href="../../categories/notes.html">Notes</a></li>
+                    <li><a href="../../categories/tools.html">Tools</a></li>
                 </ul>
             </li>
 
@@ -83,124 +83,46 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1>
+            <h1>Install VMware Workstation in Ubuntu 14.04</h1>
 <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+2016-04-21 Thu&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../../categories/bo-ke-jian-zhan.html">博客建站</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
 
  
  
-    Tags: <a href="../../tags/pelican.html">Pelican</a>,&nbsp;<a href="../../tags/git.html">Git</a>,&nbsp;</span>        </div>
+    Tags: <a href="../../tags/vmware.html">VMware</a>,&nbsp;<a href="../../tags/ubuntu.html">Ubuntu</a>,&nbsp;</span>        </div>
 		
 		<br />
 		<hr />
 		
-        <div><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
-- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
-- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
-- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
-  ​        <br>
-  <br>   </p>
-<hr>
-<p><strong>一、</strong><a href="https://jiang-hao.com/articles/2018/blog-%E4%BD%BF%E7%94%A8Pelican%E5%9F%BA%E4%BA%8EGithubPages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B.html">《Pelican＋Github博客搭建详细教程》</a>      </p>
-<hr>
-<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
-<br>   </p>
-<hr>
-<p><strong>二、在Coding创建一个新的项目</strong></p>
-<hr>
-<ol>
-<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
-    <br>   </li>
-<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
-</ol>
-<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF+FDA。。(省略)。。Ksap Heriam@users.noreply.github.com
+        <div><div><font face="Times New Roman"><p><br>
+1. Use <code>apt-get</code>  update system:    </p>
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
+linuxidc@localhost:~$ sudo apt-get upgrade
 </pre></div>
 
+<p><br><br>
+2. Download VMware Workstation bundle.<br><br>
+3. Make bundle executable:    </p>
 
-<p><br>   </p>
-<hr>
-<p><strong>三、将仓库拷贝到Coding</strong></p>
-<hr>
-<ol>
-<li>进入Pelican的output目录下的本地博客仓库，打开.git/config，修改远程仓库，将 origin 改为 github，并添加 coding：   </li>
-</ol>
-<div class="highlight"><pre><span></span><span class="k">[core]</span>
-        <span class="na">repositoryformatversion</span> <span class="o">=</span> <span class="s">0</span>
-<span class="s">        filemode = true</span>
-<span class="s">        bare = false</span>
-<span class="s">        logallrefupdates = true</span>
-<span class="s">        ignorecase = true</span>
-<span class="s">        precomposeunicode = true</span>
-<span class="k">[remote &quot;github&quot;]</span>
-        <span class="na">url</span> <span class="o">=</span> <span class="s">git@github.com:Heriam/heriam.github.io.git</span>
-<span class="s">        fetch = +refs/heads/*:refs/remotes/github/*</span>
-<span class="k">[remote &quot;coding&quot;]</span>
-        <span class="na">url</span> <span class="o">=</span> <span class="s">git@git.coding.net:Heriam/heriam.git</span>
-<span class="s">        fetch = +refs/heads/*:refs/remotes/coding/*</span>
-<span class="k">[branch &quot;master&quot;]</span>
-        <span class="na">remote</span> <span class="o">=</span> <span class="s">origin</span>
-<span class="s">        merge = refs/heads/master</span>
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
 </pre></div>
 
+<p><br><br>
+4. Run the bundle:    </p>
 
-<p><br>  <br>
-2. 然后将仓库 push 到 Coding上，在Coding新建一个 coding-pages 分支：    </p>
-<div class="highlight"><pre><span></span>git push -u coding master:coding-pages
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
 </pre></div>
 
+<p><br><br>
+5. Installation:  <br />
+<img alt="VMware Station Installation" src="http://www.linuxidc.com/upload/2015_01/150114174598326.jpg" /></p>
 
-<p><br>  <br>
-3. 这时登录Coding就可以看到博客内容已经被拷贝到coding-pages分支。
-    <br>   </p>
-<hr>
-<p><strong>四、配置域名</strong></p>
-<hr>
-<ol>
-<li>登录到网站的域名解析管理页面（我用的是DNSPOD，后来转向Cloudxns），然后添加两条域名解析记录：</li>
-</ol>
-<div class="highlight"><pre><span></span>@       CNAME  国内  coding.me
-www     CNAME  国内  coding.me
-</pre></div>
-
-
-<p><br>   </p>
-<ol>
-<li>在Coding 上“项目管理”中找到“自定义域名／Pages”，添加要绑定的域名，比如我是 <a href="https://jiang-hao.com">jiang-hao.com</a>和<a href="https://jiang-hao.com">www.jiang-hao.com</a>。注意这些域名也就是我们刚刚在dnspod中设置的解析域名。</li>
-</ol>
-<p><br>   </p>
-<hr>
-<p><strong>五、配置Pelican实现同步提交</strong></p>
-<hr>
-<p>设置一键上传：（如有疑问参见<a href="https://jiang-hao.com/articles/2018/blog-%E4%BD%BF%E7%94%A8Pelican%E5%9F%BA%E4%BA%8EGithubPages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B.html">《Pelican＋Github博客搭建详细教程》</a>第三部分第4点）打开根目录下的Makefile文件，修改以下三个地方： <br>
-<br>    </p>
-<ul>
-<li>OUTPUTDIR        </li>
-</ul>
-<div class="highlight"><pre><span></span><span class="nv">OUTPUTDIR</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/output/&lt;username&gt;.github.io    <span class="c1">#本地博客仓库路径</span>
-</pre></div>
-
-
-<p><br> <br>
--  publish    </p>
-<div class="highlight"><pre><span></span><span class="nf">publish</span><span class="o">:</span>    
- <span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>    
-</pre></div>
-
-
-<p><br> <br>
-- github: publish</p>
-<div class="highlight"><pre><span></span><span class="n">github</span><span class="o">:</span> <span class="n">publish</span>
-    <span class="n">cd</span> <span class="n">$</span><span class="o">(</span><span class="n">OUTPUTDIR</span><span class="o">)</span> <span class="o">;</span> <span class="n">git</span> <span class="n">add</span> <span class="o">.</span> <span class="o">;</span> <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">am</span> <span class="s1">&#39;&lt;添加自己的备注&gt;&#39;</span> <span class="o">;</span> <span class="n">git</span> <span class="n">push</span> <span class="n">github</span> <span class="n">master</span><span class="o">:</span><span class="n">master</span> <span class="o">;</span> <span class="n">git</span> <span class="n">push</span> <span class="n">coding</span> <span class="n">master</span><span class="o">:</span><span class="n">coding</span><span class="o">-</span><span class="n">pages</span> 
-</pre></div>
-
-
-<p><br>
-这样 ，通过<code>make github</code>命令就能一键发布博客更新到Github和Coding了。</p></div>
+<p></font></div></p></div>
 	
         <hr>
 

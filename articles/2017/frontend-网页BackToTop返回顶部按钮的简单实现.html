@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Install Wireshark on Ubuntu</title>
+    <title>Heriam - 网页 BacktoTop 返回顶部按钮的简单实现</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,11 +53,11 @@
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
-                    <li><a href="../../categories/bian-cheng-yu-yan.html">编程语言</a></li>
-                    <li><a href="../../categories/bo-ke-jian-zhan.html">博客建站</a></li>
+                    <li><a href="../../categories/backend.html">Backend</a></li>
                     <li><a href="../../categories/cloud.html">Cloud</a></li>
-                    <li><a href="../../categories/ruan-jian-gong-ju.html">软件工具</a></li>
-                    <li><a href="../../categories/sheng-huo-sui-bi.html">生活随笔</a></li>
+                    <li><a href="../../categories/frontend.html">Frontend</a></li>
+                    <li><a href="../../categories/notes.html">Notes</a></li>
+                    <li><a href="../../categories/tools.html">Tools</a></li>
                 </ul>
             </li>
 
@@ -83,61 +83,85 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>Install Wireshark on Ubuntu</h1>
+            <h1>网页 BacktoTop 返回顶部按钮的简单实现</h1>
 <span class="metadata">
-2016-07-08 Fri&nbsp;&nbsp;&nbsp;
+2017-06-30 Fri&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../../categories/ruan-jian-gong-ju.html">软件工具</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
 
  
  
-    Tags: <a href="../../tags/wireshark.html">Wireshark</a>,&nbsp;<a href="../../tags/ubuntu.html">Ubuntu</a>,&nbsp;</span>        </div>
+    Tags: <a href="../../tags/html.html">HTML</a>,&nbsp;<a href="../../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../../tags/css.html">CSS</a>,&nbsp;</span>        </div>
 		
 		<br />
 		<hr />
 		
-        <div><div><font face="Times New Roman"><p><br>
-1. Download WIreshark source code on website: <a href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  <br />
-2. Extract files into targeted folder:     <br></p>
-<div class="highlight"><pre><span></span>tar -xvf wireshark-1.10.7.tar.bz2
+        <div><p>在较长的网页页面中往往需要一个固定漂浮在显示屏右下侧位置的返回顶部按钮。</p>
+<p>下面介绍一种简单实现：</p>
+<p><strong>HTML 部分：</strong>  </p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>Top<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  ...
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </pre></div>
 
-<p><br>  <br />
-3. Install compiling tools and dependencies:    <br></p>
 
-<div class="highlight"><pre><span></span>sudo apt-get install build-essential
-sudo apt-get install libgtk2.0-dev libglib2.0-dev
-sudo apt-get install checkinstall
-sudo apt-get install flex bison
-sudo apt-get build-dep wireshark
-sudo apt-get install qt5-default
-sudo apt-get install libssl-dev
-sudo apt-get install libgtk-3-dev
+<p><strong>CSS 部分：</strong></p>
+<div class="highlight"><pre><span></span><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
+    <span class="k">right</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">cursor</span><span class="p">:</span><span class="kc">pointer</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span><span class="mh">#2E435E</span><span class="p">;</span>
+    <span class="k">text-indent</span><span class="p">:</span><span class="mi">-9999</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span><span class="kc">none</span><span class="p">;</span>
+    <span class="kp">-webkit-</span><span class="k">border-radius</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+    <span class="kp">-moz-</span><span class="k">border-radius</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border-radius</span><span class="p">:</span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">#</span><span class="nn">scroll</span> <span class="nt">span</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span><span class="kc">absolute</span><span class="p">;</span>
+    <span class="k">top</span><span class="p">:</span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">left</span><span class="p">:</span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">margin-left</span><span class="p">:</span><span class="mi">-8</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">margin-top</span><span class="p">:</span><span class="mi">-12</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span><span class="mi">8</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">transparent</span><span class="p">;</span>
+    <span class="k">border-bottom-color</span><span class="p">:</span><span class="mh">#ffffff</span>
+<span class="p">}</span>
+<span class="p">#</span><span class="nn">scroll</span><span class="p">:</span><span class="nd">hover</span> <span class="p">{</span>
+    <span class="k">background-color</span><span class="p">:</span><span class="mh">#3498db</span><span class="p">;</span>
+    <span class="k">opacity</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">filter</span><span class="p">:</span><span class="s2">&quot;alpha(opacity=100)&quot;</span><span class="p">;</span>
+    <span class="kp">-ms-</span><span class="k">filter</span><span class="p">:</span><span class="s2">&quot;alpha(opacity=100)&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
-<p><br>  <br />
-4. Go to <a href="http://www.tcpdump.org">www.tcpdump.org</a> and find newest version of libpcap(e.g., libpcap-1.5.3.tar.gz):     <br></p>
 
-<div class="highlight"><pre><span></span>#tar -xvf libpcap-1.5.3.tar.gz  
-#cd libpcap-1.5.3.tar.gz  
-#./configure  
-#make  
-#make install 
+<p><strong>JavaScript 部分：</strong></p>
+<div class="highlight"><pre><span></span><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scroll</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">scrollTop</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">){</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#scroll&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">();</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#scroll&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#scroll&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;html, body&quot;</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span> <span class="nx">scrollTop</span><span class="o">:</span> <span class="mi">0</span> <span class="p">},</span> <span class="mi">600</span><span class="p">);</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </pre></div>
 
-<p><br>  <br />
-5. Go to wireshark folder:    <br></p>
 
-<div class="highlight"><pre><span></span>./autogen.sh
-./configure --with-ssl --enable-setcap-install
-make
-make install
-</pre></div>
-
-<p></font></div></p></div>
+<p>最后的显示效果可以参照本博客：）</p></div>
 	
         <hr>
 

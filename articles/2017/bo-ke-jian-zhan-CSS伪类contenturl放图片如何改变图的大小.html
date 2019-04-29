@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Ubuntu系统Apache Maven安装</title>
+    <title>Heriam - CSS伪类content: url放图片如何改变图的大小</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,11 +53,11 @@
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
-                    <li><a href="../../categories/blog.html">Blog</a></li>
+                    <li><a href="../../categories/bian-cheng-yu-yan.html">编程语言</a></li>
+                    <li><a href="../../categories/bo-ke-jian-zhan.html">博客建站</a></li>
                     <li><a href="../../categories/cloud.html">Cloud</a></li>
-                    <li><a href="../../categories/coding.html">Coding</a></li>
-                    <li><a href="../../categories/notes.html">Notes</a></li>
-                    <li><a href="../../categories/tools.html">Tools</a></li>
+                    <li><a href="../../categories/ruan-jian-gong-ju.html">软件工具</a></li>
+                    <li><a href="../../categories/sheng-huo-sui-bi.html">生活随笔</a></li>
                 </ul>
             </li>
 
@@ -83,80 +83,44 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>Ubuntu系统Apache Maven安装</h1>
+            <h1>CSS伪类content: url放图片如何改变图的大小</h1>
 <span class="metadata">
-2017-10-24 Tue&nbsp;&nbsp;&nbsp;
+2017-02-21 Tue&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../../categories/coding.html">Coding</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/bo-ke-jian-zhan.html">博客建站</a>&nbsp;&nbsp;&nbsp;
 
  
  
-    Tags: <a href="../../tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="../../tags/maven.html">Maven</a>,&nbsp;</span>        </div>
+    Tags: <a href="../../tags/css.html">CSS</a>,&nbsp;</span>        </div>
 		
 		<br />
 		<hr />
 		
-        <div><div><font face="Times New Roman">
-<p><em><font face = "Times New Roman">操作系统：Linux x64 / Ubuntu 14.04</font></em>
-<em><font face = "Times New Roman">Apache Maven版本：3.3.9</font></em>  <br />
-<em><font face = "Times New Roman">建议预先搭建Java开发环境：详见<a href="https://jiang-hao.com/articles/2017/coding-Ubuntu%E7%B3%BB%E7%BB%9FJava%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA.html">《Linux Ubuntu系统下Java开发环境搭建》</a></font></em></p>
-<hr />
-<p><font face = "Times New Roman">1. 前往Apache Maven官网下载最新版本：https://maven.apache.org/download.cgi，本文以apache-maven-3.3.9-bin.tar.gz为例。</font>    </p>
-<p><font face = "Times New Roman">2. 在合适的路径下创建文件夹用来存储Maven，本例选择在/opt目录下新建MVN子文件夹。打开Terminal（后文成为T1），输入：</font>    </p>
-<div class="highlight"><pre><span></span>cd /opt                       #进入到opt目录
-sudo mkdir mvn                #新建一个mvn文件夹
-ls                            #显示成功新建的mvn文件夹
-cd mvn                        #进入mvn文件夹
+        <div><p>遇到过一个问题：用before after 之类的伪类的content里放一个图的链接，如何去改图的大小？比如：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">nav</span> <span class="nt">ul</span> <span class="nt">li</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">../img/nav_fg.png</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
-<p><font face = "Times New Roman">3.将下载的MVN压缩包拷贝到mvn目录下。新建另一个Terminal窗口（T2）并输入：</font></p>
 
-<div class="highlight"><pre><span></span>cd Downloads                                               #进入Downloads文件夹
-ls                                                         #显示刚刚下载的MVN文件，
-sudo cp apache-maven-3.3.9-bin.tar.gz /opt/mvn             #将文件拷贝到刚刚新建的mvn文件夹中(这里将“&lt; &gt;”部分替代为自己对应的MVN文件名，后同)
-sudo rm apache-maven-3.3.9-bin.tar.gz                      #删除本目录下的安装包（可选）  
+<p>事实上，如果想要设置前端页面通过content：url显示出来的图片大小，那只能修改图片的大小。因为它是直接读取的图片，并不是代入到html中再显示出来。但可以采用background的方式调整图片的大小，比如本博客中学术社交网站ResearchGate的Logo的CSS显示代码如下：</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">social</span> <span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">*=</span><span class="s1">&#39;researchgate.net&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="s1">&#39;./images/icons/researchgate.png&#39;</span><span class="p">);</span> 
+  <span class="k">background-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span> 
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span> 
+  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">vertical-align</span><span class="p">:</span> <span class="mi">-3</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">height</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">width</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
-<p><font face = "Times New Roman">4.解压安装MVN，配置环境变量。回到第一个Terminal（T1），输入：</font>  </p>
 
-<div class="highlight"><pre><span></span>ls                                                   #显示拷贝过来的MVN安装包
-sudo tar -zxvf apache-maven-3.3.9-bin.tar.gz         #将安装包解压
-ls                                                   #显示解压出的MVN文件夹，以及原安装包
-sudo rm apache-maven-3.3.9-bin.tar.gz                #删除原安装包
-sudo gedit /etc/profile                              #打开etc目录下的profile文件
-</pre></div>
-
-<p><font face = "Times New Roman">5.配置全局环境变量。在打开的profile文档末尾添加MVN安装路径（需仔细确认）：</font>  </p>
-
-<div class="highlight"><pre><span></span>#set maven environment
-export M2_HOME=/opt/mvn/apache-maven-3.3.9
-export MAVEN_OPTS=&quot;-Xmx1024m&quot;                           #避免内存溢出错误（可选）
-export PATH=<span class="cp">${</span><span class="n">M2_HOME</span><span class="cp">}</span>/bin:<span class="cp">${</span><span class="n">PATH</span><span class="cp">}</span>
-</pre></div>
-
-<p><font face = "Times New Roman">6.保存并关闭文档。（注：也可以通过vim 命令编辑etc/profile，打开命令：sudo vim /etc/profile，按<Insert>键进入编辑模式，<Esc>键退出编辑模式，接着按":"再输入”wq!“保存并退出；输入"q!"不保存退出）</font>     </p>
-
-<p><font face = "Times New Roman">7.启用配置并验证。在Terminal输入：</font>    </p>
-
-<div class="highlight"><pre><span></span>mvn -v
-</pre></div>
-
-<p><font face = "Times New Roman">8.显示效果类似如下：</font>    </p>
-
-<div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T08:41:47-08:00)
-Maven home: /opt/developTools/jvm/apache-maven-3.3.9
-Java version: 1.8.0_65, vendor: Oracle Corporation
-Java home: /opt/developTools/jvm/jdk1.8.0_65/jre
-Default locale: en_US, platform encoding: UTF-8
-OS name: &quot;linux&quot;, version: &quot;3.19.0-25-generic&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;
-</pre></div>
-
-<p><font face = "Times New Roman">（完）</font></p>
-
-<p></font></div></p></div>
+<p>其中 content="", height, width, background-size, display, background-image 都必须显示指定。这样，就可以通过 height, width 来分别设置图片的长和宽了。</p></div>
 	
         <hr>
 

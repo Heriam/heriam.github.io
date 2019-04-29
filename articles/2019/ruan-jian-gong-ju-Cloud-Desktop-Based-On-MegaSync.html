@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Install VMware Workstation in Ubuntu 14.04</title>
+    <title>Heriam - Put your desktop in the cloud using MEGASync</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,11 +53,11 @@
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
-                    <li><a href="../../categories/blog.html">Blog</a></li>
+                    <li><a href="../../categories/bian-cheng-yu-yan.html">编程语言</a></li>
+                    <li><a href="../../categories/bo-ke-jian-zhan.html">博客建站</a></li>
                     <li><a href="../../categories/cloud.html">Cloud</a></li>
-                    <li><a href="../../categories/coding.html">Coding</a></li>
-                    <li><a href="../../categories/notes.html">Notes</a></li>
-                    <li><a href="../../categories/tools.html">Tools</a></li>
+                    <li><a href="../../categories/ruan-jian-gong-ju.html">软件工具</a></li>
+                    <li><a href="../../categories/sheng-huo-sui-bi.html">生活随笔</a></li>
                 </ul>
             </li>
 
@@ -83,46 +83,36 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>Install VMware Workstation in Ubuntu 14.04</h1>
+            <h1>Put your desktop in the cloud using MEGASync</h1>
 <span class="metadata">
-2016-04-21 Thu&nbsp;&nbsp;&nbsp;
+2019-04-10 Wed&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/ruan-jian-gong-ju.html">软件工具</a>&nbsp;&nbsp;&nbsp;
 
  
- 
-    Tags: <a href="../../tags/vmware.html">VMware</a>,&nbsp;<a href="../../tags/ubuntu.html">Ubuntu</a>,&nbsp;</span>        </div>
+</span>        </div>
 		
 		<br />
 		<hr />
 		
-        <div><div><font face="Times New Roman"><p><br>
-1. Use <code>apt-get</code>  update system:    </p>
-<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
-linuxidc@localhost:~$ sudo apt-get upgrade
-</pre></div>
-
-<p><br><br>
-2. Download VMware Workstation bundle.<br><br>
-3. Make bundle executable:    </p>
-
-<div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
-</pre></div>
-
-<p><br><br>
-4. Run the bundle:    </p>
-
-<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
-</pre></div>
-
-<p><br><br>
-5. Installation:  <br />
-<img alt="VMware Station Installation" src="http://www.linuxidc.com/upload/2015_01/150114174598326.jpg" /></p>
-
-<p></font></div></p></div>
+        <div><h3 id="demo">Demo</h3>
+<p>Here is a demo showing a "cloud" desktop:
+<br /> <br>
+<img alt="MEGASync Desktop" src="https://raw.githubusercontent.com/Heriam/images/master/in-article/desktop.png">
+<br /> <br>
+If you don't like application icons and want to only have files and folders on desktop (as shown in the picture), but still want to be able to launch applications in a convenient way, you can remove all the icons, and install <a href="http://www.wox.one/">WOX</a> for quickly accessing applications.</p>
+<p>Using MEGASync, you can synchronize your desktop among multiple devcies and access your documents anywhere with Internet connection.</p>
+<h3 id="megasync">MEGASync</h3>
+<p><a href="https://mega.nz/">MEGASync</a> provides following functionalities: <br>
+- secure cloud netdisk with 50GB free storage <br>
+- fast transfers with end-to-end encryption <br>
+- folder synchronization among multiple devices</p>
+<p>As we can see, a very useful function of MEGASync is to synchronize folders among multiple devices. But it would become more interesting when we use it to put our desktop in the cloud.</p>
+<h3 id="howto">HOWTO</h3>
+<p>The configuration is very easy, just include the desktop directory for synchronization when setting up MEGASync.</p></div>
 	
         <hr>
 

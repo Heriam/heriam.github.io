@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Windows系统配置WiFi无线热点</title>
+    <title>Heriam - JQCloud: 一个前端生成美化标签云的简单JQuery插件</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,11 +53,11 @@
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
-                    <li><a href="../../categories/blog.html">Blog</a></li>
+                    <li><a href="../../categories/bian-cheng-yu-yan.html">编程语言</a></li>
+                    <li><a href="../../categories/bo-ke-jian-zhan.html">博客建站</a></li>
                     <li><a href="../../categories/cloud.html">Cloud</a></li>
-                    <li><a href="../../categories/coding.html">Coding</a></li>
-                    <li><a href="../../categories/notes.html">Notes</a></li>
-                    <li><a href="../../categories/tools.html">Tools</a></li>
+                    <li><a href="../../categories/ruan-jian-gong-ju.html">软件工具</a></li>
+                    <li><a href="../../categories/sheng-huo-sui-bi.html">生活随笔</a></li>
                 </ul>
             </li>
 
@@ -83,61 +83,51 @@
         <div class="span9">
     <div class='article'>
         <div class="content-title">
-            <h1>Windows系统配置WiFi无线热点</h1>
+            <h1>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h1>
 <span class="metadata">
-2017-11-21 Tue&nbsp;&nbsp;&nbsp;
+2018-02-25 Sun&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/bo-ke-jian-zhan.html">博客建站</a>&nbsp;&nbsp;&nbsp;
 
  
  
-    Tags: <a href="../../tags/wifi.html">WiFi</a>,&nbsp;<a href="../../tags/windows.html">Windows</a>,&nbsp;</span>        </div>
+    Tags: <a href="../../tags/jquery.html">JQuery</a>,&nbsp;<a href="../../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../../tags/html.html">HTML</a>,&nbsp;</span>        </div>
 		
 		<br />
 		<hr />
 		
-        <div><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
-Windows 版本： Windows 7/8/10  <br />
-前提：电脑装配无线网卡  <br />
-方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
-</font></p>
-<hr />
-<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
-<div class="highlight"><pre><span></span>netsh wlan show drivers
-</pre></div></p>
-<p>在输出信息中找到 “支持承载网络：是” 则继续。
-<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
-netsh wlan show hostednetwork setting=security
+        <div><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
+官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
+<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>具体的使用方法官网都能查到。</p>
+<p>贴出自己微博使用JQCloud的前端代码：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag.url }}&#39;</span><span class="p">});</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">category</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">categories</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{category}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ category.url }}&#39;</span><span class="p">});</span>
+    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#tagcloud&quot;</span><span class="p">).</span><span class="nx">jQCloud</span><span class="p">(</span><span class="nx">words</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">autoResize</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">});</span> 
+    <span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tagcloud&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 80%; height: 450px; align-self: center;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </pre></div>
 
-<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
 
-<p>3.创建WiFi热点。命令行输入：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid=WiFi名称 key=WiFi密码
-</pre></div>
-
-<p>完成后提示承载网络设置成功。
-<hr>4.启用WiFi热点。在命令行输入：</p>
-
-<div class="highlight"><pre><span></span>netsh wlan start hostednetwork
-</pre></div>
-
-<p>完成后提示已启动承载网络。<hr></p>
-
-<p>5.启用WiFi热点共享。打开 “网络和共享中心”，在窗口左边栏找到 “更改适配器设置”，再在窗口右侧找到刚刚创建的WiFi网络，一般显示为 “本地连接”，记住。如下所示  <br />
-<img alt="windows wifi 热点 hotspot" src="http://7xq8q3.com1.z0.glb.clouddn.com/hostednetwork.jpg" />  <br />
-<br>在以太网的网络连接图标上点击右键选择属性，在弹出的窗口上方标签栏点击 “共享”。然后在下方确认框中启用 “允许其它网络用户通过此计算机的 Internet连接来连接(N)”。如下所示，下拉框中选择刚刚创建的WiFi热点，确定，完成。  <br />
-<img alt="windows wifi 热点 hotspot" src="http://7xq8q3.com1.z0.glb.clouddn.com/enablesharing.jpg" />  <br />
-<br>  <br />
-（完）</p>
-
-<p></font></div></p></div>
+<p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。
+踩坑1：因为要基于JQuery，注意引用的JQuery库可用。由于之前引用的是外网谷歌的库，国内被墙导致标签云一直没有刷出来，后来换成了bootcdn的JQuery库就成功了：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div></div>
 	
         <hr>
 

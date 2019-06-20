@@ -2,14 +2,14 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - Justin Time</title>
+    <title>Heriam - Flink入门</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="baidu-site-verification" content="OGeiccsh1O" />
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
-    <script src="../theme/html5.js"></script>
+    <script src="../../theme/html5.js"></script>
     <![endif]-->
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
@@ -18,17 +18,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
     <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
 
-    <script src="../tipuesearch_content.js"></script>
-    <link rel="stylesheet" href="../theme/tipuesearch/tipuesearch.css">
-    <script src="../theme/tipuesearch/tipuesearch_set.js"></script>
-    <script src="../theme/tipuesearch/tipuesearch.min.js"></script>
-	<script src="../theme/bootstrap-collapse.js"></script>
+    <script src="../../tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="../../theme/tipuesearch/tipuesearch.css">
+    <script src="../../theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="../../theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="../../theme/bootstrap-collapse.js"></script>
 
     <!-- Le styles -->
-    <link href="../theme/bootstrap.min.css" rel="stylesheet">
-    <link href="../theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="../theme/local.css" rel="stylesheet">
-    <link href="../theme/pygments.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../../theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="../../theme/local.css" rel="stylesheet">
+    <link href="../../theme/pygments.css" rel="stylesheet">
 
     <!-- So Firefox can bookmark->"abo this site" -->
 
@@ -46,18 +46,18 @@
              <span class="icon-bar"></span>
          </a>
 
-        <a class="brand" href="..">Heriam</a>
+        <a class="brand" href="../..">Heriam</a>
 
         <div class="nav-collapse">
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
-                    <li><a href="../categories/backend.html">Backend</a></li>
-                    <li><a href="../categories/big-data.html">Big Data</a></li>
-                    <li><a href="../categories/cloud.html">Cloud</a></li>
-                    <li><a href="../categories/frontend.html">Frontend</a></li>
-                    <li><a href="../categories/notes.html">Notes</a></li>
-                    <li><a href="../categories/tools.html">Tools</a></li>
+                    <li><a href="../../categories/backend.html">Backend</a></li>
+                    <li><a href="../../categories/big-data.html">Big Data</a></li>
+                    <li><a href="../../categories/cloud.html">Cloud</a></li>
+                    <li><a href="../../categories/frontend.html">Frontend</a></li>
+                    <li><a href="../../categories/notes.html">Notes</a></li>
+                    <li><a href="../../categories/tools.html">Tools</a></li>
                 </ul>
             </li>
 
@@ -67,7 +67,7 @@
             
         </ul>
 
-        <form class="navbar-search pull-right" action="../search.html" onsubmit="return validateForm(this.elements['q'].value);">
+        <form class="navbar-search pull-right" action="../../search.html" onsubmit="return validateForm(this.elements['q'].value);">
             <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
         </form>
         </div>
@@ -81,26 +81,58 @@
     <div class="row">
 
         <div class="span9">
-        
-
-        
-
-
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/2019/big-data-flink-intro.html"><h1>Flink入门</h1></a>
+            <h1>Flink入门</h1>
 <span class="metadata">
 2019-06-13 Thu&nbsp;&nbsp;&nbsp;
 
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+by <a class="url fn" href="../../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
 
  
-</span> 
-        </div>
-        
+</span>        </div>
+		
+		<hr />
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#_1">一、架构</a><ul>
+<li><a href="#_2">处理无界和有界数据</a></li>
+<li><a href="#_3">随处部署应用程序</a></li>
+<li><a href="#_4">以任何规模运行应用程序</a></li>
+<li><a href="#_5">利用内存中性能</a></li>
+</ul>
+</li>
+<li><a href="#_6">二、应用</a><ul>
+<li><a href="#_7">流处理应用的构建元素</a><ul>
+<li><a href="#_8">流</a></li>
+<li><a href="#_9">状态</a></li>
+<li><a href="#_10">时间</a></li>
+</ul>
+</li>
+<li><a href="#api">分层API</a><ul>
+<li><a href="#processfunctions">ProcessFunctions</a></li>
+<li><a href="#the-datastream-api">The DataStream API</a></li>
+<li><a href="#sql-table-api">SQL &amp; Table API</a></li>
+</ul>
+</li>
+<li><a href="#_11">库</a></li>
+</ul>
+</li>
+<li><a href="#_12">三、运行</a><ul>
+<li><a href="#_13">全天候运行您的应用程序</a></li>
+<li><a href="#_14">更新，迁移，暂停和恢复您的应用程序</a></li>
+<li><a href="#_15">监控您的应用程序</a></li>
+</ul>
+</li>
+</ul>
+</div>
+			</nav>
+		<br />
+		<hr />
+		
         <div>
 <h3 id="_1">一、架构</h3>
 <p>Apache Flink是一个分布式处理引擎和框架，用于对无界和有界数据流进行状态计算。Flink可在所有常见的集群环境中运行，可以内存级速度和任意规模执行计算。</p>
@@ -297,343 +329,26 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
 <li><strong>指标</strong>：Flink具有复杂的指标系统，可收集和报告系统和用户定义的指标。指标可以导出到多个报告器，包括<a href="https://en.wikipedia.org/wiki/Java_Management_Extensions">JMX</a>，Ganglia，<a href="https://graphiteapp.org/">Graphite</a>，<a href="https://prometheus.io/">Prometheus</a>，<a href="https://github.com/etsy/statsd">StatsD</a>，<a href="https://www.datadoghq.com/">Datadog</a>和<a href="https://www.slf4j.org/">Slf4j</a>。</li>
 <li><strong>REST API</strong>：Flink公开REST API以提交新应用程序、生成正在运行的应用程序的保存点或取消应用程序。REST API还公开元数据和收集运行或已完成应用程序的指标。</li>
 </ul></div>
-        <hr />
-    </div>
-		
+	
+        <hr>
 
- 
-        
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
 
- 
-
-    <div class='article'>
-        <a href="../articles/2019/cloud-openshift-basics.html"><h2>OpenShift 详细教程 - 基础知识入门</h2></a>
-        <div class= "well small"> <span class="metadata">
-2019-04-19 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/cloud.html">Cloud</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/openshift.html">OpenShift</a>,&nbsp;</span> </div>
-        <div class="summary">
-<h3 id="_1">简介</h3>
-<p>自由和开放源码的云计算平台使开发人员能够创建、测试和运行他们的应用程序，并且可以把它们部署到云中。</p>
-<p>OpenShift是红帽的云开发平台即服务（PaaS）。是一个基于主流的容器技术Docker和K8s构建的开源容器云平台。底层以Docker作为容器引擎驱动，以K8s作为容器编排引擎组件，并提供了开发语言，中间件，DevOps自动化流程工具和web console用户界面等元素，提供了一套完整的基于容器的应用云平台。</p>
-<p>Openshift提供比任何PaaS更多的灵活性，它支持用于Java、Python、PHP、Perl、node.js、go和Ruby的更多的开发框架，包括 Spring、Seam、Weld、CDI、Rails、Rack、Symfony、Zend Framework、Twisted、Django和Java E。数据库语言则支持MySQL、MongoDB和PostgreSQL。</p>
-<p>另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。</p>
-<p>OpenShift Online服务构建在Red Hat Enterprise Linux上。Red Hat …</p> <a class="btn btn-info xsmall" href="../articles/2019/cloud-openshift-basics.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2019/backend-java-final-keyword.html"><h2>详解Java中的final关键字</h2></a>
-        <div class= "well small"> <span class="metadata">
-2019-04-12 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/java.html">Java</a>,&nbsp;</span> </div>
-        <div class="summary">
-<h3 id="final-1"><em>final</em> 简介<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></h3>
-<p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
-<p><img alt="java中的final关键字" src="https://raw.githubusercontent.com/Heriam/images/master/in-article/final-keyword.png"/></p>
-<p>上面这张图可以概括成：</p>
-<ul>
-<li>当<em>final</em>修饰<strong>变量</strong>时，被修饰的变量必须被初始化(赋值)，且后续不能修改其值，实质上是常量；</li>
-<li>当<em>final</em>修饰<strong>方法</strong>时，被修饰的方法无法被所在类的子类重写（覆写）；</li>
-<li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且<em>final</em>类中的所有成员方法都会被隐式地指定为<em>final</em>方法，但成员变量则不会变。</li>
-</ul>
-<h3 id="final"><em>final</em> 修饰变量</h3>
-<p>当使用<em>final</em>关键字声明类成员变量或局部变量后，其值不能被再次修改 …</p> <a class="btn btn-info xsmall" href="../articles/2019/backend-java-final-keyword.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2019/tools-Cloud-Desktop-Based-On-MegaSync.html"><h2>Put your desktop in the cloud using MEGASync</h2></a>
-        <div class= "well small"> <span class="metadata">
-2019-04-10 Wed&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
-</span> </div>
-        <div class="summary"><h3 id="demo">Demo</h3>
-<p>Here is a demo showing a "cloud" desktop:
-<br /> <br>
-<img alt="MEGASync Desktop" src="https://raw.githubusercontent.com/Heriam/images/master/in-article/desktop.png">
-<br /> <br>
-If you don't like application icons and want to only have files and folders on desktop (as shown in the picture), but still want to be able to launch applications in a convenient way, you can remove all the icons, and …</p> <a class="btn btn-info xsmall" href="../articles/2019/tools-Cloud-Desktop-Based-On-MegaSync.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2019/backend-AJavaTFTPServer.html"><h2>A Java TFTP Server</h2></a>
-        <div class= "well small"> <span class="metadata">
-2019-04-09 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/java.html">Java</a>,&nbsp;<a href="../tags/tftp.html">TFTP</a>,&nbsp;</span> </div>
-        <div class="summary">
-<h3 id="_1">简介</h3>
-<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
-<p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
-<p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
-<p>要停止，请使用shutdown方法。</p>
-<p>要检查服务器是否仍在运行（或者由于错误而停止），请调用isRunning方法。</p>
-<p>默认情况下，事件不会记录到stdout/stderr。可以使用setLog和setLogError方法更改此设置。</p>
-<p>示例用法如下：</p>
-<div class="highlight"><pre><span></span> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
-  <span class="o">{</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">)</span>
-      <span class="o">{</span>
-          <span class="n">System</span><span class="o">.</span><span class="na">out</span>
-                  <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"You must provide 1 argument - the …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2019/backend-AJavaTFTPServer.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2019/backend-Java代码优化35点总结.html"><h2>Java代码优化35点总结</h2></a>
-        <div class= "well small"> <span class="metadata">
-2019-04-02 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/java.html">Java</a>,&nbsp;</span> </div>
-        <div class="summary">
-<h3 id="_1">前言</h3>
-<p>代码优化，一个很重要的课题。可能有些人觉得没用，一些细小的地方有什么好修改的，改与不改对于代码的运行效率有什么影响呢？这个问题我是这么考虑的，就像大海里面的鲸鱼一样，它吃一条小虾米有用吗？没用，但是，吃的小虾米一多之后，鲸鱼就被喂饱了。代码优化也是一样，如果项目着眼于尽快无BUG上线，那么此时可以抓大放小，代码的细节可以不精打细磨；但是如果有足够的时间开发、维护代码，这时候就必须考虑每个可以优化的细节了，一个一个细小的优化点累积起来，对于代码的运行效率绝对是有提升的。</p>
-<p>代码优化的目标是：</p>
-<p>1、减小代码的体积</p>
-<p>2、提高代码运行的效率</p>
-<h3 id="_2">代码优化细节</h3>
-<h5 id="1final">1、尽量指定类、方法的final修饰符</h5>
-<p>带有final修饰符的类是不可派生的。在Java核心API中，有许多应用final的例子，例如java.lang.String，整个类都是final的。为类指定final修饰符可以让类不可以被继承，为方法指定final修饰符可以让方法不可以被重写。如果指定了一个类为final，则该类所有的方法都是final的。Java编译器会寻找机会内联所有的final方法，内联对于提升Java运行效率作用重大，具体参见Java运行期优化。此举能够使性能平均提高50%。</p>
-<h5 id="2">2、尽量重用对象</h5>
-<p>特别是String对象的使用，出现字符串连接时应该使用StringBuilder …</p> <a class="btn btn-info xsmall" href="../articles/2019/backend-Java代码优化35点总结.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2019/notes-人之一生.html"><h2>人之一生</h2></a>
-        <div class= "well small"> <span class="metadata">
-2019-03-16 Sat&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
-
- 
-</span> </div>
-        <div class="summary"><h3>热爱生命</h3>
-
-<p>我不去想，
-是否能够成功 ，
-既然选择了远方 ，
-便只顾风雨兼程。</p>
-<p>我不去想，
-能否赢得爱情 ，
-既然钟情于玫瑰 ，
-就勇敢地吐露真诚 。</p>
-<p>我不去想，
-身后会不会袭来寒风冷雨 ，
-既然目标是地平线，
-留给世界的只能是背影 。</p>
-<p>我不去想，
-未来是平坦还是泥泞 ，
-只要热爱生命 ，
-一切，都在意料之中。</p>
-<hr>
-<h3>决心</h3>
-
-<p>人之一生，总会有许多困惑不已、纠缠不清的琐事，难免受其影响，绝不为其左右。</p>
-<p>此时所需的就是断然的取舍与明智的抉择，唯一会限制我们的，是我们自己的决心。</p>
-<hr>
-<h3>延续</h3>
-
-<p>万物善变，人生泛滥的是那些冲动和急躁：即兴的热情、肤浅的思考、仓促的决定、敷衍的搪塞和最终的草草了事；</p>
-<p>而珍贵的是生命中那些经久和坚持，一种信仰，一段情感，一个习惯。一句独白自视为约定，一段感情权当作余生。</p>
-<hr>
-<h3>动力</h3>
-
-<p>如果说不清追逐的动力源于何处，就至少要让优秀成为自己的习惯，要乐观阳光，要知道自己身在何处，路在何方。</p>
-<hr>
-<h3>初心</h3>
-
-<p>愿我们在心底埋下的勇气、乐观和向善的种子，最后都成长为自己一直所追寻的最喜欢的样子 …</p> <a class="btn btn-info xsmall" href="../articles/2019/notes-人之一生.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/frontend-JQCloud.html"><h2>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-25 Sun&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/jquery.html">JQuery</a>,&nbsp;<a href="../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../tags/html.html">HTML</a>,&nbsp;</span> </div>
-        <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
-官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
-<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
-<p>具体的使用方法官网都能查到。</p>
-<p>贴出自己微博使用JQCloud的前端代码：</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2018/frontend-JQCloud.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;<a href="../tags/git.html">Git</a>,&nbsp;</span> </div>
-        <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
-- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
-- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
-- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
-  ​        <br>
-  <br>   </p>
-<hr>
-<p><strong>一、</strong><a href="https://jiang-hao.com/articles/2018/blog-%E4%BD%BF%E7%94%A8Pelican%E5%9F%BA%E4%BA%8EGithubPages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B.html">《Pelican＋Github博客搭建详细教程》</a>      </p>
-<hr>
-<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
-<br>   </p>
-<hr>
-<p><strong>二、在Coding创建一个新的项目</strong></p>
-<hr>
-<ol>
-<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
-    <br>   </li>
-<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
-</ol>
-<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="../articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html"><h2>使用Pelican基于Github Pages搭建博客教程</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;</span> </div>
-        <div class="summary"><p><strong>操作系统：</strong>Mac OS / Linux    <br>
-<strong>工具集：</strong>  <br>
-1.Pelican——基于Python的静态网页生成器 <br>
-2.马克飞象——Evernote出的Markdown文本编辑器 <br>
-3.GoDaddy——域名供应商 <br>
-4.DNSPod——提供免费域名解析注册服务 <br>
-5.Github Pages——Github为每个注册用户提供300M的站点空间 <br>
-6.Python——Pelican工具需要Python运行环境 <br>
-7.Google Analytics——谷歌站点数据监测分析工具 <br>
-8.Google Custom Search——谷歌自定义搜索引擎可用作站内搜索工具 <br>
-9.Google Webmasters——谷歌站长工具  <br>
-10.Disqus——用来提供博客评论功能  <br>
-11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
-12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
-<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="../articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="../authors/justin-time.html">1</a></li>
-    <li class=""><a href="../authors/justin-time2.html">2</a></li>
-    <li class=""><a href="../authors/justin-time3.html">3</a></li>
-
-    <li class="next"><a href="../authors/justin-time2.html">Next &rarr;</a></li>
-
-</ul>
-</div>
- 
-  
+	gitalk.render('gitalk-container')
+</script>    </div>
         </div>
         
         <div class="span3">
@@ -647,46 +362,46 @@ Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
 						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
 						<p class="motto">We only live once, and time just goes by.</p>
 						<ul class="biography">
-						<li><span><img src="../theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
-						<li><span><img src="../theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+						<li><span><img src="../../theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="../../theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
 
 					<hr>
 
 						<div class="tooltip">
 							<span class="tooltiptext">Facebook</span>
-							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Facebook.svg) center no-repeat"></a>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Facebook.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">微博</span>
-							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(../theme/images/icons/微博.svg) center no-repeat"></a>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/微博.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Linkedin</span>
-							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Linkedin.svg) center no-repeat"></a>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Linkedin.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Github</span>
-							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Github.svg) center no-repeat"></a>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Github.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Email</span>
-							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Email.svg) center no-repeat"></a>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Email.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">Instagram</span>
-							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(../theme/images/icons/Instagram.svg) center no-repeat"></a>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/Instagram.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">ResearchGate</span>
-							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(../theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/ResearchGate.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">知乎</span>
-							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(../theme/images/icons/知乎.svg) center no-repeat"></a>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/知乎.svg) center no-repeat"></a>
 						</div>
 						<div class="tooltip">
 							<span class="tooltiptext">OSChina</span>
-							<a href="https://my.oschina.net/heriam" target="_blank" class="socialLink" style="background: url(../theme/images/icons/OSChina.svg) center no-repeat"></a>
+							<a href="https://my.oschina.net/heriam" target="_blank" class="socialLink" style="background: url(../../theme/images/icons/OSChina.svg) center no-repeat"></a>
 						</div>
 					</div>
                 </div>
@@ -696,9 +411,11 @@ Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
                 <ins class="adsbygoogle"
-                     style="display:inline-block;width:268px;height:268px"
+                     style="display:block"
                      data-ad-client="ca-pub-8958123988900703"
-                     data-ad-slot="3077290298"></ins>
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -708,7 +425,7 @@ Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
     </div>     </div> 
 <footer>
 <br />
-<p><a href="..">Heriam</a> &copy; Justin Time 2019</p>
+<p><a href="../..">Heriam</a> &copy; Justin Time 2019</p>
 </footer>
 
 </div> <!-- /container -->

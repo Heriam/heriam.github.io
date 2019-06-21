@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jiang-hao.com/</loc>
-<lastmod>2019-06-20T19:32:00-00:00</lastmod>
+<lastmod>2019-06-21T14:14:01-00:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.1</priority>
 </url>
@@ -43,6 +43,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2013-04-18T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.2</priority>
+</url>
+
+<url>
+<loc>https://jiang-hao.com/articles/2019/big-data-flink-FAQ.html</loc>
+<lastmod>2019-06-21T00:00:00+08:00</lastmod>
+<changefreq>always</changefreq>
+<priority>0.7</priority>
 </url>
 
 <url>

@@ -88,6 +88,38 @@
  
 
     <div class='article'>
+        <a href="../articles/2018/frontend-JQCloud.html"><h2>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h2></a>
+        <div class= "well small"> <span class="metadata">
+2018-02-25 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/jquery.html">JQuery</a>,&nbsp;<a href="../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../tags/html.html">HTML</a>,&nbsp;</span> </div>
+        <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
+官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
+<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>具体的使用方法官网都能查到。</p>
+<p>贴出自己微博使用JQCloud的前端代码：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2018/frontend-JQCloud.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
         <a href="../articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
         <div class= "well small"> <span class="metadata">
 2018-02-05 Mon&nbsp;&nbsp;&nbsp;
@@ -416,40 +448,6 @@ Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
   <span class="k">vertical-align</span><span class="p">:</span> <span class="mi">-3</span><span class="kt">px</span><span class="p">;</span> 
   <span class="k">height</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span> 
   <span class="k">width</span><span class="p">:</span> <span class="mi">16 …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2017/frontend-CSS伪类contenturl放图片如何改变图的大小.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2016/tools-InstallWiresharkonUbuntu.html"><h2>Install Wireshark on Ubuntu</h2></a>
-        <div class= "well small"> <span class="metadata">
-2016-07-08 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/wireshark.html">Wireshark</a>,&nbsp;<a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;</span> </div>
-        <div class="summary"><div><font face="Times New Roman"><p><br>
-1. Download WIreshark source code on website: <a href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  <br />
-2. Extract files into targeted folder:     <br></p>
-<div class="highlight"><pre><span></span>tar -xvf wireshark-1.10.7.tar.bz2
-</pre></div>
-
-<p><br>  <br />
-3. Install compiling tools and dependencies:    <br></p>
-
-<div class="highlight"><pre><span></span>sudo apt-get install build-essential
-sudo apt-get install libgtk2.0-dev libglib2.0-dev
-sudo apt-get install checkinstall
-sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall" href="../articles/2016/tools-InstallWiresharkonUbuntu.html">read more</a></div>
     </div>	
 				
 <div class="pagination">

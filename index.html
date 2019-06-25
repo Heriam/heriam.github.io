@@ -2,7 +2,7 @@
 <html lang="zh_cn">
 <head>
     <meta charset="utf-8">
-    <title>Heriam - About me</title>
+    <title>Heriam</title>
     <meta name="description" content="">
     <meta name="author" content="Justin Time">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,6 +64,7 @@
             <li><a href="/articles">Archives</a></li>
             <li><a href="/tags">Tags</a></li>
             <li><a href="/pages/publications">Publications</a></li>
+            <li><a href="/pages/aboutme">About me</a></li>
             
         </ul>
 
@@ -82,24 +83,607 @@
 
         <div class="span9">
         
-<section id="content" class="body">    
-    <h1 class="content-title">
-        About me
-    </h1>
-    <p><br>
-Hao serves as an R&D Engineer at <a target="_blank" href="http://www.h3c.com/en/">New H3C Technologies</a>. In early 2017, He completed <a target="_blank" href="http://www.eitdigital.eu">EIT Digital</a> Dual Master Degree Programme with a major of <em>Internet Technology and Architecture</em> at <a target="_blank" href="http://www.kth.se">KTH Royal Institute of Technology</a> and a specialization of <em>Internet of Things(IoT)</em> at <a target="_blank" href="https://www.imt-atlantique.fr/en">IMT Atlantique</a>. He also minored in <em>ICT Innovation and Entrepreneurship</em> during his Master studies.
-<br><br>
-Hao is a Cisco Certificated Internetwork Expert in <em>Routing and Switching</em> (CCIE R&amp;S #40343). He is passionate about future networking technologies. His interests mainly focus on <em>Wireless and Mobile Networking</em>, <em>Datacenter and Cloud Networking</em>, and <em>Network Intelligence(Big Data, AI, etc.)</em>. He is highly motivated by the desire to see these technologies meet together to shape a more intelligent, efficient, and reliable networked society. 
-<br><br>
-His curriculum vitae is available <a href="pages/resume.html">here</a>. You can also find him on <a target="_blank" href="http://www.linkedin.com/in/haochiang">Linkedin</a>.
-<br><br>
-现就职于<a target="_blank" href="http://www.h3c.com">H3C</a>担任研发工程师。2017年初完成欧盟<a target="_blank" href="http://www.eitdigital.eu">EIT Digital</a>双硕士学位联合培养项目，分别获得<a target="_blank" href="http://www.kth.se">KTH瑞典皇家理工学院</a>的互联网技术与架构硕士学位和<a target="_blank" href="https://www.imt-atlantique.fr/en">IMT Atlantique法国大西洋高等矿业电信学校</a>的物联网硕士学位，以及ICT创新创业商科辅修证书。2016年3月至9月在<a target="_blank" href="https://www.cisco.com/">思科</a>巴黎创新研究院进行硕士毕业论文实习。2014年本科毕业于<a target="_blank" href="https://www.zju.edu.cn">浙江大学</a>环境与资源学院并获得农学学士学位。
-<br><br>
-思科认证互联网络专家（CCIE R&S #40343），也是未来网络技术的狂热爱好者。兴趣主要集中在无线和移动网络，数据中心和云计算网络，以及网络大数据/人工智能等领域。期待这些技术融合后构建一个更加智能、高效和可靠的互联社会。
-<br><br>
-详细简历请戳<a href="pages/resume.html">这里</a>。您也可以在<a target="_blank" href="http://www.linkedin.com/in/haochiang">领英</a>上找到我。
-</p>
-</section>
+<section id="content" class="body">   
+        
+
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/big-data-flink-FAQ.html"><h1>Flink FAQ</h1></a>
+<span class="metadata">
+2019-06-21 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/flink.html">Flink</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h3>
+<p>Flink是一个非常通用的系统，用于数据处理和数据驱动的应用程序，<em>数据流</em>作为核心构建块。这些数据流可以是实时数据流或存储的历史数据流。例如，在Flink的视图中，文件是存储的字节流。因此，Flink支持实时数据处理和应用程序，以及批处理应用程序。</p>
+<p>流可以是<em>无界的</em>（没有结束，事件不断发生）或受<em>限制</em>（流有开始和结束）。例如，来自消息队列的Twitter馈送或事件流通常是无界的流，而来自文件的字节流是有界流。</p>
+<h3 id="flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</h3>
+<p>有界流通常比无界流更高效。在（近）实时处理无限事件流需要系统能够立即对事件起作用并产生中间结果（通常具有低延迟）。处理有界流通常不需要产生低延迟结果，因为无论如何数据都是旧的（相对而言）。这允许Flink以简单且更高效的方式处理数据。</p>
+<p>DataStream API 捕获无界和有界的流的连续处理，以支持低等待时间的结果以及对事件和时间（包括事件时间）灵活反应的模型。</p>
+<p>DataSet API 具有加快有界的数据流的处理的技术。将来，社区计划将这些优化与DataStream API中的技术相结合。</p>
+<h3 id="flinkhadoop">Flink如何与Hadoop栈相关联 …</h3> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-FAQ.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/big-data-flink-programming-model.html"><h1>Flink Dataflow 编程模型</h1></a>
+<span class="metadata">
+2019-06-21 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/flink.html">Flink</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<p>Apache Flink是一个用于分布式流和批处理数据处理的开源平台。Flink的核心是流数据流引擎，为数据流上的分布式计算提供数据分发，通信和容错。Flink基于流引擎之上构建批处理，覆加本地迭代支持，内存托管和程序优化。</p>
+<h2 id="_1">抽象层次</h2>
+<p>Flink提供不同级别的抽象来开发流/批处理应用程序。</p>
+<p><img alt="编程抽象级别" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/levels_of_abstraction.svg"/></p>
+<ul>
+<li>
+<p>最低级抽象只提供<strong>stateful streaming</strong>。它通过<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/process_function.html">Process Function</a>嵌入到<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API中</a>。它允许用户自由处理来自一个或多个流的事件，并使用一致的容错<em>状态</em>。此外，用户可以注册事件时间和处理时间回调，允许程序实现复杂的计算。</p>
+</li>
+<li>
+<p>在实践中，大多数应用程序不需要上述低级抽象，而是针对<strong>Core API</strong>编程， 如<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>（有界/无界流）和<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/index.html">DataSet API</a>（有界数据集）。这些流畅的API提供了用于数据处理的通用构建块，例如各种形式的用户指定的转换，连接，聚合，窗口，状态等（transformations, joins, aggregations …</p></li></ul> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-programming-model.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/big-data-flink-usecases.html"><h1>Flink用例</h1></a>
+<span class="metadata">
+2019-06-20 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/flink.html">Flink</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<p>Apache Flink因其丰富的功能集而成为开发和运行多种不同类型应用程序的绝佳选择。Flink的功能包括支持流和批处理，复杂的状态管理，事件时间处理语义以及状态的精确一次一致性保证。此外，Flink可以部署在各种资源提供者（如YARN，Apache Mesos和Kubernetes）上，也可以作为裸机硬件上的独立群集。配置为高可用性，Flink没有单点故障。Flink已被证明可扩展到数千个核心和TB级的应用程序状态，提供高吞吐量和低延迟，并为世界上最苛刻的流处理应用程序提供支持。</p>
+<p>下面，我们将探讨由Flink提供支持的最常见类型的应用程序，并指出实际示例。</p>
+<ul>
+<li><a href="https://flink.apache.org/usecases.html#eventDrivenApps">事件驱动的应用程序</a></li>
+<li><a href="https://flink.apache.org/usecases.html#analytics">数据分析应用</a></li>
+<li><a href="https://flink.apache.org/usecases.html#pipelines">数据管道应用</a></li>
+</ul>
+<h2 id="_1">事件驱动的应用程序</h2>
+<h3 id="_2">什么是事件驱动的应用程序？</h3>
+<p>事件驱动的应用程序是一个有状态的应用程序，它从一个或多个事件流中提取事件，并通过触发计算，状态更新或外部操作对传入事件做出反应。</p>
+<p>事件驱动的应用程序是传统应用程序设计的演变。传统应用一般具有独立的计算和数据存储层，在此体系结构中，应用程序从远程事务数据库读取数据并将数据持久化。</p>
+<p>相反，事件驱动的应用程序基于有状态流处理应用程序。在这种设计中，数据和计算是共同定位的，即本地（内存或磁盘）数据访问。通过定期将检查点写入远程持久存储来实现容错。下图描绘了传统应用程序体系结构和事件驱动应用程序之间的差异。</p>
+<p><img alt="img" src="https://flink.apache.org/img/usecases-eventdrivenapps.png"/></p>
+<h3 id="_3">事件驱动的应用程序有哪些优点？</h3>
+<p>事件驱动的应用程序不是查询远程数据库，而是在本地访问其数据，从而在吞吐量和延迟方面产生更好的性能。远程持久存储的定期检查点可以异步和递增完成。因此，检查点对常规事件处理的影响非常小。但是 …</p> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-usecases.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/big-data-flink-intro.html"><h1>Flink入门</h1></a>
+<span class="metadata">
+2019-06-13 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/flink.html">Flink</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="_1">一、架构</h3>
+<p>Apache Flink是一个分布式处理引擎和框架，用于对无界和有界数据流进行状态计算。Flink可在所有常见的集群环境中运行，可以内存级速度和任意规模执行计算。</p>
+<p>接下来首先我们阐述Flink的架构。</p>
+<h4 id="_2">处理无界和有界数据</h4>
+<p>任何类型的数据都是作为事件流产生的。信用卡交易，传感器测量，机器日志或网站或移动应用程序上的用户交互，所有这些数据都作为流生成。</p>
+<p>数据可以作为<em>无界</em>或<em>有界</em>流处理。</p>
+<ol>
+<li><strong>无界流</strong>有一个开始但没有明确定义的结束。它们不会终止，并且数据在生成时即提供。必须连续处理无界流，即必须在摄取事件后立即处理事件。无法等待所有输入数据到达，因为输入是无界的，并且在任何时间点都不会完成。处理无界数据通常要求以特定顺序摄取事件，例如事件发生的顺序，以便能够推断结果完整性。无界流的处理也称为流处理。</li>
+<li><strong>有界流</strong>具有明确定义的开始和结束。可以通过在执行任何计算之前先摄取所有数据的方式来处理有界流。处理有界流不需要有序摄取，因为可以始终对有界数据集进行排序。有界流的处理也称为批处理。</li>
+</ol>
+<p><img alt="" src="https://flink.apache.org/img/bounded-unbounded.png"/></p>
+<p><strong>Apache Flink擅长处理无界和有界数据集。</strong>精确控制时间和状态使Flink的运行时能够在无界流上运行任何类型的应用程序。有界流由算法和数据结构内部处理，这些算法和数据结构专为固定大小的数据集而设计，从而产生出色的性能。</p>
+<h4 id="_3">随处部署应用程序</h4>
+<p>Apache Flink是一个分布式系统，需要计算资源才能执行应用程序。Flink可与所有常见的集群资源管理器（Resource …</p> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-intro.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/cloud-openshift-basics.html"><h1>OpenShift 详细教程 - 基础知识入门</h1></a>
+<span class="metadata">
+2019-04-19 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/cloud.html">Cloud</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/openshift.html">OpenShift</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="_1">简介</h3>
+<p>自由和开放源码的云计算平台使开发人员能够创建、测试和运行他们的应用程序，并且可以把它们部署到云中。</p>
+<p>OpenShift是红帽的云开发平台即服务（PaaS）。是一个基于主流的容器技术Docker和K8s构建的开源容器云平台。底层以Docker作为容器引擎驱动，以K8s作为容器编排引擎组件，并提供了开发语言，中间件，DevOps自动化流程工具和web console用户界面等元素，提供了一套完整的基于容器的应用云平台。</p>
+<p>Openshift提供比任何PaaS更多的灵活性，它支持用于Java、Python、PHP、Perl、node.js、go和Ruby的更多的开发框架，包括 Spring、Seam、Weld、CDI、Rails、Rack、Symfony、Zend Framework、Twisted、Django和Java E。数据库语言则支持MySQL、MongoDB和PostgreSQL。</p>
+<p>另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。</p>
+<p>OpenShift Online服务构建在Red Hat Enterprise Linux上。Red Hat …</p> <a class="btn btn-info xsmall" href="./articles/2019/cloud-openshift-basics.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/backend-java-final-keyword.html"><h1>详解Java中的final关键字</h1></a>
+<span class="metadata">
+2019-04-12 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/java.html">Java</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="final-1"><em>final</em> 简介<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></h3>
+<p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
+<p><img alt="java中的final关键字" src="https://raw.githubusercontent.com/Heriam/images/master/in-article/final-keyword.png"/></p>
+<p>上面这张图可以概括成：</p>
+<ul>
+<li>当<em>final</em>修饰<strong>变量</strong>时，被修饰的变量必须被初始化(赋值)，且后续不能修改其值，实质上是常量；</li>
+<li>当<em>final</em>修饰<strong>方法</strong>时，被修饰的方法无法被所在类的子类重写（覆写）；</li>
+<li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且<em>final</em>类中的所有成员方法都会被隐式地指定为<em>final</em>方法，但成员变量则不会变。</li>
+</ul>
+<h3 id="final"><em>final</em> 修饰变量</h3>
+<p>当使用<em>final</em>关键字声明类成员变量或局部变量后，其值不能被再次修改 …</p> <a class="btn btn-info xsmall" href="./articles/2019/backend-java-final-keyword.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/tools-Cloud-Desktop-Based-On-MegaSync.html"><h1>Put your desktop in the cloud using MEGASync</h1></a>
+<span class="metadata">
+2019-04-10 Wed&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary"><h3 id="demo">Demo</h3>
+<p>Here is a demo showing a "cloud" desktop:
+<br /> <br>
+<img alt="MEGASync Desktop" src="https://raw.githubusercontent.com/Heriam/images/master/in-article/desktop.png">
+<br /> <br>
+If you don't like application icons and want to only have files and folders on desktop (as shown in the picture), but still want to be able to launch applications in a convenient way, you can remove all the icons, and …</p> <a class="btn btn-info xsmall" href="./articles/2019/tools-Cloud-Desktop-Based-On-MegaSync.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/backend-AJavaTFTPServer.html"><h1>A Java TFTP Server</h1></a>
+<span class="metadata">
+2019-04-09 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/java.html">Java</a>,&nbsp;<a href="./tags/tftp.html">TFTP</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="_1">简介</h3>
+<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
+<p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
+<p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
+<p>要停止，请使用shutdown方法。</p>
+<p>要检查服务器是否仍在运行（或者由于错误而停止），请调用isRunning方法。</p>
+<p>默认情况下，事件不会记录到stdout/stderr。可以使用setLog和setLogError方法更改此设置。</p>
+<p>示例用法如下：</p>
+<div class="highlight"><pre><span></span> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+  <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">)</span>
+      <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span>
+                  <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"You must provide 1 argument - the …</span></pre></div> <a class="btn btn-info xsmall" href="./articles/2019/backend-AJavaTFTPServer.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/backend-Java代码优化35点总结.html"><h1>Java代码优化35点总结</h1></a>
+<span class="metadata">
+2019-04-02 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/java.html">Java</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="_1">前言</h3>
+<p>代码优化，一个很重要的课题。可能有些人觉得没用，一些细小的地方有什么好修改的，改与不改对于代码的运行效率有什么影响呢？这个问题我是这么考虑的，就像大海里面的鲸鱼一样，它吃一条小虾米有用吗？没用，但是，吃的小虾米一多之后，鲸鱼就被喂饱了。代码优化也是一样，如果项目着眼于尽快无BUG上线，那么此时可以抓大放小，代码的细节可以不精打细磨；但是如果有足够的时间开发、维护代码，这时候就必须考虑每个可以优化的细节了，一个一个细小的优化点累积起来，对于代码的运行效率绝对是有提升的。</p>
+<p>代码优化的目标是：</p>
+<p>1、减小代码的体积</p>
+<p>2、提高代码运行的效率</p>
+<h3 id="_2">代码优化细节</h3>
+<h5 id="1final">1、尽量指定类、方法的final修饰符</h5>
+<p>带有final修饰符的类是不可派生的。在Java核心API中，有许多应用final的例子，例如java.lang.String，整个类都是final的。为类指定final修饰符可以让类不可以被继承，为方法指定final修饰符可以让方法不可以被重写。如果指定了一个类为final，则该类所有的方法都是final的。Java编译器会寻找机会内联所有的final方法，内联对于提升Java运行效率作用重大，具体参见Java运行期优化。此举能够使性能平均提高50%。</p>
+<h5 id="2">2、尽量重用对象</h5>
+<p>特别是String对象的使用，出现字符串连接时应该使用StringBuilder …</p> <a class="btn btn-info xsmall" href="./articles/2019/backend-Java代码优化35点总结.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2019/notes-人之一生.html"><h1>人之一生</h1></a>
+<span class="metadata">
+2019-03-16 Sat&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary"><h3>热爱生命</h3>
+
+<p>我不去想，
+是否能够成功 ，
+既然选择了远方 ，
+便只顾风雨兼程。</p>
+<p>我不去想，
+能否赢得爱情 ，
+既然钟情于玫瑰 ，
+就勇敢地吐露真诚 。</p>
+<p>我不去想，
+身后会不会袭来寒风冷雨 ，
+既然目标是地平线，
+留给世界的只能是背影 。</p>
+<p>我不去想，
+未来是平坦还是泥泞 ，
+只要热爱生命 ，
+一切，都在意料之中。</p>
+<hr>
+<h3>决心</h3>
+
+<p>人之一生，总会有许多困惑不已、纠缠不清的琐事，难免受其影响，绝不为其左右。</p>
+<p>此时所需的就是断然的取舍与明智的抉择，唯一会限制我们的，是我们自己的决心。</p>
+<hr>
+<h3>延续</h3>
+
+<p>万物善变，人生泛滥的是那些冲动和急躁：即兴的热情、肤浅的思考、仓促的决定、敷衍的搪塞和最终的草草了事；</p>
+<p>而珍贵的是生命中那些经久和坚持，一种信仰，一段情感，一个习惯。一句独白自视为约定，一段感情权当作余生。</p>
+<hr>
+<h3>动力</h3>
+
+<p>如果说不清追逐的动力源于何处，就至少要让优秀成为自己的习惯，要乐观阳光，要知道自己身在何处，路在何方。</p>
+<hr>
+<h3>初心</h3>
+
+<p>愿我们在心底埋下的勇气、乐观和向善的种子，最后都成长为自己一直所追寻的最喜欢的样子 …</p> <a class="btn btn-info xsmall" href="./articles/2019/notes-人之一生.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2018/frontend-JQCloud.html"><h1>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h1></a>
+<span class="metadata">
+2018-02-25 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/jquery.html">JQuery</a>,&nbsp;<a href="./tags/javascript.html">JavaScript</a>,&nbsp;<a href="./tags/html.html">HTML</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
+官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
+<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>具体的使用方法官网都能查到。</p>
+<p>贴出自己微博使用JQCloud的前端代码：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="./articles/2018/frontend-JQCloud.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1></a>
+<span class="metadata">
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/pelican.html">Pelican</a>,&nbsp;<a href="./tags/git.html">Git</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
+- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
+- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
+- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
+  ​        <br>
+  <br>   </p>
+<hr>
+<p><strong>一、</strong><a href="https://jiang-hao.com/articles/2018/blog-%E4%BD%BF%E7%94%A8Pelican%E5%9F%BA%E4%BA%8EGithubPages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B.html">《Pelican＋Github博客搭建详细教程》</a>      </p>
+<hr>
+<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
+<br>   </p>
+<hr>
+<p><strong>二、在Coding创建一个新的项目</strong></p>
+<hr>
+<ol>
+<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
+    <br>   </li>
+<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
+</ol>
+<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="./articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html"><h1>使用Pelican基于Github Pages搭建博客教程</h1></a>
+<span class="metadata">
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/pelican.html">Pelican</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><p><strong>操作系统：</strong>Mac OS / Linux    <br>
+<strong>工具集：</strong>  <br>
+1.Pelican——基于Python的静态网页生成器 <br>
+2.马克飞象——Evernote出的Markdown文本编辑器 <br>
+3.GoDaddy——域名供应商 <br>
+4.DNSPod——提供免费域名解析注册服务 <br>
+5.Github Pages——Github为每个注册用户提供300M的站点空间 <br>
+6.Python——Pelican工具需要Python运行环境 <br>
+7.Google Analytics——谷歌站点数据监测分析工具 <br>
+8.Google Custom Search——谷歌自定义搜索引擎可用作站内搜索工具 <br>
+9.Google Webmasters——谷歌站长工具  <br>
+10.Disqus——用来提供博客评论功能  <br>
+11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
+12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
+<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="./articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
+<span class="metadata">
+2018-01-01 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/opendaylight.html">OpenDaylight</a>,&nbsp;<a href="./tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="./tags/sdn.html">SDN</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><div><font face="Times New Roman">
+<p><em><font face = "Times New Roman">Operating System：Linux x64 / Ubuntu 14.04</font></em>   <br />
+<em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
+<em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
+<hr />
+<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
+<hr />
+<p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
+<div class="highlight"><pre><span></span>sudo apt-get install git-core
+</pre></div>
+
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="./articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="./articles/2017/tools-WifiHotSpotOnWindows.html"><h1>Windows系统配置WiFi无线热点</h1></a>
+<span class="metadata">
+2017-11-21 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/wifi.html">WiFi</a>,&nbsp;<a href="./tags/windows.html">Windows</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
+Windows 版本： Windows 7/8/10  <br />
+前提：电脑装配无线网卡  <br />
+方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
+</font></p>
+<hr />
+<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
+<div class="highlight"><pre><span></span>netsh wlan show drivers
+</pre></div></p>
+<p>在输出信息中找到 “支持承载网络：是” 则继续。
+<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
+netsh wlan show hostednetwork setting=security
+</pre></div>
+
+<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
+
+<p>3.创建WiFi热点。命令行输入：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="./articles/2017/tools-WifiHotSpotOnWindows.html">read more</a></div>
+        <hr />
+    </div>
+				
+<div class="pagination">
+<ul>
+    <li class="prev disabled"><a href="#">&lsaquo; Previous</a></li>
+
+    <li class="active"><a href="./index.html">1</a></li>
+    <li class=""><a href="./index2.html">2</a></li>
+
+    <li class="next"><a href="./index2.html">Next &rsaquo;</a></li>
+
+</ul>
+</div>
+ 
+  </section>
         </div>
         
         <div class="span3">

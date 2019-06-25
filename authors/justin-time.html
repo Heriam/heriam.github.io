@@ -446,13 +446,196 @@ Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
 <p>愿我们在心底埋下的勇气、乐观和向善的种子，最后都成长为自己一直所追寻的最喜欢的样子 …</p> <a class="btn btn-info xsmall" href="../articles/2019/notes-人之一生.html">read more</a></div>
     </div>	
 				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2018/frontend-JQCloud.html"><h2>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h2></a>
+        <div class= "well small"> <span class="metadata">
+2018-02-25 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/jquery.html">JQuery</a>,&nbsp;<a href="../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../tags/html.html">HTML</a>,&nbsp;</span> </div>
+        <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
+官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
+<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>具体的使用方法官网都能查到。</p>
+<p>贴出自己微博使用JQCloud的前端代码：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2018/frontend-JQCloud.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
+        <div class= "well small"> <span class="metadata">
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;<a href="../tags/git.html">Git</a>,&nbsp;</span> </div>
+        <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
+- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
+- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
+- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
+  ​        <br>
+  <br>   </p>
+<hr>
+<p><strong>一、</strong><a href="https://jiang-hao.com/articles/2018/blog-%E4%BD%BF%E7%94%A8Pelican%E5%9F%BA%E4%BA%8EGithubPages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B.html">《Pelican＋Github博客搭建详细教程》</a>      </p>
+<hr>
+<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
+<br>   </p>
+<hr>
+<p><strong>二、在Coding创建一个新的项目</strong></p>
+<hr>
+<ol>
+<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
+    <br>   </li>
+<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
+</ol>
+<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="../articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html"><h2>使用Pelican基于Github Pages搭建博客教程</h2></a>
+        <div class= "well small"> <span class="metadata">
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;</span> </div>
+        <div class="summary"><p><strong>操作系统：</strong>Mac OS / Linux    <br>
+<strong>工具集：</strong>  <br>
+1.Pelican——基于Python的静态网页生成器 <br>
+2.马克飞象——Evernote出的Markdown文本编辑器 <br>
+3.GoDaddy——域名供应商 <br>
+4.DNSPod——提供免费域名解析注册服务 <br>
+5.Github Pages——Github为每个注册用户提供300M的站点空间 <br>
+6.Python——Pelican工具需要Python运行环境 <br>
+7.Google Analytics——谷歌站点数据监测分析工具 <br>
+8.Google Custom Search——谷歌自定义搜索引擎可用作站内搜索工具 <br>
+9.Google Webmasters——谷歌站长工具  <br>
+10.Disqus——用来提供博客评论功能  <br>
+11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
+12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
+<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="../articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html"><h2>Build and Install OpenDaylight on Ubuntu</h2></a>
+        <div class= "well small"> <span class="metadata">
+2018-01-01 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/opendaylight.html">OpenDaylight</a>,&nbsp;<a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="../tags/sdn.html">SDN</a>,&nbsp;</span> </div>
+        <div class="summary"><div><font face="Times New Roman">
+<p><em><font face = "Times New Roman">Operating System：Linux x64 / Ubuntu 14.04</font></em>   <br />
+<em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
+<em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
+<hr />
+<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
+<hr />
+<p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
+<div class="highlight"><pre><span></span>sudo apt-get install git-core
+</pre></div>
+
+<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="../articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2017/tools-WifiHotSpotOnWindows.html"><h2>Windows系统配置WiFi无线热点</h2></a>
+        <div class= "well small"> <span class="metadata">
+2017-11-21 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/wifi.html">WiFi</a>,&nbsp;<a href="../tags/windows.html">Windows</a>,&nbsp;</span> </div>
+        <div class="summary"><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
+Windows 版本： Windows 7/8/10  <br />
+前提：电脑装配无线网卡  <br />
+方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
+</font></p>
+<hr />
+<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
+<div class="highlight"><pre><span></span>netsh wlan show drivers
+</pre></div></p>
+<p>在输出信息中找到 “支持承载网络：是” 则继续。
+<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
+netsh wlan show hostednetwork setting=security
+</pre></div>
+
+<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
+
+<p>3.创建WiFi热点。命令行输入：    </p>
+
+<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="../articles/2017/tools-WifiHotSpotOnWindows.html">read more</a></div>
+    </div>	
+				
 <div class="pagination">
 <ul>
     <li class="prev disabled"><a href="#">&lsaquo; Previous</a></li>
 
     <li class="active"><a href="../authors/justin-time.html">1</a></li>
     <li class=""><a href="../authors/justin-time2.html">2</a></li>
-    <li class=""><a href="../authors/justin-time3.html">3</a></li>
 
     <li class="next"><a href="../authors/justin-time2.html">Next &rsaquo;</a></li>
 

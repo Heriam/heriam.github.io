@@ -88,190 +88,6 @@
  
 
     <div class='article'>
-        <a href="../articles/2018/frontend-JQCloud.html"><h2>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-25 Sun&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/jquery.html">JQuery</a>,&nbsp;<a href="../tags/javascript.html">JavaScript</a>,&nbsp;<a href="../tags/html.html">HTML</a>,&nbsp;</span> </div>
-        <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
-官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
-<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
-<p>具体的使用方法官网都能查到。</p>
-<p>贴出自己微博使用JQCloud的前端代码：</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2018/frontend-JQCloud.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h2>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;<a href="../tags/git.html">Git</a>,&nbsp;</span> </div>
-        <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
-- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
-- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
-- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
-  ​        <br>
-  <br>   </p>
-<hr>
-<p><strong>一、</strong><a href="https://jiang-hao.com/articles/2018/blog-%E4%BD%BF%E7%94%A8Pelican%E5%9F%BA%E4%BA%8EGithubPages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B.html">《Pelican＋Github博客搭建详细教程》</a>      </p>
-<hr>
-<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
-<br>   </p>
-<hr>
-<p><strong>二、在Coding创建一个新的项目</strong></p>
-<hr>
-<ol>
-<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
-    <br>   </li>
-<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
-</ol>
-<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="../articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html"><h2>使用Pelican基于Github Pages搭建博客教程</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/pelican.html">Pelican</a>,&nbsp;</span> </div>
-        <div class="summary"><p><strong>操作系统：</strong>Mac OS / Linux    <br>
-<strong>工具集：</strong>  <br>
-1.Pelican——基于Python的静态网页生成器 <br>
-2.马克飞象——Evernote出的Markdown文本编辑器 <br>
-3.GoDaddy——域名供应商 <br>
-4.DNSPod——提供免费域名解析注册服务 <br>
-5.Github Pages——Github为每个注册用户提供300M的站点空间 <br>
-6.Python——Pelican工具需要Python运行环境 <br>
-7.Google Analytics——谷歌站点数据监测分析工具 <br>
-8.Google Custom Search——谷歌自定义搜索引擎可用作站内搜索工具 <br>
-9.Google Webmasters——谷歌站长工具  <br>
-10.Disqus——用来提供博客评论功能  <br>
-11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
-12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
-<strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="../articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html"><h2>Build and Install OpenDaylight on Ubuntu</h2></a>
-        <div class= "well small"> <span class="metadata">
-2018-01-01 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/opendaylight.html">OpenDaylight</a>,&nbsp;<a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="../tags/sdn.html">SDN</a>,&nbsp;</span> </div>
-        <div class="summary"><div><font face="Times New Roman">
-<p><em><font face = "Times New Roman">Operating System：Linux x64 / Ubuntu 14.04</font></em>   <br />
-<em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
-<em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
-<hr />
-<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
-<hr />
-<p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
-<div class="highlight"><pre><span></span>sudo apt-get install git-core
-</pre></div>
-
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="../articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="../articles/2017/tools-WifiHotSpotOnWindows.html"><h2>Windows系统配置WiFi无线热点</h2></a>
-        <div class= "well small"> <span class="metadata">
-2017-11-21 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="../tags/wifi.html">WiFi</a>,&nbsp;<a href="../tags/windows.html">Windows</a>,&nbsp;</span> </div>
-        <div class="summary"><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
-Windows 版本： Windows 7/8/10  <br />
-前提：电脑装配无线网卡  <br />
-方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
-</font></p>
-<hr />
-<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
-<div class="highlight"><pre><span></span>netsh wlan show drivers
-</pre></div></p>
-<p>在输出信息中找到 “支持承载网络：是” 则继续。
-<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
-netsh wlan show hostednetwork setting=security
-</pre></div>
-
-<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
-
-<p>3.创建WiFi热点。命令行输入：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="../articles/2017/tools-WifiHotSpotOnWindows.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
         <a href="../articles/2017/backend-Ubuntu系统ApacheMaven安装.html"><h2>Ubuntu系统Apache Maven安装</h2></a>
         <div class= "well small"> <span class="metadata">
 2017-10-24 Tue&nbsp;&nbsp;&nbsp;
@@ -450,15 +266,191 @@ Category: <a href="../categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
   <span class="k">width</span><span class="p">:</span> <span class="mi">16 …</span></pre></div> <a class="btn btn-info xsmall" href="../articles/2017/frontend-CSS伪类contenturl放图片如何改变图的大小.html">read more</a></div>
     </div>	
 				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2016/tools-InstallWiresharkonUbuntu.html"><h2>Install Wireshark on Ubuntu</h2></a>
+        <div class= "well small"> <span class="metadata">
+2016-07-08 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/wireshark.html">Wireshark</a>,&nbsp;<a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;</span> </div>
+        <div class="summary"><div><font face="Times New Roman"><p><br>
+1. Download WIreshark source code on website: <a href="https://www.wireshark.org/download.html">https://www.wireshark.org/download.html</a>  <br />
+2. Extract files into targeted folder:     <br></p>
+<div class="highlight"><pre><span></span>tar -xvf wireshark-1.10.7.tar.bz2
+</pre></div>
+
+<p><br>  <br />
+3. Install compiling tools and dependencies:    <br></p>
+
+<div class="highlight"><pre><span></span>sudo apt-get install build-essential
+sudo apt-get install libgtk2.0-dev libglib2.0-dev
+sudo apt-get install checkinstall
+sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall" href="../articles/2016/tools-InstallWiresharkonUbuntu.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2016/notes-法国的一些精油品牌.html"><h2>法国的一些著名的精油品牌</h2></a>
+        <div class= "well small"> <span class="metadata">
+2016-06-10 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> </div>
+        <div class="summary"><div><font face="Times New Roman">
+<p>法国精油品牌：  <br />
+<a href="http://www.florihana.com">Florial (Florihana)</a>(芙梦丽娜) <br />
+<a href="http://fr.loccitane.com/">L'OCCITANE</a> (<a href="http://www.loccitane.cn/">欧舒丹</a>)  <br />
+<a href="www. Sanoflore .com">Sanoflore</a>(圣芙兰)   <br />
+<a href="http://www.camenae.com.cn/">CAMENAE</a> (嘉媚乐)  <br />
+<a href="https://fr.nuxe.com/">NUXE</a> (<a href="http://www.nuxechina.com/">欧树</a>)  <br />
+<a href="http://world.sisley.com/">SISLEY</a> (<a href="http://www.sisley.com.cn/">希思黎</a>)    </p>
+<hr />
+<p><strong>1. Florial (Florihana) —— F家</strong>    </p>
+<hr />
+<p><strong>品牌：</strong>  <br />
+在欧洲被视为法国第一医疗等级的有机认证植物精油品牌，多年来一直深受着各国芳疗界的喜爱。拥有世界上独一无二的特殊蒸馏技术，采用人工采集和产油率极低的低温、低压、缓慢的蒸馏技术来提炼精油。包装瓶选用一种特殊的绿色玻璃来装载精油，此种瓶子不但可阻挡一般的阳光，还有过滤紫外线和红外线的作用，方便精油更好的保持原型状态。此外，F家的有机精油品种丰富，其中尤其纯露做的非常好，属于世界顶级行列。唯一的一点瑕疵是这家的产地有些并不是非常好（其实也很好理解，算是多品种的机会成本吧）。  <br />
+<br>  <br />
+<strong>公司：</strong>  <br />
+J.E Internatioanl (Florihana、Florial商标所有人)公司总部设立在法国的南部，于国家级自然保护区内的科斯高山（Caussols plateau）上。创办人MR. Durante Alain …</p></font></div> <a class="btn btn-info xsmall" href="../articles/2016/notes-法国的一些精油品牌.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html"><h2>Install VMware Workstation in Ubuntu 14.04</h2></a>
+        <div class= "well small"> <span class="metadata">
+2016-04-21 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/vmware.html">VMware</a>,&nbsp;<a href="../tags/ubuntu.html">Ubuntu</a>,&nbsp;</span> </div>
+        <div class="summary"><div><font face="Times New Roman"><p><br>
+1. Use <code>apt-get</code>  update system:    </p>
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
+linuxidc@localhost:~$ sudo apt-get upgrade
+</pre></div>
+
+<p><br><br>
+2. Download VMware Workstation bundle.<br><br>
+3. Make bundle executable:    </p>
+
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
+</pre></div>
+
+<p><br><br>
+4. Run the bundle:    </p>
+
+<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
+</pre></div>
+
+<p><br><br>
+5. Installation:  <br />
+<img alt="VMware Station Installation" src="http://www.linuxidc.com/upload/2015_01/150114174598326.jpg" /></p>
+
+<p></font></div></p> <a class="btn btn-info xsmall" href="../articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2016/backend-Shiro.html"><h2>Apache Shiro Multi-tenancy with JDBC MySQL</h2></a>
+        <div class= "well small"> <span class="metadata">
+2016-02-21 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="../tags/mysql.html">MySQL</a>,&nbsp;<a href="../tags/java.html">Java</a>,&nbsp;<a href="../tags/shiro.html">Shiro</a>,&nbsp;<a href="../tags/aaa.html">AAA</a>,&nbsp;</span> </div>
+        <div class="summary"><p><b>0. GOALS</b><hr>
+- Provide user authentication and authorization for <strong>multi-tenant</strong> scenarios     <br> <br />
+- Provide easy-to-maintain data storage with only <strong>one database</strong>    <br> <br />
+- Provide <strong>domain-differentiated, credential-based</strong> authentication    <br> <br />
+- Provide <strong>domain-differentiated, role-based, service-specific</strong> authorization;    <br>   </p>
+
+<p><p><br><br><br><b>1. QuickStart with Apache Shiro</b><hr>
+- <a href="http://shiro.apache.org/reference.html">English Documentation</a>    <br> <br />
+- <a href="http://jinnianshilongnian.iteye.com/blog/2018398">Chinese Documentation</a>    <br> <br />
+- <a href="https://github.com/zhangkaitao/shiro-example">Example Applications</a>    <br><br />
+- <a href="http://shiro.apache.org/architecture.html">Architecture:</a>    <br><br>  <br />
+  <img alt="Shiro Architecture" src="http://shiro.apache.org/assets/images/ShiroArchitecture.png" />  <br />
+  <br><br>    </p>
+  <p><br><b>2. Environment Prerequisites</b><hr></p></p>
+<div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41 …</pre></div> <a class="btn btn-info xsmall" href="../articles/2016/backend-Shiro.html">read more</a></div>
+    </div>	
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="../articles/2016/notes-心路.html"><h2>在难搞的日子里他们这样对你说</h2></a>
+        <div class= "well small"> <span class="metadata">
+2016-02-01 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="../authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="../categories/notes.html">Notes</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> </div>
+        <div class="summary">
+<p>城市：雷恩<br/><br/>2016年2月1日晚，距国内过新年还有7天。原本只是想要找一封早时候的项目电邮，结果不小心没把持住，泛滥着感慨时光飞逝的小情绪翻阅了一遍以往的邮件，感觉就像是在看旧照片，就像把从大一开始到现在的生活重新走了一遍。至今有很多需要感谢的人，值得纪念的事，我不想在忙碌中就这样让它们随时间流走。因为手里的东西总是忙不完，那些让你成长的却不总有机会不被遗忘。</p>
+<h1 id="2012-09-012013-08-27">2012-09-01/2013-08-27  大三</h1>
+<p>2012年大二暑假，由于本专业大类被限制转专业，我决定通过考取思科认证来自学网络技术。11月，虽然国创(SIETP)项目才刚立项一个月，SRTP项目已经立项半年，但是学习的重心从十月份起已经向网络方向偏移，整天脑子里除了思科的路由交换就是国创的建筑涂料，闲暇之余才能稍微顾及一下专业课程实习和考试，而SRTP项目已经打算彻底水漂过去了。这个过程持续了一年，准备出国又花了一年，期间发生了许多事——得到了许多人的帮助，也犯了不少傻事。</p>
+<h2 id="2012-09-inquiry-to-prof-bai">2012-09-Inquiry to Prof. Bai</h2>
+<p>我希望在本科毕业后往网络工程方向走。我的专业是农业资源与环境，但出于个人兴趣并且经过了慎重考虑后，我想在大学接下来的两年内考取CCIE，可自己目前几乎是零基础，暂时打算到欧朋兰博先报一个CCNA的培训班作为入门。我有一位高中同学（专业与计算机网络无关）在今年暑假拿到了CCIE认证，虽然有了他的建议和引导可以少走些弯路，但他毕竟不在自己身边许多事情还是需要自己去摸索。下面是我想咨询您的问题 …</p> <a class="btn btn-info xsmall" href="../articles/2016/notes-心路.html">read more</a></div>
+    </div>	
+				
 <div class="pagination">
 <ul>
     <li class="prev"><a href="../authors/justin-time.html">&lsaquo; Previous</a></li>
 
     <li class=""><a href="../authors/justin-time.html">1</a></li>
     <li class="active"><a href="../authors/justin-time2.html">2</a></li>
-    <li class=""><a href="../authors/justin-time3.html">3</a></li>
 
-    <li class="next"><a href="../authors/justin-time3.html">Next &rsaquo;</a></li>
+    <li class="next disabled"><a href="#">Next &rsaquo;</a></li>
 
 </ul>
 </div>

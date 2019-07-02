@@ -89,6 +89,48 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="./articles/2019/big-data-flink-distributed-runtime.html"><h1>Flink 分布式运行时环境</h1></a>
+<span class="metadata">
+2019-07-01 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/flink.html">Flink</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">任务和算子链</h2>
+<p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>
+<p>下图中的示例数据流由五个子任务执行，因此具有五个并行线程。</p>
+<p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"/></p>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/runtime.html#top"> 回到顶部</a></p>
+<h2 id="_2">工作经理，任务经理，客户</h2>
+<p>Flink运行时包含两种类型的进程：</p>
+<ul>
+<li>该<strong>JobManagers</strong>（也称为<em>大师</em>）协调分布式执行。他们安排任务，协调检查点，协调故障恢复等。</li>
+</ul>
+<p>总是至少有一个Job Manager。高可用性设置将具有多个JobManagers，其中一个始终是<em>领导者</em>，其他人处于<em>待机状态</em>。</p>
+<ul>
+<li>该<strong>TaskManagers</strong>（也叫<em>工人</em>）执行<em>任务</em>（或者更具体地说，子任务）的数据流，以及缓冲器和交换数据<em>流</em>。</li>
+</ul>
+<p>必须始终至少有一个TaskManager。</p>
+<p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中 …</p> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="./articles/2019/big-data-flink-FAQ.html"><h1>Flink FAQ</h1></a>
 <span class="metadata">
 2019-06-21 Fri&nbsp;&nbsp;&nbsp;
@@ -114,7 +156,7 @@ Category: <a href="./categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
 <h3 id="flinkhadoop">Flink如何与Hadoop栈相关联 …</h3> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-FAQ.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -622,52 +664,6 @@ Category: <a href="./categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 </pre></div>
 
 <p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="./articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="./articles/2017/tools-WifiHotSpotOnWindows.html"><h1>Windows系统配置WiFi无线热点</h1></a>
-<span class="metadata">
-2017-11-21 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="./categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="./tags/wifi.html">WiFi</a>,&nbsp;<a href="./tags/windows.html">Windows</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary"><p><div><font face="Times New Roman"><p><font face="Times New Roman" size=3>
-Windows 版本： Windows 7/8/10  <br />
-前提：电脑装配无线网卡  <br />
-方法：通过Dos命令行创建WiFi热点，然后启用共享  <br />
-</font></p>
-<hr />
-<p>1.首先确定无线网卡是否支持承载网络（Hosted Network）。在管理员模式的CMD窗口输入命令：    </p>
-<div class="highlight"><pre><span></span>netsh wlan show drivers
-</pre></div></p>
-<p>在输出信息中找到 “支持承载网络：是” 则继续。
-<hr>2.确定电脑是否已经配置承载网络。同样在CMD窗口分别输入命令：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan show hostednetwork
-netsh wlan show hostednetwork setting=security
-</pre></div>
-
-<p>如果看到第一条命令输出已经配置好的WiFi热点的SSID，第二条输出WiFi热点的密码，直接跳到第四步。<hr></p>
-
-<p>3.创建WiFi热点。命令行输入：    </p>
-
-<div class="highlight"><pre><span></span>netsh wlan set hostednetwork mode=allow ssid …</pre></div> <a class="btn btn-info xsmall" href="./articles/2017/tools-WifiHotSpotOnWindows.html">read more</a></div>
         <hr />
     </div>
 				

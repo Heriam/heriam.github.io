@@ -108,18 +108,17 @@ Category: <a href="./categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
 <p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>
 <p>下图中的示例数据流由五个子任务执行，因此具有五个并行线程。</p>
 <p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"/></p>
-<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/runtime.html#top"> 回到顶部</a></p>
-<h2 id="_2">工作经理，任务经理，客户</h2>
+<h2 id="job-managers-task-managers-clients">Job Managers, Task Managers, Clients</h2>
 <p>Flink运行时包含两种类型的进程：</p>
 <ul>
-<li>该<strong>JobManagers</strong>（也称为<em>大师</em>）协调分布式执行。他们安排任务，协调检查点，协调故障恢复等。</li>
+<li><strong>JobManagers</strong>（也称为<em>masters</em>）协调分布式执行。他们安排任务，协调检查点，协调故障恢复等。</li>
 </ul>
-<p>总是至少有一个Job Manager。高可用性设置将具有多个JobManagers，其中一个始终是<em>领导者</em>，其他人处于<em>待机状态</em>。</p>
+<p>Job Manager总是至少有一个。高可用性设置将具有多个JobManagers，其中一个始终是<em>领导者</em>，其他处于<em>待机状态</em>。</p>
 <ul>
-<li>该<strong>TaskManagers</strong>（也叫<em>工人</em>）执行<em>任务</em>（或者更具体地说，子任务）的数据流，以及缓冲器和交换数据<em>流</em>。</li>
+<li><strong>TaskManagers</strong>（也叫<em>workers</em>）执行dataflow的<em>任务</em>（或者更具体地说应该是子任务），以及缓冲和交换data <em>streams</em>。</li>
 </ul>
 <p>必须始终至少有一个TaskManager。</p>
-<p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中 …</p> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
+<p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中，或由<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/yarn_setup.html">YARN</a>或 …</p> <a class="btn btn-info xsmall" href="./articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
         <hr />
     </div>
 		

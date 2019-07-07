@@ -100,7 +100,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 		<hr />
 			<nav class="toc">
 			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
-<li><a href="#_1">任务和算子链</a></li>
+<li><a href="#tasks-and-operator-chains">Tasks and Operator Chains</a></li>
 <li><a href="#job-managers-task-managers-clients">Job Managers, Task Managers, Clients</a></li>
 <li><a href="#task-slots-and-resources">Task Slots and Resources</a></li>
 <li><a href="#state-backends">State Backends</a></li>
@@ -112,7 +112,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 		<hr />
 		
         <div>
-<h2 id="_1">任务和算子链</h2>
+<h2 id="tasks-and-operator-chains">Tasks and Operator Chains</h2>
 <p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>
 <p>下图中的示例数据流由五个子任务执行，因此具有五个并行线程。</p>
 <p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"/></p>
@@ -130,7 +130,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 <p><strong>Client</strong>不是运行时和程序执行的一部分，而是被用来准备和发送dataflow到JobManager。之后，客户端可以断开连接或保持连接以接收进度报告。客户端既可以作为触发执行的Java / Scala程序的一部分运行，也可以在命令行进程<code>./bin/flink run ...</code>中运行。</p>
 <p><img alt="执行Flink数据流所涉及的过程" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/processes.svg"/></p>
 <h2 id="task-slots-and-resources">Task Slots and Resources</h2>
-<p>每个worker（TaskManager）都是一个<em>JVM进程</em>，可以在不同的线程中执行一个或多个子任务。为了控制一个work接受的任务数量，每个work都有所谓的<strong>task slots</strong>（至少一个）。</p>
+<p>每个worker（TaskManager）都是一个<em>JVM进程</em>，可以在不同的线程中执行一个或多个子任务。为了控制一个worker接受的任务数量，每个worker都有所谓的<strong>task slots</strong>（至少一个）。</p>
 <p>每个<em>task slot</em>代表TaskManager的一个固定资源子集。例如，具有3个task slot的TaskManager会将其1/3的托管内存分配于每个task slot。资源切片意味着子任务不会与来自托管内存的其他作业的子任务竞争资源，相反其具有一定量的预留托管内存。请注意，这里没有CPU隔离; 当前task slots只分隔任务的托管内存。</p>
 <p>通过调整task slot的数量，用户可以定义子任务如何相互隔离。每个TaskManager有一个slot意味着每个任务组在一个单独的JVM中运行（比如也就可以在一个单独的容器中启动）。拥有多个slots意味着更多子任务共享同一个JVM。同一JVM中的任务共享TCP连接（通过多路复用）和心跳消息。它们还可以共享数据集和数据结构，从而减少每任务开销。</p>
 <p><img alt="具有任务槽和任务的TaskManager" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_slots.svg"/></p>

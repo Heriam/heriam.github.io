@@ -89,7 +89,7 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="../articles/2019/big-data-lambda-architecture.html"><h1>从Lambda到Kappa——深入理解大数据架构</h1></a>
+            <a href="../articles/2019/big-data-lambda-architecture.html"><h1>深入理解大数据架构之——Lambda架构</h1></a>
 <span class="metadata">
 2019-07-05 Fri&nbsp;&nbsp;&nbsp;
 
@@ -104,15 +104,16 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="lambda">一、Lambda架构</h3>
-<h4 id="_1">背景介绍</h4>
-<p>Lambda架构是由Storm的作者Nathan Marz提出的一个实时大数据处理框架。Marz在Twitter工作期间开发了著名的实时大数据处理框架Storm，Lambda架构是其根据多年进行分布式大数据系统的经验总结提炼而成。Lambda架构的目标是设计出一个能满足实时大数据系统关键特性的架构，包括有：高容错、低延时和可扩展等。Lambda架构整合离线计算和实时计算，融合不可变性（Immunability），读写分离和复杂性隔离等一系列架构原则，可集成Hadoop，Kafka，Storm，Spark，Hbase等各类大数据组件。</p>
-<h4 id="_2">关键特性</h4>
-<p>Marz认为大数据系统应具有以下的关键特性： </p>
-<ul>
-<li>Robust and fault-tolerant（容错性和鲁棒性）：对大规模分布式系统来说，机器是不可靠的，可能会当机，但是系统需要是健壮、行为正确的，即使是遇到机器错误。除了机器错误，人更可能会犯错误。在软件开发中难免会有一些Bug，系统必须对有Bug的程序写入的错误数据有足够的适应能力，所以比机器容错性更加重要的容错性是人为操作容错性。对于大规模的分布式系统来说，人和机器的错误每天都可能会发生，如何应对人和机器的错误，让系统能够从错误中快速恢复尤其重要。 </li>
-<li>Low latency reads and updates（低延时）：很多应用对于读和写操作的延时要求非常高，要求对更新和查询的响应是低延时的。 </li>
-<li>Scalable …</li></ul> <a class="btn btn-info xsmall" href="../articles/2019/big-data-lambda-architecture.html">read more</a></div>
+<h3 id="_1">传统系统的问题</h3>
+<blockquote>
+<p>“我们正在从IT时代走向DT时代(数据时代)。IT和DT之间，不仅仅是技术的变革，更是思想意识的变革，IT主要是为自我服务，用来更好地自我控制和管理，DT则是激活生产力，让别人活得比你好”</p>
+<p>——阿里巴巴董事局主席马云。 </p>
+</blockquote>
+<p>数据量从M的级别到G的级别到现在T的级、P的级别。数据量的变化数据管理系统（DBMS）和数仓系统（DW）也在悄然的变化着。 传统应用的数据系统架构设计时，应用直接访问数据库系统。当用户访问量增加时，数据库无法支撑日益增长的用户请求的负载时，从而导致数据库服务器无法及时响应用户请求，出现超时的错误。出现这种情况以后，在系统架构上就采用下图的架构，在数据库和应用中间过一层缓冲隔离，缓解数据库的读写压力。</p>
+<p><img alt="" src="https://img-blog.csdn.net/20160628202055909?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"/></p>
+<p>然而，当用户访问量持续增加时，就需要考虑读写分离技术（Master－Slave）架构则如下图，分库分表技术。现在，架构变得越来越复杂了，增加队列、分区、复制等处理逻辑。应用程序需要了解数据库的schema，才能访问到正确的数据。</p>
+<p><img alt="" src="https://img-blog.csdn.net/20160628202131003?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"/></p>
+<p>商业现实已经发生了变化，所以现在更快做出的决定更有价值。除此之外，技术也在不断发展。Kafka，Storm，Trident，Samza …</p> <a class="btn btn-info xsmall" href="../articles/2019/big-data-lambda-architecture.html">read more</a></div>
         <hr />
     </div>
 		
@@ -139,7 +140,7 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h2 id="_1">任务和算子链</h2>
+<h2 id="tasks-and-operator-chains">Tasks and Operator Chains</h2>
 <p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>
 <p>下图中的示例数据流由五个子任务执行，因此具有五个并行线程。</p>
 <p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"/></p>
@@ -153,7 +154,7 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
 <li><strong>TaskManagers</strong>（也叫<em>workers</em>）执行dataflow的<em>任务</em>（或者更具体地说应该是子任务），以及缓冲和交换data <em>streams</em>。</li>
 </ul>
 <p>必须始终至少有一个TaskManager。</p>
-<p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中，或由<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/yarn_setup.html">YARN</a>或 …</p> <a class="btn btn-info xsmall" href="../articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
+<p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中 …</p> <a class="btn btn-info xsmall" href="../articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
         <hr />
     </div>
 				

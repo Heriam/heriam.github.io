@@ -115,7 +115,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 <li><a href="#_4">选型原则</a></li>
 </ul>
 </li>
-<li><a href="#lambda_4">Lambda架构的局限性</a></li>
+<li><a href="#_5">总结</a></li>
 </ul>
 </div>
 			</nav>
@@ -245,15 +245,21 @@ query = function(batch view, realtime view)
 <h4 id="_3">组件选型</h4>
 <p>下图给出了Lambda架构中各组件在大数据生态系统中和阿里集团的常用组件。数据流存储选用不可变日志的分布式系统Kafka、TT、Metaq；BatchLayer数据集的存储选用Hadoop的HDFS或者阿里云的ODPS；BatchView的加工采用MapReduce；BatchView数据的存储采用Mysql（查询少量的最近结果数据）、Hbase（查询大量的历史结果数据）。SpeedLayer采用增量数据处理Storm、Flink；RealtimeView增量结果数据集采用内存数据库Redis。</p>
 <p><img alt="" src="https://img-blog.csdn.net/20160628202924389?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"/></p>
+<p>另一个实现版本：</p>
+<p><img alt="" src="https://upload-images.jianshu.io/upload_images/1552893-5b0692e1d55a8483.png!web?imageMogr2/auto-orient/strip%7CimageView2/2/w/500/format/webp"/></p>
+<p>根据batch layer的特点，具备存储(HDFS)和计算(MapReduce)的Hadoop显然是第一人选，而batch view 可以是hadoop本身的hdfs 或者基于hdfs的所构建的类似hive那样的仓库，speed layer因为时效性的影响，采用实时流式处理系统，例如strom或者spark streaming, 而speed view 可以存在HBase 或者其他类似的Nosql数据库。server layer 提供用户查询的方法，采用facebook 开源的Impala，统一入口查询。或者自己实现hive和HBase统一查询。这是两年前的文章，当时spark 还没那么火，现在看来spark可以直接作为batch和speed层的替代者了。</p>
 <h4 id="_4">选型原则</h4>
 <p>Lambda架构是个通用框架，各个层选型时不要局限时上面给出的组件，特别是对于View的选型。从我对Lambda架构的实践来看，因为View是个和业务关联性非常大的概念，View选择组件时关键是要根据业务的需求，来选择最适合查询的组件。不同的View组件的选择要深入挖掘数据和计算自身的特点，从而选择出最适合数据和计算自身特点的组件，同时不同的View可以选择不同的组件。 </p>
-<h3 id="lambda_4">Lambda架构的局限性</h3>
-<p>Lambda 架构是构建大数据应用程序的一种很有效的框架，但它还不够好。简单来说有如下几点：</p>
-<ul>
-<li><strong>实时与批量计算结果不一致引起的数据口径问题</strong>：基于 MapReduce 和 HDFS 的 Lambda 系统有一个长达数小时的时间窗口，在这个窗口内，由于实时任务失败而产生的不准确的结果会一直存在。</li>
-<li><strong>开发和维护的复杂性问题</strong>：Lambda 架构需要在两个不同的 API（application programming interface，应用程序编程接口）中对同样的业务逻辑进行两次编程：一次为批量计算的系统，一次为流式计算的系统。针对同一个业务问题产生了两个代码库，各有不同的漏洞。这种系统实际上非常难维护。</li>
-<li><strong>批量计算在计算窗口内无法完成</strong>：在IOT时代，数据量级越来越大，经常发现夜间只有4、5个小时的时间窗口，已经无法完成白天20多个小时累计的数据，保证早上上班前准时出数据已成为每个大数据团队头疼的问题。</li>
-</ul></div>
+<h3 id="_5">总结</h3>
+<p>在过去Lambda数据架构成为每一个公司大数据平台必备的架构，它解决了一个公司大数据批量离线处理和实时数据处理的需求。一个典型的Lambda架构如下：</p>
+<p><img alt="img" src="https://pic1.zhimg.com/80/v2-02f100064fdcd1c5e4d46e614837ab50_hd.jpg"/></p>
+<p>数据从底层的数据源开始，经过各种各样的格式进入大数据平台，在大数据平台中经过Kafka、Flume等数据组件进行收集，然后分成两条线进行计算。一条线是进入流式计算平台（例如 Storm、Flink或者Spark
+Streaming），去计算实时的一些指标；另一条线进入批量数据处理离线计算平台（例如Mapreduce、Hive，Spark SQL），去计算T+1的相关业务指标，这些指标需要隔日才能看见。</p>
+<p>Lambda架构经历多年的发展，其优点是稳定，对于实时计算部分的计算成本可控，批量处理可以用晚上的时间来整体批量计算，这样把实时计算和离线计算高峰分开，这种架构支撑了数据行业的早期发展，但是它也有一些致命缺点，并在大数据3.0时代越来越不适应数据分析业务的需求。缺点如下：</p>
+<p><strong>●</strong> <strong>实时与批量计算结果不一致引起的数据口径问题</strong>：因为批量和实时计算走的是两个计算框架和计算程序，算出的结果往往不同，经常看到一个数字当天看是一个数据，第二天看昨天的数据反而发生了变化。</p>
+<p><strong>●</strong> <strong>批量计算在计算窗口内无法完成</strong>：在IOT时代，数据量级越来越大，经常发现夜间只有4、5个小时的时间窗口，已经无法完成白天20多个小时累计的数据，保证早上上班前准时出数据已成为每个大数据团队头疼的问题。</p>
+<p>●<strong>开发和维护的复杂性问题</strong>：Lambda 架构需要在两个不同的 API（application programming interface，应用程序编程接口）中对同样的业务逻辑进行两次编程：一次为批量计算的ETL系统，一次为流式计算的Streaming系统。针对同一个业务问题产生了两个代码库，各有不同的漏洞。这种系统实际上非常难维护</p>
+<p><strong>●</strong> <strong>服务器存储大</strong>：数据仓库的典型设计，会产生大量的中间结果表，造成数据急速膨胀，加大服务器存储压力。</p></div>
 	
         <hr>
 

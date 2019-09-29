@@ -97,10 +97,9 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
  
     Tags: <a href="../../tags/flink.html">Flink</a>,&nbsp;</span>        </div>
 		
-		<br />
 		<hr />
-		
-        <div><div class="toc"><span class="toctitle">Table of Contents</span><ul>
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#_1">一、架构</a><ul>
 <li><a href="#_2">处理无界和有界数据</a></li>
 <li><a href="#_3">随处部署应用程序</a></li>
@@ -132,6 +131,11 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 </li>
 </ul>
 </div>
+			</nav>
+		<br />
+		<hr />
+		
+        <div>
 <h3 id="_1">一、架构</h3>
 <p>Apache Flink是一个分布式处理引擎和框架，用于对无界和有界数据流进行状态计算。Flink可在所有常见的集群环境中运行，可以内存级速度和任意规模执行计算。</p>
 <p>接下来首先我们阐述Flink的架构。</p>
@@ -142,7 +146,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 <li><strong>无界流</strong>有一个开始但没有明确定义的结束。它们不会终止，并且数据在生成时即提供。必须连续处理无界流，即必须在摄取事件后立即处理事件。无法等待所有输入数据到达，因为输入是无界的，并且在任何时间点都不会完成。处理无界数据通常要求以特定顺序摄取事件，例如事件发生的顺序，以便能够推断结果完整性。无界流的处理也称为流处理。</li>
 <li><strong>有界流</strong>具有明确定义的开始和结束。可以通过在执行任何计算之前先摄取所有数据的方式来处理有界流。处理有界流不需要有序摄取，因为可以始终对有界数据集进行排序。有界流的处理也称为批处理。</li>
 </ol>
-<p><img alt="" src="https://flink.apache.org/img/bounded-unbounded.png"></p>
+<p><img alt="" src="https://flink.apache.org/img/bounded-unbounded.png"/></p>
 <p><strong>Apache Flink擅长处理无界和有界数据集。</strong>精确控制时间和状态使Flink的运行时能够在无界流上运行任何类型的应用程序。有界流由算法和数据结构内部处理，这些算法和数据结构专为固定大小的数据集而设计，从而产生出色的性能。</p>
 <h4 id="_3">随处部署应用程序</h4>
 <p>Apache Flink是一个分布式系统，需要计算资源才能执行应用程序。Flink可与所有常见的集群资源管理器（Resource Manager, 如<a href="https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/YARN.html">Hadoop YARN</a>，<a href="https://mesos.apache.org/">Apache Mesos</a>和<a href="https://kubernetes.io/">Kubernetes）集成，</a>但也可以设置为作为独立集群运行。</p>
@@ -158,7 +162,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 </ul>
 <h4 id="_5">利用内存中性能</h4>
 <p>有状态Flink应用程序针对本地状态访问进行了优化。任务状态始终保留在内存中，如果状态大小超过可用内存，则保存在访问高效的磁盘上数据结构中。因此，任务通过访问本地（通常是内存中）状态来执行所有计算，从而产生非常低的处理延迟。Flink通过定期和异步地将本地状态checkpoint到持久存储来保证在出现故障时的“精确一次”的状态一致性。</p>
-<p><img alt="" src="https://flink.apache.org/img/local-state.png"></p>
+<p><img alt="" src="https://flink.apache.org/img/local-state.png"/></p>
 <h3 id="_6">二、应用</h3>
 <p>Apache Flink是一个用于对无界和有界数据流进行有状态计算的框架。Flink在不同的抽象级别提供多个API，并为常见用例提供专用库。</p>
 <p>在这里，我们介绍Flink易于使用和富有表现力的API和库。</p>
@@ -172,7 +176,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 </ul>
 <h5 id="_9">状态</h5>
 <p>每个有意义的流应用程序都是有状态的，只有对单个事件进行转换的应用才不需要状态。运行基本业务逻辑的任何应用程序都需要记住事件或中间结果，以便在以后的时间点访问它们，例如在收到下一个事件时或在特定持续时间之后。</p>
-<p><img alt="" src="https://flink.apache.org/img/function-state.png"></p>
+<p><img alt="" src="https://flink.apache.org/img/function-state.png"/></p>
 <p>应用状态是Flink中的“一等公民”。可以通过Flink在状态处理环境中提供的所有功能来确认这一点：</p>
 <ul>
 <li><strong>多状态基元</strong>：Flink为不同的数据结构提供状态基元，例如原子值，列表或映射。开发人员可以根据函数的访问模式选择最有效的状态原语。</li>
@@ -192,14 +196,14 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 </ul>
 <h4 id="api">分层API</h4>
 <p>Flink提供三层API。每个API在简洁性和表达性之间提供不同的权衡，并针对不同的用例。</p>
-<p><img alt="" src="https://flink.apache.org/img/api-stack.png"></p>
+<p><img alt="" src="https://flink.apache.org/img/api-stack.png"/></p>
 <p>我们简要介绍每个API，讨论其应用，并显示代码示例。</p>
 <h5 id="processfunctions">ProcessFunctions</h5>
 <p><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/operators/process_function.html">ProcessFunctions</a>是Flink提供的最具表现力的功能接口。Flink提供ProcessFunction来处理来自一个或两个输入流的单个事件，或被分组在一个窗口中的事件。ProcessFunctions提供对时间和状态的细粒度控制。ProcessFunction可以任意修改其状态并注册将在未来触发回调函数的定时器。因此，ProcessFunctions可以根据许多<a href="https://flink.apache.org/usecases.html#eventDrivenApps">有状态事件驱动的应用的</a>需要实现复杂的每事件业务逻辑。</p>
 <p>以下显示了一个<code>KeyedProcessFunction</code>对一个 <code>KeyedStream</code>进行操作，匹配 <code>START</code>以及<code>END</code>事件的示例。当一个<code>START</code>事件被接收，则该函数在状态中记住其时间戳并且注册一个4小时的计时器。如果在计时器触发之前收到<code>END</code>事件，则该函数计算事件<code>END</code>和<code>START</code>事件之间的持续时间，清除状态并返回值。否则，计时器只会超时并清除状态。</p>
 <div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * Matches keyed START and END events and computes the difference between </span>
-<span class="cm"> * both elements&#39; timestamps. The first String field is the key attribute, </span>
+<span class="cm"> * both elements' timestamps. The first String field is the key attribute, </span>
 <span class="cm"> * the second String attribute marks START and END events.</span>
 <span class="cm"> */</span>
 <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">StartEndDuration</span>
@@ -211,7 +215,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">open</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">conf</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// obtain state handle</span>
     <span class="n">startTime</span> <span class="o">=</span> <span class="n">getRuntimeContext</span><span class="o">()</span>
-      <span class="o">.</span><span class="na">getState</span><span class="o">(</span><span class="k">new</span> <span class="n">ValueStateDescriptor</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;(</span><span class="s">&quot;startTime&quot;</span><span class="o">,</span> <span class="n">Long</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
+      <span class="o">.</span><span class="na">getState</span><span class="o">(</span><span class="k">new</span> <span class="n">ValueStateDescriptor</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;(</span><span class="s">"startTime"</span><span class="o">,</span> <span class="n">Long</span><span class="o">.</span><span class="na">class</span><span class="o">));</span>
   <span class="o">}</span>
 
   <span class="cm">/** Called for each processed event. */</span>
@@ -222,14 +226,14 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
       <span class="n">Collector</span><span class="o">&lt;</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="n">out</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 
     <span class="k">switch</span> <span class="o">(</span><span class="n">in</span><span class="o">.</span><span class="na">f1</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">case</span> <span class="s">&quot;START&quot;</span><span class="o">:</span>
+      <span class="k">case</span> <span class="s">"START"</span><span class="o">:</span>
         <span class="c1">// set the start time if we receive a start event.</span>
         <span class="n">startTime</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">ctx</span><span class="o">.</span><span class="na">timestamp</span><span class="o">());</span>
         <span class="c1">// register a timer in four hours from the start event.</span>
         <span class="n">ctx</span><span class="o">.</span><span class="na">timerService</span><span class="o">()</span>
           <span class="o">.</span><span class="na">registerEventTimeTimer</span><span class="o">(</span><span class="n">ctx</span><span class="o">.</span><span class="na">timestamp</span><span class="o">()</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">);</span>
         <span class="k">break</span><span class="o">;</span>
-      <span class="k">case</span> <span class="s">&quot;END&quot;</span><span class="o">:</span>
+      <span class="k">case</span> <span class="s">"END"</span><span class="o">:</span>
         <span class="c1">// emit the duration between start and end event</span>
         <span class="n">Long</span> <span class="n">sTime</span> <span class="o">=</span> <span class="n">startTime</span><span class="o">.</span><span class="na">value</span><span class="o">();</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">sTime</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
@@ -254,8 +258,6 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
   <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-
-
 <p>这个例子说明了<code>KeyedProcessFunction</code>的表现力，但也强调了它是一个相当冗长的接口。</p>
 <h5 id="the-datastream-api">The DataStream API</h5>
 <p><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/datastream_api.html">DataStream API</a>为诸如窗口等许多常见的流处理操作提供原语。DataStream API可用于Java和Scala，基于如<code>map()</code>，<code>reduce()</code>和<code>aggregate()</code>等方法。可以通过扩展接口，或像Java或Scala中lambda函数一样来定义函数。</p>
@@ -280,18 +282,14 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
   <span class="c1">// count clicks per session. Define function as lambda function.</span>
   <span class="o">.</span><span class="na">reduce</span><span class="o">((</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">Tuple2</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">f0</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">f1</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">f1</span><span class="o">));</span>
 </pre></div>
-
-
 <h5 id="sql-table-api">SQL &amp; Table API</h5>
 <p>Flink具有两个关系型API，<a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/index.html">Table API和SQL</a>。这两个API都是用于批处理和流处理的统一API，即，在无界的实时流或有界的记录流上以相同的语义执行查询，并产生相同的结果。Table API和SQL利用<a href="https://calcite.apache.org/">Apache Calcite</a>进行解析，验证和查询优化。它们可以与DataStream和DataSet API无缝集成，并支持用户定义的标量，聚合和表值函数。</p>
 <p>Flink的关系型API旨在简化<a href="https://flink.apache.org/usecases.html#analytics">数据分析</a>，<a href="https://flink.apache.org/usecases.html#pipelines">数据pipelining和ETL应用</a>的定义。</p>
 <p>以下示例显示用于会话化点击流并计算每个会话的点击次数的SQL查询。这与DataStream API示例中的用例相同。</p>
 <div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">userId</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">clicks</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">SESSION</span><span class="p">(</span><span class="n">clicktime</span><span class="p">,</span> <span class="nb">INTERVAL</span> <span class="s1">&#39;30&#39;</span> <span class="k">MINUTE</span><span class="p">),</span> <span class="n">userId</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">SESSION</span><span class="p">(</span><span class="n">clicktime</span><span class="p">,</span> <span class="nb">INTERVAL</span> <span class="s1">'30'</span> <span class="k">MINUTE</span><span class="p">),</span> <span class="n">userId</span>
 </pre></div>
-
-
 <h4 id="_11">库</h4>
 <p>Flink具有几个用于常见数据处理用例的库。这些库通常嵌入在API中，而不是完全独立的。因此，他们可以从API的所有功能中受益，并与其他库集成。</p>
 <ul>

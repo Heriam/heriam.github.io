@@ -97,15 +97,19 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
  
     Tags: <a href="../../tags/flink.html">Flink</a>,&nbsp;</span>        </div>
 		
-		<br />
 		<hr />
-		
-        <div><div class="toc"><span class="toctitle">Table of Contents</span><ul>
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#maven">设置Maven项目</a></li>
 <li><a href="#flink">写一个Flink程序</a></li>
 <li><a href="#kafka">奖金练习：在群集上运行并写入Kafka</a></li>
 </ul>
 </div>
+			</nav>
+		<br />
+		<hr />
+		
+        <div>
 <p>在本文中，我们将从头开始，介绍从设置Flink项目到在Flink集群上运行流分析程序。</p>
 <p>Wikipedia提供了一个IRC频道，其中记录了对Wiki的所有编辑。我们将在Flink中读取此通道，并计算每个用户在给定时间窗口内编辑的字节数。这很容易使用Flink在几分钟内实现，但它将为您提供一个良好的基础，从而开始自己构建更复杂的分析程序。</p>
 <h2 id="maven">设置Maven项目</h2>
@@ -120,8 +124,6 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
     -Dpackage<span class="o">=</span>wikiedits <span class="se">\</span>
     -DinteractiveMode<span class="o">=</span><span class="nb">false</span>
 </pre></div>
-
-
 <p>您可以编辑<code>groupId</code>，<code>artifactId</code>而<code>package</code>如果你喜欢。使用上面的参数，Maven将创建一个如下所示的项目结构：</p>
 <div class="highlight"><pre><span></span>$ tree wiki-edits
 wiki-edits/
@@ -135,13 +137,9 @@ wiki-edits/
         └── resources
             └── log4j.properties
 </pre></div>
-
-
 <p>我们的<code>pom.xml</code>文件已经在根目录中添加了Flink依赖项，并且有几个示例Flink程序<code>src/main/java</code>。我们可以删除示例程序，因为我们将从头开始：</p>
 <div class="highlight"><pre><span></span>$ rm wiki-edits/src/main/java/wikiedits/*.java
 </pre></div>
-
-
 <p>作为最后一步，我们需要将Flink Wikipedia连接器添加为依赖关系，以便我们可以在我们的程序中使用它。编辑<code>dependencies</code>部分<code>pom.xml</code>，使其看起来像这样：</p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;dependencies&gt;</span>
     <span class="nt">&lt;dependency&gt;</span>
@@ -166,8 +164,6 @@ wiki-edits/
     <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span>
 </pre></div>
-
-
 <p>注意添加的依赖项<code>flink-connector-wikiedits_2.11</code>。（此示例和Wikipedia连接器的灵感来自Apache Samza 的<em>Hello Samza</em>示例。）</p>
 <h2 id="flink">写一个Flink程序</h2>
 <p>接下来是编码。启动您喜欢的IDE并导入Maven项目或打开文本编辑器并创建文件<code>src/main/java/wikiedits/WikipediaAnalysis.java</code>：</p>
@@ -180,19 +176,13 @@ wiki-edits/
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-
-
 <p>该计划现在非常基础，但我们会慢慢填充。请注意，我不会在此处提供import语句，因为IDE可以自动添加它们。在本节结束时，如果您只想跳过并在编辑器中输入，我将使用import语句显示完整的代码。</p>
 <p>Flink程序的第一步是创建一个<code>StreamExecutionEnvironment</code> （或者<code>ExecutionEnvironment</code>，如果您正在编写批处理作业）。这可用于设置执行参数并创建从外部系统读取的源。所以让我们继续把它添加到main方法：</p>
 <div class="highlight"><pre><span></span>StreamExecutionEnvironment see = StreamExecutionEnvironment.getExecutionEnvironment();
 </pre></div>
-
-
 <p>接下来，我们将创建一个从Wikipedia IRC日志中读取的源：</p>
 <div class="highlight"><pre><span></span>DataStream&lt;WikipediaEditEvent&gt; edits = see.addSource(new WikipediaEditsSource());
 </pre></div>
-
-
 <p>这创建了一个我们可以进一步处理<code>DataStream</code>的<code>WikipediaEditEvent</code>元素。出于本示例的目的，我们感兴趣的是确定每个用户在特定时间窗口中添加或删除的字节数，比如说五秒。为此，我们首先要指定我们要在用户名上键入流，也就是说此流上的操作应考虑用户名。在我们的例子中，窗口中编辑的字节的总和应该是每个唯一的用户。对于键入流，我们必须提供一个<code>KeySelector</code>，如下所示：</p>
 <div class="highlight"><pre><span></span>KeyedStream&lt;WikipediaEditEvent, String&gt; keyedEdits = edits
     .keyBy(new KeySelector&lt;WikipediaEditEvent, String&gt;() {
@@ -202,12 +192,10 @@ wiki-edits/
         }
     });
 </pre></div>
-
-
 <p>这为我们提供了一个<code>WikipediaEditEvent</code>具有<code>String</code>密钥的用户名。我们现在可以指定我们希望在此流上加上窗口，并根据这些窗口中的元素计算结果。窗口指定要在其上执行计算的Stream的切片。在无限的元素流上计算聚合时需要Windows。在我们的例子中，我们将说我们想要每五秒聚合一次编辑的字节总和：</p>
 <div class="highlight"><pre><span></span>DataStream&lt;Tuple2&lt;String, Long&gt;&gt; result = keyedEdits
     .timeWindow(Time.seconds(5))
-    .fold(new Tuple2&lt;&gt;(&quot;&quot;, 0L), new FoldFunction&lt;WikipediaEditEvent, Tuple2&lt;String, Long&gt;&gt;() {
+    .fold(new Tuple2&lt;&gt;("", 0L), new FoldFunction&lt;WikipediaEditEvent, Tuple2&lt;String, Long&gt;&gt;() {
         @Override
         public Tuple2&lt;String, Long&gt; fold(Tuple2&lt;String, Long&gt; acc, WikipediaEditEvent event) {
             acc.f0 = event.getUser();
@@ -216,16 +204,12 @@ wiki-edits/
         }
     });
 </pre></div>
-
-
 <p>第一个调用，<code>.timeWindow()</code>指定我们希望有五秒钟的翻滚（非重叠）窗口。第二个调用为每个唯一键指定每个窗口切片的<em>折叠变换</em>。在我们的例子中，我们从一个初始值开始，<code>("", 0L)</code>并在该时间窗口中为用户添加每个编辑的字节差异。生成的Stream现在包含<code>Tuple2&lt;String, Long&gt;</code>每五秒钟发出一次的用户。</p>
 <p>剩下要做的就是将流打印到控制台并开始执行：</p>
 <div class="highlight"><pre><span></span>result.print();
 
 see.execute();
 </pre></div>
-
-
 <p>最后一次调用是启动实际Flink工作所必需的。所有操作（例如创建源，转换和接收器）仅构建内部操作的图形。只有在<code>execute()</code>被调用时 才会在集群上抛出或在本地计算机上执行此操作图。</p>
 <p>到目前为止完整的代码是这样的：</p>
 <div class="highlight"><pre><span></span><span class="n">package</span> <span class="n">wikiedits</span><span class="p">;</span>
@@ -258,7 +242,7 @@ see.execute();
 
     <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">keyedEdits</span>
       <span class="o">.</span><span class="n">timeWindow</span><span class="p">(</span><span class="n">Time</span><span class="o">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-      <span class="o">.</span><span class="n">fold</span><span class="p">(</span><span class="n">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="il">0L</span><span class="p">),</span> <span class="n">new</span> <span class="n">FoldFunction</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="p">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+      <span class="o">.</span><span class="n">fold</span><span class="p">(</span><span class="n">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="il">0L</span><span class="p">),</span> <span class="n">new</span> <span class="n">FoldFunction</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="p">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
         <span class="nd">@Override</span>
         <span class="n">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">fold</span><span class="p">(</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">acc</span><span class="p">,</span> <span class="n">WikipediaEditEvent</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
           <span class="n">acc</span><span class="o">.</span><span class="n">f0</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">getUser</span><span class="p">();</span>
@@ -273,14 +257,10 @@ see.execute();
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>您可以使用Maven在IDE或命令行上运行此示例：</p>
 <div class="highlight"><pre><span></span>$ mvn clean package
 $ mvn exec:java -Dexec.mainClass<span class="o">=</span>wikiedits.WikipediaAnalysis
 </pre></div>
-
-
 <p>第一个命令构建我们的项目，第二个命令执行我们的主类。输出应该类似于：</p>
 <div class="highlight"><pre><span></span>1&gt; (Fenix down,114)
 6&gt; (AnomieBOT,155)
@@ -293,8 +273,6 @@ $ mvn exec:java -Dexec.mainClass<span class="o">=</span>wikiedits.WikipediaAnaly
 4&gt; (Ms Sarah Welch,269)
 4&gt; (KasparBot,-245)
 </pre></div>
-
-
 <p>每行前面的数字告诉您输出的打印接收器的哪个并行实例。</p>
 <p>这应该让您开始编写自己的Flink程序。要了解更多信息，您可以查看我们的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/api_concepts.html">基本概念</a>指南和 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>。如果您想了解如何在自己的机器上设置Flink群集并将结果写入<a href="http://kafka.apache.org/">Kafka</a>，请坚持参加奖励练习。</p>
 <h2 id="kafka">奖金练习：在群集上运行并写入Kafka</h2>
@@ -306,8 +284,6 @@ $ mvn exec:java -Dexec.mainClass<span class="o">=</span>wikiedits.WikipediaAnaly
     <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">flink</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </pre></div>
-
-
 <p>接下来，我们需要修改我们的程序。我们将移除<code>print()</code>水槽，而是使用Kafka水槽。新代码如下所示：</p>
 <div class="highlight"><pre><span></span><span class="nt">result</span>
     <span class="p">.</span><span class="nc">map</span><span class="o">(</span><span class="nt">new</span> <span class="nt">MapFunction</span><span class="o">&lt;</span><span class="nt">Tuple2</span><span class="o">&lt;</span><span class="nt">String</span><span class="o">,</span><span class="nt">Long</span><span class="o">&gt;,</span> <span class="nt">String</span><span class="o">&gt;()</span> <span class="p">{</span>
@@ -316,41 +292,29 @@ $ mvn exec:java -Dexec.mainClass<span class="o">=</span>wikiedits.WikipediaAnaly
             <span class="err">return</span> <span class="err">tuple.toString()</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="err">}</span><span class="o">)</span>
-    <span class="p">.</span><span class="nc">addSink</span><span class="o">(</span><span class="nt">new</span> <span class="nt">FlinkKafkaProducer011</span><span class="o">&lt;&gt;(</span><span class="s2">&quot;localhost:9092&quot;</span><span class="o">,</span> <span class="s2">&quot;wiki-result&quot;</span><span class="o">,</span> <span class="nt">new</span> <span class="nt">SimpleStringSchema</span><span class="o">()));</span>
+    <span class="p">.</span><span class="nc">addSink</span><span class="o">(</span><span class="nt">new</span> <span class="nt">FlinkKafkaProducer011</span><span class="o">&lt;&gt;(</span><span class="s2">"localhost:9092"</span><span class="o">,</span> <span class="s2">"wiki-result"</span><span class="o">,</span> <span class="nt">new</span> <span class="nt">SimpleStringSchema</span><span class="o">()));</span>
 </pre></div>
-
-
 <p>还需要导入相关的类：</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer011</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.flink.api.common.serialization.SimpleStringSchema</span><span class="p">;</span>
 <span class="kn">import</span> <span class="nn">org.apache.flink.api.common.functions.MapFunction</span><span class="p">;</span>
 </pre></div>
-
-
 <p>注意我们是如何第一个转换的流<code>Tuple2&lt;String, Long&gt;</code>来流<code>String</code>使用MapFunction。我们这样做是因为将简单字符串写入Kafka更容易。然后，我们创建了一个卡夫卡水槽。您可能必须使主机名和端口适应您的设置。<code>"wiki-result"</code> 是在我们运行程序之前我们将要创建的Kafka流的名称。使用Maven构建项目，因为我们需要jar文件在集群上运行：</p>
 <div class="highlight"><pre><span></span>$ mvn clean package
 </pre></div>
-
-
 <p>生成的jar文件将位于<code>target</code>子文件夹中：<code>target/wiki-edits-0.1.jar</code>。我们稍后会用到它。</p>
 <p>现在我们准备启动Flink集群并运行写入Kafka的程序。转到安装Flink的位置并启动本地群集：</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my/flink/directory
 $ bin/start-cluster.sh
 </pre></div>
-
-
 <p>我们还必须创建Kafka主题，以便我们的程序可以写入它：</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my/kafka/directory
 $ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor <span class="m">1</span> --partitions <span class="m">1</span> --topic wiki-results
 </pre></div>
-
-
 <p>现在我们准备在本地Flink集群上运行我们的jar文件：</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my/flink/directory
 $ bin/flink run -c wikiedits.WikipediaAnalysis path/to/wikiedits-0.1.jar
 </pre></div>
-
-
 <p>如果一切按计划进行，那么该命令的输出应该与此类似：</p>
 <div class="highlight"><pre><span></span>03/08/2016 15:09:27 Job execution switched to status RUNNING.
 03/08/2016 15:09:27 Source: Custom Source(1/1) switched to SCHEDULED
@@ -360,18 +324,14 @@ $ bin/flink run -c wikiedits.WikipediaAnalysis path/to/wikiedits-0.1.jar
 03/08/2016 15:09:27 TriggerWindow(TumblingProcessingTimeWindows(5000), FoldingStateDescriptor{name=window-contents, defaultValue=(,0), serializer=null}, ProcessingTimeTrigger(), WindowedStream.fold(WindowedStream.java:207)) -&gt; Map -&gt; Sink: Unnamed(1/1) switched to RUNNING
 03/08/2016 15:09:27 Source: Custom Source(1/1) switched to RUNNING
 </pre></div>
-
-
 <p>您可以看到各个运营商如何开始运行。只有两个，因为窗口之后的操作由于性能原因而折叠成一个操作。在Flink，我们称之为<em>链接</em>。</p>
 <p>您可以通过使用Kafka控制台使用者检查Kafka主题来观察程序的输出：</p>
 <div class="highlight"><pre><span></span>bin/kafka-console-consumer.sh  --zookeeper localhost:2181 --topic wiki-result
 </pre></div>
-
-
 <p>您还可以查看应在<a href="http://localhost:8081/">http：// localhost：8081上</a>运行的Flink仪表板。您将获得群集资源和正在运行的作业的概述：</p>
-<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-overview.png"><img alt="JobManager概述" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-overview.png"></a></p>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-overview.png"><img alt="JobManager概述" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-overview.png"/></a></p>
 <p>如果单击正在运行的作业，您将获得一个视图，您可以在其中检查单个操作，例如，查看已处理元素的数量：</p>
-<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-job.png"><img alt="作业视图示例" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-job.png"></a></p></div>
+<p><a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-job.png"><img alt="作业视图示例" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/page/img/quickstart-example/jobmanager-job.png"/></a></p></div>
 	
         <hr>
 

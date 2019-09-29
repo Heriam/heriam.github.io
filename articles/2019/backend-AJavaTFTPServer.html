@@ -97,14 +97,18 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
  
     Tags: <a href="../../tags/java.html">Java</a>,&nbsp;<a href="../../tags/tftp.html">TFTP</a>,&nbsp;</span>        </div>
 		
-		<br />
 		<hr />
-		
-        <div><div class="toc"><span class="toctitle">Table of Contents</span><ul>
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#_1">简介</a></li>
 <li><a href="#_2">代码</a></li>
 </ul>
 </div>
+			</nav>
+		<br />
+		<hr />
+		
+        <div>
 <h3 id="_1">简介</h3>
 <p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
 <p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
@@ -118,36 +122,34 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
       <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="o">)</span>
       <span class="o">{</span>
           <span class="n">System</span><span class="o">.</span><span class="na">out</span>
-                  <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;You must provide 1 argument - the base path for the server to serve from.&quot;</span><span class="o">);</span>
+                  <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"You must provide 1 argument - the base path for the server to serve from."</span><span class="o">);</span>
           <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
       <span class="o">}</span>
 
       <span class="n">TFTPServer</span> <span class="n">ts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTPServer</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]),</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]),</span> <span class="n">GET_AND_PUT</span><span class="o">);</span>
       <span class="n">ts</span><span class="o">.</span><span class="na">setSocketTimeout</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
 
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;TFTP Server running.  Press enter to stop.&quot;</span><span class="o">);</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TFTP Server running.  Press enter to stop."</span><span class="o">);</span>
       <span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">).</span><span class="na">read</span><span class="o">();</span>
 
       <span class="n">ts</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
-      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Server shut down.&quot;</span><span class="o">);</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Server shut down."</span><span class="o">);</span>
       <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
   <span class="o">}</span>
 </pre></div>
-
-
 <h3 id="_2">代码</h3>
 <div class="highlight"><pre><span></span> <span class="cm">/*</span>
 <span class="cm">  * Licensed to the Apache Software Foundation (ASF) under one or more</span>
 <span class="cm">  * contributor license agreements.  See the NOTICE file distributed with</span>
 <span class="cm">  * this work for additional information regarding copyright ownership.</span>
 <span class="cm">  * The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm">  * (the &quot;License&quot;); you may not use this file except in compliance with</span>
+<span class="cm">  * (the "License"); you may not use this file except in compliance with</span>
 <span class="cm">  * the License.  You may obtain a copy of the License at</span>
 <span class="cm">  *</span>
 <span class="cm">  *      http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm">  *</span>
 <span class="cm">  * Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">  * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">  * distributed under the License is distributed on an "AS IS" BASIS,</span>
 <span class="cm">  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
 <span class="cm">  * See the License for the specific language governing permissions and</span>
 <span class="cm">  * limitations under the License.</span>
@@ -199,18 +201,18 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 <span class="cm">  *      if (args.length != 1)</span>
 <span class="cm">  *      {</span>
 <span class="cm">  *          System.out</span>
-<span class="cm">  *                  .println(&quot;You must provide 1 argument - the base path for the server to serve from.&quot;);</span>
+<span class="cm">  *                  .println("You must provide 1 argument - the base path for the server to serve from.");</span>
 <span class="cm">  *          System.exit(1);</span>
 <span class="cm">  *      }</span>
 <span class="cm">  *</span>
 <span class="cm">  *      TFTPServer ts = new TFTPServer(new File(args[0]), new File(args[0]), GET_AND_PUT);</span>
 <span class="cm">  *      ts.setSocketTimeout(2000);</span>
 <span class="cm">  *</span>
-<span class="cm">  *      System.out.println(&quot;TFTP Server running.  Press enter to stop.&quot;);</span>
+<span class="cm">  *      System.out.println("TFTP Server running.  Press enter to stop.");</span>
 <span class="cm">  *      new InputStreamReader(System.in).read();</span>
 <span class="cm">  *</span>
 <span class="cm">  *      ts.shutdown();</span>
-<span class="cm">  *      System.out.println(&quot;Server shut down.&quot;);</span>
+<span class="cm">  *      System.out.println("Server shut down.");</span>
 <span class="cm">  *      System.exit(0);</span>
 <span class="cm">  *  }</span>
 <span class="cm">  *</span>
@@ -244,7 +246,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                  <span class="o">}</span>
              <span class="o">);</span>
 
-     <span class="c1">// don&#39;t have access to a logger api, so we will log to these streams, which</span>
+     <span class="c1">// don't have access to a logger api, so we will log to these streams, which</span>
      <span class="c1">// by default are set to a no-op logger</span>
      <span class="kd">private</span> <span class="n">PrintStream</span> <span class="n">log_</span><span class="o">;</span>
      <span class="kd">private</span> <span class="n">PrintStream</span> <span class="n">logError_</span><span class="o">;</span>
@@ -354,7 +356,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 <span class="cm">      * @param serverWriteDirectory directory for PUT requests</span>
 <span class="cm">      * @param port the port to use</span>
 <span class="cm">      * @param localiface The local network interface to bind to.</span>
-<span class="cm">      *  The interface&#39;s first address wil be used.</span>
+<span class="cm">      *  The interface's first address wil be used.</span>
 <span class="cm">      * @param mode A value as specified above.</span>
 <span class="cm">      * @param log Stream to write log message to. If not provided, uses System.out</span>
 <span class="cm">      * @param errorLog Stream to write error messages to. If not provided, uses System.err.</span>
@@ -390,7 +392,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
      <span class="o">{</span>
          <span class="k">if</span> <span class="o">(</span><span class="n">retries</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span>
          <span class="o">{</span>
-             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&quot;Invalid Value&quot;</span><span class="o">);</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">"Invalid Value"</span><span class="o">);</span>
          <span class="o">}</span>
          <span class="n">maxTimeoutRetries_</span> <span class="o">=</span> <span class="n">retries</span><span class="o">;</span>
      <span class="o">}</span>
@@ -414,7 +416,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
      <span class="o">{</span>
          <span class="k">if</span> <span class="o">(</span><span class="n">timeout</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">)</span>
          <span class="o">{</span>
-             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&quot;Invalid Value&quot;</span><span class="o">);</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">"Invalid Value"</span><span class="o">);</span>
          <span class="o">}</span>
          <span class="n">socketTimeout_</span> <span class="o">=</span> <span class="n">timeout</span><span class="o">;</span>
      <span class="o">}</span>
@@ -429,26 +431,26 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
      <span class="o">}</span>
 
      <span class="cm">/*</span>
-<span class="cm">      * start the server, throw an error if it can&#39;t start.</span>
+<span class="cm">      * start the server, throw an error if it can't start.</span>
 <span class="cm">      */</span>
      <span class="kd">private</span> <span class="kt">void</span> <span class="nf">launch</span><span class="o">(</span><span class="n">File</span> <span class="n">serverReadDirectory</span><span class="o">,</span> <span class="n">File</span> <span class="n">serverWriteDirectory</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span>
      <span class="o">{</span>
-         <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Starting TFTP Server on port &quot;</span> <span class="o">+</span> <span class="n">port_</span> <span class="o">+</span> <span class="s">&quot;.  Read directory: &quot;</span>
-                 <span class="o">+</span> <span class="n">serverReadDirectory</span> <span class="o">+</span> <span class="s">&quot; Write directory: &quot;</span> <span class="o">+</span> <span class="n">serverWriteDirectory</span>
-                 <span class="o">+</span> <span class="s">&quot; Server Mode is &quot;</span> <span class="o">+</span> <span class="n">mode_</span><span class="o">);</span>
+         <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Starting TFTP Server on port "</span> <span class="o">+</span> <span class="n">port_</span> <span class="o">+</span> <span class="s">".  Read directory: "</span>
+                 <span class="o">+</span> <span class="n">serverReadDirectory</span> <span class="o">+</span> <span class="s">" Write directory: "</span> <span class="o">+</span> <span class="n">serverWriteDirectory</span>
+                 <span class="o">+</span> <span class="s">" Server Mode is "</span> <span class="o">+</span> <span class="n">mode_</span><span class="o">);</span>
 
          <span class="n">serverReadDirectory_</span> <span class="o">=</span> <span class="n">serverReadDirectory</span><span class="o">.</span><span class="na">getCanonicalFile</span><span class="o">();</span>
          <span class="k">if</span> <span class="o">(!</span><span class="n">serverReadDirectory_</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">serverReadDirectory</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span>
          <span class="o">{</span>
-             <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">&quot;The server read directory &quot;</span> <span class="o">+</span> <span class="n">serverReadDirectory_</span>
-                     <span class="o">+</span> <span class="s">&quot; does not exist&quot;</span><span class="o">);</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"The server read directory "</span> <span class="o">+</span> <span class="n">serverReadDirectory_</span>
+                     <span class="o">+</span> <span class="s">" does not exist"</span><span class="o">);</span>
          <span class="o">}</span>
 
          <span class="n">serverWriteDirectory_</span> <span class="o">=</span> <span class="n">serverWriteDirectory</span><span class="o">.</span><span class="na">getCanonicalFile</span><span class="o">();</span>
          <span class="k">if</span> <span class="o">(!</span><span class="n">serverWriteDirectory_</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">serverWriteDirectory</span><span class="o">.</span><span class="na">isDirectory</span><span class="o">())</span>
          <span class="o">{</span>
-             <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">&quot;The server write directory &quot;</span> <span class="o">+</span> <span class="n">serverWriteDirectory_</span>
-                     <span class="o">+</span> <span class="s">&quot; does not exist&quot;</span><span class="o">);</span>
+             <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"The server write directory "</span> <span class="o">+</span> <span class="n">serverWriteDirectory_</span>
+                     <span class="o">+</span> <span class="s">" does not exist"</span><span class="o">);</span>
          <span class="o">}</span>
 
          <span class="n">serverTftp_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TFTP</span><span class="o">();</span>
@@ -519,7 +521,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
              <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownServer</span><span class="o">)</span>
              <span class="o">{</span>
                  <span class="n">serverException</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
-                 <span class="n">logError_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Unexpected Error in TFTP Server - Server shut down! + &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+                 <span class="n">logError_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected Error in TFTP Server - Server shut down! + "</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
              <span class="o">}</span>
          <span class="o">}</span>
          <span class="k">finally</span>
@@ -561,7 +563,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
          <span class="k">try</span> <span class="o">{</span>
              <span class="n">serverThread</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
          <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-             <span class="c1">// we&#39;ve done the best we could, return</span>
+             <span class="c1">// we've done the best we could, return</span>
          <span class="o">}</span>
      <span class="o">}</span>
 
@@ -616,7 +618,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                  <span class="o">}</span>
                  <span class="k">else</span>
                  <span class="o">{</span>
-                     <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Unsupported TFTP request (&quot;</span> <span class="o">+</span> <span class="n">tftpPacket_</span> <span class="o">+</span> <span class="s">&quot;) - ignored.&quot;</span><span class="o">);</span>
+                     <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unsupported TFTP request ("</span> <span class="o">+</span> <span class="n">tftpPacket_</span> <span class="o">+</span> <span class="s">") - ignored."</span><span class="o">);</span>
                  <span class="o">}</span>
              <span class="o">}</span>
              <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
@@ -624,7 +626,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                  <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownTransfer</span><span class="o">)</span>
                  <span class="o">{</span>
                      <span class="n">logError_</span>
-                             <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Unexpected Error in during TFTP file transfer.  Transfer aborted. &quot;</span>
+                             <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected Error in during TFTP file transfer.  Transfer aborted. "</span>
                                      <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
                  <span class="o">}</span>
              <span class="o">}</span>
@@ -661,7 +663,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                  <span class="o">{</span>
                      <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">trrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">trrp</span>
                              <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">ILLEGAL_OPERATION</span><span class="o">,</span>
-                             <span class="s">&quot;Read not allowed by server.&quot;</span><span class="o">));</span>
+                             <span class="s">"Read not allowed by server."</span><span class="o">));</span>
                      <span class="k">return</span><span class="o">;</span>
                  <span class="o">}</span>
 
@@ -727,13 +729,13 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                          <span class="c1">// listen for an answer.</span>
                          <span class="k">if</span> <span class="o">(</span><span class="n">answer</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
                          <span class="o">{</span>
-                             <span class="c1">// The answer that we got didn&#39;t come from the</span>
+                             <span class="c1">// The answer that we got didn't come from the</span>
                              <span class="c1">// expected source, fire back an error, and continue</span>
                              <span class="c1">// listening.</span>
-                             <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;TFTP Server ignoring message from unexpected source.&quot;</span><span class="o">);</span>
+                             <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TFTP Server ignoring message from unexpected source."</span><span class="o">);</span>
                              <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">answer</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span>
                                      <span class="n">answer</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNKNOWN_TID</span><span class="o">,</span>
-                                     <span class="s">&quot;Unexpected Host or Port&quot;</span><span class="o">));</span>
+                                     <span class="s">"Unexpected Host or Port"</span><span class="o">));</span>
                          <span class="o">}</span>
                          <span class="k">try</span>
                          <span class="o">{</span>
@@ -745,7 +747,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                              <span class="o">{</span>
                                  <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
                              <span class="o">}</span>
-                             <span class="c1">// didn&#39;t get an ack for this data. need to resend</span>
+                             <span class="c1">// didn't get an ack for this data. need to resend</span>
                              <span class="c1">// it.</span>
                              <span class="n">timeoutCount</span><span class="o">++;</span>
                              <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="n">lastSentData</span><span class="o">);</span>
@@ -758,8 +760,8 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                          <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownTransfer</span><span class="o">)</span>
                          <span class="o">{</span>
                              <span class="n">logError_</span>
-                                     <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Unexpected response from tftp client during transfer (&quot;</span>
-                                             <span class="o">+</span> <span class="n">answer</span> <span class="o">+</span> <span class="s">&quot;).  Transfer aborted.&quot;</span><span class="o">);</span>
+                                     <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected response from tftp client during transfer ("</span>
+                                             <span class="o">+</span> <span class="n">answer</span> <span class="o">+</span> <span class="s">").  Transfer aborted."</span><span class="o">);</span>
                          <span class="o">}</span>
                          <span class="k">break</span><span class="o">;</span>
                      <span class="o">}</span>
@@ -823,7 +825,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                  <span class="o">{</span>
                      <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span>
                              <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">ILLEGAL_OPERATION</span><span class="o">,</span>
-                             <span class="s">&quot;Write not allowed by server.&quot;</span><span class="o">));</span>
+                             <span class="s">"Write not allowed by server."</span><span class="o">));</span>
                      <span class="k">return</span><span class="o">;</span>
                  <span class="o">}</span>
 
@@ -836,7 +838,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                      <span class="k">if</span> <span class="o">(</span><span class="n">temp</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span>
                      <span class="o">{</span>
                          <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">twrp</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">twrp</span>
-                                 <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">FILE_EXISTS</span><span class="o">,</span> <span class="s">&quot;File already exists&quot;</span><span class="o">));</span>
+                                 <span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">FILE_EXISTS</span><span class="o">,</span> <span class="s">"File already exists"</span><span class="o">));</span>
                          <span class="k">return</span><span class="o">;</span>
                      <span class="o">}</span>
                      <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">temp</span><span class="o">));</span>
@@ -871,13 +873,13 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                          <span class="c1">// listen for an answer.</span>
                          <span class="k">if</span> <span class="o">(</span><span class="n">dataPacket</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
                          <span class="o">{</span>
-                             <span class="c1">// The data that we got didn&#39;t come from the</span>
+                             <span class="c1">// The data that we got didn't come from the</span>
                              <span class="c1">// expected source, fire back an error, and continue</span>
                              <span class="c1">// listening.</span>
-                             <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;TFTP Server ignoring message from unexpected source.&quot;</span><span class="o">);</span>
+                             <span class="n">log_</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TFTP Server ignoring message from unexpected source."</span><span class="o">);</span>
                              <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">dataPacket</span><span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span>
                                      <span class="n">dataPacket</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span> <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNKNOWN_TID</span><span class="o">,</span>
-                                     <span class="s">&quot;Unexpected Host or Port&quot;</span><span class="o">));</span>
+                                     <span class="s">"Unexpected Host or Port"</span><span class="o">));</span>
                          <span class="o">}</span>
 
                          <span class="k">try</span>
@@ -890,7 +892,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                              <span class="o">{</span>
                                  <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
                              <span class="o">}</span>
-                             <span class="c1">// It didn&#39;t get our ack. Resend it.</span>
+                             <span class="c1">// It didn't get our ack. Resend it.</span>
                              <span class="n">transferTftp_</span><span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="n">lastSentAck</span><span class="o">);</span>
                              <span class="n">timeoutCount</span><span class="o">++;</span>
                              <span class="k">continue</span><span class="o">;</span>
@@ -908,8 +910,8 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                          <span class="k">if</span> <span class="o">(!</span><span class="n">shutdownTransfer</span><span class="o">)</span>
                          <span class="o">{</span>
                              <span class="n">logError_</span>
-                                     <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Unexpected response from tftp client during transfer (&quot;</span>
-                                             <span class="o">+</span> <span class="n">dataPacket</span> <span class="o">+</span> <span class="s">&quot;).  Transfer aborted.&quot;</span><span class="o">);</span>
+                                     <span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Unexpected response from tftp client during transfer ("</span>
+                                             <span class="o">+</span> <span class="n">dataPacket</span> <span class="o">+</span> <span class="s">").  Transfer aborted."</span><span class="o">);</span>
                          <span class="o">}</span>
                          <span class="k">break</span><span class="o">;</span>
                      <span class="o">}</span>
@@ -923,7 +925,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                          <span class="k">if</span> <span class="o">(</span><span class="n">block</span> <span class="o">&gt;</span> <span class="n">lastBlock</span> <span class="o">||</span> <span class="o">(</span><span class="n">lastBlock</span> <span class="o">==</span> <span class="mi">65535</span> <span class="o">&amp;&amp;</span> <span class="n">block</span> <span class="o">==</span> <span class="mi">0</span><span class="o">))</span>
                          <span class="o">{</span>
                              <span class="c1">// it might resend a data block if it missed our ack</span>
-                             <span class="c1">// - don&#39;t rewrite the block.</span>
+                             <span class="c1">// - don't rewrite the block.</span>
                              <span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">dataOffset</span><span class="o">,</span> <span class="n">dataLength</span><span class="o">);</span>
                              <span class="n">lastBlock</span> <span class="o">=</span> <span class="n">block</span><span class="o">;</span>
                          <span class="o">}</span>
@@ -946,7 +948,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                                  <span class="k">catch</span> <span class="o">(</span><span class="n">SocketTimeoutException</span> <span class="n">e</span><span class="o">)</span>
                                  <span class="o">{</span>
                                      <span class="c1">// this is the expected route - the client</span>
-                                     <span class="c1">// shouldn&#39;t be sending any more packets.</span>
+                                     <span class="c1">// shouldn't be sending any more packets.</span>
                                      <span class="k">break</span><span class="o">;</span>
                                  <span class="o">}</span>
 
@@ -959,7 +961,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                                              <span class="o">.</span><span class="na">bufferedSend</span><span class="o">(</span><span class="k">new</span> <span class="n">TFTPErrorPacket</span><span class="o">(</span><span class="n">dataPacket</span>
                                                      <span class="o">.</span><span class="na">getAddress</span><span class="o">(),</span> <span class="n">dataPacket</span><span class="o">.</span><span class="na">getPort</span><span class="o">(),</span>
                                                      <span class="n">TFTPErrorPacket</span><span class="o">.</span><span class="na">UNKNOWN_TID</span><span class="o">,</span>
-                                                     <span class="s">&quot;Unexpected Host or Port&quot;</span><span class="o">));</span>
+                                                     <span class="s">"Unexpected Host or Port"</span><span class="o">));</span>
                                  <span class="o">}</span>
                                  <span class="k">else</span>
                                  <span class="o">{</span>
@@ -997,7 +999,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 
              <span class="k">if</span> <span class="o">(!</span><span class="n">isSubdirectoryOf</span><span class="o">(</span><span class="n">serverDirectory</span><span class="o">,</span> <span class="n">temp</span><span class="o">))</span>
              <span class="o">{</span>
-                 <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">&quot;Cannot access files outside of tftp server root.&quot;</span><span class="o">);</span>
+                 <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"Cannot access files outside of tftp server root."</span><span class="o">);</span>
              <span class="o">}</span>
 
              <span class="c1">// ensure directory exists (if requested)</span>
@@ -1017,7 +1019,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
              <span class="n">File</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">getParentFile</span><span class="o">();</span>
              <span class="k">if</span> <span class="o">(</span><span class="n">parent</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
              <span class="o">{</span>
-                 <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">&quot;Unexpected error creating requested directory&quot;</span><span class="o">);</span>
+                 <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"Unexpected error creating requested directory"</span><span class="o">);</span>
              <span class="o">}</span>
              <span class="k">if</span> <span class="o">(!</span><span class="n">parent</span><span class="o">.</span><span class="na">exists</span><span class="o">())</span>
              <span class="o">{</span>
@@ -1034,13 +1036,13 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
                  <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">mkdir</span><span class="o">();</span>
                  <span class="k">if</span> <span class="o">(!</span><span class="n">result</span><span class="o">)</span>
                  <span class="o">{</span>
-                     <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">&quot;Couldn&#39;t create requested directory&quot;</span><span class="o">);</span>
+                     <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span><span class="s">"Couldn't create requested directory"</span><span class="o">);</span>
                  <span class="o">}</span>
              <span class="o">}</span>
              <span class="k">else</span>
              <span class="o">{</span>
                  <span class="k">throw</span> <span class="k">new</span> <span class="n">IOException</span><span class="o">(</span>
-                         <span class="s">&quot;Invalid directory path - file in the way of requested folder&quot;</span><span class="o">);</span>
+                         <span class="s">"Invalid directory path - file in the way of requested folder"</span><span class="o">);</span>
              <span class="o">}</span>
          <span class="o">}</span>
 

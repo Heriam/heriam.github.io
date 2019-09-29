@@ -90,6 +90,51 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="./articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1></a>
+<span class="metadata">
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/pelican.html">Pelican</a>,&nbsp;<a href="./tags/git.html">Git</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><p><strong>介绍：</strong> Github Pages 禁用了百度爬虫，因此百度搜索引擎经常抓取不到在Github上托管的博客链接。本文介绍一种可行的解决方法：   <br>
+- 注册Coding用来托管一份和Github上一样的博客仓库专门服务国内的索引  <br>
+- 配置DNS解析，将国内的线路解析到Coding，国外的线路解析到Github  <br>
+- 配置Pelican，支持一键将同一份本地博客仓库同时发布到Github和Coding
+  ​        <br>
+  <br>   </p>
+<hr>
+<p><strong>一、</strong><a href="https://jiang-hao.com/articles/2018/blog-%E4%BD%BF%E7%94%A8Pelican%E5%9F%BA%E4%BA%8EGithubPages%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B.html">《Pelican＋Github博客搭建详细教程》</a>      </p>
+<hr>
+<p>按照标题链接给出的教程先搭建出一个基于Github托管的博客系统。接下来将说明如何将博客同步到Coding。  <br>
+<br>   </p>
+<hr>
+<p><strong>二、在Coding创建一个新的项目</strong></p>
+<hr>
+<ol>
+<li>在<a href="http://www.coding.net">Coding首页</a>进行注册并登陆，创建项目的方法与Github类似，不同之处在于coding新建的公开项目名和用户名相同，而不像Github那样是&lt;用户名&gt;.github.io。创建完成后，生成的新的项目链接应该类似于：<code>https://coding.net/&lt;usrname&gt;/&lt;username&gt;.git</code>。  <br>
+    <br>   </li>
+<li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
+</ol>
+<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="./articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="./articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html"><h1>使用Pelican基于Github Pages搭建博客教程</h1></a>
 <span class="metadata">
 2018-02-05 Mon&nbsp;&nbsp;&nbsp;

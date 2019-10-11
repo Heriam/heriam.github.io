@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jiang-hao.com/</loc>
-<lastmod>2019-09-29T17:42:54-00:00</lastmod>
+<lastmod>2019-10-11T14:14:30-00:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.1</priority>
 </url>
@@ -46,7 +46,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jiang-hao.com/articles/2019/tools-大陆访问Vultr各节点VPS网速测试综合报告.html</loc>
+<loc>https://jiang-hao.com/articles/2019/tools-Vultr-Nodes-Speed-Tests.html</loc>
 <lastmod>2019-09-30T00:00:00+08:00</lastmod>
 <changefreq>always</changefreq>
 <priority>0.7</priority>

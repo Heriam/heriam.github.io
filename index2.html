@@ -90,6 +90,42 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="./articles/2018/frontend-JQCloud.html"><h1>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h1></a>
+<span class="metadata">
+2018-02-25 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="./authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="./categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="./tags/jquery.html">JQuery</a>,&nbsp;<a href="./tags/javascript.html">JavaScript</a>,&nbsp;<a href="./tags/html.html">HTML</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><p>因为博客需要，发现了一个生成美化简约风格的标签云的JQuery插件。
+官网地址：<a href="http://mistic100.github.io/jQCloud/index.html">http://mistic100.github.io/jQCloud/index.html</a></p>
+<p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
+<p>具体的使用方法官网都能查到。</p>
+<p>贴出自己微博使用JQCloud的前端代码：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="./articles/2018/frontend-JQCloud.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="./articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1></a>
 <span class="metadata">
 2018-02-05 Mon&nbsp;&nbsp;&nbsp;

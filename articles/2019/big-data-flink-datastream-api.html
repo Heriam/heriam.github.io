@@ -102,7 +102,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
 <li><a href="#maven">设置Maven项目</a></li>
 <li><a href="#flink">写一个Flink程序</a></li>
-<li><a href="#kafka">奖金练习：在群集上运行并写入Kafka</a></li>
+<li><a href="#kafka">额外练习：在群集上运行并写入Kafka</a></li>
 </ul>
 </div>
 			</nav>
@@ -145,28 +145,28 @@ wiki-edits/
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>flink-java<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">flink</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>flink-streaming-java_2.11<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">flink</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>flink-clients_2.11<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">flink</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
         <span class="nt">&lt;artifactId&gt;</span>flink-connector-wikiedits_2.11<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span><span class="cp">${</span><span class="n">flink</span><span class="o">.</span><span class="n">version</span><span class="cp">}</span><span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;version&gt;</span>${flink.version}<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/dependencies&gt;</span>
 </pre></div>
 <p>注意添加的依赖项<code>flink-connector-wikiedits_2.11</code>。（此示例和Wikipedia连接器的灵感来自Apache Samza 的<em>Hello Samza</em>示例。）</p>
 <h2 id="flink">写一个Flink程序</h2>
-<p>接下来是编码。启动您喜欢的IDE并导入Maven项目或打开文本编辑器并创建文件<code>src/main/java/wikiedits/WikipediaAnalysis.java</code>：</p>
+<p>接下来是编码。启动你喜欢的IDE并导入Maven项目或打开文本编辑器并创建文件<code>src/main/java/wikiedits/WikipediaAnalysis.java</code>：</p>
 <div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">wikiedits</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">WikipediaAnalysis</span> <span class="o">{</span>
@@ -176,107 +176,137 @@ wiki-edits/
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
-<p>该计划现在非常基础，但我们会慢慢填充。请注意，我不会在此处提供import语句，因为IDE可以自动添加它们。在本节结束时，如果您只想跳过并在编辑器中输入，我将使用import语句显示完整的代码。</p>
-<p>Flink程序的第一步是创建一个<code>StreamExecutionEnvironment</code> （或者<code>ExecutionEnvironment</code>，如果您正在编写批处理作业）。这可用于设置执行参数并创建从外部系统读取的源。所以让我们继续把它添加到main方法：</p>
-<div class="highlight"><pre><span></span>StreamExecutionEnvironment see = StreamExecutionEnvironment.getExecutionEnvironment();
+<p>该程序现在还非常基础，但我们会慢慢填充。请注意，我不会在此处提供import语句，因为IDE可以自动添加它们。在本文结尾将给出包括import语句的完整的代码。</p>
+<p>Flink程序的第一步是创建一个<code>StreamExecutionEnvironment</code> （或者<code>ExecutionEnvironment</code>，如果您正在编写批处理作业）。这可用于设置执行参数并创建从外部系统读取的源。所以让我们继续把它添加到main方法中：</p>
+<div class="highlight"><pre><span></span><span class="n">StreamExecutionEnvironment</span> <span class="n">see</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="na">getExecutionEnvironment</span><span class="o">();</span>
 </pre></div>
 <p>接下来，我们将创建一个从Wikipedia IRC日志中读取的源：</p>
-<div class="highlight"><pre><span></span>DataStream&lt;WikipediaEditEvent&gt; edits = see.addSource(new WikipediaEditsSource());
+<div class="highlight"><pre><span></span><span class="n">DataStream</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">&gt;</span> <span class="n">edits</span> <span class="o">=</span> <span class="n">see</span><span class="o">.</span><span class="na">addSource</span><span class="o">(</span><span class="k">new</span> <span class="n">WikipediaEditsSource</span><span class="o">());</span>
 </pre></div>
-<p>这创建了一个我们可以进一步处理<code>DataStream</code>的<code>WikipediaEditEvent</code>元素。出于本示例的目的，我们感兴趣的是确定每个用户在特定时间窗口中添加或删除的字节数，比如说五秒。为此，我们首先要指定我们要在用户名上键入流，也就是说此流上的操作应考虑用户名。在我们的例子中，窗口中编辑的字节的总和应该是每个唯一的用户。对于键入流，我们必须提供一个<code>KeySelector</code>，如下所示：</p>
-<div class="highlight"><pre><span></span>KeyedStream&lt;WikipediaEditEvent, String&gt; keyedEdits = edits
-    .keyBy(new KeySelector&lt;WikipediaEditEvent, String&gt;() {
-        @Override
-        public String getKey(WikipediaEditEvent event) {
-            return event.getUser();
-        }
-    });
+<p>这创建了我们可以进一步处理的一个包含<code>WikipediaEditEvent</code>元素的<code>DataStream</code>。出于本示例的目的，我们感兴趣的是确定每个用户在特定时间窗口中添加或删除的字节数，比如说五秒。为此，我们首先要对流以用户名进行键值化，也就是说此流上的操作应考虑用户名。在我们的例子中，窗口中编辑的字节的总和应该是基于每个唯一的用户分别进行统计。对流进行键值化，我们必须提供一个<code>KeySelector</code>，如下所示：</p>
+<div class="highlight"><pre><span></span><span class="n">KeyedStream</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">keyedEdits</span> <span class="o">=</span> <span class="n">edits</span>
+    <span class="o">.</span><span class="na">keyBy</span><span class="o">(</span><span class="k">new</span> <span class="n">KeySelector</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getKey</span><span class="o">(</span><span class="n">WikipediaEditEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="na">getUser</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
 </pre></div>
-<p>这为我们提供了一个<code>WikipediaEditEvent</code>具有<code>String</code>密钥的用户名。我们现在可以指定我们希望在此流上加上窗口，并根据这些窗口中的元素计算结果。窗口指定要在其上执行计算的Stream的切片。在无限的元素流上计算聚合时需要Windows。在我们的例子中，我们将说我们想要每五秒聚合一次编辑的字节总和：</p>
-<div class="highlight"><pre><span></span>DataStream&lt;Tuple2&lt;String, Long&gt;&gt; result = keyedEdits
-    .timeWindow(Time.seconds(5))
-    .fold(new Tuple2&lt;&gt;("", 0L), new FoldFunction&lt;WikipediaEditEvent, Tuple2&lt;String, Long&gt;&gt;() {
-        @Override
-        public Tuple2&lt;String, Long&gt; fold(Tuple2&lt;String, Long&gt; acc, WikipediaEditEvent event) {
-            acc.f0 = event.getUser();
-            acc.f1 += event.getByteDiff();
-            return acc;
-        }
-    });
+<p>这为我们提供了一个具有<code>String</code>类型用户名键的<code>WikipediaEditEvent</code> 数据流。我们现在可以指定我们希望在此流上加上窗口，并根据这些窗口中的元素计算结果。窗口定义了要在其上执行计算的数据流的一个切片。在无限的元素流上计算聚合时需要Windows。在我们的例子中，我们将说我们想要每五秒聚合一次编辑的字节总和：</p>
+<div class="highlight"><pre><span></span><span class="n">DataStream</span><span class="o">&lt;</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">keyedEdits</span>
+    <span class="o">.</span><span class="na">timeWindow</span><span class="o">(</span><span class="n">Time</span><span class="o">.</span><span class="na">seconds</span><span class="o">(</span><span class="mi">5</span><span class="o">))</span>
+    <span class="o">.</span><span class="na">aggregate</span><span class="o">(</span><span class="k">new</span> <span class="n">AggregateFunction</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">createAccumulator</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;(</span><span class="s">""</span><span class="o">,</span> <span class="mi">0</span><span class="n">L</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">add</span><span class="o">(</span><span class="n">WikipediaEditEvent</span> <span class="n">value</span><span class="o">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">accumulator</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">accumulator</span><span class="o">.</span><span class="na">f0</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">getUser</span><span class="o">();</span>
+            <span class="n">accumulator</span><span class="o">.</span><span class="na">f1</span> <span class="o">+=</span> <span class="n">value</span><span class="o">.</span><span class="na">getByteDiff</span><span class="o">();</span>
+            <span class="k">return</span> <span class="n">accumulator</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">getResult</span><span class="o">(</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">accumulator</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">accumulator</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">merge</span><span class="o">(</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">a</span><span class="o">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;(</span><span class="n">a</span><span class="o">.</span><span class="na">f0</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">f1</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">f1</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
 </pre></div>
-<p>第一个调用，<code>.timeWindow()</code>指定我们希望有五秒钟的翻滚（非重叠）窗口。第二个调用为每个唯一键指定每个窗口切片的<em>折叠变换</em>。在我们的例子中，我们从一个初始值开始，<code>("", 0L)</code>并在该时间窗口中为用户添加每个编辑的字节差异。生成的Stream现在包含<code>Tuple2&lt;String, Long&gt;</code>每五秒钟发出一次的用户。</p>
+<p>第一个调用<code>.timeWindow()</code>表示我们希望有五秒钟的翻滚（不重叠）窗口。第二个调用为每个Key在每个窗口切片上指定<em>聚合转换</em>。在我们的例子中，我们从一个初始值<code>("", 0L)</code>开始，并在该时间窗口中为用户添加每次编辑的字节差。现在，输出流中将包含每个用户对应一个每五秒钟发出一次的<code>Tuple2&lt;String, Long&gt;</code>。</p>
 <p>剩下要做的就是将流打印到控制台并开始执行：</p>
-<div class="highlight"><pre><span></span>result.print();
+<div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
 
-see.execute();
+<span class="n">see</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
 </pre></div>
-<p>最后一次调用是启动实际Flink工作所必需的。所有操作（例如创建源，转换和接收器）仅构建内部操作的图形。只有在<code>execute()</code>被调用时 才会在集群上抛出或在本地计算机上执行此操作图。</p>
+<p>最后一个调用是启动实际Flink工作所必需的。所有操作（例如创建源Source，转换Transformation和接收器Sink）仅构建内部操作的图形。只有在<code>execute()</code>被调用时才会提交到集群上或在本地计算机上执行此操作图。</p>
 <p>到目前为止完整的代码是这样的：</p>
-<div class="highlight"><pre><span></span><span class="n">package</span> <span class="n">wikiedits</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">wikiedits</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">org.apache.flink.api.common.functions.FoldFunction</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.api.java.functions.KeySelector</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.api.java.tuple.Tuple2</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.datastream.DataStream</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.datastream.KeyedStream</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.environment.StreamExecutionEnvironment</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.windowing.time.Time</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.connectors.wikiedits.WikipediaEditEvent</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.connectors.wikiedits.WikipediaEditsSource</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.api.common.functions.AggregateFunction</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.api.java.functions.KeySelector</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.api.java.tuple.Tuple2</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.datastream.DataStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.datastream.KeyedStream</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.environment.StreamExecutionEnvironment</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.api.windowing.time.Time</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.connectors.wikiedits.WikipediaEditEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.flink.streaming.connectors.wikiedits.WikipediaEditsSource</span><span class="o">;</span>
 
-<span class="n">public</span> <span class="k">class</span> <span class="nc">WikipediaAnalysis</span> <span class="p">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WikipediaAnalysis</span> <span class="o">{</span>
 
-  <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="n">throws</span> <span class="ne">Exception</span> <span class="p">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
 
-    <span class="n">StreamExecutionEnvironment</span> <span class="n">see</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="n">getExecutionEnvironment</span><span class="p">();</span>
+    <span class="n">StreamExecutionEnvironment</span> <span class="n">see</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="o">.</span><span class="na">getExecutionEnvironment</span><span class="o">();</span>
 
-    <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">&gt;</span> <span class="n">edits</span> <span class="o">=</span> <span class="n">see</span><span class="o">.</span><span class="n">addSource</span><span class="p">(</span><span class="n">new</span> <span class="n">WikipediaEditsSource</span><span class="p">());</span>
+    <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">&gt;</span> <span class="n">edits</span> <span class="o">=</span> <span class="n">see</span><span class="o">.</span><span class="na">addSource</span><span class="o">(</span><span class="k">new</span> <span class="n">WikipediaEditsSource</span><span class="o">());</span>
 
-    <span class="n">KeyedStream</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">keyedEdits</span> <span class="o">=</span> <span class="n">edits</span>
-      <span class="o">.</span><span class="n">keyBy</span><span class="p">(</span><span class="n">new</span> <span class="n">KeySelector</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="p">,</span> <span class="n">String</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">KeyedStream</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">keyedEdits</span> <span class="o">=</span> <span class="n">edits</span>
+      <span class="o">.</span><span class="na">keyBy</span><span class="o">(</span><span class="k">new</span> <span class="n">KeySelector</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="n">public</span> <span class="n">String</span> <span class="n">getKey</span><span class="p">(</span><span class="n">WikipediaEditEvent</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="n">getUser</span><span class="p">();</span>
-        <span class="p">}</span>
-      <span class="p">});</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getKey</span><span class="o">(</span><span class="n">WikipediaEditEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="na">getUser</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">});</span>
 
-    <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">keyedEdits</span>
-      <span class="o">.</span><span class="n">timeWindow</span><span class="p">(</span><span class="n">Time</span><span class="o">.</span><span class="n">seconds</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-      <span class="o">.</span><span class="n">fold</span><span class="p">(</span><span class="n">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="il">0L</span><span class="p">),</span> <span class="n">new</span> <span class="n">FoldFunction</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="p">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">keyedEdits</span>
+      <span class="o">.</span><span class="na">timeWindow</span><span class="o">(</span><span class="n">Time</span><span class="o">.</span><span class="na">seconds</span><span class="o">(</span><span class="mi">5</span><span class="o">))</span>
+      <span class="o">.</span><span class="na">aggregate</span><span class="o">(</span><span class="k">new</span> <span class="n">AggregateFunction</span><span class="o">&lt;</span><span class="n">WikipediaEditEvent</span><span class="o">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;&gt;()</span> <span class="o">{</span>
         <span class="nd">@Override</span>
-        <span class="n">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">fold</span><span class="p">(</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">acc</span><span class="p">,</span> <span class="n">WikipediaEditEvent</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
-          <span class="n">acc</span><span class="o">.</span><span class="n">f0</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">getUser</span><span class="p">();</span>
-          <span class="n">acc</span><span class="o">.</span><span class="n">f1</span> <span class="o">+=</span> <span class="n">event</span><span class="o">.</span><span class="n">getByteDiff</span><span class="p">();</span>
-          <span class="k">return</span> <span class="n">acc</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">});</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">createAccumulator</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;(</span><span class="s">""</span><span class="o">,</span> <span class="mi">0</span><span class="n">L</span><span class="o">);</span>
+        <span class="o">}</span>
 
-    <span class="n">result</span><span class="o">.</span><span class="k">print</span><span class="p">();</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">add</span><span class="o">(</span><span class="n">WikipediaEditEvent</span> <span class="n">value</span><span class="o">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">accumulator</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">accumulator</span><span class="o">.</span><span class="na">f0</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">getUser</span><span class="o">();</span>
+          <span class="n">accumulator</span><span class="o">.</span><span class="na">f1</span> <span class="o">+=</span> <span class="n">value</span><span class="o">.</span><span class="na">getByteDiff</span><span class="o">();</span>
+          <span class="k">return</span> <span class="n">accumulator</span><span class="o">;</span>
+        <span class="o">}</span>
 
-    <span class="n">see</span><span class="o">.</span><span class="n">execute</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">getResult</span><span class="o">(</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">accumulator</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">accumulator</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">merge</span><span class="o">(</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">a</span><span class="o">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="n">Tuple2</span><span class="o">&lt;&gt;(</span><span class="n">a</span><span class="o">.</span><span class="na">f0</span><span class="o">,</span> <span class="n">a</span><span class="o">.</span><span class="na">f1</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">f1</span><span class="o">);</span>
+        <span class="o">}</span>
+      <span class="o">});</span>
+
+    <span class="n">result</span><span class="o">.</span><span class="na">print</span><span class="o">();</span>
+
+    <span class="n">see</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 <p>您可以使用Maven在IDE或命令行上运行此示例：</p>
 <div class="highlight"><pre><span></span>$ mvn clean package
 $ mvn exec:java -Dexec.mainClass<span class="o">=</span>wikiedits.WikipediaAnalysis
 </pre></div>
 <p>第一个命令构建我们的项目，第二个命令执行我们的主类。输出应该类似于：</p>
-<div class="highlight"><pre><span></span>1&gt; (Fenix down,114)
-6&gt; (AnomieBOT,155)
-8&gt; (BD2412bot,-3690)
-7&gt; (IgnorantArmies,49)
-3&gt; (Ckh3111,69)
-5&gt; (Slade360,0)
-7&gt; (Narutolovehinata5,2195)
-6&gt; (Vuyisa2001,79)
-4&gt; (Ms Sarah Welch,269)
-4&gt; (KasparBot,-245)
+<div class="highlight"><pre><span></span><span class="m">1</span>&gt; <span class="o">(</span>Fenix down,114<span class="o">)</span>
+<span class="m">6</span>&gt; <span class="o">(</span>AnomieBOT,155<span class="o">)</span>
+<span class="m">8</span>&gt; <span class="o">(</span>BD2412bot,-3690<span class="o">)</span>
+<span class="m">7</span>&gt; <span class="o">(</span>IgnorantArmies,49<span class="o">)</span>
+<span class="m">3</span>&gt; <span class="o">(</span>Ckh3111,69<span class="o">)</span>
+<span class="m">5</span>&gt; <span class="o">(</span>Slade360,0<span class="o">)</span>
+<span class="m">7</span>&gt; <span class="o">(</span>Narutolovehinata5,2195<span class="o">)</span>
+<span class="m">6</span>&gt; <span class="o">(</span>Vuyisa2001,79<span class="o">)</span>
+<span class="m">4</span>&gt; <span class="o">(</span>Ms Sarah Welch,269<span class="o">)</span>
+<span class="m">4</span>&gt; <span class="o">(</span>KasparBot,-245<span class="o">)</span>
 </pre></div>
-<p>每行前面的数字告诉您输出的打印接收器的哪个并行实例。</p>
-<p>这应该让您开始编写自己的Flink程序。要了解更多信息，您可以查看我们的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/api_concepts.html">基本概念</a>指南和 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>。如果您想了解如何在自己的机器上设置Flink群集并将结果写入<a href="http://kafka.apache.org/">Kafka</a>，请坚持参加奖励练习。</p>
-<h2 id="kafka">奖金练习：在群集上运行并写入Kafka</h2>
-<p>请按照我们的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/tutorials/local_setup.html">本地安装教程</a>在您的计算机上设置Flink分发，并 在继续之前参考<a href="https://kafka.apache.org/0110/documentation.html#quickstart">Kafka快速入门</a>以设置Kafka安装。</p>
+<p>每行前面的数字告诉你输出是由哪个打印Sink的并行实例产生的。</p>
+<p>要了解更多信息，您可以查看我们的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/api_concepts.html">基本概念</a>指南和 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>。如果您想了解如何在自己的机器上设置Flink群集并将结果写入<a href="http://kafka.apache.org/">Kafka</a>，请坚持参加奖励练习。</p>
+<h2 id="kafka">额外练习：在群集上运行并写入Kafka</h2>
+<p>请按照我们的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/tutorials/local_setup.html">本地安装教程</a>在您的计算机上设置Flink分发，并在继续之前参考<a href="https://kafka.apache.org/0110/documentation.html#quickstart">Kafka快速入门</a>以设置Kafka安装。</p>
 <p>作为第一步，我们必须添加Flink Kafka连接器作为依赖关系，以便我们可以使用Kafka接收器。将其添加到<code>pom.xml</code>依赖项部分中的文件：</p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>

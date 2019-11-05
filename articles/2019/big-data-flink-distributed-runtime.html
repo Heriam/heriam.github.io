@@ -113,8 +113,6 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 			<hr />
 
 
-		<br />
-
         <div>
 <h2 id="tasks-and-operator-chains">Tasks and Operator Chains</h2>
 <p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>

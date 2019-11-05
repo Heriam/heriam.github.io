@@ -99,7 +99,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 		
 		<hr />
 			<nav class="toc">
-			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+			<div class="toc"><span class="toctitle">目录</span><ul>
 <li><a href="#final-1">final 简介1</a></li>
 <li><a href="#final">final 修饰变量</a></li>
 <li><a href="#final_1">final 修饰类</a></li>
@@ -112,7 +112,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 		<hr />
 		
         <div>
-<h3 id="final-1"><em>final</em> 简介<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></h3>
+<h4 id="final-1"><em>final</em> 简介<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></h4>
 <p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
 <p><img alt="java中的final关键字" src="https://i.loli.net/2019/10/31/Df4CVqbjoTEKFhe.png"/></p>
 <p>上面这张图可以概括成：</p>
@@ -121,7 +121,7 @@ Category: <a href="../../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 <li>当<em>final</em>修饰<strong>方法</strong>时，被修饰的方法无法被所在类的子类重写（覆写）；</li>
 <li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且<em>final</em>类中的所有成员方法都会被隐式地指定为<em>final</em>方法，但成员变量则不会变。</li>
 </ul>
-<h3 id="final"><em>final</em> 修饰变量</h3>
+<h4 id="final"><em>final</em> 修饰变量</h4>
 <p>当使用<em>final</em>关键字声明类成员变量或局部变量后，其值不能被再次修改；也经常和<em>static</em>关键字一起，作为<strong>类常量</strong>使用。很多时候会容易把<em>static</em>和<em>final</em>关键字混淆，<u><em>static</em>作用于成员变量用来表示只保存一份副本，而<em>final</em>的作用是用来保证变量不可变</u>。如果<em>final</em>变量是引用，这意味着该变量不能重新绑定到引用另一个对象，但是可以更改该引用变量指向的对象的内部状态，即可以从<a href="https://www.geeksforgeeks.org/final-arrays-in-java/"><em>final</em>数组</a>或<em>final</em>集合中添加或删除元素。最好用全部大写来表示<em>final</em>变量，使用下划线来分隔单词。</p>
 <p><strong>例子</strong>：</p>
 <div class="highlight"><pre><span></span><span class="c1">//一个final成员常量</span>
@@ -295,7 +295,7 @@ GeeksForGeeks
 <div class="highlight"><pre><span></span>1 2 3
 </pre></div>
 <p><strong>说明：</strong>由于i变量在循环的每次迭代时超出范围，因此实际上每次迭代都重新声明，允许使用相同的标记（即i）来表示多个变量。</p>
-<h3 id="final_1"><em>final</em> 修饰类</h3>
+<h4 id="final_1"><em>final</em> 修饰类</h4>
 <p>当使用<em>final</em>关键字声明一个类时，它被称为<em>final</em>类。被声明为<em>final</em>的类不能被扩展（继承）。<em>final</em>类有两种用途：</p>
 <ol>
 <li>一个是彻底防止被<a href="https://www.geeksforgeeks.org/inheritance-in-java/">继承</a>，因为<em>final</em>类不能被扩展。例如，所有<a href="https://www.geeksforgeeks.org/wrapper-classes-java/">包装类</a>如<a href="https://www.geeksforgeeks.org/java-lang-integer-class-java/">Integer</a>，<a href="https://www.geeksforgeeks.org/java-lang-float-class-in-java/">Float</a>等都是<em>final</em>类。我们无法扩展它们。</li>
@@ -322,7 +322,7 @@ GeeksForGeeks
 <p>原因大多是说当我们创建匿名内部类的那个方法调用运行完毕之后，因为局部变量的生命周期和方法的生命周期是一样的，当方法弹栈，<strong>这个局部变量就会消亡了，但内部类对象可能还存在。</strong> 此时就会出现一种情况，就是我们调用这个内部类对象去访问一个不存在的局部变量，就可能会出现空指针异常。而此时需要使用 <em>final</em> 在类加载的时候进入常量池，即使方法弹栈，常量池的常量还在，也可以继续使用，JVM 会持续维护这个引用在回调方法中的生命周期。</p>
 <p><span style="color:red;"><strong>但是 JDK 1.8 取消了对匿名内部类引用的局部变量 <em>final</em> 修饰的检查</strong></span></p>
 <p>对此，<a href="https://www.jianshu.com/u/7e0d004ed427">theonlin</a>专门通过实验做出了总结：其实局部内部类并不是直接调用方法传进来的参数，而是内部类将传进来的参数通过自己的构造器备份到了自己的内部，自己内部的方法调用的实际是自己的属性而不是外部类方法的参数。外部类中的方法中的变量或参数只是方法的局部变量，这些变量或参数的作用域只在这个方法内部有效，所以方法中被 <em>final</em>的变量的仅仅作用是表明这个变量将作为内部类构造器参数，<strong>其实<em>final</em>不加也可以，加了可能还会占用内存空间，影响 GC</strong>。最后结论就是，需要使用 final 去持续维护这个引用在回调方法中的生命周期这种说法应该是错误的，也没必要。</p>
-<h3 id="final_2"><em>final</em> 修饰方法</h3>
+<h4 id="final_2"><em>final</em> 修饰方法</h4>
 <p>下面这段话摘自《Java编程思想》第四版第143页：</p>
 <blockquote>
 <p>使用<em>final</em>方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。</p>
@@ -352,7 +352,7 @@ GeeksForGeeks
 <p>注1：类的<em>private</em>方法会隐式地被指定为<em>final</em>方法，也就同样无法被重写。可以对private方法添加final修饰符，但并没有添加任何额外意义。</p>
 <p>注2：在java中，你永远不会看到同时使用<a href="https://www.geeksforgeeks.org/final-keyword-java/"><em>final</em></a>和<em>abstract</em>关键字声明的类或方法。对于类，<em>final</em>用于防止<a href="https://www.geeksforgeeks.org/inheritance-in-java/">继承</a>，而抽象类反而需要依赖于它们的子类来完成实现。在修饰方法时，<em>final</em>用于防止被<a href="https://www.geeksforgeeks.org/overriding-in-java/">覆盖</a>，而抽象方法反而需要在子类中被重写。</p>
 <p><strong>有关<em>final</em>方法和<em>final</em>类的更多示例和行为</strong>，请参阅<a href="https://www.geeksforgeeks.org/using-final-with-inheritance-in-java/">使用final继承</a>。</p>
-<h3 id="final_3"><em>final</em> 优化编码的艺术</h3>
+<h4 id="final_3"><em>final</em> 优化编码的艺术</h4>
 <p><em>final</em>关键字在效率上的作用主要可以总结为以下三点：</p>
 <ul>
 <li>

@@ -99,7 +99,7 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 		
 		<hr />
 			<nav class="toc">
-			<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+			<div class="toc"><span class="toctitle">目录</span><ul>
 <li><a href="#apache-flink">Apache Flink仅用于（近）实时处理用例吗？</a></li>
 <li><a href="#flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</a></li>
 <li><a href="#flinkhadoop">Flink如何与Hadoop栈相关联？</a></li>
@@ -114,28 +114,28 @@ Category: <a href="../../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp
 		<hr />
 		
         <div>
-<h3 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h3>
+<h4 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h4>
 <p>Flink是一个非常通用的系统，用于数据处理和数据驱动的应用程序，<em>数据流</em>作为核心构建块。这些数据流可以是实时数据流或存储的历史数据流。例如，在Flink的视图中，文件是存储的字节流。因此，Flink支持实时数据处理和应用程序，以及批处理应用程序。</p>
 <p>流可以是<em>无界的</em>（没有结束，事件不断发生）或受<em>限制</em>（流有开始和结束）。例如，来自消息队列的Twitter馈送或事件流通常是无界的流，而来自文件的字节流是有界流。</p>
-<h3 id="flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</h3>
+<h4 id="flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</h4>
 <p>有界流通常比无界流更高效。在（近）实时处理无限事件流需要系统能够立即对事件起作用并产生中间结果（通常具有低延迟）。处理有界流通常不需要产生低延迟结果，因为无论如何数据都是旧的（相对而言）。这允许Flink以简单且更高效的方式处理数据。</p>
 <p>DataStream API 捕获无界和有界的流的连续处理，以支持低等待时间的结果以及对事件和时间（包括事件时间）灵活反应的模型。</p>
 <p>DataSet API 具有加快有界的数据流的处理的技术。将来，社区计划将这些优化与DataStream API中的技术相结合。</p>
-<h3 id="flinkhadoop">Flink如何与Hadoop栈相关联？</h3>
+<h4 id="flinkhadoop">Flink如何与Hadoop栈相关联？</h4>
 <p>Flink独立于<a href="https://hadoop.apache.org/">Apache Hadoop，</a>并且在没有任何Hadoop依赖性的情况下运行。</p>
 <p>但是，Flink与许多Hadoop组件集成得非常好，例如<em>HDFS</em>，<em>YARN</em>或<em>HBase</em>。与这些组件一起运行时，Flink可以使用HDFS读取数据，或写入结果和检查点/快照。Flink可以通过YARN轻松部署，并与YARN和HDFS Kerberos安全模块集成。</p>
-<h3 id="flink">Flink可运行的其他栈是什么？</h3>
+<h4 id="flink">Flink可运行的其他栈是什么？</h4>
 <p>用户在<a href="https://kubernetes.io/">Kubernetes</a>，<a href="https://mesos.apache.org/">Mesos</a>， <a href="https://www.docker.com/">Docker</a>上运行Flink ，甚至作为独立服务运行。</p>
-<h3 id="flink_1">使用Flink有哪些先决条件？</h3>
+<h4 id="flink_1">使用Flink有哪些先决条件？</h4>
 <ul>
 <li>您需要<em>Java 8</em>来运行Flink作业/应用程序。</li>
 <li>Scala API（可选）基于Scala 2.11。</li>
 <li><a href="https://zookeeper.apache.org/">Apache ZooKeeper</a>需要高度可用且没有单点故障的设置。</li>
 <li>对于可以从故障中恢复的高可用流处理设置，Flink需要某种形式的分布式存储用于检查点（HDFS / S3 / NFS / SAN / GFS / Kosmos / Ceph / ...）。</li>
 </ul>
-<h3 id="flink_2">Flink支持多大的规模？</h3>
+<h4 id="flink_2">Flink支持多大的规模？</h4>
 <p>用户可在非常小的配置（少于5个节点）和1000个节点以及TB级的状态上运行Flink作业。</p>
-<h3 id="flink_3">Flink是否仅限于内存数据集？</h3>
+<h4 id="flink_3">Flink是否仅限于内存数据集？</h4>
 <p>对于DataStream API，Flink支持大于内存的状态来配置RocksDB状态后端。</p>
 <p>对于DataSet API，所有操作（delta迭代除外）都可以扩展到主内存之外。</p></div>
 	

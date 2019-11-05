@@ -104,8 +104,8 @@ Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h1 id="_1">事务初探</h1>
-<h2 id="_2">事物的定义</h2>
+<h3 id="_1">事务初探</h3>
+<h4 id="_2">事物的定义</h4>
 <p>事务（Transaction）是由一系列对系统中数据进行访问或更新的操作所组成的一个程序执行逻辑单元（Unit）。在计算机术语中，事务通常就是指数据库事务 。</p>
 <p><img alt="57355-20190323094924183-1338282146.png" src="https://i.loli.net/2019/11/05/iuoBJaNxb4H8Pgq.png"/></p>
 <p>在数据库管理系统（DBMS）中，事务是数据库恢复和并发控制的基本单位。它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。</p>
@@ -139,17 +139,17 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h4 id="flink">Flink应用程序集群</h4>
+<h5 id="flink">Flink应用程序集群</h5>
 <p>Flink应用程序集群是指仅执行一个<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-job">Flink作业</a>专用的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-cluster">Flink集群</a>。该<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-cluster">Flink集群</a>的生命周期与对应Flink作业的生命周期相同。在<em>工作模式下，</em>以前的Flink应用程序集群也称为Flink集群。点击查看与<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-session-cluster">Flink Session Cluster</a>的比较。</p>
-<h4 id="flink_1">Flink集群</h4>
+<h5 id="flink_1">Flink集群</h5>
 <p>一种分布式系统，通常由一个<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-master">Flink Master</a>和一个或多个 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-taskmanager">Flink TaskManager</a>进程组成。</p>
-<h4 id="_1">事件</h4>
+<h5 id="_1">事件</h5>
 <p>事件是有关由应用程序建模的域的状态更改的声明。事件可以是流或批处理应用程序的输入和/或输出。事件是特殊类型的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#Record">记录</a>。</p>
-<h4 id="_2">执行图</h4>
+<h5 id="_2">执行图</h5>
 <p>见<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#physical-graph">物理图</a></p>
-<h4 id="_3">函数</h4>
+<h5 id="_3">函数</h5>
 <p>函数由用户实现，并封装Flink程序的应用程序逻辑。大多数函数由相应的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#operator">算子</a>包装 。</p>
-<h4 id="_4">实例</h4>
+<h5 id="_4">实例</h5>
 <p>术语<em>实例</em>用于描述在运行期间特定类型的特定实例（通常是 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#operator">算子</a>或<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#function">函数</a>）。由于Apache Flink主要是用Java编写的 …</p> <a class="btn btn-info xsmall" href="../articles/2019/big-data-flink-glossary.html">read more</a></div>
         <hr />
     </div>
@@ -178,11 +178,11 @@ Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
         
         <div class="summary">
 <p><br/></p>
-<h2 id="_1">限时福利</h2>
+<h3 id="_1">限时福利</h3>
 <p><a href="https://www.vultr.com/promo/try50/?service=try50">Vultr新用户赠送$50活动入口</a></p>
 <p><img alt="vultr-promotion" src="https://s2.ax1x.com/2019/11/01/KHBPSK.png"/></p>
 <p><br/></p>
-<h2 id="_2">测试方法</h2>
+<h3 id="_2">测试方法</h3>
 <p>采用以下方法：</p>
 <ul>
 <li>本地Ping测试</li>
@@ -192,7 +192,7 @@ Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
 <li>站长工具综合测试</li>
 </ul>
 <p><br/></p>
-<h2 id="_3"><a href="https://www.vultr.com/resources/faq/#downloadspeedtests">节点列表</a></h2>
+<h3 id="_3"><a href="https://www.vultr.com/resources/faq/#downloadspeedtests">节点列表</a></h3>
 <table>
 <thead>
 <tr>
@@ -253,7 +253,7 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         <div class="summary">
 <p>在本文中，我们将从头开始，介绍从设置Flink项目到在Flink集群上运行流分析程序。</p>
 <p>Wikipedia提供了一个IRC频道，其中记录了对Wiki的所有编辑。我们将在Flink中读取此通道，并计算每个用户在给定时间窗口内编辑的字节数。这很容易使用Flink在几分钟内实现，但它将为您提供一个良好的基础，从而开始自己构建更复杂的分析程序。</p>
-<h2 id="maven">设置Maven项目</h2>
+<h3 id="maven">设置Maven项目</h3>
 <p>我们将使用Flink Maven Archetype来创建我们的项目结构。有关此内容的更多详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/projectsetup/java_api_quickstart.html">Java API快速入门</a>。出于我们的目的，运行命令是这样的：</p>
 <div class="highlight"><pre><span></span>$ mvn archetype:generate <span class="se">\</span>
     -DarchetypeGroupId<span class="o">=</span>org.apache.flink <span class="se">\</span>
@@ -292,7 +292,7 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="_1">传统系统的问题</h3>
+<h4 id="_1">传统系统的问题</h4>
 <blockquote>
 <p>“我们正在从IT时代走向DT时代(数据时代)。IT和DT之间，不仅仅是技术的变革，更是思想意识的变革，IT主要是为自我服务，用来更好地自我控制和管理，DT则是激活生产力，让别人活得比你好”</p>
 <p>——阿里巴巴董事局主席马云。 </p>
@@ -328,11 +328,11 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h2 id="tasks-and-operator-chains">Tasks and Operator Chains</h2>
+<h3 id="tasks-and-operator-chains">Tasks and Operator Chains</h3>
 <p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>
 <p>下图中的示例数据流由五个子任务执行，因此具有五个并行线程。</p>
 <p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"/></p>
-<h2 id="job-managers-task-managers-clients">Job Managers, Task Managers, Clients</h2>
+<h3 id="job-managers-task-managers-clients">Job Managers, Task Managers, Clients</h3>
 <p>Flink运行时包含两种类型的进程：</p>
 <ul>
 <li><strong>JobManagers</strong>（也称为<em>masters</em>）协调分布式执行。他们安排任务，协调检查点，协调故障恢复等。</li>
@@ -369,14 +369,14 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h3>
+<h4 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h4>
 <p>Flink是一个非常通用的系统，用于数据处理和数据驱动的应用程序，<em>数据流</em>作为核心构建块。这些数据流可以是实时数据流或存储的历史数据流。例如，在Flink的视图中，文件是存储的字节流。因此，Flink支持实时数据处理和应用程序，以及批处理应用程序。</p>
 <p>流可以是<em>无界的</em>（没有结束，事件不断发生）或受<em>限制</em>（流有开始和结束）。例如，来自消息队列的Twitter馈送或事件流通常是无界的流，而来自文件的字节流是有界流。</p>
-<h3 id="flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</h3>
+<h4 id="flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</h4>
 <p>有界流通常比无界流更高效。在（近）实时处理无限事件流需要系统能够立即对事件起作用并产生中间结果（通常具有低延迟）。处理有界流通常不需要产生低延迟结果，因为无论如何数据都是旧的（相对而言）。这允许Flink以简单且更高效的方式处理数据。</p>
 <p>DataStream API 捕获无界和有界的流的连续处理，以支持低等待时间的结果以及对事件和时间（包括事件时间）灵活反应的模型。</p>
 <p>DataSet API 具有加快有界的数据流的处理的技术。将来，社区计划将这些优化与DataStream API中的技术相结合。</p>
-<h3 id="flinkhadoop">Flink如何与Hadoop栈相关联 …</h3> <a class="btn btn-info xsmall" href="../articles/2019/big-data-flink-FAQ.html">read more</a></div>
+<h4 id="flinkhadoop">Flink如何与Hadoop栈相关联 …</h4> <a class="btn btn-info xsmall" href="../articles/2019/big-data-flink-FAQ.html">read more</a></div>
         <hr />
     </div>
 				
@@ -404,7 +404,7 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         
         <div class="summary">
 <p>Apache Flink是一个用于分布式流和批处理数据处理的开源平台。Flink的核心是流数据流引擎，为数据流上的分布式计算提供数据分发，通信和容错。Flink基于流引擎之上构建批处理，覆加本地迭代支持，内存托管和程序优化。</p>
-<h2 id="_1">抽象层次</h2>
+<h3 id="_1">抽象层次</h3>
 <p>Flink提供不同级别的抽象来开发流/批处理应用程序。</p>
 <p><img alt="编程抽象级别" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/levels_of_abstraction.svg"/></p>
 <ul>
@@ -446,13 +446,13 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
 <li><a href="https://flink.apache.org/usecases.html#analytics">数据分析应用</a></li>
 <li><a href="https://flink.apache.org/usecases.html#pipelines">数据管道应用</a></li>
 </ul>
-<h2 id="_1">事件驱动的应用程序</h2>
-<h3 id="_2">什么是事件驱动的应用程序？</h3>
+<h3 id="_1">事件驱动的应用程序</h3>
+<h4 id="_2">什么是事件驱动的应用程序？</h4>
 <p>事件驱动的应用程序是一个有状态的应用程序，它从一个或多个事件流中提取事件，并通过触发计算，状态更新或外部操作对传入事件做出反应。</p>
 <p>事件驱动的应用程序是传统应用程序设计的演变。传统应用一般具有独立的计算和数据存储层，在此体系结构中，应用程序从远程事务数据库读取数据并将数据持久化。</p>
 <p>相反，事件驱动的应用程序基于有状态流处理应用程序。在这种设计中，数据和计算是共同定位的，即本地（内存或磁盘）数据访问。通过定期将检查点写入远程持久存储来实现容错。下图描绘了传统应用程序体系结构和事件驱动应用程序之间的差异。</p>
 <p><img alt="img" src="https://flink.apache.org/img/usecases-eventdrivenapps.png"/></p>
-<h3 id="_3">事件驱动的应用程序有哪些优点？</h3>
+<h4 id="_3">事件驱动的应用程序有哪些优点？</h4>
 <p>事件驱动的应用程序不是查询远程数据库，而是在本地访问其数据，从而在吞吐量和延迟方面产生更好的性能。远程持久存储的定期检查点可以异步和递增完成。因此，检查点对常规事件处理的影响非常小。但是 …</p> <a class="btn btn-info xsmall" href="../articles/2019/big-data-flink-usecases.html">read more</a></div>
         <hr />
     </div>
@@ -480,10 +480,10 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="_1">一、架构</h3>
+<h4 id="_1">一、架构</h4>
 <p>Apache Flink是一个分布式处理引擎和框架，用于对无界和有界数据流进行状态计算。Flink可在所有常见的集群环境中运行，可以内存级速度和任意规模执行计算。</p>
 <p>接下来首先我们阐述Flink的架构。</p>
-<h4 id="_2">处理无界和有界数据</h4>
+<h5 id="_2">处理无界和有界数据</h5>
 <p>任何类型的数据都是作为事件流产生的。信用卡交易，传感器测量，机器日志或网站或移动应用程序上的用户交互，所有这些数据都作为流生成。</p>
 <p>数据可以作为<em>无界</em>或<em>有界</em>流处理。</p>
 <ol>
@@ -492,7 +492,7 @@ Category: <a href="../categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
 </ol>
 <p><img alt="" src="https://flink.apache.org/img/bounded-unbounded.png"/></p>
 <p><strong>Apache Flink擅长处理无界和有界数据集。</strong>精确控制时间和状态使Flink的运行时能够在无界流上运行任何类型的应用程序。有界流由算法和数据结构内部处理，这些算法和数据结构专为固定大小的数据集而设计，从而产生出色的性能。</p>
-<h4 id="_3">随处部署应用程序</h4>
+<h5 id="_3">随处部署应用程序</h5>
 <p>Apache Flink是一个分布式系统，需要计算资源才能执行应用程序。Flink可与所有常见的集群资源管理器（Resource …</p> <a class="btn btn-info xsmall" href="../articles/2019/big-data-flink-intro.html">read more</a></div>
         <hr />
     </div>
@@ -520,7 +520,7 @@ Category: <a href="../categories/cloud.html">Cloud</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="_1">简介</h3>
+<h4 id="_1">简介</h4>
 <p>自由和开放源码的云计算平台使开发人员能够创建、测试和运行他们的应用程序，并且可以把它们部署到云中。</p>
 <p>OpenShift是红帽的云开发平台即服务（PaaS）。是一个基于主流的容器技术Docker和K8s构建的开源容器云平台。底层以Docker作为容器引擎驱动，以K8s作为容器编排引擎组件，并提供了开发语言，中间件，DevOps自动化流程工具和web console用户界面等元素，提供了一套完整的基于容器的应用云平台。</p>
 <p>Openshift提供比任何PaaS更多的灵活性，它支持用于Java、Python、PHP、Perl、node.js、go和Ruby的更多的开发框架，包括 Spring、Seam、Weld、CDI、Rails、Rack、Symfony、Zend Framework、Twisted、Django和Java E。数据库语言则支持MySQL、MongoDB和PostgreSQL。</p>
@@ -552,7 +552,7 @@ Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="final-1"><em>final</em> 简介<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></h3>
+<h4 id="final-1"><em>final</em> 简介<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></h4>
 <p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
 <p><img alt="java中的final关键字" src="https://i.loli.net/2019/10/31/Df4CVqbjoTEKFhe.png"/></p>
 <p>上面这张图可以概括成：</p>
@@ -561,7 +561,7 @@ Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
 <li>当<em>final</em>修饰<strong>方法</strong>时，被修饰的方法无法被所在类的子类重写（覆写）；</li>
 <li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且<em>final</em>类中的所有成员方法都会被隐式地指定为<em>final</em>方法，但成员变量则不会变。</li>
 </ul>
-<h3 id="final"><em>final</em> 修饰变量</h3>
+<h4 id="final"><em>final</em> 修饰变量</h4>
 <p>当使用<em>final</em>关键字声明类成员变量或局部变量后，其值不能被再次修改 …</p> <a class="btn btn-info xsmall" href="../articles/2019/backend-java-final-keyword.html">read more</a></div>
         <hr />
     </div>
@@ -587,15 +587,15 @@ Category: <a href="../categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
 </span> 
         </div>
         
-        <div class="summary"><h3 id="_1">简介</h3>
+        <div class="summary"><h4 id="_1">简介</h4>
 <p>方法其实很简单，而且很多人可能已经想到或者在用了。一言以蔽之，就是把桌面文件夹设置为网盘的同步文件夹。之所以要这么做，因为很多人习惯使用一些程序搜索工具来启动程序（比如wox, everything, 甚至系统自带的搜索功能等等），不在系统桌面保留桌面图标，而且通常为了平时工作方便，会直接把桌面当做文档库或者workshop来用，也就是把平时常用的一些文档直接保存在桌面。这个时候如果直接用网盘把桌面设置为同步文件夹，就可以直接实时备份桌面上的文件了。而许多人可能平时会用到诸多不同设备（比如工作场所的电脑，私人电脑，手机，ipad等等），这种方法就可以实现多个电脑之间桌面的实时文件共享，同时其他移动端设备也能实时进行同步了。平时工作或者收藏的文件或者个人材料，在外临时要用的时候随时随处都可以拿到，而不用刻意事先进行上传或者分享。</p>
-<h3 id="_2">效果</h3>
+<h4 id="_2">效果</h4>
 <p>以下是大致效果:</p>
 <p><img alt="MEGASync Desktop" src="https://i.loli.net/2019/11/01/3ZKJIE4gzNMUpqb.png"></p>
-<h3 id="_3">工具</h3>
-<h5 id="_4">程序启动</h5>
+<h4 id="_3">工具</h4>
+<h6 id="_4">程序启动</h6>
 <p>如果您不喜欢应用程序图标，并且只希望在桌面上放置文件和文件夹（如图所示），但仍然希望能够以一种方便的方式启动应用程序，则可以删除所有图标，然后安装<a href="http://www.wox.one/"> WOX</a>，用于快速访问应用程序。</p>
-<h5 id="_5">网盘同步</h5>
+<h6 id="_5">网盘同步</h6>
 <p>这里的网盘可以使用MEGASync或者坚果云，可以在多个设备之间同步桌面，并可以通过网页或者客户端随时随地访问文档。<a href="https://mega.nz/">MEGASync</a>提供以下功能：</p>
 <ul>
 <li>具有50GB免费存储空间的安全云网络磁盘</li>
@@ -629,7 +629,7 @@ Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="_1">简介</h3>
+<h4 id="_1">简介</h4>
 <p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
 <p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
 <p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
@@ -669,15 +669,15 @@ Category: <a href="../categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
         </div>
         
         <div class="summary">
-<h3 id="_1">前言</h3>
+<h4 id="_1">前言</h4>
 <p>代码优化，一个很重要的课题。可能有些人觉得没用，一些细小的地方有什么好修改的，改与不改对于代码的运行效率有什么影响呢？这个问题我是这么考虑的，就像大海里面的鲸鱼一样，它吃一条小虾米有用吗？没用，但是，吃的小虾米一多之后，鲸鱼就被喂饱了。代码优化也是一样，如果项目着眼于尽快无BUG上线，那么此时可以抓大放小，代码的细节可以不精打细磨；但是如果有足够的时间开发、维护代码，这时候就必须考虑每个可以优化的细节了，一个一个细小的优化点累积起来，对于代码的运行效率绝对是有提升的。</p>
 <p>代码优化的目标是：</p>
 <p>1、减小代码的体积</p>
 <p>2、提高代码运行的效率</p>
-<h3 id="_2">代码优化细节</h3>
-<h5 id="1final">1、尽量指定类、方法的final修饰符</h5>
+<h4 id="_2">代码优化细节</h4>
+<h6 id="1final">1、尽量指定类、方法的final修饰符</h6>
 <p>带有final修饰符的类是不可派生的。在Java核心API中，有许多应用final的例子，例如java.lang.String，整个类都是final的。为类指定final修饰符可以让类不可以被继承，为方法指定final修饰符可以让方法不可以被重写。如果指定了一个类为final，则该类所有的方法都是final的。Java编译器会寻找机会内联所有的final方法，内联对于提升Java运行效率作用重大，具体参见Java运行期优化。此举能够使性能平均提高50%。</p>
-<h5 id="2">2、尽量重用对象</h5>
+<h6 id="2">2、尽量重用对象</h6>
 <p>特别是String对象的使用，出现字符串连接时应该使用StringBuilder …</p> <a class="btn btn-info xsmall" href="../articles/2019/backend-Java代码优化35点总结.html">read more</a></div>
         <hr />
     </div>

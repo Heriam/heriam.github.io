@@ -105,29 +105,29 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
 <p>具体的使用方法官网都能查到。</p>
 <p>贴出自己微博使用JQCloud的前端代码：</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag.url }}&#39;</span><span class="p">});</span>
-    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">category</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">categories</span> <span class="o">%</span><span class="p">}</span>
-        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{category}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ category.url }}&#39;</span><span class="p">});</span>
-    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
-    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#tagcloud&quot;</span><span class="p">).</span><span class="nx">jQCloud</span><span class="p">(</span><span class="nx">words</span><span class="p">,</span> <span class="p">{</span>
-            <span class="nx">autoResize</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">});</span> 
-    <span class="p">});</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;tagcloud&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 80%; height: 450px; align-self: center;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+    var words = [];
+    {% for tag, articles in tags|sort %}
+        words.push({text: &quot;{{tag}}&quot;, weight: Math.random(), link: &#39;{{ SITEURL }}/{{ tag.url }}&#39;});
+    {% endfor %}
+    {% for category, articles in categories %}
+        words.push({text: &quot;{{category}}&quot;, weight: Math.random(), link: &#39;{{ SITEURL }}/{{ category.url }}&#39;});
+    {% endfor %}
+    $(function() {
+        $(&quot;#tagcloud&quot;).jQCloud(words, {
+            autoResize: true
+        }); 
+    });
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;tagcloud&quot;</span> <span class="na">style=</span><span class="s">&quot;width: 80%; height: 450px; align-self: center;&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 </pre></div>
 
 
 <p>需要注意的是要包含标签云的div模块需要显示指定width和height，否则需要在JavaScript中进行相关设置。
 踩坑1：因为要基于JQuery，注意引用的JQuery库可用。由于之前引用的是外网谷歌的库，国内被墙导致标签云一直没有刷出来，后来换成了bootcdn的JQuery库就成功了：</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div></div>
 	
         <hr />

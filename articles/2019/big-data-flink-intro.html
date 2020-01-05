@@ -203,7 +203,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <h5 id="processfunctions">ProcessFunctions</h5>
 <p><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/stream/operators/process_function.html">ProcessFunctions</a>是Flink提供的最具表现力的功能接口。Flink提供ProcessFunction来处理来自一个或两个输入流的单个事件，或被分组在一个窗口中的事件。ProcessFunctions提供对时间和状态的细粒度控制。ProcessFunction可以任意修改其状态并注册将在未来触发回调函数的定时器。因此，ProcessFunctions可以根据许多<a href="https://flink.apache.org/usecases.html#eventDrivenApps">有状态事件驱动的应用的</a>需要实现复杂的每事件业务逻辑。</p>
 <p>以下显示了一个<code>KeyedProcessFunction</code>对一个 <code>KeyedStream</code>进行操作，匹配 <code>START</code>以及<code>END</code>事件的示例。当一个<code>START</code>事件被接收，则该函数在状态中记住其时间戳并且注册一个4小时的计时器。如果在计时器触发之前收到<code>END</code>事件，则该函数计算事件<code>END</code>和<code>START</code>事件之间的持续时间，清除状态并返回值。否则，计时器只会超时并清除状态。</p>
-<div class="highlight"><pre><span></span><span class="cm">/**</span>
+<div class="highlight"><pre><span class="cm">/**</span>
 <span class="cm"> * Matches keyed START and END events and computes the difference between </span>
 <span class="cm"> * both elements' timestamps. The first String field is the key attribute, </span>
 <span class="cm"> * the second String attribute marks START and END events.</span>
@@ -264,7 +264,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <h5 id="the-datastream-api">The DataStream API</h5>
 <p><a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/datastream_api.html">DataStream API</a>为诸如窗口等许多常见的流处理操作提供原语。DataStream API可用于Java和Scala，基于如<code>map()</code>，<code>reduce()</code>和<code>aggregate()</code>等方法。可以通过扩展接口，或像Java或Scala中lambda函数一样来定义函数。</p>
 <p>以下示例显示如何对点击流进行会话化并计算每个会话的点击次数。</p>
-<div class="highlight"><pre><span></span><span class="c1">// a stream of website clicks</span>
+<div class="highlight"><pre><span class="c1">// a stream of website clicks</span>
 <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">Click</span><span class="o">&gt;</span> <span class="n">clicks</span> <span class="o">=</span> <span class="o">...</span>
 
 <span class="n">DataStream</span><span class="o">&lt;</span><span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">clicks</span>
@@ -273,7 +273,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     <span class="c1">// define function by implementing the MapFunction interface.</span>
     <span class="k">new</span> <span class="n">MapFunction</span><span class="o">&lt;</span><span class="n">Click</span><span class="o">,</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;&gt;()</span> <span class="o">{</span>
       <span class="nd">@Override</span>
-      <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="nf">map</span><span class="o">(</span><span class="n">Click</span> <span class="n">click</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="n">Tuple2</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="n">map</span><span class="o">(</span><span class="n">Click</span> <span class="n">click</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">return</span> <span class="n">Tuple2</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">click</span><span class="o">.</span><span class="na">userId</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
       <span class="o">}</span>
     <span class="o">})</span>
@@ -288,7 +288,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>Flink具有两个关系型API，<a href="https://ci.apache.org/projects/flink/flink-docs-stable/dev/table/index.html">Table API和SQL</a>。这两个API都是用于批处理和流处理的统一API，即，在无界的实时流或有界的记录流上以相同的语义执行查询，并产生相同的结果。Table API和SQL利用<a href="https://calcite.apache.org/">Apache Calcite</a>进行解析，验证和查询优化。它们可以与DataStream和DataSet API无缝集成，并支持用户定义的标量，聚合和表值函数。</p>
 <p>Flink的关系型API旨在简化<a href="https://flink.apache.org/usecases.html#analytics">数据分析</a>，<a href="https://flink.apache.org/usecases.html#pipelines">数据pipelining和ETL应用</a>的定义。</p>
 <p>以下示例显示用于会话化点击流并计算每个会话的点击次数的SQL查询。这与DataStream API示例中的用例相同。</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">userId</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">SELECT</span> <span class="n">userId</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">clicks</span>
 <span class="k">GROUP</span> <span class="k">BY</span> <span class="k">SESSION</span><span class="p">(</span><span class="n">clicktime</span><span class="p">,</span> <span class="nb">INTERVAL</span> <span class="s1">'30'</span> <span class="k">MINUTE</span><span class="p">),</span> <span class="n">userId</span>
 </pre></div>

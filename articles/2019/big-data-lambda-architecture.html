@@ -86,7 +86,7 @@
         <div class="content-title">
             <h1>深入理解大数据之——Lambda架构</h1>
 <span class="metadata">
-2019-07-05 Fri&nbsp;&nbsp;&nbsp;
+2019-07-05 五&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -155,7 +155,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 </ul>
 <h3 id="_2">数据系统的本质</h3>
 <p>为了设计出能满足前述的大数据关键特性的系统，我们需要对数据系统有本质性的理解。我们可将数据系统简化为：</p>
-<div class="highlight"><pre><span class="err">数据系统</span> <span class="o">=</span> <span class="err">数据</span> <span class="o">+</span> <span class="err">查询</span>
+<div class="highlight"><pre><span></span>数据系统 = 数据 + 查询
 </pre></div>
 <p>从而从数据和查询两方面来认识大数据系统的本质。</p>
 <p><strong>数据的特性： when &amp; what</strong></p>
@@ -174,11 +174,11 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>当前业界有很多采用不可变数据模型来存储所有数据的例子。比如分布式数据库Datomic，基于不可变数据模型来存储数据，从而简化了设计。分布式消息中间件Kafka，基于Log日志，以追加append-only的方式来存储消息。</p>
 <p><strong>查询的本质</strong></p>
 <p>查询是个什么概念？Marz给查询如下一个简单的定义：</p>
-<div class="highlight"><pre><span class="n">Query</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">All</span> <span class="n">Data</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>Query = Function(All Data)
 </pre></div>
 <p>该等式的含义是：查询是应用于数据集上的函数。该定义看似简单，却几乎囊括了数据库和数据系统的所有领域：RDBMS、索引、OLAP、OLTP、MapReduce、EFL、分布式文件系统、NoSQL等都可以用这个等式来表示。 </p>
 <p>让我们进一步深入看一下函数的特性，从而挖掘函数自身的特点来执行查询。 有一类称为Monoid特性的函数应用非常广泛。Monoid的概念来源于范畴学（Category Theory），其一个重要特性是满足结合律。如整数的加法就满足Monoid特性：</p>
-<div class="highlight"><pre><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>(a+b)+c=a+(b+c)
 </pre></div>
 <p>不满足Monoid特性的函数很多时候可以转化成多个满足Monoid特性的函数的运算。如多个数的平均值Avg函数，多个平均值没法直接通过结合来得到最终的平均值，但是可以拆成分母除以分子，分母和分子都是整数的加法，从而满足Monoid特性。</p>
 <p>Monoid的结合律特性在分布式计算中极其重要，满足Monoid特性意味着我们可以将计算分解到多台机器并行运算，然后再结合各自的部分运算结果得到最终结果。同时也意味着部分运算结果可以储存下来被别的运算共享利用（如果该运算也包含相同的部分子运算），从而减少重复运算的工作量。 </p>
@@ -237,9 +237,9 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>（D）query<strong>＝</strong>function(batch view, realtime view)</p>
 <h3 id="lambda_3">Lambda架构组件选型</h3>
 <p>上面分别讨论了Lambda架构的三层：Batch Layer，Speed Layer和Serving Layer。总结下来，Lambda架构就是如下的三个等式：</p>
-<div class="highlight"><pre><span class="n">batch</span> <span class="n">view</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">all</span> <span class="n">data</span><span class="p">)</span>
-<span class="n">realtime</span> <span class="n">view</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">realtime</span> <span class="n">view</span><span class="p">,</span> <span class="k">new</span> <span class="n">data</span><span class="p">)</span>
-<span class="n">query</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">batch</span> <span class="n">view</span><span class="p">,</span> <span class="n">realtime</span> <span class="n">view</span><span class="p">)</span>
+<div class="highlight"><pre><span></span>batch view = function(all data)
+realtime view = function(realtime view, new data)
+query = function(batch view, realtime view)
 </pre></div>
 <p>下图给出了Lambda架构的一个完整视图和流程。 </p>
 <p><img alt="TIM截图20191101175010.png" src="https://i.loli.net/2019/11/01/xgNE9vi3fL7DjhQ.png"/></p>

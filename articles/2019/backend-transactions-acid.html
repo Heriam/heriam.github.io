@@ -86,7 +86,7 @@
         <div class="content-title">
             <h1>深入理解大数据之——事务及其ACID特性</h1>
 <span class="metadata">
-2019-11-05 Tue&nbsp;&nbsp;&nbsp;
+2019-11-05 二&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -189,7 +189,8 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <blockquote>
 <ul>
 <li><strong>中止</strong>：如果事务中止，则看不到对数据库所做的更改。</li>
-<li><strong>提交</strong>：如果事务提交，则所做的更改可见。</li>
+<li><strong>提交</strong>：如果事务提交，则所做的更改可见。
+</li>
 </ul>
 </blockquote>
 <p>拿之前转账的例子来说，用户A给用户B转账，至少要包含两个操作，用户A钱数减少，用户B钱数增加，增加和减少的操作要么全部成功，要么全部失败，是一个原子操作。如下图，如果事务在<strong>T1</strong> 完成之后但在<strong>T2</strong>完成之前失败，将导致数据库状态不正确。 </p>

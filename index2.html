@@ -92,7 +92,7 @@
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2019/notes-人之一生.html"><h1>人之一生</h1></a>
 <span class="metadata">
-2019-03-16 Sat&nbsp;&nbsp;&nbsp;
+2019-03-16 六&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -152,7 +152,7 @@ Category: <a href="https://jiang-hao.com/categories/notes.html">Notes</a>&nbsp;&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/frontend-JQCloud.html"><h1>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h1></a>
 <span class="metadata">
-2018-02-25 Sun&nbsp;&nbsp;&nbsp;
+2018-02-25 日&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -169,12 +169,12 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <p>使用方法很简单，可以把JS和CSS文件下载到本地，也可以直接通过Script标签src=“”的方法在线引用。</p>
 <p>具体的使用方法官网都能查到。</p>
 <p>贴出自己微博使用JQCloud的前端代码：</p>
-<div class="highlight"><pre><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script&gt;</span>
-    var words = [];
-    {% for tag, articles in tags|sort %}
-        words.push({text: &quot;{{tag}}&quot;, weight: Math.random(), link: &#39;{{ SITEURL }}/{{ tag …</pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/frontend-JQCloud.html">read more</a></div>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/jqcloud.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">articles</span> <span class="k">in</span> <span class="nx">tags</span><span class="o">|</span><span class="nx">sort</span> <span class="o">%</span><span class="p">}</span>
+        <span class="nx">words</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;{{tag}}&quot;</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span> <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;{{ SITEURL }}/{{ tag …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/frontend-JQCloud.html">read more</a></div>
         <hr />
     </div>
 				
@@ -188,7 +188,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1></a>
 <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+2018-02-05 一&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -219,7 +219,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
     <br>   </li>
 <li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
 </ol>
-<div class="highlight"><pre><span class="n">ssh</span><span class="o">-</span><span class="n">rsa …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
         <hr />
     </div>
 				
@@ -233,7 +233,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html"><h1>使用Pelican基于Github Pages搭建博客教程</h1></a>
 <span class="metadata">
-2018-02-05 Mon&nbsp;&nbsp;&nbsp;
+2018-02-05 一&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -273,7 +273,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
 <span class="metadata">
-2018-01-01 Mon&nbsp;&nbsp;&nbsp;
+2018-01-01 一&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -310,7 +310,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/tools-WifiHotSpotOnWindows.html"><h1>Windows系统配置WiFi无线热点</h1></a>
 <span class="metadata">
-2017-11-21 Tue&nbsp;&nbsp;&nbsp;
+2017-11-21 二&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -356,7 +356,7 @@ netsh wlan show hostednetwork setting=security
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/backend-Ubuntu系统ApacheMaven安装.html"><h1>Ubuntu系统Apache Maven安装</h1></a>
 <span class="metadata">
-2017-10-24 Tue&nbsp;&nbsp;&nbsp;
+2017-10-24 二&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -395,7 +395,7 @@ cd mvn                        #进入mvn文件夹
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/backend-Ubuntu系统Java开发环境的搭建.html"><h1>Ubuntu系统Java开发环境的搭建</h1></a>
 <span class="metadata">
-2017-10-23 Mon&nbsp;&nbsp;&nbsp;
+2017-10-23 一&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -437,7 +437,7 @@ sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="https://j
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/tools-InstallAndRunGeditOnMac.html"><h1>Install & Run Gedit from Terminal on Mac</h1></a>
 <span class="metadata">
-2017-08-15 Tue&nbsp;&nbsp;&nbsp;
+2017-08-15 二&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -474,7 +474,7 @@ Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/frontend-网页BackToTop返回顶部按钮的简单实现.html"><h1>网页 BacktoTop 返回顶部按钮的简单实现</h1></a>
 <span class="metadata">
-2017-06-30 Fri&nbsp;&nbsp;&nbsp;
+2017-06-30 五&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -489,26 +489,24 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="summary"><p>在较长的网页页面中往往需要一个固定漂浮在显示屏右下侧位置的返回顶部按钮。</p>
 <p>下面介绍一种简单实现：</p>
 <p><strong>HTML 部分：</strong>  </p>
-<div class="highlight"><pre><span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style=</span><span class="s">&quot;display: none;&quot;</span><span class="nt">&gt;</span>Top<span class="nt">&lt;span&gt;&lt;/span&gt;&lt;/a&gt;</span>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>Top<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
   ...
-<span class="nt">&lt;/body&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </pre></div>
 
 
 <p><strong>CSS 部分：</strong></p>
-<div class="highlight"><pre><span class="nf">#scroll</span> <span class="p">{</span>
-    <span class="k">position</span><span class="o">:</span><span class="k">fixed</span><span class="p">;</span>
-    <span class="k">right</span><span class="o">:</span><span class="m">10px</span><span class="p">;</span>
-    <span class="k">bottom</span><span class="o">:</span><span class="m">10px</span><span class="p">;</span>
-    <span class="k">cursor</span><span class="o">:</span><span class="k">pointer</span><span class="p">;</span>
-    <span class="k">width</span><span class="o">:</span><span class="m">50px</span><span class="p">;</span>
-    <span class="k">height</span><span class="o">:</span><span class="m">50px</span><span class="p">;</span>
-    <span class="k">background-color</span><span class="o">:</span><span class="m">#2E435E</span><span class="p">;</span>
-    <span class="k">text-indent</span><span class="o">:-</span><span class="m">9999px</span><span class="p">;</span>
-    <span class="k">display</span><span class="o">:</span><span class="k">none</span><span class="p">;</span>
-    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span><span class="m">5px</span><span class="p">;</span>
-    <span class="o">-</span><span class="n">moz …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/frontend-网页BackToTop返回顶部按钮的简单实现.html">read more</a></div>
+<div class="highlight"><pre><span></span><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
+    <span class="k">position</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
+    <span class="k">right</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">bottom</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">cursor</span><span class="p">:</span><span class="kc">pointer</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span><span class="mh">#2E435E</span><span class="p">;</span>
+    <span class="k">text-indent</span><span class="p">:</span><span class="mi">-9999</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span><span class="kc">none …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/frontend-网页BackToTop返回顶部按钮的简单实现.html">read more</a></div>
         <hr />
     </div>
 				
@@ -522,7 +520,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/frontend-CSS伪类contenturl放图片如何改变图的大小.html"><h1>CSS伪类content: url放图片如何改变图的大小</h1></a>
 <span class="metadata">
-2017-02-21 Tue&nbsp;&nbsp;&nbsp;
+2017-02-21 二&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -535,19 +533,21 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         </div>
         
         <div class="summary"><p>遇到过一个问题：用before after 之类的伪类的content里放一个图的链接，如何去改图的大小？比如：</p>
-<div class="highlight"><pre><span class="o">.</span><span class="n">nav</span> <span class="n">ul</span> <span class="n">li:after</span><span class="p">{</span>
-  <span class="n">content:</span> <span class="n">url</span><span class="p">(</span><span class="o">..</span><span class="sr">/img/</span><span class="n">nav_fg</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">nav</span> <span class="nt">ul</span> <span class="nt">li</span><span class="p">:</span><span class="nd">after</span><span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">../img/nav_fg.png</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <p>事实上，如果想要设置前端页面通过content：url显示出来的图片大小，那只能修改图片的大小。因为它是直接读取的图片，并不是代入到html中再显示出来。但可以采用background的方式调整图片的大小，比如本博客中学术社交网站ResearchGate的Logo的CSS显示代码如下：</p>
-<div class="highlight"><pre><span class="o">.</span><span class="n">social</span> <span class="n">a</span><span class="p">[</span><span class="n">href</span><span class="o">*=</span><span class="s">&#39;researchgate.net&#39;</span><span class="p">]:</span><span class="n">before</span> <span class="p">{</span>
-  <span class="n">background</span><span class="o">-</span><span class="n">image:</span> <span class="n">url</span><span class="p">(</span><span class="s">&#39;./images/icons/researchgate.png&#39;</span><span class="p">);</span> 
-  <span class="n">background</span><span class="o">-</span><span class="n">size:</span> <span class="mi">100</span><span class="nv">%</span><span class="err">;</span> 
-  <span class="nv">display:</span> <span class="n">inline</span><span class="o">-</span><span class="n">block</span><span class="p">;</span> 
-  <span class="n">margin</span><span class="o">-</span><span class="n">right:</span> <span class="mi">2</span><span class="n">px</span><span class="p">;</span> 
-  <span class="n">vertical</span><span class="o">-</span><span class="n">align:</span> <span class="o">-</span><span class="mi">3</span><span class="n">px …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/frontend-CSS伪类contenturl放图片如何改变图的大小.html">read more</a></div>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">social</span> <span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">*=</span><span class="s1">&#39;researchgate.net&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="s1">&#39;./images/icons/researchgate.png&#39;</span><span class="p">);</span> 
+  <span class="k">background-size</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span> 
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span> 
+  <span class="k">margin-right</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">vertical-align</span><span class="p">:</span> <span class="mi">-3</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">height</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span> 
+  <span class="k">width</span><span class="p">:</span> <span class="mi">16 …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/frontend-CSS伪类contenturl放图片如何改变图的大小.html">read more</a></div>
         <hr />
     </div>
 				
@@ -561,7 +561,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2016/tools-InstallWiresharkonUbuntu.html"><h1>Install Wireshark on Ubuntu</h1></a>
 <span class="metadata">
-2016-07-08 Fri&nbsp;&nbsp;&nbsp;
+2016-07-08 五&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -599,7 +599,7 @@ sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall"
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2016/notes-法国的一些精油品牌.html"><h1>法国的一些著名的精油品牌</h1></a>
 <span class="metadata">
-2016-06-10 Fri&nbsp;&nbsp;&nbsp;
+2016-06-10 五&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -639,7 +639,7 @@ J.E Internatioanl (Florihana、Florial商标所有人)公司总部设立在法�
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html"><h1>Install VMware Workstation in Ubuntu 14.04</h1></a>
 <span class="metadata">
-2016-04-21 Thu&nbsp;&nbsp;&nbsp;
+2016-04-21 四&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -688,7 +688,7 @@ linuxidc@localhost:~$ sudo apt-get upgrade
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2016/backend-Shiro.html"><h1>Apache Shiro Multi-tenancy with JDBC MySQL</h1></a>
 <span class="metadata">
-2016-02-21 Sun&nbsp;&nbsp;&nbsp;
+2016-02-21 日&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  

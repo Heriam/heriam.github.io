@@ -107,8 +107,8 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
     		</span>
         </div>
 
-
-        <div><div class="toc"><span class="toctitle">目录</span><ul>
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
 <li><a href="#vxlan">VxLAN简介</a><ul>
 <li><a href="#_1">背景</a></li>
 <li><a href="#_2">定义</a></li>
@@ -138,6 +138,12 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
 <li><a href="#_11">参考文献</a></li>
 </ul>
 </div>
+			</nav>
+
+			<hr />
+
+
+        <div>
 <h2 id="vxlan">VxLAN简介</h2>
 <h3 id="_1">背景</h3>
 <p>任何技术的产生，都有其特定的时代背景与实际需求，VXLAN正是为了解决云计算时代虚拟化中的一系列问题而产生的一项技术。那么我们先看看 VXLAN 到底要解决哪些问题。</p>
@@ -170,7 +176,7 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
 </ul>
 <h2 id="vxlan_1">VxLAN组网模型</h2>
 <p>VxLAN主要用于数据中心网络。VxLAN技术将已有的三层物理网络作为Underlay网络，在其上构建出虚拟的二层网络，即Overlay网络。Overlay网络通过Mac-in-UDP封装技术、利用Underlay网络提供的三层转发路径，实现租户二层报文跨越三层网络在不同的站点间传递。对于租户来说，Underlay网络是透明的，同一租户的不同站点就像是工作在一个局域网中。同时，在同一个物理网络上可以构建多个VxLAN网络，每个VxLAN网络由唯一的VNI标识，不同VxLAN之间互不影响，从而实现租户网络之间的隔离。</p>
-<p><img src="https://heriam.coding.net/api/share/download/3b7a1d98-ef3f-466b-8653-fc85c6c02c96" onerror="this.src='http://img.wandouip.com/crawler/article/2019420/83ab2b8df3af8e5e148a9cd4c4d63491';this.onerror=null"/></p>
+<p><img onerror="this.src='http://img.wandouip.com/crawler/article/2019420/83ab2b8df3af8e5e148a9cd4c4d63491';this.onerror=null" src="https://heriam.coding.net/api/share/download/3b7a1d98-ef3f-466b-8653-fc85c6c02c96"/></p>
 <p>如上图所示，VxLAN的典型网络模型中主要包含以下几个基本元素：</p>
 <ul>
 <li>VM (Virtual Machine): 虚拟机。在一台服务器上可以创建多台虚拟机，不同的虚拟机可以属于不同的 VXLAN。处于相同VxLAN的虚拟机处于同一个逻辑二层网络，彼此之间二层互通；属于不同VxLAN的虚拟机之间二层隔离。</li>
@@ -193,7 +199,7 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
 <li>中间是 VXLAN 头部，VTEP 接受到报文之后，去除前面的 UDP 协议部分，根据这部分来处理 VxLAN 的逻辑，主要是根据 VNI 发送到最终的虚拟机；</li>
 <li>最里面是原始的二层帧，也就是虚拟机所见的报文内容。</li>
 </ol>
-<p><img src="https://Heriam.coding.net/api/share/download/ad57c0e1-1648-4a4c-a8a1-e0c2f2f41e2a" onerror="this.src='https://download.huawei.com/mdl/imgDownload?uuid=83046341c6764fcf82b688857ec9e8d7.png';this.onerror=null"/></p>
+<p><img onerror="this.src='https://download.huawei.com/mdl/imgDownload?uuid=83046341c6764fcf82b688857ec9e8d7.png';this.onerror=null" src="https://Heriam.coding.net/api/share/download/ad57c0e1-1648-4a4c-a8a1-e0c2f2f41e2a"/></p>
 <p>VxLAN报文各个部分解释如下：</p>
 <ul>
 <li>Outer Ethernet/MAC Header: 外层以太头。14字节，如果有VLAN TAG则为18字节。</li>
@@ -229,8 +235,6 @@ interface Nve1   //创建逻辑接口NVE 1
  vni 5000 head-end peer-list 2.2.2.3   
 #
 </pre></div>
-
-
 <p>其中，vni 5000 head-end peer-list 2.2.2.2和vni 5000 head-end peer-list 2.2.2.3的配置，表示属于VNI 5000的对端VTEP有两个，IP地址分别为2.2.2.2和2.2.2.3。根据这两条配置，VTEP上会生成如下所示的一张表：</p>
 <div class="highlight"><pre><span></span><span class="nt">&lt;HUAWEI&gt;</span> display vxlan vni 5000 verbose
     BD ID                  : 10
@@ -242,8 +246,6 @@ interface Nve1   //创建逻辑接口NVE 1
     Group Address         : - 
     Peer List              : 2.2.2.2 2.2.2.3 
 </pre></div>
-
-
 <p>根据上表中的Peer List，本端VTEP就可以知道属于同一VNI的对端VTEP都有哪些，这也就决定了同一大二层广播域的范围。当VTEP收到BUM（Broadcast&amp;Unknown-unicast&amp;Multicast，广播&amp;未知单播&amp;组播）报文时，会将报文复制并发送给Peer List中所列的所有对端VTEP（这就好比广播报文在VLAN内广播）。因此，这张表也被称为“头端复制列表”。当VTEP收到已知单播报文时，会根据VTEP上的MAC表来确定报文要从哪条VXLAN隧道走。而此时Peer List中所列的对端，则充当了MAC表中“出接口”的角色。在后面的报文转发流程中，你将会看到头端复制列表是如何在VXLAN网络中指导报文进行转发的。</p>
 <h4 id="_6">自动方式</h4>
 <p>自动方式下VXLAN隧道的建立需要借助于其他的协议，例如通过BGP/EVPN(Ethernet Virtual Private Network)或ENDP(Enhanced Neighbor Discovery Protocol)发现远端VTEP后，自动在本端和远端VTEP之间建立VXLAN隧道。</p>
@@ -268,17 +270,17 @@ interface Nve1   //创建逻辑接口NVE 1
 <p>组成为控制平面的表来记录对端地址可达情况。VXLAN有着与传统以太网非常相似的MAC学习机制，当VTEP接收到VXLAN报文后，会记录源VTEP的IP、虚拟机MAC和VNI到本地MAC表中，这样当VTEP接收到目的MAC为此虚拟机的MAC时，就可以进行VXLAN封装并转发。VXLAN学习地址的时候仍然保存着二层协议的特征，节点之间不会周期性的交换各自的转发表。对于不认识的MAC地址，VXLAN一般依靠组播或控制中心来获取路径信息。组播的概念是同个 VxLAN 网络的 VTEP 加入到同一个组播网络，如果需要知道以上信息，就在组内发送多播来查询；控制中心的概念是在某个集中式的地方保存了所有虚拟机的上述信息，自动化告知 VTEP 它需要的信息。</p>
 <h4 id="_7">组播方式</h4>
 <p>每个多播组对应一个多播IP地址，vtep 建立的时候会通过配置加入到多播组（具体做法取决于实现），往这个多播IP地址发送的报文会发给多播组的所有主机。为什么要使用多播？因为vxlan的底层网络是三层的，广播地址无法穿越三层网络，要给vxlan 网络所有vtep发送报文只能通过多播。 通过组播的方式承载ARP的广播报文可以实现整个VxLAN网络下的地址解析以及VSI的MAC地址学习，在这个过程中，只需要有一次多播，因为VTEP有自动学习的能力，后续的报文都是通过单播直接发送的。也可以看到，多播报文非常浪费，每次的多播其实只有一个报文是有效的，如果某个多播组的 vtep 数量很多，这个浪费是非常大的。但是多播组也有它的实现起来比较简单，不需要中心化的控制，只要底层网络支持多播，只需配置好多播组就能自动发现了。因为并不是所有的网络设备都支持多播，再加上多播方式带来的报文浪费，在实际生产中这种方式很少用到。综上，VXLAN和传统VLAN网络数据平面一样，数据经过未知单播泛洪-&gt;MAC表项及ARP表项建立-&gt;单播转发的过程，我们称之为自学习模式。但自学习方式过于简单，其大量的泛洪报文以及无法智能调整的缺点，使得这样的控制平面构建方式不适合SDN网络。</p>
-<p><img src="https://Heriam.coding.net/api/share/download/a07e6d26-fd6b-438b-9ae3-b83469d61ee5" onerror="this.src='https://download.huawei.com/mdl/imgDownload?uuid=2ece2b33a14841f0bc23ac79e18934fb.png';this.onerror=null"/></p>
+<p><img onerror="this.src='https://download.huawei.com/mdl/imgDownload?uuid=2ece2b33a14841f0bc23ac79e18934fb.png';this.onerror=null" src="https://Heriam.coding.net/api/share/download/a07e6d26-fd6b-438b-9ae3-b83469d61ee5"/></p>
 <h4 id="_8">控制器方式</h4>
 <p>VTEP发送报文最关键的就是知道对方虚拟机的 MAC 地址和虚拟机所在主机的 VTEP IP 地址，如果实现知道这两个信息，那么就不需要多播了。SDN最大的特点就是转控分离，集中控制。按照这个指导思想，将控制功能单独剥离出来成为一个单独的设备便是很自然的事了。这个设备就是 Controller。Controller可以是一个或者一组硬件设备，也可以是一套软件。Controller与网络中所有设备建立连接，整个VXLAN网络的数据转发都由Controller来管理。Controller与设备连接的接口称为南向接口，可以使用OpenFlow、Netconf等协议；对用户提供服务的接口称为北向接口，也可以提供API以便与其他管理平台对接或进行深度开发。基于Controller的南向接口，可以通过OpenFlow或OVSDB协议的方式向VTEP设备下发远端MAC地址表项。具体不在这里进行展开讲述。</p>
-<p><img src="https://Heriam.coding.net/api/share/download/e450606f-05c2-4a06-a0b8-38e1b9479a0f" onerror="this.src='https://pic1.zhimg.com/80/v2-1418f38fb92e6feab3287dd174317e94_1440w.jpg';this.onerror=null"/></p>
+<p><img onerror="this.src='https://pic1.zhimg.com/80/v2-1418f38fb92e6feab3287dd174317e94_1440w.jpg';this.onerror=null" src="https://Heriam.coding.net/api/share/download/e450606f-05c2-4a06-a0b8-38e1b9479a0f"/></p>
 <h3 id="bum">BUM报文转发</h3>
 <p>前面描述的报文转发过程都是已知单播报文转发，如果VTEP收到一个未知地址的BUM报文如何处理呢。与传统以太网BUM报文转发类似，VTEP会通过泛洪的方式转发流量。BUM（Broadcast, Unknown-unicast, Multicast）即广播、未知单播、组播流量。根据对泛洪流量的复制方式不同可分为单播路由方式（头端复制）和组播路由方式（核心复制）两种。</p>
 <h4 id="_9">单播路由方式泛洪（头端复制）</h4>
 <p>在头端复制方式下，VTEP负责复制报文，采用单播方式将复制后的报文通过本地接口发送给本地站点，并通过VXLAN隧道发送给VXLAN内的所有远端VTEP。</p>
 <p>如下图所示，当VTEP 1上的VM 1发出BUM报文后，VTEP 1判断数据所属的VXLAN，通过该VXLAN内所有本地接口和VXLAN Tunnel转发报文。通过VXLAN Tunnel转发报文时，封装VXLAN头、UDP头和IP头，将泛洪报文封装于单播报文中，发送到VXLAN内的所有远端VTEP。</p>
 <p>远端VTEP收到VXLAN报文后，解封装报文，将原始数据在本地站点的VXLAN内泛洪。为避免环路，远端VTEP从VXLAN隧道上接收到报文后，不会再将其泛洪到其他的VXLAN隧道。</p>
-<p><img src="https://Heriam.coding.net/api/share/download/51d6cba1-24e0-4eb5-9266-ec3f20dc5af9" onerror="this.src='https://download.huawei.com/mdl/imgDownload?uuid=7d90fdc0009f4476a0890dbb8e0392c5.png';this.onerror=null"/></p>
+<p><img onerror="this.src='https://download.huawei.com/mdl/imgDownload?uuid=7d90fdc0009f4476a0890dbb8e0392c5.png';this.onerror=null" src="https://Heriam.coding.net/api/share/download/51d6cba1-24e0-4eb5-9266-ec3f20dc5af9"/></p>
 <p>通过头端复制完成BUM报文的广播，不需要依赖组播路由协议。</p>
 <h4 id="_10">组播路由方式泛洪（核心复制）</h4>
 <p>组播路由方式的组网中同一个VXLAN内的所有VTEP都加入同一个组播组，利用组播路由协议（如PIM）在IP网络上为该组播建立组播转发表项，VTEP上相应生成一个组播隧道。</p>

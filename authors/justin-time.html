@@ -104,36 +104,7 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
     Tags: <a href="https://jiang-hao.com/tags/vxlan.html">VxLAN</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#vxlan">VxLAN简介</a><ul>
-<li><a href="#_1">背景</a></li>
-<li><a href="#_2">定义</a></li>
-<li><a href="#_3">意义</a></li>
-</ul>
-</li>
-<li><a href="#vxlan_1">VxLAN组网模型</a></li>
-<li><a href="#vxlan_2">VxLAN报文格式</a></li>
-<li><a href="#vxlan_3">VxLAN运行机制</a><ul>
-<li><a href="#_4">隧道建立</a><ul>
-<li><a href="#_5">手工方式</a></li>
-<li><a href="#_6">自动方式</a></li>
-</ul>
-</li>
-<li><a href="#mac">二层MAC学习</a><ul>
-<li><a href="#_7">组播方式</a></li>
-<li><a href="#_8">控制器方式</a></li>
-</ul>
-</li>
-<li><a href="#bum">BUM报文转发</a><ul>
-<li><a href="#_9">单播路由方式泛洪（头端复制）</a></li>
-<li><a href="#_10">组播路由方式泛洪（核心复制）</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#_11">参考文献</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h2 id="vxlan">VxLAN简介</h2>
 <h3 id="_1">背景</h3>
 <p>任何技术的产生，都有其特定的时代背景与实际需求，VXLAN正是为了解决云计算时代虚拟化中的一系列问题而产生的一项技术。那么我们先看看 VXLAN 到底要解决哪些问题。</p>
@@ -148,7 +119,8 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
 <ul>
 <li><strong>虚拟机迁移范围受限</strong></li>
 </ul>
-<p>虚拟机迁移 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/networking-vxlan-in-depth.html">read more</a></div>
+<p>虚拟机迁移，顾名思义，就是将虚拟机从一个物理机迁移到另一个物理机，但是要求在迁移过程中业务不能中断。要做到这一点，需要保证虚拟机迁移前后，其IP地址、MAC地址等参数维持不变。这就决定了，虚拟机迁移必须发生在一个二层域中。而传统数据中心网络的二层域，将虚拟机迁移限制在了一个较小的局部范围内。此外，解决这个问题同时还需保证二层的广播域不会过分扩大，这也是云计算网络的要求。</p>
+<p>传统“二层+三层”的网络在应对这些要求时变得力不从心，虽然通过很多改进型的技术比如堆叠、SVF …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/networking-vxlan-in-depth.html">read more</a></div>
         <hr />
     </div>
 		
@@ -174,35 +146,16 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     Tags: <a href="https://jiang-hao.com/tags/acid.html">ACID</a>,&nbsp;<a href="https://jiang-hao.com/tags/consistency.html">Consistency</a>,&nbsp;<a href="https://jiang-hao.com/tags/database.html">Database</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">事务简介</a><ul>
-<li><a href="#_2">事物的定义</a></li>
-<li><a href="#_3">事务的目的</a></li>
-<li><a href="#_4">事务的状态</a></li>
-</ul>
-</li>
-<li><a href="#acid">事务的ACID属性</a><ul>
-<li><a href="#acid_1">ACID简介</a></li>
-<li><a href="#atomicity">原子性（Atomicity）</a></li>
-<li><a href="#consistency">一致性（Consistency）</a><ul>
-<li><a href="#acidcapc">ACID和CAP中C（一致性）的区别</a></li>
-</ul>
-</li>
-<li><a href="#isolation">隔离性（Isolation）</a></li>
-<li><a href="#durability">持久性（Durability）</a></li>
-</ul>
-</li>
-<li><a href="#_5">总结</a></li>
-<li><a href="#_6">参考文献</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h2 id="_1">事务简介</h2>
 <h3 id="_2">事物的定义</h3>
 <p>事务（Transaction）是由一系列对系统中数据进行访问或更新的操作所组成的一个程序执行逻辑单元（Unit）。在计算机术语中，事务通常就是指数据库事务 。</p>
-<p><img alt="57355-20190323094924183-1338282146.png" src="https://i.loli.net/2019/11/05/iuoBJaNxb4H8Pgq.png"></p>
+<p><img alt="57355-20190323094924183-1338282146.png" src="https://i.loli.net/2019/11/05/iuoBJaNxb4H8Pgq.png"/></p>
 <p>在数据库管理系统（DBMS）中，事务是数据库恢复和并发控制的基本单位。它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。</p>
 <p>例如，银行转帐工作：从源帐号扣款并使目标帐号增款，这两个操作必须要么全部执行，要么都不执行，否则就会出现该笔金额平白消失或出现的情况。所以，应该把他们看成一个事务。</p>
-<p>在现代数据库中，事务还可以实现其他一些事情，例如，确保你不能访问别人写了一半的数据；但是基本思想是相同的——事务是用来确保 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-transactions-acid.html">read more</a></div>
+<p>在现代数据库中，事务还可以实现其他一些事情，例如，确保你不能访问别人写了一半的数据；但是基本思想是相同的——事务是用来确保<strong>无论发生什么情况，你使用的数据都将处于一个合理的状态</strong>：</p>
+<blockquote>
+<p>transactions are there to ensure, that no matter what happens, the data you work with will be in …</p></blockquote> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-transactions-acid.html">read more</a></div>
         <hr />
     </div>
 				
@@ -228,36 +181,19 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#flink">Flink应用程序集群</a></li>
-<li><a href="#flink_1">Flink集群</a></li>
-<li><a href="#_1">事件</a></li>
-<li><a href="#_2">执行图</a></li>
-<li><a href="#_3">函数</a></li>
-<li><a href="#_4">实例</a></li>
-<li><a href="#flink_2">Flink作业</a></li>
-<li><a href="#_5">作业图</a></li>
-<li><a href="#flink-jobmanager">Flink JobManager</a></li>
-<li><a href="#_6">逻辑图</a></li>
-<li><a href="#_7">受管状态</a></li>
-<li><a href="#flink-master">Flink Master</a></li>
-<li><a href="#_8">算子</a></li>
-<li><a href="#_9">算子链</a></li>
-<li><a href="#_10">分区</a></li>
-<li><a href="#_11">物理图</a></li>
-<li><a href="#_12">记录</a></li>
-<li><a href="#flink_3">Flink会话集群</a></li>
-<li><a href="#_13">状态后端</a></li>
-<li><a href="#_14">子任务</a></li>
-<li><a href="#_15">任务</a></li>
-<li><a href="#flink_4">Flink任务管理器</a></li>
-<li><a href="#_16">转换</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h4 id="flink">Flink应用程序集群</h4>
 <p>Flink应用程序集群是指仅执行一个<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-job">Flink作业</a>专用的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-cluster">Flink集群</a>。该<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-cluster">Flink集群</a>的生命周期与对应Flink作业的生命周期相同。在<em>工作模式下，</em>以前的Flink应用程序集群也称为Flink集群。点击查看与<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-session-cluster">Flink Session Cluster</a>的比较。</p>
 <h4 id="flink_1">Flink集群</h4>
-<p>一种分布式系统，通常由一个<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-master">Flink Master</a>和一个或多个 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-taskmanager">Flink TaskManager …</a></p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-glossary.html">read more</a></div>
+<p>一种分布式系统，通常由一个<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-master">Flink Master</a>和一个或多个 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#flink-taskmanager">Flink TaskManager</a>进程组成。</p>
+<h4 id="_1">事件</h4>
+<p>事件是有关由应用程序建模的域的状态更改的声明。事件可以是流或批处理应用程序的输入和/或输出。事件是特殊类型的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#Record">记录</a>。</p>
+<h4 id="_2">执行图</h4>
+<p>见<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#physical-graph">物理图</a></p>
+<h4 id="_3">函数</h4>
+<p>函数由用户实现，并封装Flink程序的应用程序逻辑。大多数函数由相应的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#operator">算子</a>包装 。</p>
+<h4 id="_4">实例</h4>
+<p>术语<em>实例</em>用于描述在运行期间特定类型的特定实例（通常是 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#operator">算子</a>或<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#function">函数</a>）。由于Apache Flink主要是用Java编写的 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-glossary.html">read more</a></div>
         <hr />
     </div>
 				
@@ -283,22 +219,10 @@ Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&
     Tags: <a href="https://jiang-hao.com/tags/vps.html">VPS</a>,&nbsp;<a href="https://jiang-hao.com/tags/vultr.html">Vultr</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">限时福利</a></li>
-<li><a href="#_2">测试方法</a></li>
-<li><a href="#_3">节点列表</a></li>
-<li><a href="#_4">测试结果</a><ul>
-<li><a href="#_5">电信</a></li>
-<li><a href="#_6">联通</a></li>
-<li><a href="#_7">移动</a></li>
-<li><a href="#_8">多线</a></li>
-</ul>
-</li>
-</ul>
-</div>
+        <div class="summary">
 <h2 id="_1">限时福利</h2>
 <p><a href="https://www.vultr.com/promo/try50/?service=try50">Vultr新用户赠送$50活动入口</a></p>
-<p><img alt="vultr-promotion" src="https://s2.ax1x.com/2019/11/01/KHBPSK.png"></p>
+<p><img alt="vultr-promotion" src="https://s2.ax1x.com/2019/11/01/KHBPSK.png"/></p>
 <h2 id="_2">测试方法</h2>
 <p>采用以下方法：</p>
 <ul>
@@ -334,7 +258,13 @@ Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&
 <td align="left"><a href="https://par-fr-ping.vultr.com/vultr.com.100MB.bin">100MB</a> <a href="https://par-fr-ping.vultr.com/vultr.com.1000MB.bin">1GB</a></td>
 </tr>
 <tr>
-<td align="left">London, UK …</td></tr></tbody></table> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/tools-Vultr-Nodes-Speed-Tests.html">read more</a></div>
+<td align="left">London, UK</td>
+<td align="left"><a href="http://lon-gb-ping.vultr.com/">lon-gb-ping.vultr.com</a></td>
+<td align="left"><a href="https://lon-gb-ping.vultr.com/vultr.com.100MB.bin">100MB</a> <a href="https://lon-gb-ping.vultr.com/vultr.com.1000MB.bin">1GB</a></td>
+</tr>
+<tr>
+<td align="left">Singapore</td>
+<td align="left"><a href="http://sgp-ping.vultr.com/">sgp-ping.vultr.com …</a></td></tr></tbody></table> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/tools-Vultr-Nodes-Speed-Tests.html">read more</a></div>
         <hr />
     </div>
 				
@@ -360,12 +290,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#maven">设置Maven项目</a></li>
-<li><a href="#flink">写一个Flink程序</a></li>
-<li><a href="#kafka">额外练习：在群集上运行并写入Kafka</a></li>
-</ul>
-</div>
+        <div class="summary">
 <p>在本文中，我们将从头开始，介绍从设置Flink项目到在Flink集群上运行流分析程序。</p>
 <p>Wikipedia提供了一个IRC频道，其中记录了对Wiki的所有编辑。我们将在Flink中读取此通道，并计算每个用户在给定时间窗口内编辑的字节数。这很容易使用Flink在几分钟内实现，但它将为您提供一个良好的基础，从而开始自己构建更复杂的分析程序。</p>
 <h2 id="maven">设置Maven项目</h2>
@@ -380,9 +305,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     -Dpackage<span class="o">=</span>wikiedits <span class="se">\</span>
     -DinteractiveMode<span class="o">=</span><span class="nb">false</span>
 </pre></div>
-
-
-<p>您可以编辑 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-datastream-api.html">read more</a></div>
+<p>您可以编辑<code>groupId</code>，<code>artifactId</code>而<code>package</code>如果你喜欢 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-datastream-api.html">read more</a></div>
         <hr />
     </div>
 				
@@ -408,33 +331,17 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/lambda.html">Lambda</a>,&nbsp;<a href="https://jiang-hao.com/tags/kappa.html">Kappa</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">传统系统的问题</a></li>
-<li><a href="#lambda">Lambda架构简介</a></li>
-<li><a href="#lambda_1">Lambda架构关键特性</a></li>
-<li><a href="#_2">数据系统的本质</a></li>
-<li><a href="#lambda_2">Lambda的三层架构</a><ul>
-<li><a href="#batch-layer">Batch Layer</a></li>
-<li><a href="#speed-layer">Speed Layer</a></li>
-<li><a href="#serving-layer">Serving Layer</a></li>
-</ul>
-</li>
-<li><a href="#lambda_3">Lambda架构组件选型</a><ul>
-<li><a href="#_3">组件选型</a></li>
-<li><a href="#_4">选型原则</a></li>
-</ul>
-</li>
-<li><a href="#_5">总结</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h3 id="_1">传统系统的问题</h3>
 <blockquote>
 <p>“我们正在从IT时代走向DT时代(数据时代)。IT和DT之间，不仅仅是技术的变革，更是思想意识的变革，IT主要是为自我服务，用来更好地自我控制和管理，DT则是激活生产力，让别人活得比你好”</p>
 <p>——阿里巴巴董事局主席马云。 </p>
 </blockquote>
 <p>数据量从M的级别到G的级别到现在T的级、P的级别。数据量的变化数据管理系统（DBMS）和数仓系统（DW）也在悄然的变化着。 传统应用的数据系统架构设计时，应用直接访问数据库系统。当用户访问量增加时，数据库无法支撑日益增长的用户请求的负载时，从而导致数据库服务器无法及时响应用户请求，出现超时的错误。出现这种情况以后，在系统架构上就采用下图的架构，在数据库和应用中间过一层缓冲隔离，缓解数据库的读写压力。</p>
-<p><img alt="" src="https://i.loli.net/2019/11/01/UlbBAWMcGzLiCp6.png"></p>
-<p>然而，当用户访问量持续增加时，就需要考虑读写分离技术（Master－Slave）架构则如下图 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-lambda-architecture.html">read more</a></div>
+<p><img alt="" src="https://i.loli.net/2019/11/01/UlbBAWMcGzLiCp6.png"/></p>
+<p>然而，当用户访问量持续增加时，就需要考虑读写分离技术（Master－Slave）架构则如下图，分库分表技术。现在，架构变得越来越复杂了，增加队列、分区、复制等处理逻辑。应用程序需要了解数据库的schema，才能访问到正确的数据。</p>
+<p><img alt="" src="https://i.loli.net/2019/11/01/lvg2m1LXJNna6Mj.png"/></p>
+<p>商业现实已经发生了变化，所以现在更快做出的决定更有价值。除此之外，技术也在不断发展。Kafka，Storm，Trident，Samza …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-lambda-architecture.html">read more</a></div>
         <hr />
     </div>
 				
@@ -460,24 +367,22 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#tasks-and-operator-chains">Tasks and Operator Chains</a></li>
-<li><a href="#job-managers-task-managers-clients">Job Managers, Task Managers, Clients</a></li>
-<li><a href="#task-slots-and-resources">Task Slots and Resources</a></li>
-<li><a href="#state-backends">State Backends</a></li>
-<li><a href="#savepoints">Savepoints</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h2 id="tasks-and-operator-chains">Tasks and Operator Chains</h2>
 <p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>
 <p>下图中的示例数据流由五个子任务执行，因此具有五个并行线程。</p>
-<p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"></p>
+<p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"/></p>
 <h2 id="job-managers-task-managers-clients">Job Managers, Task Managers, Clients</h2>
 <p>Flink运行时包含两种类型的进程：</p>
 <ul>
 <li><strong>JobManagers</strong>（也称为<em>masters</em>）协调分布式执行。他们安排任务，协调检查点，协调故障恢复等。</li>
 </ul>
-<p>Job Manager总是至少有一个。高可用性设置将具有多个JobManagers，其中一个始终是 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
+<p>Job Manager总是至少有一个。高可用性设置将具有多个JobManagers，其中一个始终是<em>领导者</em>，其他处于<em>待机状态</em>。</p>
+<ul>
+<li><strong>TaskManagers</strong>（也叫<em>workers</em>）执行dataflow的<em>任务</em>（或者更具体地说应该是子任务），以及缓冲和交换data <em>streams</em>。</li>
+</ul>
+<p>必须始终至少有一个TaskManager。</p>
+<p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
         <hr />
     </div>
 				
@@ -503,21 +408,15 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#apache-flink">Apache Flink仅用于（近）实时处理用例吗？</a></li>
-<li><a href="#flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</a></li>
-<li><a href="#flinkhadoop">Flink如何与Hadoop栈相关联？</a></li>
-<li><a href="#flink">Flink可运行的其他栈是什么？</a></li>
-<li><a href="#flink_1">使用Flink有哪些先决条件？</a></li>
-<li><a href="#flink_2">Flink支持多大的规模？</a></li>
-<li><a href="#flink_3">Flink是否仅限于内存数据集？</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h3 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h3>
 <p>Flink是一个非常通用的系统，用于数据处理和数据驱动的应用程序，<em>数据流</em>作为核心构建块。这些数据流可以是实时数据流或存储的历史数据流。例如，在Flink的视图中，文件是存储的字节流。因此，Flink支持实时数据处理和应用程序，以及批处理应用程序。</p>
 <p>流可以是<em>无界的</em>（没有结束，事件不断发生）或受<em>限制</em>（流有开始和结束）。例如，来自消息队列的Twitter馈送或事件流通常是无界的流，而来自文件的字节流是有界流。</p>
 <h3 id="flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</h3>
-<p>有界流通常比无界流更高效。在（近）实时处理无限事件流需要系统能够立即对事件起作用并产生中间结果（通常具有低延迟）。处理有界流通常不需要产生低延迟结果，因为无论如何数据都是旧的（相对而言）。这允许Flink以简单且更高效的方式处理数据 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-FAQ.html">read more</a></div>
+<p>有界流通常比无界流更高效。在（近）实时处理无限事件流需要系统能够立即对事件起作用并产生中间结果（通常具有低延迟）。处理有界流通常不需要产生低延迟结果，因为无论如何数据都是旧的（相对而言）。这允许Flink以简单且更高效的方式处理数据。</p>
+<p>DataStream API 捕获无界和有界的流的连续处理，以支持低等待时间的结果以及对事件和时间（包括事件时间）灵活反应的模型。</p>
+<p>DataSet API 具有加快有界的数据流的处理的技术。将来，社区计划将这些优化与DataStream API中的技术相结合。</p>
+<h3 id="flinkhadoop">Flink如何与Hadoop栈相关联 …</h3> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-FAQ.html">read more</a></div>
         <hr />
     </div>
 				
@@ -543,27 +442,17 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">抽象层次</a></li>
-<li><a href="#_2">程序和数据流</a></li>
-<li><a href="#_3">并行数据流</a></li>
-<li><a href="#_4">窗口</a></li>
-<li><a href="#_5">时间</a></li>
-<li><a href="#_6">有状态的操作</a></li>
-<li><a href="#_7">容错检查点</a></li>
-<li><a href="#_8">批量流媒体</a></li>
-</ul>
-</div>
+        <div class="summary">
 <p>Apache Flink是一个用于分布式流和批处理数据处理的开源平台。Flink的核心是流数据流引擎，为数据流上的分布式计算提供数据分发，通信和容错。Flink基于流引擎之上构建批处理，覆加本地迭代支持，内存托管和程序优化。</p>
 <h2 id="_1">抽象层次</h2>
 <p>Flink提供不同级别的抽象来开发流/批处理应用程序。</p>
-<p><img alt="编程抽象级别" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/levels_of_abstraction.svg"></p>
+<p><img alt="编程抽象级别" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/levels_of_abstraction.svg"/></p>
 <ul>
 <li>
 <p>最低级抽象只提供<strong>stateful streaming</strong>。它通过<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/process_function.html">Process Function</a>嵌入到<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API中</a>。它允许用户自由处理来自一个或多个流的事件，并使用一致的容错<em>状态</em>。此外，用户可以注册事件时间和处理时间回调，允许程序实现复杂的计算。</p>
 </li>
 <li>
-<p>在实践中，大多数应用程序不需要上述低级抽象，而是针对<strong>Core API</strong>编程， 如<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>（有界/无界流）和<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/index.html">DataSet API</a>（有界数据集 …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-programming-model.html">read more</a></div>
+<p>在实践中，大多数应用程序不需要上述低级抽象，而是针对<strong>Core API</strong>编程， 如<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>（有界/无界流）和<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/index.html">DataSet API</a>（有界数据集）。这些流畅的API提供了用于数据处理的通用构建块，例如各种形式的用户指定的转换，连接，聚合，窗口，状态等（transformations, joins, aggregations …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-programming-model.html">read more</a></div>
         <hr />
     </div>
 				
@@ -589,30 +478,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">事件驱动的应用程序</a><ul>
-<li><a href="#_2">什么是事件驱动的应用程序？</a></li>
-<li><a href="#_3">事件驱动的应用程序有哪些优点？</a></li>
-<li><a href="#flink">Flink如何支持事件驱动的应用程序？</a></li>
-<li><a href="#_4">什么是典型的事件驱动应用程序？</a></li>
-</ul>
-</li>
-<li><a href="#_5">数据分析应用</a><ul>
-<li><a href="#_6">什么是数据分析应用程序？</a></li>
-<li><a href="#_7">流式分析应用程序有哪些优势？</a></li>
-<li><a href="#flink_1">Flink如何支持数据分析应用程序？</a></li>
-<li><a href="#_8">什么是典型的数据分析应用程序？</a></li>
-</ul>
-</li>
-<li><a href="#_9">数据管道应用</a><ul>
-<li><a href="#_10">什么是数据管道？</a></li>
-<li><a href="#_11">数据管道有哪些优势？</a></li>
-<li><a href="#flink_2">Flink如何支持数据管道？</a></li>
-<li><a href="#_12">什么是典型的数据管道应用？</a></li>
-</ul>
-</li>
-</ul>
-</div>
+        <div class="summary">
 <p>Apache Flink因其丰富的功能集而成为开发和运行多种不同类型应用程序的绝佳选择。Flink的功能包括支持流和批处理，复杂的状态管理，事件时间处理语义以及状态的精确一次一致性保证。此外，Flink可以部署在各种资源提供者（如YARN，Apache Mesos和Kubernetes）上，也可以作为裸机硬件上的独立群集。配置为高可用性，Flink没有单点故障。Flink已被证明可扩展到数千个核心和TB级的应用程序状态，提供高吞吐量和低延迟，并为世界上最苛刻的流处理应用程序提供支持。</p>
 <p>下面，我们将探讨由Flink提供支持的最常见类型的应用程序，并指出实际示例。</p>
 <ul>
@@ -624,7 +490,10 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <h3 id="_2">什么是事件驱动的应用程序？</h3>
 <p>事件驱动的应用程序是一个有状态的应用程序，它从一个或多个事件流中提取事件，并通过触发计算，状态更新或外部操作对传入事件做出反应。</p>
 <p>事件驱动的应用程序是传统应用程序设计的演变。传统应用一般具有独立的计算和数据存储层，在此体系结构中，应用程序从远程事务数据库读取数据并将数据持久化。</p>
-<p>相反 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-usecases.html">read more</a></div>
+<p>相反，事件驱动的应用程序基于有状态流处理应用程序。在这种设计中，数据和计算是共同定位的，即本地（内存或磁盘）数据访问。通过定期将检查点写入远程持久存储来实现容错。下图描绘了传统应用程序体系结构和事件驱动应用程序之间的差异。</p>
+<p><img alt="img" src="https://flink.apache.org/img/usecases-eventdrivenapps.png"/></p>
+<h3 id="_3">事件驱动的应用程序有哪些优点？</h3>
+<p>事件驱动的应用程序不是查询远程数据库，而是在本地访问其数据，从而在吞吐量和延迟方面产生更好的性能。远程持久存储的定期检查点可以异步和递增完成。因此，检查点对常规事件处理的影响非常小。但是 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-usecases.html">read more</a></div>
         <hr />
     </div>
 				
@@ -650,38 +519,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">一、架构</a><ul>
-<li><a href="#_2">处理无界和有界数据</a></li>
-<li><a href="#_3">随处部署应用程序</a></li>
-<li><a href="#_4">以任何规模运行应用程序</a></li>
-<li><a href="#_5">利用内存中性能</a></li>
-</ul>
-</li>
-<li><a href="#_6">二、应用</a><ul>
-<li><a href="#_7">流处理应用的构建元素</a><ul>
-<li><a href="#_8">流</a></li>
-<li><a href="#_9">状态</a></li>
-<li><a href="#_10">时间</a></li>
-</ul>
-</li>
-<li><a href="#api">分层API</a><ul>
-<li><a href="#processfunctions">ProcessFunctions</a></li>
-<li><a href="#the-datastream-api">The DataStream API</a></li>
-<li><a href="#sql-table-api">SQL &amp; Table API</a></li>
-</ul>
-</li>
-<li><a href="#_11">库</a></li>
-</ul>
-</li>
-<li><a href="#_12">三、运行</a><ul>
-<li><a href="#_13">全天候运行您的应用程序</a></li>
-<li><a href="#_14">更新，迁移，暂停和恢复您的应用程序</a></li>
-<li><a href="#_15">监控您的应用程序</a></li>
-</ul>
-</li>
-</ul>
-</div>
+        <div class="summary">
 <h3 id="_1">一、架构</h3>
 <p>Apache Flink是一个分布式处理引擎和框架，用于对无界和有界数据流进行状态计算。Flink可在所有常见的集群环境中运行，可以内存级速度和任意规模执行计算。</p>
 <p>接下来首先我们阐述Flink的架构。</p>
@@ -689,7 +527,13 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>任何类型的数据都是作为事件流产生的。信用卡交易，传感器测量，机器日志或网站或移动应用程序上的用户交互，所有这些数据都作为流生成。</p>
 <p>数据可以作为<em>无界</em>或<em>有界</em>流处理。</p>
 <ol>
-<li><strong>无界流</strong>有一个开始但没有明确定义的结束 …</li></ol> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-intro.html">read more</a></div>
+<li><strong>无界流</strong>有一个开始但没有明确定义的结束。它们不会终止，并且数据在生成时即提供。必须连续处理无界流，即必须在摄取事件后立即处理事件。无法等待所有输入数据到达，因为输入是无界的，并且在任何时间点都不会完成。处理无界数据通常要求以特定顺序摄取事件，例如事件发生的顺序，以便能够推断结果完整性。无界流的处理也称为流处理。</li>
+<li><strong>有界流</strong>具有明确定义的开始和结束。可以通过在执行任何计算之前先摄取所有数据的方式来处理有界流。处理有界流不需要有序摄取，因为可以始终对有界数据集进行排序。有界流的处理也称为批处理。</li>
+</ol>
+<p><img alt="" src="https://flink.apache.org/img/bounded-unbounded.png"/></p>
+<p><strong>Apache Flink擅长处理无界和有界数据集。</strong>精确控制时间和状态使Flink的运行时能够在无界流上运行任何类型的应用程序。有界流由算法和数据结构内部处理，这些算法和数据结构专为固定大小的数据集而设计，从而产生出色的性能。</p>
+<h4 id="_3">随处部署应用程序</h4>
+<p>Apache Flink是一个分布式系统，需要计算资源才能执行应用程序。Flink可与所有常见的集群资源管理器（Resource …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-intro.html">read more</a></div>
         <hr />
     </div>
 				
@@ -715,30 +559,13 @@ Category: <a href="https://jiang-hao.com/categories/cloud.html">Cloud</a>&nbsp;&
     Tags: <a href="https://jiang-hao.com/tags/openshift.html">OpenShift</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">简介</a></li>
-<li><a href="#_2">重要概念</a></li>
-<li><a href="#_3">总体架构</a></li>
-<li><a href="#_4">核心组件</a><ul>
-<li><a href="#master">Master节点：主控节点</a></li>
-<li><a href="#node">Node节点：计算节点</a></li>
-<li><a href="#project">Project</a></li>
-<li><a href="#pod">Pod</a></li>
-<li><a href="#service">Service</a></li>
-<li><a href="#routerroute">Router和Route</a></li>
-<li><a href="#persistent-storage">Persistent Storage</a></li>
-<li><a href="#registry">Registry</a></li>
-<li><a href="#s2i">S2I</a></li>
-</ul>
-</li>
-<li><a href="#_5">核心流程</a></li>
-<li><a href="#_6">优点</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h3 id="_1">简介</h3>
 <p>自由和开放源码的云计算平台使开发人员能够创建、测试和运行他们的应用程序，并且可以把它们部署到云中。</p>
 <p>OpenShift是红帽的云开发平台即服务（PaaS）。是一个基于主流的容器技术Docker和K8s构建的开源容器云平台。底层以Docker作为容器引擎驱动，以K8s作为容器编排引擎组件，并提供了开发语言，中间件，DevOps自动化流程工具和web console用户界面等元素，提供了一套完整的基于容器的应用云平台。</p>
-<p>Openshift提供比任何PaaS更多的灵活性，它支持用于Java、Python、PHP、Perl、node.js、go和Ruby的更多的开发框架，包括 Spring、Seam、Weld、CDI、Rails、Rack、Symfony、Zend …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/cloud-openshift-basics.html">read more</a></div>
+<p>Openshift提供比任何PaaS更多的灵活性，它支持用于Java、Python、PHP、Perl、node.js、go和Ruby的更多的开发框架，包括 Spring、Seam、Weld、CDI、Rails、Rack、Symfony、Zend Framework、Twisted、Django和Java E。数据库语言则支持MySQL、MongoDB和PostgreSQL。</p>
+<p>另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。</p>
+<p>OpenShift Online服务构建在Red Hat Enterprise Linux上。Red Hat …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/cloud-openshift-basics.html">read more</a></div>
         <hr />
     </div>
 				
@@ -764,22 +591,18 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     Tags: <a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#final-1">final 简介1</a></li>
-<li><a href="#final">final 修饰变量</a></li>
-<li><a href="#final_1">final 修饰类</a></li>
-<li><a href="#final_2">final 修饰方法</a></li>
-<li><a href="#final_3">final 优化编码的艺术</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h3 id="final-1"><em>final</em> 简介<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></h3>
 <p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
-<p><img alt="java中的final关键字" src="https://i.loli.net/2019/10/31/Df4CVqbjoTEKFhe.png"></p>
+<p><img alt="java中的final关键字" src="https://i.loli.net/2019/10/31/Df4CVqbjoTEKFhe.png"/></p>
 <p>上面这张图可以概括成：</p>
 <ul>
 <li>当<em>final</em>修饰<strong>变量</strong>时，被修饰的变量必须被初始化(赋值)，且后续不能修改其值，实质上是常量；</li>
 <li>当<em>final</em>修饰<strong>方法</strong>时，被修饰的方法无法被所在类的子类重写（覆写）；</li>
-<li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且 …</li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-java-final-keyword.html">read more</a></div>
+<li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且<em>final</em>类中的所有成员方法都会被隐式地指定为<em>final</em>方法，但成员变量则不会变。</li>
+</ul>
+<h3 id="final"><em>final</em> 修饰变量</h3>
+<p>当使用<em>final</em>关键字声明类成员变量或局部变量后，其值不能被再次修改 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-java-final-keyword.html">read more</a></div>
         <hr />
     </div>
 				
@@ -845,11 +668,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     Tags: <a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;<a href="https://jiang-hao.com/tags/tftp.html">TFTP</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">简介</a></li>
-<li><a href="#_2">代码</a></li>
-</ul>
-</div>
+        <div class="summary">
 <h3 id="_1">简介</h3>
 <p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
 <p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
@@ -863,7 +682,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
       <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
       <span class="p">{</span>
           <span class="n">System</span><span class="p">.</span><span class="na">out</span>
-                  <span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;You must provide …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-AJavaTFTPServer.html">read more</a></div>
+                  <span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"You must provide 1 argument - the …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-AJavaTFTPServer.html">read more</a></div>
         <hr />
     </div>
 				

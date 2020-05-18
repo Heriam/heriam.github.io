@@ -100,8 +100,8 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 
 		<hr />
 
-
-        <div><div class="toc"><span class="toctitle">目录</span><ul>
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
 <li><a href="#apache-flink">Apache Flink仅用于（近）实时处理用例吗？</a></li>
 <li><a href="#flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</a></li>
 <li><a href="#flinkhadoop">Flink如何与Hadoop栈相关联？</a></li>
@@ -111,6 +111,12 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <li><a href="#flink_3">Flink是否仅限于内存数据集？</a></li>
 </ul>
 </div>
+			</nav>
+
+			<hr />
+
+
+        <div>
 <h3 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h3>
 <p>Flink是一个非常通用的系统，用于数据处理和数据驱动的应用程序，<em>数据流</em>作为核心构建块。这些数据流可以是实时数据流或存储的历史数据流。例如，在Flink的视图中，文件是存储的字节流。因此，Flink支持实时数据处理和应用程序，以及批处理应用程序。</p>
 <p>流可以是<em>无界的</em>（没有结束，事件不断发生）或受<em>限制</em>（流有开始和结束）。例如，来自消息队列的Twitter馈送或事件流通常是无界的流，而来自文件的字节流是有界流。</p>

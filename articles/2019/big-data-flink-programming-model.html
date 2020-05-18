@@ -100,8 +100,8 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 
 		<hr />
 
-
-        <div><div class="toc"><span class="toctitle">目录</span><ul>
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
 <li><a href="#_1">抽象层次</a></li>
 <li><a href="#_2">程序和数据流</a></li>
 <li><a href="#_3">并行数据流</a></li>
@@ -112,10 +112,16 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <li><a href="#_8">批量流媒体</a></li>
 </ul>
 </div>
+			</nav>
+
+			<hr />
+
+
+        <div>
 <p>Apache Flink是一个用于分布式流和批处理数据处理的开源平台。Flink的核心是流数据流引擎，为数据流上的分布式计算提供数据分发，通信和容错。Flink基于流引擎之上构建批处理，覆加本地迭代支持，内存托管和程序优化。</p>
 <h2 id="_1">抽象层次</h2>
 <p>Flink提供不同级别的抽象来开发流/批处理应用程序。</p>
-<p><img alt="编程抽象级别" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/levels_of_abstraction.svg"></p>
+<p><img alt="编程抽象级别" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/levels_of_abstraction.svg"/></p>
 <ul>
 <li>
 <p>最低级抽象只提供<strong>stateful streaming</strong>。它通过<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/process_function.html">Process Function</a>嵌入到<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API中</a>。它允许用户自由处理来自一个或多个流的事件，并使用一致的容错<em>状态</em>。此外，用户可以注册事件时间和处理时间回调，允许程序实现复杂的计算。</p>
@@ -135,13 +141,13 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <h2 id="_2">程序和数据流</h2>
 <p>Flink程序的基本构建块是<strong>streams</strong>和<strong>transformations</strong>。（请注意，Flink的DataSet API中使用的DataSets其实内部也是streams - 稍后会详细介绍。）从概念上讲，<em>stream</em>是（可能永无止境的）数据记录流，而<em>transformation</em>是将一个或多个流作为输入，并产生一个或多个输出流作为结果的操作。</p>
 <p>执行时，Flink程序映射为<strong>streaming dataflows</strong>，由<strong>流</strong>和转换<strong>算子</strong>组成。每个<em>dataflow</em>都以一个或多个<strong>sources</strong>开头，并以一个或多个<strong>sinks</strong>结束。数据流类似于任意<strong>有向无环图</strong> <em>（DAG）</em>。尽管通过<em>迭代</em>结构允许特殊形式的循环 ，但为了简单起见，我们将在大多数情况下不将其考虑其中。</p>
-<p><img alt="DataStream程序及其数据流。" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/program_dataflow.svg"></p>
+<p><img alt="DataStream程序及其数据流。" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/program_dataflow.svg"/></p>
 <p>通常，程序中的transformations与dataflow中的operators之间存在一对一的对应关系。但是，有时一个转换可能包含多个转换算子。</p>
 <p>Sources和Sinks在<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/connectors/index.html">流连接器</a>和<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/connectors.html">批处理连接器</a>文档中有介绍。<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/index.html">DataStream算子</a>和<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/dataset_transformations.html">DataSet转换</a>中记录了<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/dataset_transformations.html">转换</a>有关介绍。</p>
 <h2 id="_3">并行数据流</h2>
 <p>Flink中的程序本质上是并行和分布式的。在执行期间，<em>stream</em>具有一个或多个<strong>stream partitions</strong>，并且每个<em>算子</em>具有一个或多个<strong>算子子任务</strong>。算子子任务彼此独立，并且可以在不同的线程中执行，并且可能在不同的机器或容器上执行。</p>
 <p>算子子任务的数量是该特定算子的<strong>并行</strong>度。流的并行度始终是其生成算子的并行度。同一程序的不同算子可能具有不同的并行级别。</p>
-<p><img alt="并行数据流" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/parallel_dataflow.svg"></p>
+<p><img alt="并行数据流" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/parallel_dataflow.svg"/></p>
 <p>流可以<em>以一对一</em>（或<em>转发</em>）模式或以<em>重新分发</em>模式在两个operator之间传输数据：</p>
 <ul>
 <li><strong>一对一</strong>流（例如，在上图中的<em>Source</em>和<em>map（）</em>算子之间）保留元素的分区和排序。这意味着<em>map（）</em>算子的subtask [1] 将以<em>Source</em>算子的subtask [1]生成的相同顺序的相同元素作为输入。</li>
@@ -151,7 +157,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <h2 id="_4">窗口</h2>
 <p>聚合事件（例如，计数，求和）在流上的工作方式与批处理方式不同。例如，不可能计算流中的所有元素，因为流通常是无限的（无界）。相反，流上的聚合（计数，总和等）由<strong>窗口</strong>限定，例如<em>“在最后5分钟内计数”</em>或<em>“最后100个元素的总和”</em>。</p>
 <p>Windows可以是<em>时间驱动的</em>（例如：每30秒）或<em>数据驱动</em>（例如：每100个元素）。人们通常区分不同类型的窗口，例如<em>翻滚窗口</em>（没有重叠）， <em>滑动窗口</em>（具有重叠）和<em>会话窗口</em>（由不活动间隙打断）。</p>
-<p><img alt="时间和计数Windows" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/windows.svg"></p>
+<p><img alt="时间和计数Windows" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/windows.svg"/></p>
 <p>可以在此<a href="https://flink.apache.org/news/2015/12/04/Introducing-windows.html">博客文章中</a>找到更多窗口示例。更多详细信息在<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/windows.html">窗口文档中</a>。</p>
 <h2 id="_5">时间</h2>
 <p>当在流程序中引用时间（例如定义窗口）时，可以参考不同的时间概念：</p>
@@ -160,12 +166,12 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <li><strong>摄取时间</strong>是事件在Source算子处输入Flink数据流的时间。</li>
 <li><strong>处理时间</strong>是执行基于时间的操作的每个算子的本地时间。</li>
 </ul>
-<p><img alt="事件时间，摄取时间和处理时间" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/event_ingestion_processing_time.svg"></p>
+<p><img alt="事件时间，摄取时间和处理时间" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/event_ingestion_processing_time.svg"/></p>
 <p>有关如何处理时间的更多详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/event_time.html">事件时间文档</a>。</p>
 <h2 id="_6">有状态的操作</h2>
 <p>虽然数据流中的许多操作只是一次查看一个单独的<em>事件</em>（例如事件解析器），但某些操作会记住多个事件（例如窗口算子）的信息。这些操作称为<strong>有状态</strong>。</p>
 <p>状态操作的状态保持在可以被认为是嵌入式键/值存储的状态中。状态被分区并严格地与有状态算子读取的流一起分发。因此，只有在<em>keyBy（）</em>函数之后才能在<em>键控流</em>上访问键/值状态，并且限制为与当前事件的键相关联的值。对齐流和状态的密钥可确保所有状态更新都是本地操作，从而保证一致性而无需事务开销。此对齐还允许Flink重新分配状态并透明地调整流分区。</p>
-<p><img alt="状态和分区" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/state_partitioning.svg"></p>
+<p><img alt="状态和分区" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/state_partitioning.svg"/></p>
 <p>有关更多信息，请参阅有关<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/state/index.html">状态</a>的文档。</p>
 <h2 id="_7">容错检查点</h2>
 <p>Flink使用<strong>流重放</strong>和<strong>检查点</strong>的组合实现容错。检查点与每个输入流中的特定点以及每个算子的对应状态相关。通过恢复算子的状态并从检查点重放事件，可以从检查点恢复流数据流，同时保持一致性<em>（恰好一次处理语义）</em>。</p>

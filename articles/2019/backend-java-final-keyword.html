@@ -100,8 +100,8 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 
 		<hr />
 
-
-        <div><div class="toc"><span class="toctitle">目录</span><ul>
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
 <li><a href="#final-1">final 简介1</a></li>
 <li><a href="#final">final 修饰变量</a></li>
 <li><a href="#final_1">final 修饰类</a></li>
@@ -109,9 +109,15 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <li><a href="#final_3">final 优化编码的艺术</a></li>
 </ul>
 </div>
+			</nav>
+
+			<hr />
+
+
+        <div>
 <h3 id="final-1"><em>final</em> 简介<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></h3>
 <p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
-<p><img alt="java中的final关键字" src="https://i.loli.net/2019/10/31/Df4CVqbjoTEKFhe.png"></p>
+<p><img alt="java中的final关键字" src="https://i.loli.net/2019/10/31/Df4CVqbjoTEKFhe.png"/></p>
 <p>上面这张图可以概括成：</p>
 <ul>
 <li>当<em>final</em>修饰<strong>变量</strong>时，被修饰的变量必须被初始化(赋值)，且后续不能修改其值，实质上是常量；</li>
@@ -130,8 +136,6 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <span class="c1">//一个空的静态final类常量</span>
 <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">PI</span><span class="p">;</span>
 </pre></div>
-
-
 <p><strong>初始化final变量</strong>：</p>
 <p>我们必须初始化一个<em>final</em>变量，否则编译器将抛出编译时错误。<em>final</em>变量只能通过<a href="https://www.geeksforgeeks.org/g-fact-26-the-initializer-block-in-java/">初始化器</a>或赋值语句初始化一次。初始化<em>final</em>变量有三种方法：</p>
 <ol>
@@ -189,16 +193,12 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 
 <span class="p">}</span> 
 </pre></div>
-
-
 <p><strong>何时使用<em>final</em>变量：</strong></p>
 <p>普通变量和<em>final</em>变量之间的唯一区别是我们可以将值重新赋值给普通变量；但是对于<em>final</em>变量，一旦赋值，我们就不能改变<em>final</em>变量的值。因此，<em>final</em>变量必须仅用于我们希望在整个程序执行期间保持不变的值。</p>
 <p><strong><em>final</em>引用变量：</strong>
 当<em>final</em>变量是对象的引用时，则此变量称为<em>final</em>引用变量。例如，<em>final</em>的<em>StringBuffer</em>变量：</p>
 <div class="highlight"><pre><span></span><span class="kd">final</span> <span class="n">StringBuffer</span> <span class="n">sb</span><span class="p">;</span>
 </pre></div>
-
-
 <p><em>final</em>变量无法重新赋值。但是对于<em>final</em>的引用变量，可以更改该引用变量指向的对象的内部状态。请注意，这不是重新赋值。<em>final的</em>这个属性称为<em>非传递性</em>。要了解对象内部状态的含义，请参阅下面的示例：</p>
 <div class="highlight"><pre><span></span><span class="c1">// Java program to demonstrate  </span>
 <span class="c1">// reference final variable </span>
@@ -208,27 +208,23 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span>  
     <span class="p">{</span> 
         <span class="c1">// a final reference variable sb </span>
-        <span class="kd">final</span> <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">(</span><span class="s">&quot;Geeks&quot;</span><span class="p">);</span> 
+        <span class="kd">final</span> <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">(</span><span class="s">"Geeks"</span><span class="p">);</span> 
 
         <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sb</span><span class="p">);</span> 
 
         <span class="c1">// changing internal state of object </span>
         <span class="c1">// reference by final reference variable sb </span>
         <span class="c1">// 更改final变量sb引用的对象的内部状态</span>
-        <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;ForGeeks&quot;</span><span class="p">);</span> 
+        <span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">"ForGeeks"</span><span class="p">);</span> 
 
         <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sb</span><span class="p">);</span> 
     <span class="p">}</span>     
 <span class="p">}</span> 
 </pre></div>
-
-
 <p>输出：</p>
 <div class="highlight"><pre><span></span><span class="err">Geeks</span>
 <span class="err">GeeksForGeeks</span>
 </pre></div>
-
-
 <p><em>非传递</em>属性也适用于数组，因为在Java中<a href="https://www.geeksforgeeks.org/arrays-in-java/">数组也是对象</a>。带有<em>final</em>关键字的数组也称为<a href="https://www.geeksforgeeks.org/final-arrays-in-java/"><em>final</em>数组</a>。</p>
 <p><strong>注意 ：</strong></p>
 <ol>
@@ -249,13 +245,9 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
      <span class="p">}</span> 
    <span class="p">}</span> 
 </pre></div>
-
-
 <p>输出：</p>
 <div class="highlight"><pre><span></span><span class="err">   Compiler Error: cannot assign a value to final variable CAPACITY</span>
 </pre></div>
-
-
 <ol>
 <li>当在方法/构造函数/块中创建<em>final</em>变量时，它被称为局部<em>final</em>变量，并且必须在创建它的位置初始化一次。参见下面的局部<em>final</em>变量程序：</li>
 </ol>
@@ -275,13 +267,9 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     <span class="p">}</span> 
    <span class="p">}</span> 
 </pre></div>
-
-
 <p>输出：</p>
 <div class="highlight"><pre><span></span><span class="err">   20</span>
 </pre></div>
-
-
 <ol>
 <li>
 <p>注意C ++ <em>const</em>变量和Java <em>final</em>变量之间的区别。声明时，必须为C ++中的const变量赋值。对于Java中的<em>final</em>变量，正如我们在上面的示例中所看到的那样，可以稍后赋值，但只能赋值一次。</p>
@@ -302,17 +290,13 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
       <span class="c1">// final with for-each statement </span>
       <span class="c1">// legal statement </span>
       <span class="k">for</span> <span class="p">(</span><span class="kd">final</span> <span class="kt">int</span> <span class="n">i</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="p">);</span> 
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">" "</span><span class="p">);</span> 
     <span class="p">}</span>    
   <span class="p">}</span> 
 </pre></div>
-
-
 <p>输出：</p>
 <div class="highlight"><pre><span></span><span class="err">1 2 3</span>
 </pre></div>
-
-
 <p><strong>说明：</strong>由于i变量在循环的每次迭代时超出范围，因此实际上每次迭代都重新声明，允许使用相同的标记（即i）来表示多个变量。</p>
 <h3 id="final_1"><em>final</em> 修饰类</h3>
 <p>当使用<em>final</em>关键字声明一个类时，它被称为<em>final</em>类。被声明为<em>final</em>的类不能被扩展（继承）。<em>final</em>类有两种用途：</p>
@@ -327,11 +311,9 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
   <span class="c1">// 下面的这个类B想要扩展类A是非法的</span>
   <span class="kd">class</span> <span class="nc">B</span> <span class="kd">extends</span> <span class="n">A</span> 
   <span class="p">{</span> 
-      <span class="c1">// COMPILE-ERROR! Can&#39;t subclass A</span>
+      <span class="c1">// COMPILE-ERROR! Can't subclass A</span>
   <span class="p">}</span>
 </pre></div>
-
-
 <p>Java支持把class定义成<em>final</em>，似乎违背了面向对象编程的基本原则，但在另一方面，封闭的类也保证了该类的所有方法都是固定不变的，不会有子类的覆盖方法需要去动态加载。这给编译器做优化时提供了更多的可能，最好的例子是String，它就是<em>final</em>类，Java编译器就可以把字符串常量（那些包含在双引号中的内容）直接变成String对象，同时对运算符"+"的操作直接优化成新的常量，因为final修饰保证了不会有子类对拼接操作返回不同的值。
 对于所有不同的类定义一顶层类(全局或包可见)、嵌套类(内部类或静态嵌套类)都可以用final来修饰。但是一般来说final多用来修饰在被定义成全局(public)的类上，因为对于非全局类，访问修饰符已经将他们限制了它们的也可见性，想要继承这些类已经很困难，就不用再加一层final限制。</p>
 <p><strong><em>final</em>与匿名内部类</strong></p>
@@ -341,7 +323,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <li>在内部类的方法形参使用到外部传过来的变量，则形参需要添加 <em>final</em> 修饰符</li>
 </ol>
 <p>原因大多是说当我们创建匿名内部类的那个方法调用运行完毕之后，因为局部变量的生命周期和方法的生命周期是一样的，当方法弹栈，<strong>这个局部变量就会消亡了，但内部类对象可能还存在。</strong> 此时就会出现一种情况，就是我们调用这个内部类对象去访问一个不存在的局部变量，就可能会出现空指针异常。而此时需要使用 <em>final</em> 在类加载的时候进入常量池，即使方法弹栈，常量池的常量还在，也可以继续使用，JVM 会持续维护这个引用在回调方法中的生命周期。</p>
-<p><span style='color:red;'><strong>但是 JDK 1.8 取消了对匿名内部类引用的局部变量 <em>final</em> 修饰的检查</strong></span></p>
+<p><span style="color:red;"><strong>但是 JDK 1.8 取消了对匿名内部类引用的局部变量 <em>final</em> 修饰的检查</strong></span></p>
 <p>对此，<a href="https://www.jianshu.com/u/7e0d004ed427">theonlin</a>专门通过实验做出了总结：其实局部内部类并不是直接调用方法传进来的参数，而是内部类将传进来的参数通过自己的构造器备份到了自己的内部，自己内部的方法调用的实际是自己的属性而不是外部类方法的参数。外部类中的方法中的变量或参数只是方法的局部变量，这些变量或参数的作用域只在这个方法内部有效，所以方法中被 <em>final</em>的变量的仅仅作用是表明这个变量将作为内部类构造器参数，<strong>其实<em>final</em>不加也可以，加了可能还会占用内存空间，影响 GC</strong>。最后结论就是，需要使用 final 去持续维护这个引用在回调方法中的生命周期这种说法应该是错误的，也没必要。</p>
 <h3 id="final_2"><em>final</em> 修饰方法</h3>
 <p>下面这段话摘自《Java编程思想》第四版第143页：</p>
@@ -354,7 +336,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     <span class="c1">// 父类的ml方法被使用了final关键字修饰</span>
     <span class="kd">final</span> <span class="kt">void</span> <span class="nf">m1</span><span class="p">()</span> 
     <span class="p">{</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;This is a final method.&quot;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"This is a final method."</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -364,13 +346,11 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     <span class="nd">@override</span>
     <span class="kt">void</span> <span class="nf">m1</span><span class="p">()</span>
     <span class="p">{</span> 
-        <span class="c1">// COMPILE-ERROR! Can&#39;t override.</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Illegal!&quot;</span><span class="p">);</span>
+        <span class="c1">// COMPILE-ERROR! Can't override.</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"Illegal!"</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
 <p>而关于高效，是因为在java早期实现中，如果将一个方法指明为final，就是同意编译器将针对该方法的调用都转化为内嵌调用（内联）。大概就是，如果是内嵌调用，虚拟机不再执行正常的方法调用（参数压栈，跳转到方法处执行，再调回，处理栈参数，处理返回值），而是直接将方法展开，以方法体中的实际代码替代原来的方法调用。这样减少了方法调用的开销。所以有一些程序员认为：<strong>除非有足够的理由使用多态性，否则应该将所有的方法都用 final 修饰。这样的认识未免有些偏激</strong>，因为在最近的java设计中，虚拟机（特别是hotspot技术）可以自己去根据具体情况自动优化选择是否进行内联，只不过使用了<em>final</em>关键字的话可以显示地影响编译器对被修饰的代码进行内联优化。所以请切记，对于Java虚拟机来说编译器在编译期间会自动进行内联优化，这是由编译器决定的，对于开发人员来说，一定要设计好时空复杂度的平衡，不要滥用final。</p>
 <p>注1：类的<em>private</em>方法会隐式地被指定为<em>final</em>方法，也就同样无法被重写。可以对private方法添加final修饰符，但并没有添加任何额外意义。</p>
 <p>注2：在java中，你永远不会看到同时使用<a href="https://www.geeksforgeeks.org/final-keyword-java/"><em>final</em></a>和<em>abstract</em>关键字声明的类或方法。对于类，<em>final</em>用于防止<a href="https://www.geeksforgeeks.org/inheritance-in-java/">继承</a>，而抽象类反而需要依赖于它们的子类来完成实现。在修饰方法时，<em>final</em>用于防止被<a href="https://www.geeksforgeeks.org/overriding-in-java/">覆盖</a>，而抽象方法反而需要在子类中被重写。</p>
@@ -390,10 +370,10 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 </ul>
 <p>更多关于<em>final</em>关键字对代码的优化总结以及注意点可以参考IBM的<a href="https://www.ibm.com/developerworks/library/j-jtp1029/index.html">《Is that your final answer?》</a>这篇文章。</p>
 <div class="footnote">
-<hr>
+<hr/>
 <ol>
 <li id="fn:1">
-<p>本文由笔者参考多篇博文汇总作成，因数量众多不一一列出，主体部分从GeeksforGeeks网站翻译，实际由<strong>Gaurav Miglani</strong>撰写。如果您发现任何不正确的内容，或者您想要分享有关上述主题的更多信息，请撰写评论。&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>本文由笔者参考多篇博文汇总作成，因数量众多不一一列出，主体部分从GeeksforGeeks网站翻译，实际由<strong>Gaurav Miglani</strong>撰写。如果您发现任何不正确的内容，或者您想要分享有关上述主题的更多信息，请撰写评论。 <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
 </li>
 </ol>
 </div></div>

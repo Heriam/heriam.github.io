@@ -105,26 +105,17 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     Tags: <a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;</span> 
         </div>
         
-        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
-<li><a href="#_1">前言</a></li>
-<li><a href="#_2">代码优化细节</a><ul>
-<li><a href="#1final">1、尽量指定类、方法的final修饰符</a></li>
-<li><a href="#2">2、尽量重用对象</a></li>
-<li><a href="#3">3、尽可能使用局部变量</a></li>
-<li><a href="#4">4、及时关闭流</a></li>
-<li><a href="#5">5、尽量减少对变量的重复计算</a></li>
-<li><a href="#6">6、尽量采用懒加载的策略，即在需要的时候才创建</a></li>
-<li><a href="#7">7、慎用异常</a></li>
-<li><a href="#8trycatch">8、不要在循环中使用try...catch...，应该把其放在最外层</a></li>
-<li><a href="#9">9、如果能估计到待添加的内容长度，为底层以数组方式实现的集合、工具类指定初始长度</a></li>
-<li><a href="#10systemarraycopy">10、当复制大量数据时，使用System.arraycopy()命令</a></li>
-<li><a href="#11">11、乘法和除法使用移位操作</a></li>
-<li><a href="#12">12、循环内不要不断创建对象引用</a></li>
-<li><a href="#13array">13、基于效率和类型检查的考虑，应该尽可能使用array</a></li>
-<li><a href="#14hashmaparrayliststringbuilder">14、尽量使用HashMap、ArrayList、StringBuilder</a></li>
-<li><a href="#15public-static-final">15、不要将数组声明为public static final</a></li>
-<li><a href="#16">16、尽量在合适的场合使用单例</a></li>
-<li><a href="#17">17 …</a></li></ul></li></ul></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-Java代码优化35点总结.html">read more</a></div>
+        <div class="summary">
+<h3 id="_1">前言</h3>
+<p>代码优化，一个很重要的课题。可能有些人觉得没用，一些细小的地方有什么好修改的，改与不改对于代码的运行效率有什么影响呢？这个问题我是这么考虑的，就像大海里面的鲸鱼一样，它吃一条小虾米有用吗？没用，但是，吃的小虾米一多之后，鲸鱼就被喂饱了。代码优化也是一样，如果项目着眼于尽快无BUG上线，那么此时可以抓大放小，代码的细节可以不精打细磨；但是如果有足够的时间开发、维护代码，这时候就必须考虑每个可以优化的细节了，一个一个细小的优化点累积起来，对于代码的运行效率绝对是有提升的。</p>
+<p>代码优化的目标是：</p>
+<p>1、减小代码的体积</p>
+<p>2、提高代码运行的效率</p>
+<h3 id="_2">代码优化细节</h3>
+<h5 id="1final">1、尽量指定类、方法的final修饰符</h5>
+<p>带有final修饰符的类是不可派生的。在Java核心API中，有许多应用final的例子，例如java.lang.String，整个类都是final的。为类指定final修饰符可以让类不可以被继承，为方法指定final修饰符可以让方法不可以被重写。如果指定了一个类为final，则该类所有的方法都是final的。Java编译器会寻找机会内联所有的final方法，内联对于提升Java运行效率作用重大，具体参见Java运行期优化。此举能够使性能平均提高50%。</p>
+<h5 id="2">2、尽量重用对象</h5>
+<p>特别是String对象的使用，出现字符串连接时应该使用StringBuilder …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-Java代码优化35点总结.html">read more</a></div>
         <hr />
     </div>
 				

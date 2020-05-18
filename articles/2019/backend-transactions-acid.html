@@ -56,6 +56,7 @@
                     <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
                     <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
                     <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
                     <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
                     <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
                 </ul>
@@ -86,7 +87,7 @@
         <div class="content-title">
             <h1>深入理解大数据之——事务及其ACID特性</h1>
 <span class="metadata">
-2019-11-05 二&nbsp;&nbsp;&nbsp;
+2019-11-05 Tue&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -106,8 +107,8 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     		</span>
         </div>
 
-			<nav class="toc">
-			<div class="toc"><span class="toctitle">目录</span><ul>
+
+        <div><div class="toc"><span class="toctitle">目录</span><ul>
 <li><a href="#_1">事务简介</a><ul>
 <li><a href="#_2">事物的定义</a></li>
 <li><a href="#_3">事务的目的</a></li>
@@ -129,16 +130,10 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <li><a href="#_6">参考文献</a></li>
 </ul>
 </div>
-			</nav>
-
-			<hr />
-
-
-        <div>
 <h2 id="_1">事务简介</h2>
 <h3 id="_2">事物的定义</h3>
 <p>事务（Transaction）是由一系列对系统中数据进行访问或更新的操作所组成的一个程序执行逻辑单元（Unit）。在计算机术语中，事务通常就是指数据库事务 。</p>
-<p><img alt="57355-20190323094924183-1338282146.png" src="https://i.loli.net/2019/11/05/iuoBJaNxb4H8Pgq.png"/></p>
+<p><img alt="57355-20190323094924183-1338282146.png" src="https://i.loli.net/2019/11/05/iuoBJaNxb4H8Pgq.png"></p>
 <p>在数据库管理系统（DBMS）中，事务是数据库恢复和并发控制的基本单位。它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。</p>
 <p>例如，银行转帐工作：从源帐号扣款并使目标帐号增款，这两个操作必须要么全部执行，要么都不执行，否则就会出现该笔金额平白消失或出现的情况。所以，应该把他们看成一个事务。</p>
 <p>在现代数据库中，事务还可以实现其他一些事情，例如，确保你不能访问别人写了一半的数据；但是基本思想是相同的——事务是用来确保<strong>无论发生什么情况，你使用的数据都将处于一个合理的状态</strong>：</p>
@@ -162,9 +157,9 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <p>在现实情况下，失败的风险很高。在一个数据库事务的执行过程中，有可能会遇上事务操作失败、数据库系统或操作系统出错，甚至是存储介质出错等情况。而上述Martin的话说明了事务的存在，就是为了能够简化我们的编程模型，不需要我们去考虑各种各样的潜在错误和并发问题 。我们在实际使用事务时，不需要考虑数据库宕机，网络异常，并发修改等问题，整个事务要么提交，要么回滚，非常方便。所以本质上来说，<strong>事务的出现了是为了应用层服务的，而不是数据库系统本身的需要</strong> 。</p>
 <h3 id="_4">事务的状态</h3>
 <p>因为事务具有原子性，所以从外部看的话，事务就是密不可分的一个整体，事务的状态也只有三种：Active、Commited 和 Failed，事务要不就在执行中，要不然就是成功或者失败的状态。</p>
-<p><img alt="transaction_states_out.png" src="https://i.loli.net/2019/11/05/ELFtsuiwhDNbkzG.png"/></p>
+<p><img alt="transaction_states_out.png" src="https://i.loli.net/2019/11/05/ELFtsuiwhDNbkzG.png"></p>
 <p>进一步放大看，事物内部还有部分提交这个中间状态，其对外是不可见的。</p>
-<p><img alt="transaction_states.png" src="https://i.loli.net/2019/11/05/AaK2xDRwcpy9jue.png"/></p>
+<p><img alt="transaction_states.png" src="https://i.loli.net/2019/11/05/AaK2xDRwcpy9jue.png"></p>
 <p>所以，具体来说，事务有以下几种可能的状态：</p>
 <ul>
 <li>Active：事务的初始状态，表示事务正在执行；</li>
@@ -194,7 +189,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 </ul>
 </blockquote>
 <p>拿之前转账的例子来说，用户A给用户B转账，至少要包含两个操作，用户A钱数减少，用户B钱数增加，增加和减少的操作要么全部成功，要么全部失败，是一个原子操作。如下图，如果事务在<strong>T1</strong> 完成之后但在<strong>T2</strong>完成之前失败，将导致数据库状态不正确。 </p>
-<p><img alt="11-6.jpg" src="https://i.loli.net/2019/11/05/pwUaAMjyIe6qrBY.jpg"/></p>
+<p><img alt="11-6.jpg" src="https://i.loli.net/2019/11/05/pwUaAMjyIe6qrBY.jpg"></p>
 <h3 id="consistency">一致性（Consistency）</h3>
 <p>一致性是指，一个事务必须使数据库从一个一致性状态变换到另一个一致性状态（执行成功），或回滚到原始的一致性状态（执行失败）。这意味着必须维护完整性约束，以使在事务之前和之后数据库保持一致性和正确性。</p>
 <p>参考上面的示例，假设用户A和用户B两者的钱加起来一共是700，那么不管A和B之间如何转账，转几次账，这一约束都得成立，即事务结束后两个用户的钱相加起来还得是700，这就是事务的一致性。</p>
@@ -202,7 +197,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <p>但数据的一致性问题并不都和原子性有关。比如转账的过程中，用户A扣款了100，而用户B只收款了50，那么该过程可以符合原子性，但是数据的一致性就出现了问题。 </p>
 <p><strong>一致性既是事务的属性，也是事务的目的</strong>。也正如本文开篇所提到的，“事务是用来确保无论发生什么情况，你使用的数据都将处于一个合理的状态“，这里所说的合理/正确，也就是指满足完整性约束。</p>
 <p>总的来说，<strong>一致性是事务ACID四大特性中最重要的属性，而原子性、隔离性和持久性，都是作为保障一致性的手段。事务作为这些性质的载体，实现了这种由ACID保障C的机制。</strong></p>
-<p><img alt="pc-3.png" src="https://i.loli.net/2019/11/05/KR67AT8Jpea5wbI.png"/></p>
+<p><img alt="pc-3.png" src="https://i.loli.net/2019/11/05/KR67AT8Jpea5wbI.png"></p>
 <h4 id="acidcapc">ACID和CAP中C（一致性）的区别</h4>
 <p>请注意，我们一直在讨论的一致性，即ACID中的C，是指单一实体内部的正确状态在时间维度上的一致性，进一步说，是通过维护数据的完整性约束，来保持数据库在时间上（比如事务前后）保持一致的正确状态。因为是描述单一实体的内部状态，故又称“内部一致性”。</p>
 <p>而CAP原则中的一致性是指在分布式系统中，空间维度上，某一特定时刻，多个实体中不同数据备份之间值的一致性，又称“外部一致性”。具体我们会在另文CAP原则相关内容中做详细介绍。</p>
@@ -230,7 +225,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <p>并发控制技术保证了事务的隔离性，使数据库的一致性状态不会因为并发执行的操作被破坏。</p>
 <p>日志恢复技术保证了事务的原子性，使一致性状态不会因事务或系统故障被破坏。同时使已提交的对数据库的修改不会因系统崩溃而丢失，保证了事务的持久性。</p>
 <p>我们将另文对以上两种技术进行详细介绍。</p>
-<p><img alt="1422237-20181122103102223-1059881337.png" src="https://i.loli.net/2019/11/05/kESoJcXzCF3eWmv.png"/></p>
+<p><img alt="1422237-20181122103102223-1059881337.png" src="https://i.loli.net/2019/11/05/kESoJcXzCF3eWmv.png"></p>
 <h2 id="_6">参考文献</h2>
 <ol>
 <li>
@@ -352,7 +347,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2019.&nbsp;All rights reserved.</p>
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
 </footer>
 
 </div> <!-- /container -->

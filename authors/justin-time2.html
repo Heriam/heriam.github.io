@@ -56,6 +56,7 @@
                     <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
                     <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
                     <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
                     <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
                     <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
                 </ul>
@@ -90,9 +91,54 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2019/backend-Java代码优化35点总结.html"><h1>Java代码优化35点总结</h1></a>
+<span class="metadata">
+2019-04-02 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary"><div class="toc"><span class="toctitle">目录</span><ul>
+<li><a href="#_1">前言</a></li>
+<li><a href="#_2">代码优化细节</a><ul>
+<li><a href="#1final">1、尽量指定类、方法的final修饰符</a></li>
+<li><a href="#2">2、尽量重用对象</a></li>
+<li><a href="#3">3、尽可能使用局部变量</a></li>
+<li><a href="#4">4、及时关闭流</a></li>
+<li><a href="#5">5、尽量减少对变量的重复计算</a></li>
+<li><a href="#6">6、尽量采用懒加载的策略，即在需要的时候才创建</a></li>
+<li><a href="#7">7、慎用异常</a></li>
+<li><a href="#8trycatch">8、不要在循环中使用try...catch...，应该把其放在最外层</a></li>
+<li><a href="#9">9、如果能估计到待添加的内容长度，为底层以数组方式实现的集合、工具类指定初始长度</a></li>
+<li><a href="#10systemarraycopy">10、当复制大量数据时，使用System.arraycopy()命令</a></li>
+<li><a href="#11">11、乘法和除法使用移位操作</a></li>
+<li><a href="#12">12、循环内不要不断创建对象引用</a></li>
+<li><a href="#13array">13、基于效率和类型检查的考虑，应该尽可能使用array</a></li>
+<li><a href="#14hashmaparrayliststringbuilder">14、尽量使用HashMap、ArrayList、StringBuilder</a></li>
+<li><a href="#15public-static-final">15、不要将数组声明为public static final</a></li>
+<li><a href="#16">16、尽量在合适的场合使用单例</a></li>
+<li><a href="#17">17 …</a></li></ul></li></ul></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-Java代码优化35点总结.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2019/notes-人之一生.html"><h1>人之一生</h1></a>
 <span class="metadata">
-2019-03-16 六&nbsp;&nbsp;&nbsp;
+2019-03-16 Sat&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -152,7 +198,7 @@ Category: <a href="https://jiang-hao.com/categories/notes.html">Notes</a>&nbsp;&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/frontend-JQCloud.html"><h1>JQCloud: 一个前端生成美化标签云的简单JQuery插件</h1></a>
 <span class="metadata">
-2018-02-25 日&nbsp;&nbsp;&nbsp;
+2018-02-25 Sun&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -188,7 +234,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html"><h1>使用Pelican在Github(国外)和Coding(国内)同步托管博客</h1></a>
 <span class="metadata">
-2018-02-05 一&nbsp;&nbsp;&nbsp;
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -219,7 +265,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
     <br>   </li>
 <li>将本地SSH公钥拷贝到coding。操作同样与Github类似。由于本地已经为Github生成了一个公钥，这里只用cd进入~/.ssh文件夹查看一个名为<code>id_rsa.pub</code>文件的内容，类似于如下。我们只拷贝<strong>邮箱之前</strong>的所有内容到coding的公钥管理页面。     </li>
 </ol>
-<div class="highlight"><pre><span></span>ssh-rsa AAAAfafjIJGOF …</pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
+<div class="highlight"><pre><span></span><span class="err">ssh-rsa AAAAfafjIJGOF …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/frontend-使用Pelican在Github和Coding同步托管博客.html">read more</a></div>
         <hr />
     </div>
 				
@@ -233,7 +279,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html"><h1>使用Pelican基于Github Pages搭建博客教程</h1></a>
 <span class="metadata">
-2018-02-05 一&nbsp;&nbsp;&nbsp;
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -273,7 +319,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
 <span class="metadata">
-2018-01-01 一&nbsp;&nbsp;&nbsp;
+2018-01-01 Mon&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -310,7 +356,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/tools-WifiHotSpotOnWindows.html"><h1>Windows系统配置WiFi无线热点</h1></a>
 <span class="metadata">
-2017-11-21 二&nbsp;&nbsp;&nbsp;
+2017-11-21 Tue&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -356,7 +402,7 @@ netsh wlan show hostednetwork setting=security
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/backend-Ubuntu系统ApacheMaven安装.html"><h1>Ubuntu系统Apache Maven安装</h1></a>
 <span class="metadata">
-2017-10-24 二&nbsp;&nbsp;&nbsp;
+2017-10-24 Tue&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -395,7 +441,7 @@ cd mvn                        #进入mvn文件夹
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/backend-Ubuntu系统Java开发环境的搭建.html"><h1>Ubuntu系统Java开发环境的搭建</h1></a>
 <span class="metadata">
-2017-10-23 一&nbsp;&nbsp;&nbsp;
+2017-10-23 Mon&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -437,7 +483,7 @@ sudo …</pre></div></font></div> <a class="btn btn-info xsmall" href="https://j
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/tools-InstallAndRunGeditOnMac.html"><h1>Install & Run Gedit from Terminal on Mac</h1></a>
 <span class="metadata">
-2017-08-15 二&nbsp;&nbsp;&nbsp;
+2017-08-15 Tue&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -474,7 +520,7 @@ Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/frontend-网页BackToTop返回顶部按钮的简单实现.html"><h1>网页 BacktoTop 返回顶部按钮的简单实现</h1></a>
 <span class="metadata">
-2017-06-30 五&nbsp;&nbsp;&nbsp;
+2017-06-30 Fri&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -520,7 +566,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2017/frontend-CSS伪类contenturl放图片如何改变图的大小.html"><h1>CSS伪类content: url放图片如何改变图的大小</h1></a>
 <span class="metadata">
-2017-02-21 二&nbsp;&nbsp;&nbsp;
+2017-02-21 Tue&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -561,7 +607,7 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2016/tools-InstallWiresharkonUbuntu.html"><h1>Install Wireshark on Ubuntu</h1></a>
 <span class="metadata">
-2016-07-08 五&nbsp;&nbsp;&nbsp;
+2016-07-08 Fri&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -599,7 +645,7 @@ sudo apt-get install …</pre></div></font></div> <a class="btn btn-info xsmall"
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2016/notes-法国的一些精油品牌.html"><h1>法国的一些著名的精油品牌</h1></a>
 <span class="metadata">
-2016-06-10 五&nbsp;&nbsp;&nbsp;
+2016-06-10 Fri&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -639,7 +685,7 @@ J.E Internatioanl (Florihana、Florial商标所有人)公司总部设立在法�
         <div class="content-title">
             <a href="https://jiang-hao.com/articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html"><h1>Install VMware Workstation in Ubuntu 14.04</h1></a>
 <span class="metadata">
-2016-04-21 四&nbsp;&nbsp;&nbsp;
+2016-04-21 Thu&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -675,46 +721,6 @@ linuxidc@localhost:~$ sudo apt-get upgrade
 <img alt="VMware Station Installation" src="http://www.linuxidc.com/upload/2015_01/150114174598326.jpg" /></p>
 
 <p></font></div></p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2016/backend-Shiro.html"><h1>Apache Shiro Multi-tenancy with JDBC MySQL</h1></a>
-<span class="metadata">
-2016-02-21 日&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/mysql.html">MySQL</a>,&nbsp;<a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;<a href="https://jiang-hao.com/tags/shiro.html">Shiro</a>,&nbsp;<a href="https://jiang-hao.com/tags/aaa.html">AAA</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary"><p><b>0. GOALS</b><hr>
-- Provide user authentication and authorization for <strong>multi-tenant</strong> scenarios     <br> <br />
-- Provide easy-to-maintain data storage with only <strong>one database</strong>    <br> <br />
-- Provide <strong>domain-differentiated, credential-based</strong> authentication    <br> <br />
-- Provide <strong>domain-differentiated, role-based, service-specific</strong> authorization;    <br>   </p>
-
-<p><p><br><br><br><b>1. QuickStart with Apache Shiro</b><hr>
-- <a href="http://shiro.apache.org/reference.html">English Documentation</a>    <br> <br />
-- <a href="http://jinnianshilongnian.iteye.com/blog/2018398">Chinese Documentation</a>    <br> <br />
-- <a href="https://github.com/zhangkaitao/shiro-example">Example Applications</a>    <br><br />
-- <a href="http://shiro.apache.org/architecture.html">Architecture:</a>    <br><br>  <br />
-  <img alt="Shiro Architecture" src="http://shiro.apache.org/assets/images/ShiroArchitecture.png" />  <br />
-  <br><br>    </p>
-  <p><br><b>2. Environment Prerequisites</b><hr></p></p>
-<div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41 …</pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/backend-Shiro.html">read more</a></div>
         <hr />
     </div>
 				
@@ -806,7 +812,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2019.&nbsp;All rights reserved.</p>
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
 </footer>
 
 </div> <!-- /container -->

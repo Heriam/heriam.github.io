@@ -56,6 +56,7 @@
                     <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
                     <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
                     <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
                     <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
                     <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
                 </ul>
@@ -86,7 +87,7 @@
         <div class="content-title">
             <h1>使用Pelican基于Github Pages搭建博客教程</h1>
 <span class="metadata">
-2018-02-05 一&nbsp;&nbsp;&nbsp;
+2018-02-05 Mon&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -139,21 +140,21 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 1.安装Python。最新的Mac OS 一般都自带Python环境。在终端输入"python"即可确认Python版本。如有需要可以到官网安装：http://www.python.org/。    <br>
 ​  <br>
 2.安装Pelican。可以从github克隆最新的代码安装, 并且建议在virtualenv下使用。首先建立 virtualenv（Python虚拟环境）:         </p>
-<div class="highlight"><pre><span></span>virtualenv pelican      # 创建
-cd pelican
-sh bin/activate            # 激活虚拟环境
+<div class="highlight"><pre><span></span><span class="err">virtualenv pelican      # 创建</span>
+<span class="err">cd pelican</span>
+<span class="err">sh bin/activate            # 激活虚拟环境</span>
 </pre></div>
 
 
 <p>从github克隆最新代码安装Pelican：      </p>
-<div class="highlight"><pre><span></span>git clone git://github.com/getpelican/pelican.git          # 下载代码
-cd pelican
-python setup.py install
+<div class="highlight"><pre><span></span><span class="err">git clone git://github.com/getpelican/pelican.git          # 下载代码</span>
+<span class="err">cd pelican</span>
+<span class="err">python setup.py install</span>
 </pre></div>
 
 
 <p>3.安装Markdown:        </p>
-<div class="highlight"><pre><span></span>pip install markdown
+<div class="highlight"><pre><span></span><span class="err">pip install markdown</span>
 </pre></div>
 
 
@@ -163,36 +164,36 @@ python setup.py install
 <p>接下来将通过初始化Pelican设置来生成一个基本的博客框架。   <br>
 ​   <br>
 1.搭建博客目录：     </p>
-<div class="highlight"><pre><span></span>mkdir blog
-cd blog
-pelican-quickstart
+<div class="highlight"><pre><span></span><span class="err">mkdir blog</span>
+<span class="err">cd blog</span>
+<span class="err">pelican-quickstart</span>
 </pre></div>
 
 
 <p>2.根据提示一步步输入相应的配置项，不知道如何设置的接受默认即可，后续可以通过编辑pelicanconf.py文件更改配置。完成后将会在根目录生成以下文件：     </p>
-<div class="highlight"><pre><span></span>.
-|-- content                # 所有文章放于此目录
-│   └── (pages)            # 存放手工创建的静态页面
-|-- develop_server.sh      # 用于开启测试服务器
-|-- Makefile               # 方便管理博客的Makefile
-|-- output                 # 静态生成文件
-|-- pelicanconf.py         # 配置文件
-|-- publishconf.py         # 配置文件
+<div class="highlight"><pre><span></span><span class="err">.</span>
+<span class="err">|-- content                # 所有文章放于此目录</span>
+<span class="err">│   └── (pages)            # 存放手工创建的静态页面</span>
+<span class="err">|-- develop_server.sh      # 用于开启测试服务器</span>
+<span class="err">|-- Makefile               # 方便管理博客的Makefile</span>
+<span class="err">|-- output                 # 静态生成文件</span>
+<span class="err">|-- pelicanconf.py         # 配置文件</span>
+<span class="err">|-- publishconf.py         # 配置文件</span>
 </pre></div>
 
 
 <p>3.进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意这里以及后文中的username要替换成自己的Github用户名：      </p>
-<div class="highlight"><pre><span></span>cd output
-git clone https://github.com/username/username.github.io.git
+<div class="highlight"><pre><span></span><span class="err">cd output</span>
+<span class="err">git clone https://github.com/username/username.github.io.git</span>
 </pre></div>
 
 
 <p>4.设置一键上传部署到Github。打开根目录下的Makefile文件，修改以下三个地方：     </p>
-<div class="highlight"><pre><span></span> <span class="nv">OUTPUTDIR</span><span class="o">=</span><span class="k">$(</span>BASEDIR<span class="k">)</span>/output/username.github.io    
- publish:    
- <span class="k">$(</span>PELICAN<span class="k">)</span> <span class="k">$(</span>INPUTDIR<span class="k">)</span> -o <span class="k">$(</span>OUTPUTDIR<span class="k">)</span> -s <span class="k">$(</span>CONFFILE<span class="k">)</span> <span class="k">$(</span>PELICANOPTS<span class="k">)</span>    
- github: publish    
- <span class="nb">cd</span> OUTPUTDIR <span class="p">;</span> git add . <span class="p">;</span>  git commit -am <span class="s1">&#39;your comments&#39;</span> <span class="p">;</span> git push    
+<div class="highlight"><pre><span></span><span class="err"> OUTPUTDIR=$(BASEDIR)/output/username.github.io    </span>
+<span class="err"> publish:    </span>
+<span class="err"> $(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)    </span>
+<span class="err"> github: publish    </span>
+<span class="err"> cd OUTPUTDIR ; git add . ;  git commit -am &#39;your comments&#39; ; git push    </span>
 </pre></div>
 
 
@@ -203,13 +204,13 @@ git clone https://github.com/username/username.github.io.git
 <p>Markdown是当下非常流行的一种文本编辑语法，支持HTML转换，书写博文排版也方便快捷。  <br>
 ​      </p>
 <p>1.写一篇文章：用<a href="http://pan.baidu.com/s/16soGY#path=%252F%25E9%25A9%25AC%25E5%2585%258B%25E9%25A3%259E%25E8%25B1%25A1%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF">马克飞象</a>编辑器用Markdown语法来写一篇文章保存为.md格式放在content目录下。写完后，执行以下命令，即可在本机http://127.0.0.1:8000看到效果。    </p>
-<div class="highlight"><pre><span></span>make publish
-make serve
+<div class="highlight"><pre><span></span><span class="err">make publish</span>
+<span class="err">make serve</span>
 </pre></div>
 
 
 <p>2.创建一个页面：这里以创建 About页面为例。在content目录创建pages子目录：    </p>
-<div class="highlight"><pre><span></span>mkdir content/pages
+<div class="highlight"><pre><span></span><span class="err">mkdir content/pages</span>
 </pre></div>
 
 
@@ -236,9 +237,9 @@ make serve
 <p>相关介绍请参见官方文档：http://pelican-zh.readthedocs.org/en/latest/zh-cn/ 。完成后同样可以在本机http://127.0.0.1:8000看效果。  <br>
 ​    <br>
 3.创建导航目录项：Menu Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：      </p>
-<div class="highlight"><pre><span></span>MENUITEMS = ((&quot;ITEM1&quot;,&quot;http://github.com&quot;),
-             (&quot;ITEM2&quot;,URL),
-            ......)
+<div class="highlight"><pre><span></span><span class="err">MENUITEMS = ((&quot;ITEM1&quot;,&quot;http://github.com&quot;),</span>
+<span class="err">             (&quot;ITEM2&quot;,URL),</span>
+<span class="err">            ......)</span>
 </pre></div>
 
 
@@ -246,14 +247,14 @@ make serve
 <p><strong>五、安装主题</strong>    </p>
 <hr>
 <p>这里以主题bootstrap2为例，同样还在blog目录下：     </p>
-<div class="highlight"><pre><span></span>git clone https://github.com/getpelican/pelican-themes.git
-cd pelican-themes
-pelican-themes -i bootstrap2
+<div class="highlight"><pre><span></span><span class="err">git clone https://github.com/getpelican/pelican-themes.git</span>
+<span class="err">cd pelican-themes</span>
+<span class="err">pelican-themes -i bootstrap2</span>
 </pre></div>
 
 
 <p>对应在在pelicanconf.py中添加主题选择条目：    </p>
-<div class="highlight"><pre><span></span>THEME = &#39;bootstrap2&#39;
+<div class="highlight"><pre><span></span><span class="err">THEME = &#39;bootstrap2&#39;</span>
 </pre></div>
 
 
@@ -261,7 +262,7 @@ pelican-themes -i bootstrap2
 <p><strong>六、安装第三方评论系统Disqus</strong>    </p>
 <hr>
 <p>在Disqus上申请一个站点，记住shortname。 在pelicanconf.py添加：     </p>
-<div class="highlight"><pre><span></span>DISQUS_SITENAME = Shortname
+<div class="highlight"><pre><span></span><span class="err">DISQUS_SITENAME = Shortname</span>
 </pre></div>
 
 
@@ -269,7 +270,7 @@ pelican-themes -i bootstrap2
 <p><strong>七、添加Google Analytics</strong>    </p>
 <hr>
 <p>去Google Analytics申请账号并通过验证，记下跟踪ID（Track ID）， 在pelicanconf.py添加：    </p>
-<div class="highlight"><pre><span></span>GOOGLE_ANALYTICS = &#39;跟踪ID&#39;
+<div class="highlight"><pre><span></span><span class="err">GOOGLE_ANALYTICS = &#39;跟踪ID&#39;</span>
 </pre></div>
 
 
@@ -281,27 +282,27 @@ pelican-themes -i bootstrap2
 1.在Google Webmasters上注册并通过验证。  <br>
 ​  <br>
 2.添加sitemap插件。还是到/blog目录下执行：    </p>
-<div class="highlight"><pre><span></span>cd ~/blog
-git clone git://github.com/getpelican/pelican-plugins.git
+<div class="highlight"><pre><span></span><span class="err">cd ~/blog</span>
+<span class="err">git clone git://github.com/getpelican/pelican-plugins.git</span>
 </pre></div>
 
 
 <p>*然后在pelicanconf.py里配置如下：    </p>
-<div class="highlight"><pre><span></span>PLUGIN_PATH = u&quot;pelican-plugins&quot;
-PLUGINS = [&quot;sitemap&quot;]
-SITEMAP = {
-    &quot;format&quot;: &quot;xml&quot;,
-    &quot;priorities&quot;: {
-        &quot;articles&quot;: 0.7,
-        &quot;indexes&quot;: 0.5,
-        &quot;pages&quot;: 0.3,
-    },
-    &quot;changefreqs&quot;: {
-        &quot;articles&quot;: &quot;monthly&quot;,
-        &quot;indexes&quot;: &quot;daily&quot;,
-        &quot;pages&quot;: &quot;monthly&quot;,
-    }
-}
+<div class="highlight"><pre><span></span><span class="err">PLUGIN_PATH = u&quot;pelican-plugins&quot;</span>
+<span class="err">PLUGINS = [&quot;sitemap&quot;]</span>
+<span class="err">SITEMAP = {</span>
+<span class="err">    &quot;format&quot;: &quot;xml&quot;,</span>
+<span class="err">    &quot;priorities&quot;: {</span>
+<span class="err">        &quot;articles&quot;: 0.7,</span>
+<span class="err">        &quot;indexes&quot;: 0.5,</span>
+<span class="err">        &quot;pages&quot;: 0.3,</span>
+<span class="err">    },</span>
+<span class="err">    &quot;changefreqs&quot;: {</span>
+<span class="err">        &quot;articles&quot;: &quot;monthly&quot;,</span>
+<span class="err">        &quot;indexes&quot;: &quot;daily&quot;,</span>
+<span class="err">        &quot;pages&quot;: &quot;monthly&quot;,</span>
+<span class="err">    }</span>
+<span class="err">}</span>
 </pre></div>
 
 
@@ -332,82 +333,82 @@ SITEMAP = {
 
 
 <p>2.创建search.html。之后，在output目录下，新建一个名为search.html的文件，写入下面的内容，其中需要你自己修改的是google站内搜索的ID号，需要自己在<a href="https://cse.google.com">google站内搜索</a>的网站上自己申请。     </p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;zh_CN&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;title&gt;</span>站内搜索<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-<span class="nt">&lt;style&gt;</span>
-#search-box {
-    position: relative;
-    width: 50%;
-    margin: 0;
-    padding: 1em;
-}
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">html</span><span class="w"> </span><span class="n">lang</span><span class="o">=</span><span class="ss">&quot;zh_CN&quot;</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="n">charset</span><span class="o">=</span><span class="ss">&quot;utf-8&quot;</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">站内搜索</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">style</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">#search</span><span class="o">-</span><span class="n">box</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">position</span><span class="err">:</span><span class="w"> </span><span class="k">relative</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">width</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="o">%</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">em</span><span class="p">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 
-#search-form {
-    height: 30px;
-    border: 1px solid #999;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    background-color: #fff;
-    overflow: hidden;
-}
+<span class="n">#search</span><span class="o">-</span><span class="n">form</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="nl">height</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="n">px</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">px</span><span class="w"> </span><span class="n">solid</span><span class="w"> </span><span class="n">#999</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="nl">radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="n">px</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">border</span><span class="o">-</span><span class="nl">radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="n">px</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">border</span><span class="o">-</span><span class="nl">radius</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="n">px</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">background</span><span class="o">-</span><span class="nl">color</span><span class="p">:</span><span class="w"> </span><span class="n">#fff</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">overflow</span><span class="p">:</span><span class="w"> </span><span class="n">hidden</span><span class="p">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 
-#search-text {
-    font-size: 14px;
-    color: #ddd;
-    border-width: 0;
-    background: transparent;
-}
+<span class="n">#search</span><span class="o">-</span><span class="nc">text</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">font</span><span class="o">-</span><span class="k">size</span><span class="err">:</span><span class="w"> </span><span class="mi">14</span><span class="n">px</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">color</span><span class="p">:</span><span class="w"> </span><span class="n">#ddd</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">border</span><span class="o">-</span><span class="nl">width</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">background</span><span class="p">:</span><span class="w"> </span><span class="n">transparent</span><span class="p">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 
-#search-box input[type=&quot;text&quot;] {
-    width: 90%;
-    padding: 4px 0 12px 1em;
-    color: #333;
-    outline: none;
-}
-<span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;search-box&#39;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&#39;/search.html&#39;</span> <span class="na">id=</span><span class="s">&#39;search-form&#39;</span> <span class="na">method=</span><span class="s">&#39;get&#39;</span> <span class="na">target=</span><span class="s">&#39;_top&#39;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&#39;search-text&#39;</span> <span class="na">name=</span><span class="s">&#39;q&#39;</span> <span class="na">placeholder=</span><span class="s">&#39;Search&#39;</span> <span class="na">type=</span><span class="s">&#39;text&#39;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/form&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;cse&quot;</span> <span class="na">style=</span><span class="s">&quot;width: 100%;&quot;</span><span class="nt">&gt;</span>Loading<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;http://www.google.com/jsapi&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span> 
-  google.load(&#39;search&#39;, &#39;1&#39;, {language : &#39;zh-CN&#39;, style : google.loader.themes.V2_DEFAULT});
-  google.setOnLoadCallback(function() {
-    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
-      &#39;012191777864628038963:**********<span class="cp">&lt;!写入你申请的google站内搜索的ID号&gt;</span>）&#39;, customSearchOptions);
-    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
-    var options = new google.search.DrawOptions();
-    options.enableSearchResultsOnly(); 
-    customSearchControl.draw(&#39;cse&#39;, options);
-    function parseParamsFromUrl() {
-      var params = {};
-      var parts = window.location.search.substr(1).split(&#39;\x26&#39;);
-      for (var i = 0; i <span class="nt">&lt; parts.length</span><span class="err">;</span> <span class="err">i++)</span> <span class="err">{</span>
-        <span class="err">var</span> <span class="na">keyValuePair =</span> <span class="s">parts[i].split(&#39;=&#39;);</span>
-        <span class="err">var</span> <span class="na">key =</span> <span class="s">decodeURIComponent(keyValuePair[0]);</span>
-        <span class="err">params[key]</span> <span class="err">=</span> <span class="err">keyValuePair[1]</span> <span class="err">?</span>
-            <span class="err">decodeURIComponent(keyValuePair[1].replace(/\+/g,</span> <span class="err">&#39;</span> <span class="err">&#39;))</span> <span class="err">:</span>
-            <span class="err">keyValuePair[1];</span>
-      <span class="err">}</span>
-      <span class="err">return</span> <span class="err">params;</span>
-    <span class="err">}</span>
+<span class="n">#search</span><span class="o">-</span><span class="n">box</span><span class="w"> </span><span class="k">input</span><span class="o">[</span><span class="n">type=&quot;text&quot;</span><span class="o">]</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="nl">width</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="o">%</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="n">px</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">12</span><span class="n">px</span><span class="w"> </span><span class="mi">1</span><span class="n">em</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">color</span><span class="p">:</span><span class="w"> </span><span class="n">#333</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nl">outline</span><span class="p">:</span><span class="w"> </span><span class="k">none</span><span class="p">;</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+<span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;search-box&#39;</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="o">&lt;</span><span class="n">form</span><span class="w"> </span><span class="k">action</span><span class="o">=</span><span class="s1">&#39;/search.html&#39;</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;search-form&#39;</span><span class="w"> </span><span class="k">method</span><span class="o">=</span><span class="s1">&#39;get&#39;</span><span class="w"> </span><span class="n">target</span><span class="o">=</span><span class="s1">&#39;_top&#39;</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="o">&lt;</span><span class="k">input</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;search-text&#39;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;q&#39;</span><span class="w"> </span><span class="n">placeholder</span><span class="o">=</span><span class="s1">&#39;Search&#39;</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="o">/&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;cse&quot;</span><span class="w"> </span><span class="n">style</span><span class="o">=</span><span class="ss">&quot;width: 100%;&quot;</span><span class="o">&gt;</span><span class="n">Loading</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">script</span><span class="w"> </span><span class="n">src</span><span class="o">=</span><span class="ss">&quot;http://www.google.com/jsapi&quot;</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="ss">&quot;text/javascript&quot;</span><span class="o">&gt;&lt;/</span><span class="n">script</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">script</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="ss">&quot;text/javascript&quot;</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="w">  </span><span class="n">google</span><span class="p">.</span><span class="k">load</span><span class="p">(</span><span class="s1">&#39;search&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">{</span><span class="k">language</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;zh-CN&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="err">:</span><span class="w"> </span><span class="n">google</span><span class="p">.</span><span class="n">loader</span><span class="p">.</span><span class="n">themes</span><span class="p">.</span><span class="n">V2_DEFAULT</span><span class="err">}</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">google</span><span class="p">.</span><span class="n">setOnLoadCallback</span><span class="p">(</span><span class="k">function</span><span class="p">()</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="nf">var</span><span class="w"> </span><span class="n">customSearchOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">;</span><span class="w">  </span><span class="nf">var</span><span class="w"> </span><span class="n">customSearchControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">google</span><span class="p">.</span><span class="k">search</span><span class="p">.</span><span class="n">CustomSearchControl</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s1">&#39;012191777864628038963:**********&lt;!写入你申请的google站内搜索的ID号&gt;）&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">customSearchOptions</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">customSearchControl</span><span class="p">.</span><span class="n">setResultSetSize</span><span class="p">(</span><span class="n">google</span><span class="p">.</span><span class="k">search</span><span class="p">.</span><span class="k">Search</span><span class="p">.</span><span class="n">FILTERED_CSE_RESULTSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nf">var</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">google</span><span class="p">.</span><span class="k">search</span><span class="p">.</span><span class="n">DrawOptions</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">options</span><span class="p">.</span><span class="n">enableSearchResultsOnly</span><span class="p">();</span><span class="w"> </span>
+<span class="w">    </span><span class="n">customSearchControl</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="s1">&#39;cse&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">parseParamsFromUrl</span><span class="p">()</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">      </span><span class="nf">var</span><span class="w"> </span><span class="n">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="nf">var</span><span class="w"> </span><span class="n">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">window</span><span class="p">.</span><span class="n">location</span><span class="p">.</span><span class="k">search</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\x26&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nf">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">parts</span><span class="p">.</span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="nf">var</span><span class="w"> </span><span class="n">keyValuePair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parts</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nf">var</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeURIComponent</span><span class="p">(</span><span class="n">keyValuePair</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">params</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyValuePair</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"> </span><span class="vm">?</span><span class="w"></span>
+<span class="w">            </span><span class="n">decodeURIComponent</span><span class="p">(</span><span class="n">keyValuePair</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="o">/</span><span class="err">\</span><span class="o">+/</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">))</span><span class="w"> </span><span class="err">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">keyValuePair</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="err">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">params</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
 
-    <span class="err">var</span> <span class="na">urlParams =</span> <span class="s">parseParamsFromUrl();</span>
-    <span class="err">var</span> <span class="na">queryParamName =</span> <span class="s">&quot;q&quot;</span><span class="err">;</span>
-    <span class="err">if</span> <span class="err">(urlParams[queryParamName])</span> <span class="err">{</span>
-      <span class="err">customSearchControl.execute(urlParams[queryParamName]);</span>
-    <span class="err">}</span>
-  <span class="err">},</span> <span class="err">true);</span>
-<span class="err">&lt;/script</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<span class="w">    </span><span class="nf">var</span><span class="w"> </span><span class="n">urlParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parseParamsFromUrl</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="nf">var</span><span class="w"> </span><span class="n">queryParamName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;q&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">urlParams</span><span class="o">[</span><span class="n">queryParamName</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">customSearchControl</span><span class="p">.</span><span class="k">execute</span><span class="p">(</span><span class="n">urlParams</span><span class="o">[</span><span class="n">queryParamName</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="w">  </span><span class="err">}</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">);</span><span class="w"></span>
+<span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span><span class="w"></span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span><span class="w"></span>
 </pre></div>
 
 
@@ -475,9 +476,9 @@ SITEMAP = {
 <p><strong>十二、拷贝静态文件</strong>    </p>
 <hr>
 <p>如果我们定义静态的文件，该如何将它在每次生成的时候拷贝到 output 目录呢，我们以网站logo图片sitelogo.ico为例，在我们的 content/extra 下放置网站的静态资源文件：sitelogo.ico，在pelicanconf.py更改或添加 FILES_TO_COPY项：    </p>
-<div class="highlight"><pre><span></span>FILES_TO_COPY = (
-    (&quot;extra/sitelogo.ico&quot;, &quot;sitelogo.ico&quot;),
-)
+<div class="highlight"><pre><span></span><span class="err">FILES_TO_COPY = (</span>
+<span class="err">    (&quot;extra/sitelogo.ico&quot;, &quot;sitelogo.ico&quot;),</span>
+<span class="err">)</span>
 </pre></div>
 
 
@@ -486,25 +487,25 @@ SITEMAP = {
 <p><strong>十三、资源目录管理</strong>    </p>
 <hr>
 <p>使用目录名作为文章的分类名    </p>
-<div class="highlight"><pre><span></span>USE_FOLDER_AS_CATEGORY = True
+<div class="highlight"><pre><span></span><span class="err">USE_FOLDER_AS_CATEGORY = True</span>
 </pre></div>
 
 
 <p>使用文件名作为文章或页面的<code>slug（url）</code>    </p>
-<div class="highlight"><pre><span></span>FILENAME_METADATA = &#39;(?P&lt;slug&gt;.*)&#39;
+<div class="highlight"><pre><span></span><span class="err">FILENAME_METADATA = &#39;(?P&lt;slug&gt;.*)&#39;</span>
 </pre></div>
 
 
 <p>页面的显示路径和保存路径，推荐下面的方式     </p>
-<div class="highlight"><pre><span></span>ARTICLE_URL = &#39;{category}/{slug}.html&#39;
-ARTICLE_SAVE_AS = ARTICLE_URL
-PAGE_URL = &#39;{slug}.html&#39;
-PAGE_SAVE_AS = PAGE_URL
-CATEGORY_URL = &#39;{slug}/index.html&#39;
-CATEGORY_SAVE_AS = CATEGORY_URL
-TAG_URL = &#39;tag/{slug}.html&#39;
-TAG_SAVE_AS = TAG_URL
-TAGS_SAVE_AS = &#39;tag/index.html&#39;
+<div class="highlight"><pre><span></span><span class="err">ARTICLE_URL = &#39;{category}/{slug}.html&#39;</span>
+<span class="err">ARTICLE_SAVE_AS = ARTICLE_URL</span>
+<span class="err">PAGE_URL = &#39;{slug}.html&#39;</span>
+<span class="err">PAGE_SAVE_AS = PAGE_URL</span>
+<span class="err">CATEGORY_URL = &#39;{slug}/index.html&#39;</span>
+<span class="err">CATEGORY_SAVE_AS = CATEGORY_URL</span>
+<span class="err">TAG_URL = &#39;tag/{slug}.html&#39;</span>
+<span class="err">TAG_SAVE_AS = TAG_URL</span>
+<span class="err">TAGS_SAVE_AS = &#39;tag/index.html&#39;</span>
 </pre></div>
 
 
@@ -521,10 +522,10 @@ TAGS_SAVE_AS = &#39;tag/index.html&#39;
 ​   <br>
 ​    <br>
 根据上面很容易推断如何将一篇文章设置为网站的主页，如下代码即可实现将 <code>content/pages/home.md</code>设为主页：     </p>
-<div class="highlight"><pre><span></span>Title: [www.yanyulin.info](http://www.yanyulin.info)
-Date: 2014-01-08
-URL:
-save_as: index.html
+<div class="highlight"><pre><span></span><span class="c">Title: [www.yanyulin.info](http://www.yanyulin.info)</span>
+<span class="c">Date: 2014-01-08</span>
+<span class="c">URL:</span>
+<span class="c">save_as: index.html</span>
 </pre></div>
 
 
@@ -535,13 +536,13 @@ save_as: index.html
 <hr>
 <p>Godaddy上购买专属域名，用dnspod进行动态域名解析，步骤如下:    </p>
 <p>步骤1：修改Godaddy中的NameServers的两个地址为dnspod的DNS地址：    </p>
-<div class="highlight"><pre><span></span>f1g1ns1.dnspod.net
-f1g1ns2.dnspod.net
+<div class="highlight"><pre><span></span><span class="err">f1g1ns1.dnspod.net</span>
+<span class="err">f1g1ns2.dnspod.net</span>
 </pre></div>
 
 
 <p>步骤2：在Dnspod中添加一条A记录，指向Github URL      </p>
-<div class="highlight"><pre><span></span>username.github.io
+<div class="highlight"><pre><span></span><span class="err">username.github.io</span>
 </pre></div>
 
 
@@ -553,25 +554,25 @@ f1g1ns2.dnspod.net
 <p><strong>十六、相关文章、上下文导航</strong>    </p>
 <hr>
 <p>1.打开pelicanconf.py，定义插件目录和启用插件：     </p>
-<div class="highlight"><pre><span></span>#加载plugins
-PLUGIN_PATH = &quot;plugins&quot;
-PLUGINS = [&quot;sitemap&quot;,&quot;neighbors&quot;,&quot;related_posts&quot;]
-#sitemap
-SITEMAP = {
-    &#39;format&#39;: &#39;xml&#39;,
-    &#39;priorities&#39;: {
-        &#39;articles&#39;: 0.7,
-        &#39;indexes&#39;: 0.8,
-        &#39;pages&#39;: 0.5
-    },
-    &#39;changefreqs&#39;: {
-        &#39;articles&#39;: &#39;monthly&#39;,
-        &#39;indexes&#39;: &#39;daily&#39;,
-        &#39;pages&#39;: &#39;monthly&#39;
-    }
-}
-#相关文章
-RELATED_POSTS_MAX = 10
+<div class="highlight"><pre><span></span><span class="err">#加载plugins</span>
+<span class="err">PLUGIN_PATH = &quot;plugins&quot;</span>
+<span class="err">PLUGINS = [&quot;sitemap&quot;,&quot;neighbors&quot;,&quot;related_posts&quot;]</span>
+<span class="err">#sitemap</span>
+<span class="err">SITEMAP = {</span>
+<span class="err">    &#39;format&#39;: &#39;xml&#39;,</span>
+<span class="err">    &#39;priorities&#39;: {</span>
+<span class="err">        &#39;articles&#39;: 0.7,</span>
+<span class="err">        &#39;indexes&#39;: 0.8,</span>
+<span class="err">        &#39;pages&#39;: 0.5</span>
+<span class="err">    },</span>
+<span class="err">    &#39;changefreqs&#39;: {</span>
+<span class="err">        &#39;articles&#39;: &#39;monthly&#39;,</span>
+<span class="err">        &#39;indexes&#39;: &#39;daily&#39;,</span>
+<span class="err">        &#39;pages&#39;: &#39;monthly&#39;</span>
+<span class="err">    }</span>
+<span class="err">}</span>
+<span class="err">#相关文章</span>
+<span class="err">RELATED_POSTS_MAX = 10</span>
 </pre></div>
 
 
@@ -708,7 +709,7 @@ RELATED_POSTS_MAX = 10
     </div>     </div> 
 <footer>
 <br />
-<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2019.&nbsp;All rights reserved.</p>
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
 </footer>
 
 </div> <!-- /container -->

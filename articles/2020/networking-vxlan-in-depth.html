@@ -164,9 +164,7 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
 <h3 id="_2">定义</h3>
 <p>在介绍完VxLAN要解决的问题也就是技术背景之后，接下来正式阐述一下VxLAN的定义，也就是它到底是什么。</p>
 <p>VXLAN 全称是 <code>Virtual eXtensible Local Area Network</code>，虚拟可扩展的局域网。它是一种 Overlay 技术，采用L2 over L4（MAC-in-UDP）封装方式，是NVO3（Network Virtualization over Layer 3）中的一种网络虚拟化技术，将二层报文用三层协议进行封装，可实现虚拟的二层网络在三层范围内进行扩展，同时满足数据中心大二层虚拟迁移和多租户的需求。RFC7348上的介绍是这样的：</p>
-<blockquote>
 <p><em>A framework for overlaying virtualized layer 2 networks over lay 3 networks.</em></p>
-</blockquote>
 <h3 id="_3">意义</h3>
 <p>针对大二层网络，VxLAN技术的出现很好的解决了云计算时代背景下数据中心在物理网络基础设施上实施服务器虚拟化的隔离和可扩展性问题：</p>
 <ul>
@@ -292,6 +290,7 @@ interface Nve1   //创建逻辑接口NVE 1
 <ol>
 <li><a href="https://cizixs.com/2017/09/25/vxlan-protocol-introduction/">vxlan 协议原理简介</a></li>
 <li><a href="https://forum.huawei.com/enterprise/zh/thread-334207.html">华为悦读汇技术发烧友：认识VXLAN</a></li>
+<li><a href="https://doc01.homedo.com/Files/Documents/PreparationAttachment/%E5%8D%8E%E4%B8%BA/100112539/%E5%8D%8E%E4%B8%BACloudEngine%2012800%E4%BA%A4%E6%8D%A2%E6%9C%BAVXLAN%E6%8A%80%E6%9C%AF%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf">华为VxLAN技术白皮书</a></li>
 </ol></div>
 	
         <hr />

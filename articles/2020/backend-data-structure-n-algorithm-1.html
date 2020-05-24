@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 数据结构与算法——复杂度分析</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin Time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="OGeiccsh1O" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+    <script src="https://jiang-hao.com/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="https://jiang-hao.com/theme/tipuesearch/tipuesearch.css">
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="https://jiang-hao.com/theme/bootstrap-collapse.js"></script>
+
+    <!-- Le styles -->
+    <link href="https://jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="dropdown-jh"><a>Categories</a>
+                <ul class="dropdown-content-jh">
+                    <li><a href="https://jiang-hao.com/categories/backend.html">Backend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
+                    <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
+                    <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
+                    <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
+                    <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            <li><a href="/pages/aboutme">AboutMe</a></li>
+            
+        </ul>
+
+        <form class="navbar-search pull-right" action="https://jiang-hao.com/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
+        </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>数据结构与算法——复杂度分析</h1>
+<span class="metadata">
+2020-05-24 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span>        </div>
+
+		<hr />
+
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
+<li><a href="#_1">概述</a></li>
+<li><a href="#_2">时间复杂度分析</a><ul>
+<li><a href="#o">大 O 复杂度表示法</a></li>
+<li><a href="#_3">时间复杂度分析</a></li>
+<li><a href="#_4">几种常见时间复杂度实例分析</a></li>
+</ul>
+</li>
+<li><a href="#_5">空间复杂度分析</a></li>
+<li><a href="#_6">内容小结</a></li>
+</ul>
+</div>
+			</nav>
+
+			<hr />
+
+
+        <div>
+<h2 id="_1">概述</h2>
+<p>从广义上讲，数据结构就是指一组数据的存储结构。算法就是操作数据的一组方法。</p>
+<p>数据结构和算法是相辅相成的。数据结构是为算法服务的，算法要作用在特定的数据结构之上。比如，因为数组具有随机访问的特点，常用的二分查找算法需要用数组来存储数据。但如果我们选择链表这种数据结构，二分查找算法就无法工作了，因为链表并不支持随机访问。</p>
+<p>想要学习数据结构与算法，首先要掌握一个数据结构与算法中最重要的概念——复杂度分析。它几乎占了数据结构和算法这门课的半壁江山，是数据结构和算法学习的精髓。</p>
+<p>数据结构和算法解决的是如何更省、更快地存储和处理数据的问题，因此，我们就需要一个考量效率和资源消耗的方法，这就是复杂度分析方法。</p>
+<p>下图几乎涵盖了所有数据结构和算法书籍中都会讲到的知识点：</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/91/a7/913e0ababe43a2d57267df5c5f0832a7.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/e913ce75-a9af-4ac1-a7ce-b5d531ee9b0f"/></p>
+<p>但是，作为初学者，或者一个非算法工程师来说，并不需要掌握图里面的所有知识点。下面总结了 20 个最常用的、最基础数据结构与算法，不管是应付面试还是工作需要，其实只要集中精力逐一攻克这 20 个知识点就足够了：</p>
+<ul>
+<li>
+<p>10 个数据结构：<strong>数组、链表、栈、队列、散列表、二叉树、堆、跳表、图、Trie 树</strong>；</p>
+</li>
+<li>
+<p>10 个算法：<strong>递归、排序、二分查找、搜索、哈希算法、贪心算法、分治算法、回溯算法、动态规划、字符串匹配算法</strong>；</p>
+</li>
+</ul>
+<p>在学习数据结构和算法的过程中，也要注意，不要只是死记硬背，不要为了学习而学习，而是要学习它的“来历”“自身的特点”“适合解决的问题”以及“实际的应用场景”。</p>
+<h2 id="_2">时间复杂度分析</h2>
+<p>数据结构和算法本身解决的是“快”和“省”的问题，即如何让代码运行得更快，如何让代码更省存储空间。所以，执行效率是算法一个非常重要的考量指标。那如何来衡量你编写的算法代码的执行效率呢？这里就要用到我们今天要讲的内容：时间、空间复杂度分析。</p>
+<h3 id="o">大 O 复杂度表示法</h3>
+<p>关键结论：</p>
+<p><strong>假设每行代码执行的时间都一样，为 $unitTime$，则所有代码的执行时间 T(n) 与每行代码的执行次数成正比。</strong></p>
+<p>我们可以把这个规律总结成一个公式：</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/22/ef/22900968aa2b190072c985a08b0e92ef.png';this.onerror=null" src="https://heriam.coding.net/api/share/download/dea817f7-9e3e-471a-8c8a-f9ebc225f226"/></p>
+<p>其中，T(n) 我们已经讲过了，它表示代码执行的时间；n 表示数据规模的大小；f(n) 表示每行代码执行的次数总和。因为这是一个公式，所以用 f(n) 来表示。公式中的 O，表示代码的执行时间 T(n) 与 f(n) 表达式成正比。</p>
+<p>按照这个分析思路，我们再来看这段代码。</p>
+<div class="highlight"><pre><span></span> <span class="kt">int</span> <span class="nf">cal</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="k">for</span> <span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+     <span class="k">for</span> <span class="p">(;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+       <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span>  <span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">;</span>
+     <span class="p">}</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+</pre></div>
+<p>第 2、3、4 行代码，每行都需要 1 个 $unit Time$ 的执行时间，第 5、6 行代码循环执行了 $n$ 遍，需要$ 2n * unitTime$ 的执行时间，第 7、8 行代码循环执行了 $n^2$遍，所以需要 $2n^2* unitTime$ 的执行时间。所以，整段代码总的执行时间 $T(n) = O(2n^2+2n+3)$。</p>
+<p>大 O 时间复杂度实际上并不具体表示代码真正的执行时间，而是<strong>表示代码执行时间随数据规模增长的变化趋势</strong>，所以，也叫作渐进时间复杂度（asymptotic time complexity），简称时间复杂度。</p>
+<p>当 n 很大时，你可以把它想象成 10000、100000。而公式中的<strong>低阶、常量、系数三部分并不左右增长趋势，所以都可以忽略。我们只需要记录一个最大量级就可以</strong>了，如果用大 O 表示法表示刚讲的那段代码的时间复杂度，就可以记为：$T(n) = O(n^2)$。</p>
+<h3 id="_3">时间复杂度分析</h3>
+<p>如何分析一段代码的时间复杂度？我们有三个比较实用的方法。</p>
+<p><strong>只关注循环执行次数最多的一段代码</strong></p>
+<p>大 O 这种复杂度表示方法只是表示一种变化趋势。我们通常会忽略掉公式中的常量、低阶、系数，只需要记录一个最大阶的量级就可以了。所以，我们在分析一个算法、一段代码的时间复杂度的时候，也只关注循环执行次数最多的那一段代码就可以了。这段核心代码执行次数的 n 的量级，就是整段要分析代码的时间复杂度。</p>
+<p>这里我要再强调一下，即便某段代码循环 10000 次、100000 次，只要是一个已知的数，跟 n 无关，照样也是常量级的执行时间。当 n 无限大的时候，就可以忽略。尽管对代码的执行时间会有很大影响，但是回到时间复杂度的概念来说，它表示的是一个算法执行效率与数据规模增长的变化趋势，所以不管常量的执行时间多大，我们都可以忽略掉。因为它本身对增长趋势并没有影响。</p>
+<p><strong>多段同级代码的总复杂度等于量级最大的那段代码的复杂度</strong></p>
+<p>抽象成公式就是：
+$$
+如果 T_1(n)=O(f(n))，T_2(n)=O(g(n))；那么 T(n)=max(O(f(n)), O(g(n))) =O(max(f(n), g(n))).
+$$
+<strong>多个嵌套循环代码的复杂度等于嵌套内外代码复杂度的乘积</strong></p>
+<p>抽象成公式就是：
+$$
+如果 T_1(n)=O(f(n))，T_2(n)=O(g(n))；那么 T(n)=T_1(n)<em>T_2(n)=O(f(n))</em>O(g(n))=O(f(n)*g(n)).
+$$
+举个例子：</p>
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">cal</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="k">for</span> <span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+   <span class="p">}</span> 
+<span class="p">}</span> 
+
+<span class="kt">int</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+  <span class="p">}</span> 
+  <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>我们单独看 $cal()$ 函数。假设 $f()$ 只是一个普通$O(1)$的操作，那第 4～6 行的时间复杂度就是，$T_1(n) = O(n)$。但 $f()$ 函数本身不是一个简单的操作，它的时间复杂度是 $T_2(n) = O(n)$，所以，整个 $cal()$ 函数的时间复杂度就是，$T(n) = T_1(n) * T_2(n) = O(n*n) = O(n^2)$。</p>
+<h3 id="_4">几种常见时间复杂度实例分析</h3>
+<p>虽然代码千差万别，但是常见的复杂度量级并不多。我稍微总结了一下，这些复杂度量级几乎涵盖了你今后可以接触的所有代码的复杂度量级。</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/37/0a/3723793cc5c810e9d5b06bc95325bf0a.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/17713a86-5d52-47f9-9684-ec1575b2741f"/></p>
+<p>对于以上罗列的复杂度量级，我们可以粗略地分为两类，多项式量级和非多项式量级。其中，非多项式量级只有两个：$O(2^n)$ 和 $O(n!)$。</p>
+<p>我们把时间复杂度为非多项式量级的算法问题叫作 NP（Non-Deterministic Polynomial，非确定多项式）问题。</p>
+<p>当数据规模 n 越来越大时，非多项式量级算法的执行时间会急剧增加，求解问题的执行时间会无限增长。所以，非多项式时间复杂度的算法其实是非常低效的算法。因此，关于 NP 时间复杂度我们就不展开讲了。我们主要来看几种常见的多项式时间复杂度。</p>
+<p><strong>O(1)</strong></p>
+<p>首先必须明确一个概念，O(1) 只是常量级时间复杂度的一种表示方法，并不是指只执行了一行代码。比如这段代码，即便有 3 行，它的时间复杂度也是 O(1），而不是 O(3)。</p>
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span> 
+<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> 
+<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+</pre></div>
+<p>总结一下，只要代码的执行时间不随 n 的增大而增长，这样代码的时间复杂度我们都记作 O(1)。或者说，一般情况下，只要算法中不存在循环语句、递归语句，即使有成千上万行的代码，其时间复杂度也是Ο(1)。</p>
+<p><strong>O(logn)、O(nlogn)</strong></p>
+<p>对数阶时间复杂度非常常见，同时也是最难分析的一种时间复杂度。我们通过一个例子来说明一下。</p>
+<div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> 
+<span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> 
+<span class="p">}</span>
+</pre></div>
+<p>根据我们前面讲的复杂度分析方法，第三行代码是循环执行次数最多的。所以，我们只要能计算出这行代码被执行了多少次，就能知道整段代码的时间复杂度。</p>
+<p>从代码中可以看出，变量 i 的值从 1 开始取，每循环一次就乘以 2。当大于 n 时，循环结束。还记得我们高中学过的等比数列吗？实际上，变量 i 的取值就是一个等比数列。如果我把它一个一个列出来，就应该是这个样子的：</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/9b/9a/9b1c88264e7a1a20b5954be9bc4bec9a.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/4692f24c-cc9e-4d36-9911-c97e8fc6d49e"/></p>
+<p>所以，我们只要知道 x 值是多少，就知道这行代码执行的次数了。通过 $2^x=n$ 求解 x 这个问题我们想高中应该就学过了，我就不多说了。$x=log_2n$，所以，这段代码的时间复杂度就是 $O(log_2n)$。</p>
+<p>现在，我把代码稍微改下，你再看看，这段代码的时间复杂度是多少？</p>
+<div class="highlight"><pre><span></span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> 
+ <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span><span class="p">;</span> 
+ <span class="p">}</span>
+</pre></div>
+<p>根据我刚刚讲的思路，很简单就能看出来，这段代码的时间复杂度为 $O(log_3n)$。</p>
+<p>实际上，不管是以 2 为底、以 3 为底，还是以 10 为底，我们可以把所有对数阶的时间复杂度都记为 $O(logn)$。为什么呢？</p>
+<p>我们知道，对数之间是可以互相转换的，$log_3n$ 就等于 $log_32 * log_2n$，所以 $O(log_3n) = O(C * log_2n)$，其中 $C=log_32$ 是一个常量。基于我们前面的一个理论：在采用大 O 标记复杂度的时候，可以忽略系数，即 $O(Cf(n)) = O(f(n))$。所以，$O(log_2n)$ 就等于 $O(log_3n)$。因此，在对数阶时间复杂度的表示方法里，我们忽略对数的“底”，统一表示为 $O(logn)$。</p>
+<p>如果你理解了我前面讲的 $O(logn)$，那 $O(nlogn)$ 就很容易理解了。还记得我们刚讲的乘法法则吗？如果一段代码的时间复杂度是 $O(logn)$，我们循环执行 n 遍，时间复杂度就是 $O(nlogn)$ 了。而且，$O(nlogn)$ 也是一种非常常见的算法时间复杂度。比如，归并排序、快速排序的时间复杂度都是 $O(nlogn)$。</p>
+<p><strong>O(m+n)、O(m*n)</strong></p>
+<p>再来讲一种跟前面都不一样的时间复杂度，代码的复杂度由两个数据的规模来决定。</p>
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">cal</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">sum_1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum_1</span> <span class="o">=</span> <span class="n">sum_1</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">int</span> <span class="n">sum_2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sum_2</span> <span class="o">=</span> <span class="n">sum_2</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">sum_1</span> <span class="o">+</span> <span class="n">sum_2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>从代码中可以看出，m 和 n 是表示两个数据规模。我们无法事先评估 m 和 n 谁的量级大，所以我们在表示复杂度的时候，就不能简单地利用加法法则，省略掉其中一个。所以，上面代码的时间复杂度就是 O(m+n)。</p>
+<p>针对这种情况，原来的法则就不正确了，我们需要将规则改为：$T_1(m) + T_2(n) = O(f(m) + g(n))$。但是对于嵌套循环来说的乘法法则继续有效：$T_1(m)*T_2(n) = O(f(m) * f(n))$。</p>
+<h2 id="_5">空间复杂度分析</h2>
+<p>前面我讲过，时间复杂度的全称是渐进时间复杂度，表示算法的执行时间与数据规模之间的增长关系。类比一下，空间复杂度全称就是渐进空间复杂度（asymptotic space complexity），表示算法的存储空间与数据规模之间的增长关系。看下面的例子：</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span><span class="p">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">print</span> <span class="n">out</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>跟时间复杂度分析一样，我们可以看到，第 2 行代码中，我们申请了一个空间存储变量 i，但是它是常量阶的，跟数据规模 n 没有关系，所以我们可以忽略。第 3 行申请了一个大小为 n 的 int 类型数组，除此之外，剩下的代码都没有占用更多的空间，所以整段代码的空间复杂度就是 O(n)。</p>
+<p>我们常见的空间复杂度就是 O(1)、O(n)、O(n2)，像 O(logn)、O(nlogn) 这样的对数阶复杂度平时都用不到。而且，空间复杂度分析比时间复杂度分析要简单很多。所以，对于空间复杂度，掌握以上述的这些内容已经足够了。</p>
+<h2 id="_6">内容小结</h2>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/49/04/497a3f120b7debee07dc0d03984faf04.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/0bd85493-805c-4360-b174-ce4d64235b63"/></p>
+<p><strong>什么是复杂度分析？</strong></p>
+<ol>
+<li>数据结构和算法解决是“如何让计算机更快时间、更省空间的解决问题”。</li>
+<li>因此需从执行时间和占用空间两个维度来评估数据结构和算法的性能。</li>
+<li>分别用时间复杂度和空间复杂度两个概念来描述性能问题，二者统称为复杂度。</li>
+<li>复杂度描述的是算法执行时间（或占用空间）与数据规模的增长关系。</li>
+</ol>
+<p><strong>为什么要进行复杂度分析？</strong></p>
+<ol>
+<li>和性能测试相比，复杂度分析有不依赖执行环境、成本低、效率高、易操作、指导性强的特点。</li>
+<li>掌握复杂度分析，将能编写出性能更优的代码，有利于降低系统开发和维护成本。</li>
+</ol>
+<p><strong>如何进行复杂度分析？</strong></p>
+<ol>
+<li>大O表示法</li>
+</ol>
+<p>算法的执行时间与每行代码的执行次数成正比，用T(n) = O(f(n))表示，其中T(n)表示算法执行总时间，f(n)表示每行代码执行总次数，而n往往表示数据的规模。以时间复杂度为例，由于时间复杂度描述的是算法执行时间与数据规模的增长变化趋势，所以常量阶、低阶以及系数实际上对这种增长趋势不产决定性影响，所以在做时间复杂度分析时忽略这些项。</p>
+<ol>
+<li>复杂度分析法则
+   1）单段代码看高频：比如循环。
+   2）多段代码取最大：比如一段代码中有单循环和多重循环，那么取多重循环的复杂度。
+   3）嵌套代码求乘积：比如递归、多重循环等
+   4）多个规模求加法：比如方法有两个参数控制两个循环的次数，那么这时就取二者复杂度相加。</li>
+</ol>
+<p><strong>常用的复杂度级别</strong>？</p>
+<ol>
+<li>多项式阶：随着数据规模的增长，算法的执行时间和空间占用，按照多项式的比例增长。包括，</li>
+</ol>
+<p>$$
+   O(1)（常数阶）、O(logn)（对数阶）、O(n)（线性阶）、O(nlogn)（线性对数阶）、O(n^2)（平方阶）、O(n^3)（立方阶）
+   $$</p>
+<ol>
+<li>非多项式阶：随着数据规模的增长，算法的执行时间和空间占用暴增，这类算法性能极差。包括，
+   $$
+   O(2^n)（指数阶）、O(n!)（阶乘阶）
+   $$</li>
+</ol>
+<p><strong>性能测试和复杂度分析的关系？</strong></p>
+<p>有人说，我们项目之前都会进行性能测试，再做代码的时间复杂度、空间复杂度分析，是不是多此一举呢？而且，每段代码都分析一下时间复杂度、空间复杂度，是不是很浪费时间呢？事实上，渐进时间，空间复杂度分析为我们提供了一个很好的理论分析的方向，并且它是宿主平台无关的，能够让我们对我们的程序或算法有一个大致的认识，让我们知道，比如在最坏的情况下程序的执行效率如何，同时也为我们交流提供了一个不错的桥梁，我们可以说，算法1的时间复杂度是O(n)，算法2的时间复杂度是O(logN)，这样我们立刻就对不同的算法有了一个“效率”上的感性认识。</p>
+<p>当然，渐进式时间，空间复杂度分析只是一个理论模型，只能提供给粗略的估计分析，我们不能直接断定就觉得O(logN)的算法一定优于O(n), 针对不同的宿主环境，不同的数据集，不同的数据量的大小，在实际应用上面可能真正的性能会不同.针对不同的实际情况，进而进行一定的性能基准测试也是很有必要的，比如在统一在某一批型号手机上(同样的硬件，系统等等)进行横向基准测试，进而选择适合特定应用场景下的最优算法。</p>
+<p>综上所述，渐进式时间，空间复杂度分析与性能基准测试并不冲突，而是相辅相成的，但是一个低阶的时间复杂度程序有极大的可能性会优于一个高阶的时间复杂度程序，所以在实际编程中，时刻关心理论时间，空间度模型是有助于产出效率高的程序的，同时，因为渐进式时间，空间复杂度分析只是提供一个粗略的分析模型，因此也不会浪费太多时间，重点在于在编程时，要具有这种复杂度分析的思维。</p></div>
+	
+        <hr />
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+    			<div style="width:80%; margin:0 auto;">
+                    <div style="text-align: center;">
+						<a href="/" class="profilepic">
+                            <img src="https://i.loli.net/2019/10/31/TRSQt7aKkx6DdBA.png" οnerrοr="this.onerror=null;this.src='https://raw.githubusercontent.com/Heriam/images/master/portrait/photo-zzz.png';" alt="photo-zzz.png" title="photo-zzz.png" />
+						</a>
+						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
+						<p class="motto">We only live once, and time just goes by.</p>
+						<ul class="biography">
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+
+					<hr>
+
+						<div class="tooltip">
+							<span class="tooltiptext">Facebook</span>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Facebook.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">微博</span>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/微博.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Linkedin</span>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Linkedin.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Github</span>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Github.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Email</span>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Email.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Instagram</span>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Instagram.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">ResearchGate</span>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">知乎</span>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/知乎.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">OSChina</span>
+							<a href="https://my.oschina.net/heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/OSChina.svg) center no-repeat"></a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+<!--            <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8958123988900703"
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
+</footer>
+
+</div> <!-- /container -->
+<script>var _gaq=[['_setAccount','UA-137721527-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<script>
+    function validateForm(query)
+    {
+        return (query.length > 0);
+    }
+</script>
+<meting-js
+    server="netease"
+    type="playlist"
+    id="43561591"
+    fixed="true"
+    order="list"
+    volume="1.0"
+    list-folded="true"
+    >
+</meting-js>
+</body>
+</html>

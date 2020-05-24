@@ -91,6 +91,46 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2019/backend-AJavaTFTPServer.html"><h1>A Java TFTP Server</h1></a>
+<span class="metadata">
+2019-04-09 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;<a href="https://jiang-hao.com/tags/tftp.html">TFTP</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="_1">简介</h3>
+<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
+<p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
+<p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
+<p>要停止，请使用shutdown方法。</p>
+<p>要检查服务器是否仍在运行（或者由于错误而停止），请调用isRunning方法。</p>
+<p>默认情况下，事件不会记录到stdout/stderr。可以使用setLog和setLogError方法更改此设置。</p>
+<p>示例用法如下：</p>
+<div class="highlight"><pre><span></span> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
+  <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">{</span>
+          <span class="n">System</span><span class="p">.</span><span class="na">out</span>
+                  <span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"You must provide 1 argument - the …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-AJavaTFTPServer.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2019/backend-Java代码优化35点总结.html"><h1>Java代码优化35点总结</h1></a>
 <span class="metadata">
 2019-04-02 Tue&nbsp;&nbsp;&nbsp;
@@ -663,55 +703,6 @@ Category: <a href="https://jiang-hao.com/categories/notes.html">Notes</a>&nbsp;&
 <br>  <br />
 <strong>公司：</strong>  <br />
 J.E Internatioanl (Florihana、Florial商标所有人)公司总部设立在法国的南部，于国家级自然保护区内的科斯高山（Caussols plateau）上。创办人MR. Durante Alain …</p></font></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/notes-法国的一些精油品牌.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html"><h1>Install VMware Workstation in Ubuntu 14.04</h1></a>
-<span class="metadata">
-2016-04-21 Thu&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/vmware.html">VMware</a>,&nbsp;<a href="https://jiang-hao.com/tags/ubuntu.html">Ubuntu</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary"><div><font face="Times New Roman"><p><br>
-1. Use <code>apt-get</code>  update system:    </p>
-<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo apt-get update
-linuxidc@localhost:~$ sudo apt-get upgrade
-</pre></div>
-
-<p><br><br>
-2. Download VMware Workstation bundle.<br><br>
-3. Make bundle executable:    </p>
-
-<div class="highlight"><pre><span></span>linuxidc@localhost:~$ chmod a+x VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
-</pre></div>
-
-<p><br><br>
-4. Run the bundle:    </p>
-
-<div class="highlight"><pre><span></span>linuxidc@localhost:~$ sudo ./VMware-Workstation-Full-11.0.0-2305329.x86_64.bundle
-</pre></div>
-
-<p><br><br>
-5. Installation:  <br />
-<img alt="VMware Station Installation" src="http://www.linuxidc.com/upload/2015_01/150114174598326.jpg" /></p>
-
-<p></font></div></p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2016/tools-InstallVMwareWorkstationinUbuntu14.04.html">read more</a></div>
         <hr />
     </div>
 				

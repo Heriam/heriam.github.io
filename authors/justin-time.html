@@ -90,6 +90,45 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/backend-data-structure-n-algorithm-1.html"><h1>数据结构与算法——复杂度分析</h1></a>
+<span class="metadata">
+2020-05-24 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">概述</h2>
+<p>从广义上讲，数据结构就是指一组数据的存储结构。算法就是操作数据的一组方法。</p>
+<p>数据结构和算法是相辅相成的。数据结构是为算法服务的，算法要作用在特定的数据结构之上。比如，因为数组具有随机访问的特点，常用的二分查找算法需要用数组来存储数据。但如果我们选择链表这种数据结构，二分查找算法就无法工作了，因为链表并不支持随机访问。</p>
+<p>想要学习数据结构与算法，首先要掌握一个数据结构与算法中最重要的概念——复杂度分析。它几乎占了数据结构和算法这门课的半壁江山，是数据结构和算法学习的精髓。</p>
+<p>数据结构和算法解决的是如何更省、更快地存储和处理数据的问题，因此，我们就需要一个考量效率和资源消耗的方法，这就是复杂度分析方法。</p>
+<p>下图几乎涵盖了所有数据结构和算法书籍中都会讲到的知识点：</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/91/a7/913e0ababe43a2d57267df5c5f0832a7.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/e913ce75-a9af-4ac1-a7ce-b5d531ee9b0f"/></p>
+<p>但是，作为初学者，或者一个非算法工程师来说，并不需要掌握图里面的所有知识点。下面总结了 20 个最常用的、最基础数据结构与算法，不管是应付面试还是工作需要，其实只要集中精力逐一攻克这 20 个知识点就足够了：</p>
+<ul>
+<li>
+<p>10 个数据结构：<strong>数组、链表、栈、队列、散列表、二叉树、堆、跳表、图、Trie 树</strong>；</p>
+</li>
+<li>
+<p>10 …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-structure-n-algorithm-1.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/networking-vxlan-in-depth.html"><h1>VxLAN协议详解</h1></a>
 <span class="metadata">
 2020-03-12 Thu&nbsp;&nbsp;&nbsp;
@@ -123,7 +162,7 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
 <p>传统“二层+三层”的网络在应对这些要求时变得力不从心，虽然通过很多改进型的技术比如堆叠、SVF …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/networking-vxlan-in-depth.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -643,46 +682,6 @@ Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&
 <li>多个设备之间的文件夹同步</li>
 </ul>
 <p>如我们所见，MEGASync的一个非常有用的功能是在多个设备之间同步文件夹。 但是 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/tools-Cloud-Desktop-Based-On-MegaSync.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/backend-AJavaTFTPServer.html"><h1>A Java TFTP Server</h1></a>
-<span class="metadata">
-2019-04-09 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;<a href="https://jiang-hao.com/tags/tftp.html">TFTP</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<h3 id="_1">简介</h3>
-<p>一个完全多线程的tftp服务器。可以同时处理多个客户端。实现 RFC 1350 并包装块号以获得大文件支持。</p>
-<p>通过判断监听到的请求tftpPacket_的类型是TFTPReadRequestPacket（读）或者TFTPWriteRequestPacket（写），将其对应交由handleRead()或者handleWrite()方法处理。</p>
-<p>要启动，只需创建该类的实例。如果服务器由于正在使用的端口，端口被拒绝等原因而无法启动，则将抛出IOException。</p>
-<p>要停止，请使用shutdown方法。</p>
-<p>要检查服务器是否仍在运行（或者由于错误而停止），请调用isRunning方法。</p>
-<p>默认情况下，事件不会记录到stdout/stderr。可以使用setLog和setLogError方法更改此设置。</p>
-<p>示例用法如下：</p>
-<div class="highlight"><pre><span></span> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span>
-  <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="na">length</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
-      <span class="p">{</span>
-          <span class="n">System</span><span class="p">.</span><span class="na">out</span>
-                  <span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"You must provide 1 argument - the …</span></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-AJavaTFTPServer.html">read more</a></div>
         <hr />
     </div>
 				

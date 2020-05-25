@@ -90,6 +90,40 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/backend-data-struct-array.html"><h1>数据结构与算法——数组</h1></a>
+<span class="metadata">
+2020-05-26 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">定义</h2>
+<p>数组（Array）是一种<strong>线性表</strong>数据结构。它用一组<strong>连续的内存空间</strong>，来存储一组具有<strong>相同类型</strong>的数据。</p>
+<p>这个定义里有几个关键词，理解了这几个关键词，我想你就能彻底掌握数组的概念了。</p>
+<p>首先是线性表（Linear List）。顾名思义，线性表就是数据排成像一条线一样的结构。每个线性表上的数据最多只有前和后两个方向。其实除了数组，链表、队列、栈等也是线性表结构。</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/b6/77/b6b71ec46935130dff5c4b62cf273477.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/f2574bf5-18d4-48a1-a7be-09116477a8ad"/></p>
+<p>而与它相对立的概念是非线性表，比如二叉树、堆、图等。之所以叫非线性，是因为，在非线性表中，数据之间并不是简单的前后关系。</p>
+<p>第二个是连续的内存空间和相同类型的数据。正是因为这两个限制，它才有了一个堪称“杀手锏”的特性：“随机访问”。但有利就有弊，这两个限制也让数组的很多操作变得非常低效，比如要想在数组中删除、插入一个数据，为了保证连续性，就需要做大量的数据搬移工作。</p>
+<h2 id="_2">随机访问</h2>
+<p>我们拿一个长度为 10 的 int 类型的数组 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-struct-array.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/backend-data-structure-n-algorithm-1.html"><h1>数据结构与算法——复杂度分析</h1></a>
 <span class="metadata">
 2020-05-24 Sun&nbsp;&nbsp;&nbsp;
@@ -120,7 +154,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <p>10 …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-structure-n-algorithm-1.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -642,46 +676,6 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 </ul>
 <h3 id="final"><em>final</em> 修饰变量</h3>
 <p>当使用<em>final</em>关键字声明类成员变量或局部变量后，其值不能被再次修改 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-java-final-keyword.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/tools-Cloud-Desktop-Based-On-MegaSync.html"><h1>一种通过网盘实现多终端桌面同步和云化存储的方法</h1></a>
-<span class="metadata">
-2019-04-10 Wed&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
-</span> 
-        </div>
-        
-        <div class="summary"><h3 id="_1">简介</h3>
-<p>方法其实很简单，而且很多人可能已经想到或者在用了。一言以蔽之，就是把桌面文件夹设置为网盘的同步文件夹。之所以要这么做，因为很多人习惯使用一些程序搜索工具来启动程序（比如wox, everything, 甚至系统自带的搜索功能等等），不在系统桌面保留桌面图标，而且通常为了平时工作方便，会直接把桌面当做文档库或者workshop来用，也就是把平时常用的一些文档直接保存在桌面。这个时候如果直接用网盘把桌面设置为同步文件夹，就可以直接实时备份桌面上的文件了。而许多人可能平时会用到诸多不同设备（比如工作场所的电脑，私人电脑，手机，ipad等等），这种方法就可以实现多个电脑之间桌面的实时文件共享，同时其他移动端设备也能实时进行同步了。平时工作或者收藏的文件或者个人材料，在外临时要用的时候随时随处都可以拿到，而不用刻意事先进行上传或者分享。</p>
-<h3 id="_2">效果</h3>
-<p>以下是大致效果:</p>
-<p><img alt="MEGASync Desktop" src="https://i.loli.net/2019/11/01/3ZKJIE4gzNMUpqb.png"></p>
-<h3 id="_3">工具</h3>
-<h5 id="_4">程序启动</h5>
-<p>如果您不喜欢应用程序图标，并且只希望在桌面上放置文件和文件夹（如图所示），但仍然希望能够以一种方便的方式启动应用程序，则可以删除所有图标，然后安装<a href="http://www.wox.one/"> WOX</a>，用于快速访问应用程序。</p>
-<h5 id="_5">网盘同步</h5>
-<p>这里的网盘可以使用MEGASync或者坚果云，可以在多个设备之间同步桌面，并可以通过网页或者客户端随时随地访问文档。<a href="https://mega.nz/">MEGASync</a>提供以下功能：</p>
-<ul>
-<li>具有50GB免费存储空间的安全云网络磁盘</li>
-<li>通过端到端加密进行快速传输</li>
-<li>多个设备之间的文件夹同步</li>
-</ul>
-<p>如我们所见，MEGASync的一个非常有用的功能是在多个设备之间同步文件夹。 但是 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/tools-Cloud-Desktop-Based-On-MegaSync.html">read more</a></div>
         <hr />
     </div>
 				

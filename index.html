@@ -124,6 +124,41 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html"><h1>数据结构与算法——链表</h1></a>
+<span class="metadata">
+2020-05-26 Tue&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">定义</h2>
+<p>相比数组，链表是一种稍微复杂一点的数据结构。对于两者，我们常常将会放到一块儿来比较。</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/d5/cd/d5d5bee4be28326ba3c28373808a62cd.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/6bc1f6d2-5ed1-4216-84a4-b45459575b61"/></p>
+<p>从图中我们看到，数组需要一块连续的内存空间来存储，对内存的要求比较高。如果我们申请一个 100MB 大小的数组，当内存中没有连续的、足够大的存储空间时，即便内存的剩余总可用空间大于 100MB，仍然会申请失败。</p>
+<p>而链表恰恰相反，它并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，所以如果我们申请的是 100MB 大小的链表，根本不会有问题。</p>
+<p>链表结构五花八门，主要有三种最常见的链表结构，它们分别是：单链表、双向链表和循环链表。我们首先来看最简单、最常用的单链表。</p>
+<h2 id="_2">单向链表</h2>
+<p>我们刚刚讲到，链表通过指针将一组零散的内存块串联在一起。其中，我们把内存块称为链表的“结点”。为了将所有的结点串起来，每个链表的结点除了存储数据之外，还需要记录链上的下一个结点的地址。如图所示，我们把这个记录下个结点地址的指针叫作后继指针 next。</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/b9/eb/b93e7ade9bb927baad1348d9a806ddeb.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/7d29465c-1d47-4ddf-bfac-3edb5dee5cdd"/></p>
+<p>其中有两个结点是比较特殊的，它们分别是第一个结点和最后一个结点。我们习惯性地把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/backend-data-structure-n-algorithm-1.html"><h1>数据结构与算法——复杂度分析</h1></a>
 <span class="metadata">
 2020-05-24 Sun&nbsp;&nbsp;&nbsp;
@@ -639,43 +674,6 @@ Category: <a href="https://jiang-hao.com/categories/cloud.html">Cloud</a>&nbsp;&
 <p>Openshift提供比任何PaaS更多的灵活性，它支持用于Java、Python、PHP、Perl、node.js、go和Ruby的更多的开发框架，包括 Spring、Seam、Weld、CDI、Rails、Rack、Symfony、Zend Framework、Twisted、Django和Java E。数据库语言则支持MySQL、MongoDB和PostgreSQL。</p>
 <p>另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。</p>
 <p>OpenShift Online服务构建在Red Hat Enterprise Linux上。Red Hat …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/cloud-openshift-basics.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/backend-java-final-keyword.html"><h1>详解Java中的final关键字</h1></a>
-<span class="metadata">
-2019-04-12 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/java.html">Java</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<h3 id="final-1"><em>final</em> 简介<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></h3>
-<p><em>final</em>关键字可用于多个场景，且在不同场景具有不同的作用。首先，<em>final</em>是一个<a href="https://www.geeksforgeeks.org/access-and-non-access-modifiers-in-java/">非访问修饰符</a>，<strong>仅</strong>适用<strong>于变量，方法或类</strong>。下面是使用final的不同场景：</p>
-<p><img alt="java中的final关键字" src="https://i.loli.net/2019/10/31/Df4CVqbjoTEKFhe.png"/></p>
-<p>上面这张图可以概括成：</p>
-<ul>
-<li>当<em>final</em>修饰<strong>变量</strong>时，被修饰的变量必须被初始化(赋值)，且后续不能修改其值，实质上是常量；</li>
-<li>当<em>final</em>修饰<strong>方法</strong>时，被修饰的方法无法被所在类的子类重写（覆写）；</li>
-<li>当<em>final</em>修饰<strong>类</strong>时，被修饰的类不能被继承，并且<em>final</em>类中的所有成员方法都会被隐式地指定为<em>final</em>方法，但成员变量则不会变。</li>
-</ul>
-<h3 id="final"><em>final</em> 修饰变量</h3>
-<p>当使用<em>final</em>关键字声明类成员变量或局部变量后，其值不能被再次修改 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/backend-java-final-keyword.html">read more</a></div>
         <hr />
     </div>
 				

@@ -90,6 +90,41 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html"><h1>数据结构与算法——链表</h1></a>
+<span class="metadata">
+2020-05-27 Wed&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">定义</h2>
+<p>相比数组，链表是一种稍微复杂一点的数据结构。对于两者，我们常常将会放到一块儿来比较。</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/d5/cd/d5d5bee4be28326ba3c28373808a62cd.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/6bc1f6d2-5ed1-4216-84a4-b45459575b61"/></p>
+<p>从图中我们看到，数组需要一块连续的内存空间来存储，对内存的要求比较高。如果我们申请一个 100MB 大小的数组，当内存中没有连续的、足够大的存储空间时，即便内存的剩余总可用空间大于 100MB，仍然会申请失败。</p>
+<p>而链表恰恰相反，它并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，所以如果我们申请的是 100MB 大小的链表，根本不会有问题。</p>
+<p>链表结构五花八门，主要有三种最常见的链表结构，它们分别是：单链表、双向链表和循环链表。我们首先来看最简单、最常用的单链表。</p>
+<h2 id="_2">单向链表</h2>
+<p>我们刚刚讲到，链表通过指针将一组零散的内存块串联在一起。其中，我们把内存块称为链表的“结点”。为了将所有的结点串起来，每个链表的结点除了存储数据之外，还需要记录链上的下一个结点的地址。如图所示，我们把这个记录下个结点地址的指针叫作后继指针 next。</p>
+<p><img onerror="this.src='https://static001.geekbang.org/resource/image/b9/eb/b93e7ade9bb927baad1348d9a806ddeb.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/7d29465c-1d47-4ddf-bfac-3edb5dee5cdd"/></p>
+<p>其中有两个结点是比较特殊的，它们分别是第一个结点和最后一个结点。我们习惯性地把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/backend-data-struct-array.html"><h1>数据结构与算法——数组</h1></a>
 <span class="metadata">
 2020-05-26 Tue&nbsp;&nbsp;&nbsp;
@@ -113,41 +148,6 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <p>第二个是连续的内存空间和相同类型的数据。正是因为这两个限制，它才有了一个堪称“杀手锏”的特性：“随机访问”。但有利就有弊，这两个限制也让数组的很多操作变得非常低效，比如要想在数组中删除、插入一个数据，为了保证连续性，就需要做大量的数据搬移工作。</p>
 <h2 id="_2">随机访问</h2>
 <p>我们拿一个长度为 10 的 int 类型的数组 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-struct-array.html">read more</a></div>
-        <hr />
-    </div>
-		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html"><h1>数据结构与算法——链表</h1></a>
-<span class="metadata">
-2020-05-26 Tue&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
-</span> 
-        </div>
-        
-        <div class="summary">
-<h2 id="_1">定义</h2>
-<p>相比数组，链表是一种稍微复杂一点的数据结构。对于两者，我们常常将会放到一块儿来比较。</p>
-<p><img onerror="this.src='https://static001.geekbang.org/resource/image/d5/cd/d5d5bee4be28326ba3c28373808a62cd.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/6bc1f6d2-5ed1-4216-84a4-b45459575b61"/></p>
-<p>从图中我们看到，数组需要一块连续的内存空间来存储，对内存的要求比较高。如果我们申请一个 100MB 大小的数组，当内存中没有连续的、足够大的存储空间时，即便内存的剩余总可用空间大于 100MB，仍然会申请失败。</p>
-<p>而链表恰恰相反，它并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，所以如果我们申请的是 100MB 大小的链表，根本不会有问题。</p>
-<p>链表结构五花八门，主要有三种最常见的链表结构，它们分别是：单链表、双向链表和循环链表。我们首先来看最简单、最常用的单链表。</p>
-<h2 id="_2">单向链表</h2>
-<p>我们刚刚讲到，链表通过指针将一组零散的内存块串联在一起。其中，我们把内存块称为链表的“结点”。为了将所有的结点串起来，每个链表的结点除了存储数据之外，还需要记录链上的下一个结点的地址。如图所示，我们把这个记录下个结点地址的指针叫作后继指针 next。</p>
-<p><img onerror="this.src='https://static001.geekbang.org/resource/image/b9/eb/b93e7ade9bb927baad1348d9a806ddeb.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/7d29465c-1d47-4ddf-bfac-3edb5dee5cdd"/></p>
-<p>其中有两个结点是比较特殊的，它们分别是第一个结点和最后一个结点。我们习惯性地把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html">read more</a></div>
         <hr />
     </div>
 				

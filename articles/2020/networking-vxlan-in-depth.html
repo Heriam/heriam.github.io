@@ -226,15 +226,15 @@ Category: <a href="https://jiang-hao.com/categories/networking.html">Networking<
 <p>一般而言，隧道的建立不外乎手工方式和自动方式两种。</p>
 <h4 id="_5">手工方式</h4>
 <p>这种方式需要用户手动指定VXLAN隧道的源和目的IP地址分别为本端和对端VTEP的IP地址，也就是人为的在本端VTEP和对端VTEP之间建立静态VXLAN隧道。以华为CE系列交换机为例，以上配置是在NVE（Network Virtualization Edge）接口下完成的。配置过程如下：</p>
-<div class="highlight"><pre><span></span>#
+<div class="highlight"><pre><span></span><code>#
 interface Nve1   //创建逻辑接口NVE 1
  source 1.1.1.1   //配置源VTEP的IP地址（推荐使用Loopback接口的IP地址）
  vni 5000 head-end peer-list 2.2.2.2  
  vni 5000 head-end peer-list 2.2.2.3   
 #
-</pre></div>
+</code></pre></div>
 <p>其中，vni 5000 head-end peer-list 2.2.2.2和vni 5000 head-end peer-list 2.2.2.3的配置，表示属于VNI 5000的对端VTEP有两个，IP地址分别为2.2.2.2和2.2.2.3。根据这两条配置，VTEP上会生成如下所示的一张表：</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;HUAWEI&gt;</span> display vxlan vni 5000 verbose
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;HUAWEI&gt;</span> display vxlan vni 5000 verbose
     BD ID                  : 10
     State                  : up
     NVE                     : 288
@@ -243,7 +243,7 @@ interface Nve1   //创建逻辑接口NVE 1
     BUM Mode               : head-end
     Group Address         : - 
     Peer List              : 2.2.2.2 2.2.2.3 
-</pre></div>
+</code></pre></div>
 <p>根据上表中的Peer List，本端VTEP就可以知道属于同一VNI的对端VTEP都有哪些，这也就决定了同一大二层广播域的范围。当VTEP收到BUM（Broadcast&amp;Unknown-unicast&amp;Multicast，广播&amp;未知单播&amp;组播）报文时，会将报文复制并发送给Peer List中所列的所有对端VTEP（这就好比广播报文在VLAN内广播）。因此，这张表也被称为“头端复制列表”。当VTEP收到已知单播报文时，会根据VTEP上的MAC表来确定报文要从哪条VXLAN隧道走。而此时Peer List中所列的对端，则充当了MAC表中“出接口”的角色。在后面的报文转发流程中，你将会看到头端复制列表是如何在VXLAN网络中指导报文进行转发的。</p>
 <h4 id="_6">自动方式</h4>
 <p>自动方式下VXLAN隧道的建立需要借助于其他的协议，例如通过BGP/EVPN(Ethernet Virtual Private Network)或ENDP(Enhanced Neighbor Discovery Protocol)发现远端VTEP后，自动在本端和远端VTEP之间建立VXLAN隧道。</p>

@@ -403,7 +403,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>Wikipedia提供了一个IRC频道，其中记录了对Wiki的所有编辑。我们将在Flink中读取此通道，并计算每个用户在给定时间窗口内编辑的字节数。这很容易使用Flink在几分钟内实现，但它将为您提供一个良好的基础，从而开始自己构建更复杂的分析程序。</p>
 <h2 id="maven">设置Maven项目</h2>
 <p>我们将使用Flink Maven Archetype来创建我们的项目结构。有关此内容的更多详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/projectsetup/java_api_quickstart.html">Java API快速入门</a>。出于我们的目的，运行命令是这样的：</p>
-<div class="highlight"><pre><span></span>$ mvn archetype:generate <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>$ mvn archetype:generate <span class="se">\</span>
     -DarchetypeGroupId<span class="o">=</span>org.apache.flink <span class="se">\</span>
     -DarchetypeArtifactId<span class="o">=</span>flink-quickstart-java <span class="se">\</span>
     -DarchetypeVersion<span class="o">=</span><span class="m">1</span>.8.0 <span class="se">\</span>
@@ -412,7 +412,7 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
     -Dversion<span class="o">=</span><span class="m">0</span>.1 <span class="se">\</span>
     -Dpackage<span class="o">=</span>wikiedits <span class="se">\</span>
     -DinteractiveMode<span class="o">=</span><span class="nb">false</span>
-</pre></div>
+</code></pre></div>
 <p>您可以编辑<code>groupId</code>，<code>artifactId</code>而<code>package</code>如果你喜欢 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-datastream-api.html">read more</a></div>
         <hr />
     </div>

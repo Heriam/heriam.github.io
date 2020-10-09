@@ -118,10 +118,10 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 <li><a href="#2">优化2：记录上一轮最后一次交换的位置</a></li>
 <li><a href="#3">优化3：鸡尾酒排序(双向冒泡排序)</a></li>
 <li><a href="#4">优化4：一轮遍历未发生交换可提前结束的双向冒泡排序</a></li>
-<li><a href="#_6">记录上一轮最后一次交换的位置的双向冒泡排序</a></li>
+<li><a href="#5">优化5：记录上一轮最后一次交换的位置的双向冒泡排序</a></li>
 </ul>
 </li>
-<li><a href="#_7">优化性能测试</a></li>
+<li><a href="#_6">优化性能测试</a></li>
 </ul>
 </div>
 			</nav>
@@ -295,7 +295,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
         <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
     <span class="p">}</span>
 </code></pre></div>
-<h3 id="_6">记录上一轮最后一次交换的位置的双向冒泡排序</h3>
+<h3 id="5">优化5：记录上一轮最后一次交换的位置的双向冒泡排序</h3>
 <div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">cocktail_sort_mark_last_swap</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
         <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
         <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -329,7 +329,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
     <span class="p">}</span>
 </code></pre></div>
 <p>两个方向都同时跳着走，是目前可以想到的效果最好的优化。</p>
-<h2 id="_7">优化性能测试</h2>
+<h2 id="_6">优化性能测试</h2>
 <p>通过运行力扣测试数据集https://leetcode-cn.com/submissions/detail/114474973/testcase/，得到各个变形的结果如下：</p>
 <div class="highlight"><pre><span></span><code><span class="nl">bubble_sort_original:</span> <span class="n">run</span> <span class="mi">1249975000</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
 <span class="nl">bubble_sort_quit_if_sorted:</span> <span class="n">run</span> <span class="mi">1249928029</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
@@ -338,7 +338,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 <span class="nl">cocktail_sort_quit_if_sorted:</span> <span class="n">run</span> <span class="mi">934706395</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
 <span class="nl">cocktail_sort_mark_last_swap:</span> <span class="n">run</span> <span class="mi">828009788</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
 </code></pre></div>
-<p>优化4所进行的运算量最少。大多数运算都有效进行了元素交换（排序），而排除了大量无效的循环比较。</p></div>
+<p>优化5所进行的运算量最少。大多数运算都有效进行了元素交换（排序），而排除了大量无效的循环比较。</p></div>
 	
         <hr />
 

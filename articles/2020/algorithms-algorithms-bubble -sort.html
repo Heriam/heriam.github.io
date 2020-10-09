@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 数据结构与算法——冒泡排序</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin Time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="OGeiccsh1O" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+    <script src="https://jiang-hao.com/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="https://jiang-hao.com/theme/tipuesearch/tipuesearch.css">
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="https://jiang-hao.com/theme/bootstrap-collapse.js"></script>
+
+    <!-- Le styles -->
+    <link href="https://jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="dropdown-jh"><a>Categories</a>
+                <ul class="dropdown-content-jh">
+                    <li><a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a></li>
+                    <li><a href="https://jiang-hao.com/categories/backend.html">Backend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
+                    <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
+                    <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
+                    <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
+                    <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            <li><a href="/pages/aboutme">AboutMe</a></li>
+            
+        </ul>
+
+        <form class="navbar-search pull-right" action="https://jiang-hao.com/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
+        </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>数据结构与算法——冒泡排序</h1>
+<span class="metadata">
+2020-09-26 Sat&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span>        </div>
+
+        <hr />
+
+        <div class="copyright-claim">
+        	<span>
+    			<p>版权声明：本文为<a href="https://jiang-hao.com">Heriam</a>博主原创文章，遵循<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。</p>
+    			<p>原文链接：<a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-bubble -sort.html">https://jiang-hao.com/articles/2020/algorithms-algorithms-bubble -sort.html</a></p>
+    		</span>
+        </div>
+
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
+<li><a href="#_1">定义</a></li>
+<li><a href="#_2">算法原理</a></li>
+<li><a href="#_3">算法实现</a></li>
+<li><a href="#_4">助记码</a></li>
+<li><a href="#_5">算法优化</a><ul>
+<li><a href="#1">优化1：一轮遍历未发生交换可提前结束</a></li>
+<li><a href="#2">优化2：记录上一轮最后一次交换的位置</a></li>
+<li><a href="#3">优化3：鸡尾酒排序(双向冒泡排序)</a></li>
+<li><a href="#4">优化4：一轮遍历未发生交换可提前结束的双向冒泡排序</a></li>
+<li><a href="#_6">记录上一轮最后一次交换的位置的双向冒泡排序</a></li>
+</ul>
+</li>
+<li><a href="#_7">优化性能测试</a></li>
+</ul>
+</div>
+			</nav>
+
+			<hr />
+
+
+        <div>
+<h2 id="_1">定义</h2>
+<p>冒泡排序（Bubble Sort），是一种<a href="https://baike.baidu.com/item/计算机科学">计算机科学</a>领域的较简单的<a href="https://baike.baidu.com/item/排序算法/5399605">排序算法</a>。它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果顺序（如从大到小、首字母从Z到A）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳酸饮料中二氧化碳的气泡最终会上浮到顶端一样，故名“冒泡排序”。</p>
+<p><img alt="" src="https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif"/></p>
+<h2 id="_2">算法原理</h2>
+<p>冒泡<a href="https://baike.baidu.com/item/排序算法/5399605">排序算法</a>的原理如下：</p>
+<ol>
+<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
+<li>对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个。 </li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。 </li>
+</ol>
+<p>算法复杂度是 O(n^2)，空间复杂度是常数 O(1)。但可以记录一个不需要交换的位置，把最好情况的时间复杂度降到 O(n)。详细可以参考下文优化部分的实现。</p>
+<h2 id="_3">算法实现</h2>
+<div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">bubble_sort_original</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">swap_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"bubble_sort_original: run "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">", swap "</span> <span class="o">+</span> <span class="n">swap_count</span> <span class="o">+</span> <span class="s">", isSorted: "</span> <span class="o">+</span> <span class="n">isSorted</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span> <span class="c1">//打印运行次数、交换次数，以及排序检验</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="_4">助记码</h2>
+<div class="highlight"><pre><span></span><code><span class="n">i</span><span class="err">∈</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="mi">-1</span><span class="p">)</span><span class="w">               </span><span class="o">//</span><span class="err">循环</span><span class="n">N</span><span class="mi">-1</span><span class="err">遍</span><span class="w"></span>
+<span class="w">   </span><span class="n">j</span><span class="err">∈</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="mi">-1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="w">           </span><span class="o">//</span><span class="err">每遍循环要处理的无序部分</span><span class="w"></span>
+<span class="w">     </span><span class="n">swap</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w">          </span><span class="o">//</span><span class="err">两两排序（升序</span><span class="o">/</span><span class="err">降序）</span><span class="w"></span>
+</code></pre></div>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/6/6e/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.jpg"/></p>
+<h2 id="_5">算法优化</h2>
+<h3 id="1">优化1：一轮遍历未发生交换可提前结束</h3>
+<p>数据的顺序排好之后，冒泡算法仍然会继续进行下一轮的比较，直到arr.length-1次，后面的比较没有意义的。</p>
+<p>设置标志位flag，如果发生了交换flag设置为true；如果没有交换就设置为false。</p>
+<p>这样当一轮比较结束后如果flag仍为false，即：这一轮没有发生交换，说明数据的顺序已经排好，没有必要继续进行下去。</p>
+<div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">bubble_sort_quit_if_sorted</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">swap_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">boolean</span> <span class="n">head_sorted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">head_sorted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">head_sorted</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"bubble_sort_quit_if_sorted: run "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">", swap "</span> <span class="o">+</span> <span class="n">swap_count</span> <span class="o">+</span> <span class="s">", isSorted: "</span> <span class="o">+</span> <span class="n">isSorted</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3 id="2">优化2：记录上一轮最后一次交换的位置</h3>
+<p>在传统的实现中有序区的长度和排序的轮数是相等的。比如第一轮排序过后的有序区长度是1，第二轮排序过后的有序区长度是2 ......实际上，数列真正的有序区可能会大于这个长度，比如有可能在第二轮，后面5个元素实际都已经属于有序区。因此后面的许多次元素比较是没有意义的。</p>
+<p>我们可以在每一轮排序的最后，记录下最后一次元素交换的位置，那个位置也就是无序数列的边界，再往后就是有序区了。</p>
+<div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">bubble_sort_mark_last_swap</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">swap_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">sorted_border</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">sorted_border</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">last_swap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sorted_border</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">last_swap</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">sorted_border</span> <span class="o">=</span> <span class="n">last_swap</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"bubble_sort_mark_last_swap: run "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">", swap "</span> <span class="o">+</span> <span class="n">swap_count</span> <span class="o">+</span> <span class="s">", isSorted: "</span> <span class="o">+</span> <span class="n">isSorted</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>上述代码中维护了一个已排好序的序列：<code>[sorted_border,N)</code>（N是数组大小），每次冒泡会记录最大的那个泡泡的位置作为<code>sorted_border</code>。 直到<code>sorted_border == 1</code>时，说明整个序列已经排好。</p>
+<p>因为冒泡排序中每次冒泡都相当于选最大值放到序列结尾，所以<code>[sorted_border,N)</code>不仅是有序的，而且位置是正确的。 所以<code>sorted_border == 1</code>时，<code>[1,N)</code>已经获得了正确的位置，那么元素0的位置自然就确定了（它已经没得选了）。</p>
+<h3 id="3">优化3：鸡尾酒排序(双向冒泡排序)</h3>
+<p><img alt="" src="http://www.suanfajun.com/wp-content/uploads/2017/04/%E9%B8%A1%E5%B0%BE%E9%85%92%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.gif"/></p>
+<p>鸡尾酒排序也就是“定向冒泡排序”、“双向冒泡排序”和“改进冒泡排序”, 鸡尾酒搅拌排序, 搅拌排序 (也可以视作选择排序的一种变形), 涟漪排序, 来回排序 or 快乐小时排序, 是冒泡排序的一种变形。此算法与冒泡排序的不同处在于排序时是以双向在序列中进行排序。算法先找到最小的数字，把他放到第一位，然后找到最大的数字放到最后一位。然后再找到第二小的数字放到第二位，再找到第二大的数字放到倒数第二位。以此类推，直到完成排序。</p>
+<p><strong>（1）时间复杂度</strong>：鸡尾酒排序的效率还是很低的，两层循环，时间复杂度为 O(n^2) 。</p>
+<p><strong>（2）空间复杂度</strong>：由于只需要几个临时变量，所以空间复杂度为 O(1) 。</p>
+<p>那么何以见得鸡尾酒排序比冒泡排序好一点呢？</p>
+<p>考虑这样的一个序列：(2,3,4,5,1) 。如果使用鸡尾酒排序，一个来回就可以搞定；而冒泡排序则需要跑四趟。</p>
+<p>其<strong>根本原因</strong>在于冒泡是单向的，如果从左向右冒泡，对于小数靠后就会很不利（一趟只能挪一个位置，那就需要多次循环。这种数又被称之为乌龟）；相应的，如果从右向左冒泡，对于大数靠前又会很不利（靠前的一只大乌龟）。鸡尾酒排序的优点就在于这里，由于在序列中左右摇摆（为此鸡尾酒排序又称之为 shaker sort），两种较差的局面就能得到规避，以此在性能上带来一些提升。</p>
+<div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">cocktail_sort_original</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">swap_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">right</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">right</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">left</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"cocktail_sort_original: run "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">", swap "</span> <span class="o">+</span> <span class="n">swap_count</span> <span class="o">+</span> <span class="s">", isSorted: "</span> <span class="o">+</span> <span class="n">isSorted</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>对于鸡尾酒排序，算法的时间复杂度与空间复杂度并没有改进。<strong>不同的是排序的交换次数。某些情况下鸡尾酒排序比普通冒泡排序的交换次数少。总体上，鸡尾酒排序可以获得比冒泡排序稍好的性能。但是完全逆序时，鸡尾酒排序与冒泡排序的效率都非常差。</strong></p>
+<h3 id="4">优化4：一轮遍历未发生交换可提前结束的双向冒泡排序</h3>
+<div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">cocktail_sort_quit_if_sorted</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">swap_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">boolean</span> <span class="n">middle_sorted</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">middle_sorted</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">middle_sorted</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+            <span class="n">right</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">right</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">left</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"cocktail_sort_quit_if_sorted: run "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">", swap "</span> <span class="o">+</span> <span class="n">swap_count</span> <span class="o">+</span> <span class="s">", isSorted: "</span> <span class="o">+</span> <span class="n">isSorted</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3 id="_6">记录上一轮最后一次交换的位置的双向冒泡排序</h3>
+<div class="highlight"><pre><span></span><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">cocktail_sort_mark_last_swap</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">swap_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">last_swap</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">last_swap</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">last_swap</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">right</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">left</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+                    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+                    <span class="n">last_swap</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                    <span class="n">swap_count</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">last_swap</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"cocktail_sort_mark_last_swap: run "</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span> <span class="s">", swap "</span> <span class="o">+</span> <span class="n">swap_count</span> <span class="o">+</span> <span class="s">", isSorted: "</span> <span class="o">+</span> <span class="n">isSorted</span><span class="p">(</span><span class="n">arr</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>两个方向都同时跳着走，是目前可以想到的效果最好的优化。</p>
+<h2 id="_7">优化性能测试</h2>
+<p>通过运行力扣测试数据集https://leetcode-cn.com/submissions/detail/114474973/testcase/，得到各个变形的结果如下：</p>
+<div class="highlight"><pre><span></span><code><span class="nl">bubble_sort_original:</span> <span class="n">run</span> <span class="mi">1249975000</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
+<span class="nl">bubble_sort_quit_if_sorted:</span> <span class="n">run</span> <span class="mi">1249928029</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
+<span class="nl">bubble_sort_mark_last_swap:</span> <span class="n">run</span> <span class="mi">1249543883</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
+<span class="nl">cocktail_sort_original:</span> <span class="n">run</span> <span class="mi">1249975000</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
+<span class="nl">cocktail_sort_quit_if_sorted:</span> <span class="n">run</span> <span class="mi">934706395</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
+<span class="nl">cocktail_sort_mark_last_swap:</span> <span class="n">run</span> <span class="mi">828009788</span><span class="p">,</span> <span class="n">swap</span> <span class="mi">622443661</span><span class="p">,</span> <span class="n">isSorted</span><span class="p">:</span> <span class="kc">true</span>
+</code></pre></div>
+<p>优化4所进行的运算量最少。大多数运算都有效进行了元素交换（排序），而排除了大量无效的循环比较。</p></div>
+	
+        <hr />
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+    			<div style="width:80%; margin:0 auto;">
+                    <div style="text-align: center;">
+						<a href="/" class="profilepic">
+                            <img src="https://i.loli.net/2019/10/31/TRSQt7aKkx6DdBA.png" οnerrοr="this.onerror=null;this.src='https://raw.githubusercontent.com/Heriam/images/master/portrait/photo-zzz.png';" alt="photo-zzz.png" title="photo-zzz.png" />
+						</a>
+						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
+						<p class="motto">We only live once, and time just goes by.</p>
+						<ul class="biography">
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+
+					<hr>
+
+						<div class="tooltip">
+							<span class="tooltiptext">Facebook</span>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Facebook.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">微博</span>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/微博.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Linkedin</span>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Linkedin.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Github</span>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Github.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Email</span>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Email.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Instagram</span>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Instagram.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">ResearchGate</span>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">知乎</span>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/知乎.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">OSChina</span>
+							<a href="https://my.oschina.net/heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/OSChina.svg) center no-repeat"></a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+<!--            <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8958123988900703"
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
+</footer>
+
+</div> <!-- /container -->
+<script>var _gaq=[['_setAccount','UA-137721527-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<script>
+    function validateForm(query)
+    {
+        return (query.length > 0);
+    }
+</script>
+<meting-js
+    server="netease"
+    type="playlist"
+    id="43561591"
+    fixed="true"
+    order="list"
+    volume="1.0"
+    list-folded="true"
+    >
+</meting-js>
+</body>
+</html>

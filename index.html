@@ -52,6 +52,7 @@
         <ul class="nav">
             <li class="dropdown-jh"><a>Categories</a>
                 <ul class="dropdown-content-jh">
+                    <li><a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a></li>
                     <li><a href="https://jiang-hao.com/categories/backend.html">Backend</a></li>
                     <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
                     <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
@@ -90,14 +91,51 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html"><h1>数据结构与算法——链表</h1></a>
+            <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-bubble -sort.html"><h1>数据结构与算法——冒泡排序</h1></a>
+<span class="metadata">
+2020-09-26 Sat&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">定义</h2>
+<p>冒泡排序（Bubble Sort），是一种<a href="https://baike.baidu.com/item/计算机科学">计算机科学</a>领域的较简单的<a href="https://baike.baidu.com/item/排序算法/5399605">排序算法</a>。它重复地走访过要排序的元素列，依次比较两个相邻的元素，如果顺序（如从大到小、首字母从Z到A）错误就把他们交换过来。走访元素的工作是重复地进行直到没有相邻元素需要交换，也就是说该元素列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端（升序或降序排列），就如同碳酸饮料中二氧化碳的气泡最终会上浮到顶端一样，故名“冒泡排序”。</p>
+<p><img alt="" src="https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif"/></p>
+<h2 id="_2">算法原理</h2>
+<p>冒泡<a href="https://baike.baidu.com/item/排序算法/5399605">排序算法</a>的原理如下：</p>
+<ol>
+<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
+<li>对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个。 </li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。 </li>
+</ol>
+<p>算法复杂度是 O(n^2)，空间复杂度是常数 O(1)。但可以记录一个不需要交换的位置，把最好情况的时间复杂度降到 O(n)。详细可以参考下文优化部分的实现 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-bubble -sort.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/algorithms-data-struct-linkedlist.html"><h1>数据结构与算法——链表</h1></a>
 <span class="metadata">
 2020-05-27 Wed&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
 
  
 </span> 
@@ -113,10 +151,10 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <h2 id="_2">单向链表</h2>
 <p>我们刚刚讲到，链表通过指针将一组零散的内存块串联在一起。其中，我们把内存块称为链表的“结点”。为了将所有的结点串起来，每个链表的结点除了存储数据之外，还需要记录链上的下一个结点的地址。如图所示，我们把这个记录下个结点地址的指针叫作后继指针 next。</p>
 <p><img onerror="this.src='https://static001.geekbang.org/resource/image/b9/eb/b93e7ade9bb927baad1348d9a806ddeb.jpg';this.onerror=null" src="https://heriam.coding.net/api/share/download/7d29465c-1d47-4ddf-bfac-3edb5dee5cdd"/></p>
-<p>其中有两个结点是比较特殊的，它们分别是第一个结点和最后一个结点。我们习惯性地把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-struct-linkedlist.html">read more</a></div>
+<p>其中有两个结点是比较特殊的，它们分别是第一个结点和最后一个结点。我们习惯性地把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-data-struct-linkedlist.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -125,14 +163,14 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 
     <div class='article'>
         <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2020/backend-data-struct-array.html"><h1>数据结构与算法——数组</h1></a>
+            <a href="https://jiang-hao.com/articles/2020/algorithms-data-struct-array.html"><h1>数据结构与算法——数组</h1></a>
 <span class="metadata">
 2020-05-26 Tue&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
 
  
 </span> 
@@ -147,7 +185,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <p>而与它相对立的概念是非线性表，比如二叉树、堆、图等。之所以叫非线性，是因为，在非线性表中，数据之间并不是简单的前后关系。</p>
 <p>第二个是连续的内存空间和相同类型的数据。正是因为这两个限制，它才有了一个堪称“杀手锏”的特性：“随机访问”。但有利就有弊，这两个限制也让数组的很多操作变得非常低效，比如要想在数组中删除、插入一个数据，为了保证连续性，就需要做大量的数据搬移工作。</p>
 <h2 id="_2">随机访问</h2>
-<p>我们拿一个长度为 10 的 int 类型的数组 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-struct-array.html">read more</a></div>
+<p>我们拿一个长度为 10 的 int 类型的数组 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-data-struct-array.html">read more</a></div>
         <hr />
     </div>
 				
@@ -159,14 +197,14 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 
     <div class='article'>
         <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2020/backend-data-structure-n-algorithm-1.html"><h1>数据结构与算法——复杂度分析</h1></a>
+            <a href="https://jiang-hao.com/articles/2020/algorithms-data-structure-n-algorithm-1.html"><h1>数据结构与算法——复杂度分析</h1></a>
 <span class="metadata">
 2020-05-24 Sun&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
 
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
 
  
 </span> 
@@ -186,7 +224,7 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 <p>10 个数据结构：<strong>数组、链表、栈、队列、散列表、二叉树、堆、跳表、图、Trie 树</strong>；</p>
 </li>
 <li>
-<p>10 …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/backend-data-structure-n-algorithm-1.html">read more</a></div>
+<p>10 …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-data-structure-n-algorithm-1.html">read more</a></div>
         <hr />
     </div>
 				
@@ -642,38 +680,6 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p><strong>Apache Flink擅长处理无界和有界数据集。</strong>精确控制时间和状态使Flink的运行时能够在无界流上运行任何类型的应用程序。有界流由算法和数据结构内部处理，这些算法和数据结构专为固定大小的数据集而设计，从而产生出色的性能。</p>
 <h4 id="_3">随处部署应用程序</h4>
 <p>Apache Flink是一个分布式系统，需要计算资源才能执行应用程序。Flink可与所有常见的集群资源管理器（Resource …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-intro.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/cloud-openshift-basics.html"><h1>OpenShift 详细教程 - 基础知识入门</h1></a>
-<span class="metadata">
-2019-04-19 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/cloud.html">Cloud</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/openshift.html">OpenShift</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<h3 id="_1">简介</h3>
-<p>自由和开放源码的云计算平台使开发人员能够创建、测试和运行他们的应用程序，并且可以把它们部署到云中。</p>
-<p>OpenShift是红帽的云开发平台即服务（PaaS）。是一个基于主流的容器技术Docker和K8s构建的开源容器云平台。底层以Docker作为容器引擎驱动，以K8s作为容器编排引擎组件，并提供了开发语言，中间件，DevOps自动化流程工具和web console用户界面等元素，提供了一套完整的基于容器的应用云平台。</p>
-<p>Openshift提供比任何PaaS更多的灵活性，它支持用于Java、Python、PHP、Perl、node.js、go和Ruby的更多的开发框架，包括 Spring、Seam、Weld、CDI、Rails、Rack、Symfony、Zend Framework、Twisted、Django和Java E。数据库语言则支持MySQL、MongoDB和PostgreSQL。</p>
-<p>另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。</p>
-<p>OpenShift Online服务构建在Red Hat Enterprise Linux上。Red Hat …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/cloud-openshift-basics.html">read more</a></div>
         <hr />
     </div>
 				

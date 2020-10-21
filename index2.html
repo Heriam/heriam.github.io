@@ -92,6 +92,46 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2019/big-data-flink-intro.html"><h1>Flink入门</h1></a>
+<span class="metadata">
+2019-06-13 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="_1">一、架构</h3>
+<p>Apache Flink是一个分布式处理引擎和框架，用于对无界和有界数据流进行状态计算。Flink可在所有常见的集群环境中运行，可以内存级速度和任意规模执行计算。</p>
+<p>接下来首先我们阐述Flink的架构。</p>
+<h4 id="_2">处理无界和有界数据</h4>
+<p>任何类型的数据都是作为事件流产生的。信用卡交易，传感器测量，机器日志或网站或移动应用程序上的用户交互，所有这些数据都作为流生成。</p>
+<p>数据可以作为<em>无界</em>或<em>有界</em>流处理。</p>
+<ol>
+<li><strong>无界流</strong>有一个开始但没有明确定义的结束。它们不会终止，并且数据在生成时即提供。必须连续处理无界流，即必须在摄取事件后立即处理事件。无法等待所有输入数据到达，因为输入是无界的，并且在任何时间点都不会完成。处理无界数据通常要求以特定顺序摄取事件，例如事件发生的顺序，以便能够推断结果完整性。无界流的处理也称为流处理。</li>
+<li><strong>有界流</strong>具有明确定义的开始和结束。可以通过在执行任何计算之前先摄取所有数据的方式来处理有界流。处理有界流不需要有序摄取，因为可以始终对有界数据集进行排序。有界流的处理也称为批处理。</li>
+</ol>
+<p><img alt="" src="https://flink.apache.org/img/bounded-unbounded.png"/></p>
+<p><strong>Apache Flink擅长处理无界和有界数据集。</strong>精确控制时间和状态使Flink的运行时能够在无界流上运行任何类型的应用程序。有界流由算法和数据结构内部处理，这些算法和数据结构专为固定大小的数据集而设计，从而产生出色的性能。</p>
+<h4 id="_3">随处部署应用程序</h4>
+<p>Apache Flink是一个分布式系统，需要计算资源才能执行应用程序。Flink可与所有常见的集群资源管理器（Resource …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-intro.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2019/cloud-openshift-basics.html"><h1>OpenShift 详细教程 - 基础知识入门</h1></a>
 <span class="metadata">
 2019-04-19 Fri&nbsp;&nbsp;&nbsp;
@@ -648,52 +688,6 @@ Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&
 
 <p><br>  <br />
 2.After the command finishes, run …</p></font></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/tools-InstallAndRunGeditOnMac.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2017/frontend-网页BackToTop返回顶部按钮的简单实现.html"><h1>网页 BacktoTop 返回顶部按钮的简单实现</h1></a>
-<span class="metadata">
-2017-06-30 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/html.html">HTML</a>,&nbsp;<a href="https://jiang-hao.com/tags/javascript.html">JavaScript</a>,&nbsp;<a href="https://jiang-hao.com/tags/css.html">CSS</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary"><p>在较长的网页页面中往往需要一个固定漂浮在显示屏右下侧位置的返回顶部按钮。</p>
-<p>下面介绍一种简单实现：</p>
-<p><strong>HTML 部分：</strong>  </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;javascript:void(0);&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;scroll&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Scroll to Top&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: none;&quot;</span><span class="p">&gt;</span>Top<span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-  ...
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-</code></pre></div>
-
-
-<p><strong>CSS 部分：</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">#</span><span class="nn">scroll</span> <span class="p">{</span>
-    <span class="k">position</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
-    <span class="k">right</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">bottom</span><span class="p">:</span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">cursor</span><span class="p">:</span><span class="kc">pointer</span><span class="p">;</span>
-    <span class="k">width</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">height</span><span class="p">:</span><span class="mi">50</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">background-color</span><span class="p">:</span><span class="mh">#2E435E</span><span class="p">;</span>
-    <span class="k">text-indent</span><span class="p">:</span><span class="mi">-9999</span><span class="kt">px</span><span class="p">;</span>
-    <span class="k">display</span><span class="p">:</span><span class="kc">none …</span></code></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2017/frontend-网页BackToTop返回顶部按钮的简单实现.html">read more</a></div>
         <hr />
     </div>
 				

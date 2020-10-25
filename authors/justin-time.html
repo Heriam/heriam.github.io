@@ -104,7 +104,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 </span> 
         </div>
         
-        <div class="summary"><p>[toc]</p>
+        <div class="summary">
 <h2 id="_1">算法原理</h2>
 <p>插入排序的代码实现虽然没有冒泡排序和选择排序那么简单粗暴，但它的原理应该是最容易理解的了，因为只要打过扑克牌的人都应该能够秒懂。插入排序是一种最简单直观的排序算法，它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。（有点像扑克牌在手上排序的过程）</p>
 <p>插入排序和冒泡排序一样，也有一种优化算法，叫做拆半插入。</p>
@@ -112,13 +112,13 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 <p>将待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
 <p>在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动。</p>
 <h3 id="_3">动图演示</h3>
-<p><img alt="img" src="https://www.runoob.com/wp-content/uploads/2019/03/insertionSort.gif"></p>
+<p><img alt="img" src="https://www.runoob.com/wp-content/uploads/2019/03/insertionSort.gif"/></p>
 <h2 id="_4">代码实现</h2>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">insert_sort_original</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
     <span class="kt">int</span> <span class="n">valuationCnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">// 赋值操作计数</span>
     <span class="kt">int</span> <span class="n">comparisonCnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">// 比较操作计数</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int …</span></code></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-insert-sort.html">read more</a></div>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i …</span></code></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-insert-sort.html">read more</a></div>
         <hr />
     </div>
 		

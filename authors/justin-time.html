@@ -91,6 +91,45 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-insert-sort.html"><h1>数据结构与算法——插入排序（扑克牌排序）</h1></a>
+<span class="metadata">
+2020-10-26 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary"><p>[toc]</p>
+<h2 id="_1">算法原理</h2>
+<p>插入排序的代码实现虽然没有冒泡排序和选择排序那么简单粗暴，但它的原理应该是最容易理解的了，因为只要打过扑克牌的人都应该能够秒懂。插入排序是一种最简单直观的排序算法，它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。（有点像扑克牌在手上排序的过程）</p>
+<p>插入排序和冒泡排序一样，也有一种优化算法，叫做拆半插入。</p>
+<h3 id="_2">排序步骤</h3>
+<p>将待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
+<p>在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动。</p>
+<h3 id="_3">动图演示</h3>
+<p><img alt="img" src="https://www.runoob.com/wp-content/uploads/2019/03/insertionSort.gif"></p>
+<h2 id="_4">代码实现</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">insert_sort_original</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">valuationCnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">// 赋值操作计数</span>
+    <span class="kt">int</span> <span class="n">comparisonCnt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">// 比较操作计数</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int …</span></code></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-insert-sort.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-selection-sort.html"><h1>数据结构与算法——选择排序</h1></a>
 <span class="metadata">
 2020-10-10 Sat&nbsp;&nbsp;&nbsp;
@@ -116,7 +155,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 <p>选择排序的交换操作介于 0 和 (n - 1)次之间。选择排序的比较操作为 n(n - 1)/2 次。选择排序的赋值操作介于 0 和 3(n …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-selection-sort.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -633,47 +672,6 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 </li>
 <li>
 <p>在实践中，大多数应用程序不需要上述低级抽象，而是针对<strong>Core API</strong>编程， 如<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>（有界/无界流）和<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/index.html">DataSet API</a>（有界数据集）。这些流畅的API提供了用于数据处理的通用构建块，例如各种形式的用户指定的转换，连接，聚合，窗口，状态等（transformations, joins, aggregations …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-programming-model.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/big-data-flink-usecases.html"><h1>Flink用例</h1></a>
-<span class="metadata">
-2019-06-20 Thu&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<p>Apache Flink因其丰富的功能集而成为开发和运行多种不同类型应用程序的绝佳选择。Flink的功能包括支持流和批处理，复杂的状态管理，事件时间处理语义以及状态的精确一次一致性保证。此外，Flink可以部署在各种资源提供者（如YARN，Apache Mesos和Kubernetes）上，也可以作为裸机硬件上的独立群集。配置为高可用性，Flink没有单点故障。Flink已被证明可扩展到数千个核心和TB级的应用程序状态，提供高吞吐量和低延迟，并为世界上最苛刻的流处理应用程序提供支持。</p>
-<p>下面，我们将探讨由Flink提供支持的最常见类型的应用程序，并指出实际示例。</p>
-<ul>
-<li><a href="https://flink.apache.org/usecases.html#eventDrivenApps">事件驱动的应用程序</a></li>
-<li><a href="https://flink.apache.org/usecases.html#analytics">数据分析应用</a></li>
-<li><a href="https://flink.apache.org/usecases.html#pipelines">数据管道应用</a></li>
-</ul>
-<h2 id="_1">事件驱动的应用程序</h2>
-<h3 id="_2">什么是事件驱动的应用程序？</h3>
-<p>事件驱动的应用程序是一个有状态的应用程序，它从一个或多个事件流中提取事件，并通过触发计算，状态更新或外部操作对传入事件做出反应。</p>
-<p>事件驱动的应用程序是传统应用程序设计的演变。传统应用一般具有独立的计算和数据存储层，在此体系结构中，应用程序从远程事务数据库读取数据并将数据持久化。</p>
-<p>相反，事件驱动的应用程序基于有状态流处理应用程序。在这种设计中，数据和计算是共同定位的，即本地（内存或磁盘）数据访问。通过定期将检查点写入远程持久存储来实现容错。下图描绘了传统应用程序体系结构和事件驱动应用程序之间的差异。</p>
-<p><img alt="img" src="https://flink.apache.org/img/usecases-eventdrivenapps.png"/></p>
-<h3 id="_3">事件驱动的应用程序有哪些优点？</h3>
-<p>事件驱动的应用程序不是查询远程数据库，而是在本地访问其数据，从而在吞吐量和延迟方面产生更好的性能。远程持久存储的定期检查点可以异步和递增完成。因此，检查点对常规事件处理的影响非常小。但是 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-usecases.html">read more</a></div>
         <hr />
     </div>
 				

@@ -130,6 +130,41 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-shell-sort.html"><h1>数据结构与算法——希尔排序</h1></a>
+<span class="metadata">
+2020-10-26 Mon&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">算法原理</h2>
+<p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。但希尔排序是非稳定排序算法。</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ul>
+<li>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</li>
+<li>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位；</li>
+</ul>
+<p>希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录"基本有序"时，再对全体记录进行依次直接插入排序。<strong>该方法实质上是一种分组插入方法</strong>。</p>
+<p>希尔排序把元素按下标的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止。</p>
+<p>简单插入排序很循规蹈矩，不管数组分布是怎么样的，依然一步一步的对元素进行比较，移动，插入，比如[5,4,3,2,1,0]这种倒序序列，数组末端的0要回到首位置很是费劲，比较和移动元素均需n-1次。而希尔排序在数组中采用跳跃式分组的策略，通过某个增量将数组元素划分为若干组，然后分组进行插入排序，随后逐步缩小增量，继续按组进行插入排序操作，直至增量为1。希尔排序通过这种策略使得整个数组在初始阶段达到从宏观上看基本有序，小的基本在前，大的基本在后。然后缩小增量 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-shell-sort.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-selection-sort.html"><h1>数据结构与算法——选择排序</h1></a>
 <span class="metadata">
 2020-10-10 Sat&nbsp;&nbsp;&nbsp;
@@ -636,42 +671,6 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>DataStream API 捕获无界和有界的流的连续处理，以支持低等待时间的结果以及对事件和时间（包括事件时间）灵活反应的模型。</p>
 <p>DataSet API 具有加快有界的数据流的处理的技术。将来，社区计划将这些优化与DataStream API中的技术相结合。</p>
 <h3 id="flinkhadoop">Flink如何与Hadoop栈相关联 …</h3> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-FAQ.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/big-data-flink-programming-model.html"><h1>Flink Dataflow 编程模型</h1></a>
-<span class="metadata">
-2019-06-21 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<p>Apache Flink是一个用于分布式流和批处理数据处理的开源平台。Flink的核心是流数据流引擎，为数据流上的分布式计算提供数据分发，通信和容错。Flink基于流引擎之上构建批处理，覆加本地迭代支持，内存托管和程序优化。</p>
-<h2 id="_1">抽象层次</h2>
-<p>Flink提供不同级别的抽象来开发流/批处理应用程序。</p>
-<p><img alt="编程抽象级别" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/levels_of_abstraction.svg"/></p>
-<ul>
-<li>
-<p>最低级抽象只提供<strong>stateful streaming</strong>。它通过<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/process_function.html">Process Function</a>嵌入到<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API中</a>。它允许用户自由处理来自一个或多个流的事件，并使用一致的容错<em>状态</em>。此外，用户可以注册事件时间和处理时间回调，允许程序实现复杂的计算。</p>
-</li>
-<li>
-<p>在实践中，大多数应用程序不需要上述低级抽象，而是针对<strong>Core API</strong>编程， 如<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/datastream_api.html">DataStream API</a>（有界/无界流）和<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/batch/index.html">DataSet API</a>（有界数据集）。这些流畅的API提供了用于数据处理的通用构建块，例如各种形式的用户指定的转换，连接，聚合，窗口，状态等（transformations, joins, aggregations …</p></li></ul> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-programming-model.html">read more</a></div>
         <hr />
     </div>
 				

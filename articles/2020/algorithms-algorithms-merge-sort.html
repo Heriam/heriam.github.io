@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 数据结构与算法——归并排序: 数组&链表&递归&非递归解法全家桶</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin Time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="OGeiccsh1O" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+    <script src="https://jiang-hao.com/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="https://jiang-hao.com/theme/tipuesearch/tipuesearch.css">
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="https://jiang-hao.com/theme/bootstrap-collapse.js"></script>
+
+    <!-- Le styles -->
+    <link href="https://jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="dropdown-jh"><a>Categories</a>
+                <ul class="dropdown-content-jh">
+                    <li><a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a></li>
+                    <li><a href="https://jiang-hao.com/categories/backend.html">Backend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
+                    <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
+                    <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
+                    <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
+                    <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            <li><a href="/pages/aboutme">AboutMe</a></li>
+            
+        </ul>
+
+        <form class="navbar-search pull-right" action="https://jiang-hao.com/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
+        </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>数据结构与算法——归并排序: 数组&链表&递归&非递归解法全家桶</h1>
+<span class="metadata">
+2020-10-29 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span>        </div>
+
+        <hr />
+
+        <div class="copyright-claim">
+        	<span>
+    			<p>版权声明：本文为<a href="https://jiang-hao.com">Heriam</a>博主原创文章，遵循<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。</p>
+    			<p>原文链接：<a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-merge-sort.html">https://jiang-hao.com/articles/2020/algorithms-algorithms-merge-sort.html</a></p>
+    		</span>
+        </div>
+
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
+<li><a href="#_1">算法介绍</a></li>
+<li><a href="#_2">算法步骤</a></li>
+<li><a href="#_3">代码实现</a><ul>
+<li><a href="#onlognon">数组实现时间复杂度O(NlogN)，空间复杂度O(N)</a><ul>
+<li><a href="#_4">递归实现一：每次归并时都创建一个辅助数组</a></li>
+<li><a href="#_5">递归实现二：仅创建一次一个等长的辅助数组，交替归并</a></li>
+<li><a href="#_6">非递归实现</a></li>
+</ul>
+</li>
+<li><a href="#onlogno1">链表实现时间复杂度O(NlogN)，空间复杂度O(1)</a><ul>
+<li><a href="#_7">递归实现</a></li>
+<li><a href="#_8">非递归实现(从底至顶直接合并)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_9">算法复杂度</a></li>
+</ul>
+</div>
+			</nav>
+
+			<hr />
+
+
+        <div>
+<h2 id="_1">算法介绍</h2>
+<p>归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</p>
+<p><img alt="img" src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161218163120151-452283750.png"/></p>
+<p>作为一种典型的分而治之思想的算法应用，归并排序的实现由两种方法：</p>
+<ul>
+<li>自上而下的递归：它从树的顶端开始，然后向下操作，每次操作都问同样的问题（我需要做什么来排序这个数组？）并回答它（分成两个子数组，进行递归调用，合并结果），直到我们到达树的底部。</li>
+<li>自下而上的迭代：不需要递归。它直接从树的底部开始，然后通过遍历这些片段再将它们合并起来。</li>
+</ul>
+<p>在《数据结构与算法 JavaScript 描述》中，作者给出了自下而上的迭代方法。但是对于递归法，作者却认为：</p>
+<blockquote>
+<p>However, it is not possible to do so in JavaScript, as the recursion goes too deep for the language to handle.
+然而，在 JavaScript 中这种方式不太可行，因为这个算法的递归深度对它来讲太深了。</p>
+</blockquote>
+<p>和选择排序一样，归并排序的性能不受输入数据的影响，但表现比选择排序好的多，因为始终都是 O(nlogn) 的时间复杂度。代价是需要额外的内存空间。</p>
+<p>归并排序分为三个过程：</p>
+<ol>
+<li>将数列划分为两部分（在均匀划分时时间复杂度为 ）；</li>
+<li>递归地分别对两个子序列进行归并排序；</li>
+<li>合并两个子序列。</li>
+</ol>
+<p>不难发现，归并排序的核心是如何合并两个子序列，前两步都很好实现。</p>
+<p>其实合并的时候也不难操作。注意到两个子序列在第二步中已经保证了都是有序的了，第三步中实际上是想要把两个 <strong>有序</strong> 的序列合并起来。</p>
+<h2 id="_2">算法步骤</h2>
+<ol>
+<li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</li>
+<li>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</li>
+<li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</li>
+<li>重复步骤 3 直到某一指针达到序列尾；</li>
+<li>将另一序列剩下的所有元素直接复制到合并序列尾。</li>
+</ol>
+<p><img alt="img" src="https://www.runoob.com/wp-content/uploads/2019/03/mergeSort.gif"/></p>
+<h2 id="_3">代码实现</h2>
+<h3 id="onlognon">数组实现时间复杂度<em>O(NlogN)</em>，空间复杂度<em>O(N)</em></h3>
+<h4 id="_4">递归实现一：每次归并时都创建一个辅助数组</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 对数组进行拷贝，不改变参数内容</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">Math</span><span class="p">.</span><span class="na">floor</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">left</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOfRange</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">middle</span><span class="p">);</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">right</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOfRange</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">sort</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="n">sort</span><span class="p">(</span><span class="n">right</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 创建一个辅助数组存储归并结果</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">left</span><span class="p">.</span><span class="na">length</span><span class="o">+</span><span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">result</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 右侧数组全都转存完时，直接将左侧数组剩余的元素转存到结果数组</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">right</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">result</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// 左侧数组全都转存完时，直接将右侧数组剩余的元素转存到结果数组</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">left</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">result</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span><span class="o">[</span><span class="n">j</span><span class="o">++]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// 否则，将两个子数组当前元素中较小的那个转存到结果数组中</span>
+        <span class="k">else</span> <span class="n">result</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;=</span><span class="n">right</span><span class="o">[</span><span class="n">j</span><span class="o">]?</span> <span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span><span class="p">:</span> <span class="n">right</span><span class="o">[</span><span class="n">j</span><span class="o">++]</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>力扣运行结果：</p>
+<p>执行用时：10 ms, 在所有 Java 提交中击败了30.97%的用户</p>
+<p>内存消耗：44.2 MB, 在所有 Java 提交中击败了99.55%的用户</p>
+<table>
+<thead>
+<tr>
+<th>提交时间</th>
+<th>提交结果</th>
+<th>运行时间</th>
+<th>内存消耗</th>
+<th>语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>几秒前</td>
+<td><a href="https://leetcode-cn.com/submissions/detail/124802530/">通过</a></td>
+<td>10 ms</td>
+<td>43.8 MB</td>
+<td>Java</td>
+</tr>
+<tr>
+<td>几秒前</td>
+<td><a href="https://leetcode-cn.com/submissions/detail/124802509/">通过</a></td>
+<td>10 ms</td>
+<td>43.9 MB</td>
+<td>Java</td>
+</tr>
+<tr>
+<td>几秒前</td>
+<td><a href="https://leetcode-cn.com/submissions/detail/124802490/">通过</a></td>
+<td>10 ms</td>
+<td>44.1 MB</td>
+<td>Java</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_5">递归实现二：仅创建一次一个等长的辅助数组，交替归并</h4>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * 递归交替合并</span>
+<span class="cm"> * @param src 待合并的数组</span>
+<span class="cm"> * @param dst 合并结果数组</span>
+<span class="cm"> * @param start  数组 src 的 start 下标</span>
+<span class="cm"> * @param end 数组 src 的 end 下标</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 当待排序段[start,end)仅包含小于等于一个元素时，自然有序</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dst</span><span class="o">[</span><span class="n">start</span><span class="o">]=</span><span class="n">src</span><span class="o">[</span><span class="n">start</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 将左右两段子数组分别排好序</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ii</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">iii</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span><span class="p">;</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">ii</span><span class="p">);</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">iii</span><span class="p">);</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">iii</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+    <span class="n">merge</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">ii</span><span class="p">);</span>
+    <span class="n">merge</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">iii</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+    <span class="c1">// 最后归并</span>
+    <span class="n">merge</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * 归并方法：合并左右两段已分别排好序的 src[start:middle) 和 src[middle:end) 到 dst[start:end)</span>
+<span class="cm"> * 数组 src 的 [start:middle) 部分以及 [middle:end) 部分都已经各自排好序</span>
+<span class="cm"> * @param src 待合并的数组</span>
+<span class="cm"> * @param dst 合并结果数组</span>
+<span class="cm"> * @param start  数组 src 的 start 下标</span>
+<span class="cm"> * @param middle  数组 src 的 middle 下标</span>
+<span class="cm"> * @param end 数组 src 的 end 下标</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span> <span class="o">[]</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="o">[]</span> <span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">middle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">middle</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 右侧数组全都转存完时，直接将左侧数组剩余的元素转存到结果数组</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dst</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">src</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// 左侧数组全都转存完时，直接将右侧数组剩余的元素转存到结果数组</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">middle</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dst</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">src</span><span class="o">[</span><span class="n">j</span><span class="o">++]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// 否则，将两个子数组当前元素中较小的那个转存到结果数组中</span>
+        <span class="k">else</span> <span class="n">dst</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">src</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;=</span><span class="n">src</span><span class="o">[</span><span class="n">j</span><span class="o">]?</span> <span class="n">src</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span><span class="p">:</span> <span class="n">src</span><span class="o">[</span><span class="n">j</span><span class="o">++]</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>力扣运行结果：</p>
+<p>执行用时：6 ms, 在所有 Java 提交中击败了64.16%的用户</p>
+<p>内存消耗：45.7 MB, 在所有 Java 提交中击败了86.98%的用户</p>
+<table>
+<thead>
+<tr>
+<th align="left">提交时间</th>
+<th align="left">提交结果</th>
+<th align="left">运行时间</th>
+<th align="left">内存消耗</th>
+<th align="left">语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/124804541/">通过</a></td>
+<td align="left">6 ms</td>
+<td align="left">46.3 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/124804530/">通过</a></td>
+<td align="left">6 ms</td>
+<td align="left">45.9 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/124804492/">通过</a></td>
+<td align="left">6 ms</td>
+<td align="left">46 MB</td>
+<td align="left">Java</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_6">非递归实现</h4>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * 归并方法：合并左右两段已分别排好序的 src[start:middle) 和 src[middle:end) 到 dst[start:end)</span>
+<span class="cm"> * 数组 src 的 [start:middle) 部分以及 [middle:end) 部分都已经各自排好序</span>
+<span class="cm"> * @param src 待合并的数组</span>
+<span class="cm"> * @param dst 合并结果数组</span>
+<span class="cm"> * @param start  数组 src 的 start 下标</span>
+<span class="cm"> * @param middle  数组 src 的 middle 下标</span>
+<span class="cm"> * @param end 数组 src 的 end 下标</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span> <span class="o">[]</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="o">[]</span> <span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">middle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">middle</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">middle</span><span class="p">)</span> <span class="n">dst</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">src</span><span class="o">[</span><span class="n">j</span><span class="o">++]</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">end</span><span class="p">)</span> <span class="n">dst</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">src</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">dst</span><span class="o">[</span><span class="n">k</span><span class="o">++]</span> <span class="o">=</span> <span class="n">src</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">src</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">?</span> <span class="n">src</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span> <span class="p">:</span> <span class="n">src</span><span class="o">[</span><span class="n">j</span><span class="o">++]</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * 用于合并排好序的相邻数组段</span>
+<span class="cm"> * 将 x 合并到 y</span>
+<span class="cm"> * @param x</span>
+<span class="cm"> * @param y</span>
+<span class="cm"> * @param s 合并大小</span>
+<span class="cm"> */</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">mergePass</span><span class="p">(</span><span class="kt">int</span> <span class="o">[]</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="o">[]</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">s</span><span class="p">){</span>
+    <span class="c1">//从第一个元素开始</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">//i+2*s 要小于等于数组长度，也就是说未合并的元素个数要大于2*s</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">s</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//合并大小为s的相邻2段子数组</span>
+        <span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//此循环执行的次数为： x.length/(2*s) 次       9/(2*1)=4</span>
+    <span class="c1">//若未合并的元素个数大于 1*s，则合并最后两个序列</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">s</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="n">merge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+    <span class="c1">//否则直接复制到y</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">y</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">[</span><span class="n">i</span><span class="o">++]</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/**</span>
+<span class="cm"> * 消去递归后的归并排序算法</span>
+<span class="cm"> * @param a</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">mergeSort</span><span class="p">(</span><span class="kt">int</span> <span class="o">[]</span><span class="n">a</span> <span class="p">){</span>
+    <span class="c1">//申请个大小和a相等的数组b</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">//这里不能为&lt;=</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">s</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//交替合并</span>
+        <span class="n">mergePass</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+        <span class="n">s</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">mergePass</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+        <span class="n">s</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>力扣执行结果：</p>
+<p>执行用时：7 ms, 在所有 Java 提交中击败了55.19%的用户</p>
+<p>内存消耗：45.8 MB, 在所有 Java 提交中击败了75.00%的用户</p>
+<table>
+<thead>
+<tr>
+<th align="left">提交时间</th>
+<th align="left">提交结果</th>
+<th align="left">运行时间</th>
+<th align="left">内存消耗</th>
+<th align="left">语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/125462033/">通过</a></td>
+<td align="left">7 ms</td>
+<td align="left">45.8 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/125462001/">通过</a></td>
+<td align="left">8 ms</td>
+<td align="left">45.7 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/125461965/">通过</a></td>
+<td align="left">7 ms</td>
+<td align="left">45.7 MB</td>
+<td align="left">Java</td>
+</tr>
+</tbody>
+</table>
+<h3 id="onlogno1">链表实现时间复杂度<em>O(NlogN)</em>，空间复杂度<em>O(1)</em></h3>
+<h4 id="_7">递归实现</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">static</span> <span class="kd">class</span> <span class="nc">ListNode</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+    <span class="n">ListNode</span> <span class="n">next</span><span class="p">;</span>
+    <span class="n">ListNode</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="n">ListNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">ListNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">,</span> <span class="n">ListNode</span> <span class="n">next</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span> <span class="k">this</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">ListNode</span> <span class="nf">sortList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="o">==</span><span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+    <span class="c1">//链表的快慢指针二分法</span>
+    <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+    <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="p">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//找到中间节点</span>
+    <span class="n">ListNode</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">slow</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+    <span class="c1">//二分切割链表</span>
+    <span class="n">slow</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="c1">//递归调用归并</span>
+    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">sortList</span><span class="p">(</span><span class="n">head</span><span class="p">),</span> <span class="n">sortList</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="n">ListNode</span> <span class="nf">merge</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">left</span><span class="p">,</span> <span class="n">ListNode</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//创建哨兵节点，存放归并结果</span>
+    <span class="n">ListNode</span> <span class="n">sentinel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="c1">//创建指针，维护尾节点</span>
+    <span class="n">ListNode</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">sentinel</span><span class="p">;</span>
+    <span class="c1">//两个子链都还存在节点时，进入循环体</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span><span class="o">!=</span><span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">right</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//较小的节点放入结果链表，对应子链去头</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">.</span><span class="na">val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">tail</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">left</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">tail</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">right</span><span class="p">;</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">right</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//更新尾节点</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">tail</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//将还有剩余节点的子链直接尾接到结果链</span>
+    <span class="n">tail</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">left</span><span class="o">==</span><span class="kc">null</span><span class="o">?</span> <span class="n">right</span><span class="p">:</span> <span class="n">left</span><span class="p">;</span>
+    <span class="c1">//返回归并结果</span>
+    <span class="k">return</span> <span class="n">sentinel</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>力扣执行结果：</p>
+<p>执行用时：6 ms, 在所有 Java 提交中击败了53.76%的用户</p>
+<p>内存消耗：46.5 MB, 在所有 Java 提交中击败了23.27%的用户</p>
+<table>
+<thead>
+<tr>
+<th align="left">提交时间</th>
+<th align="left">提交结果</th>
+<th align="left">运行时间</th>
+<th align="left">内存消耗</th>
+<th align="left">语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/125469282/">通过</a></td>
+<td align="left">6 ms</td>
+<td align="left">46.5 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">2 分钟前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/125468929/">通过</a></td>
+<td align="left">6 ms</td>
+<td align="left">47 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">2 分钟前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/125468909/">通过</a></td>
+<td align="left">6 ms</td>
+<td align="left">46.6 MB</td>
+<td align="left">Java</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_8">非递归实现(从底至顶直接合并)</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">ListNode</span> <span class="nf">sortList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ListNode</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        <span class="n">length</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">ListNode</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">res</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+    <span class="c1">// 从1到length迭代单元块大小</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">blockSize</span><span class="o">&lt;</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ListNode</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        <span class="c1">// 两两遍历所有单元块</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">ListNode</span> <span class="n">h1</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+                <span class="n">i</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+            <span class="n">ListNode</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+                <span class="n">i</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="kt">int</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">blockSize</span><span class="o">-</span><span class="n">i</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">c1</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">c2</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">h1</span><span class="p">.</span><span class="na">val</span> <span class="o">&lt;=</span> <span class="n">h2</span><span class="p">.</span><span class="na">val</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">pre</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">h1</span><span class="p">;</span>
+                    <span class="n">h1</span> <span class="o">=</span> <span class="n">h1</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+                    <span class="n">c1</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">pre</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">h2</span><span class="p">;</span>
+                    <span class="n">h2</span> <span class="o">=</span> <span class="n">h2</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+                    <span class="n">c2</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">pre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">pre</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">c1</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">?</span> <span class="n">h1</span> <span class="p">:</span> <span class="n">h2</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">c1</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">c2</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">pre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+                <span class="n">c1</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+                <span class="n">c2</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">pre</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">blockSize</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>力扣执行结果：</p>
+<p>执行用时：8 ms, 在所有 Java 提交中击败了41.64%的用户</p>
+<p>内存消耗：43.1 MB, 在所有 Java 提交中击败了66.86%的用户</p>
+<table>
+<thead>
+<tr>
+<th align="left">提交时间</th>
+<th align="left">提交结果</th>
+<th align="left">运行时间</th>
+<th align="left">内存消耗</th>
+<th align="left">语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/129659031/">通过</a></td>
+<td align="left">8 ms</td>
+<td align="left">43.1 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">3 分钟前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/129658895/">通过</a></td>
+<td align="left">9 ms</td>
+<td align="left">43.1 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">7 分钟前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/129658730/">通过</a></td>
+<td align="left">8 ms</td>
+<td align="left">42.8 MB</td>
+<td align="left">Java</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_9">算法复杂度</h2>
+<p>最优时间复杂度：O(n*log(n))</p>
+<p>最坏时间复杂度：O(n*log(n))</p>
+<p>平均时间复杂度：O(n*log(n))</p>
+<p>最坏空间复杂度：总共O(n)，辅助O(n)；当使用linked list，辅助空间为O(1).</p></div>
+	
+        <hr />
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+    			<div style="width:80%; margin:0 auto;">
+                    <div style="text-align: center;">
+						<a href="/" class="profilepic">
+                            <img src="https://i.loli.net/2019/10/31/TRSQt7aKkx6DdBA.png" οnerrοr="this.onerror=null;this.src='https://raw.githubusercontent.com/Heriam/images/master/portrait/photo-zzz.png';" alt="photo-zzz.png" title="photo-zzz.png" />
+						</a>
+						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
+						<p class="motto">We only live once, and time just goes by.</p>
+						<ul class="biography">
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+
+					<hr>
+
+						<div class="tooltip">
+							<span class="tooltiptext">Facebook</span>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Facebook.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">微博</span>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/微博.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Linkedin</span>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Linkedin.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Github</span>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Github.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Email</span>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Email.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Instagram</span>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Instagram.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">ResearchGate</span>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">知乎</span>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/知乎.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">OSChina</span>
+							<a href="https://my.oschina.net/heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/OSChina.svg) center no-repeat"></a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+<!--            <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8958123988900703"
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
+</footer>
+
+</div> <!-- /container -->
+<script>var _gaq=[['_setAccount','UA-137721527-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<script>
+    function validateForm(query)
+    {
+        return (query.length > 0);
+    }
+</script>
+<meting-js
+    server="netease"
+    type="playlist"
+    id="43561591"
+    fixed="true"
+    order="list"
+    volume="1.0"
+    list-folded="true"
+    >
+</meting-js>
+</body>
+</html>

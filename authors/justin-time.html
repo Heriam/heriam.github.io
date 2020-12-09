@@ -91,6 +91,42 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-merge-sort.html"><h1>数据结构与算法——归并排序: 数组&链表&递归&非递归解法全家桶</h1></a>
+<span class="metadata">
+2020-10-29 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">算法介绍</h2>
+<p>归并排序（Merge sort）是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</p>
+<p><img alt="img" src="https://images2015.cnblogs.com/blog/1024555/201612/1024555-20161218163120151-452283750.png"/></p>
+<p>作为一种典型的分而治之思想的算法应用，归并排序的实现由两种方法：</p>
+<ul>
+<li>自上而下的递归：它从树的顶端开始，然后向下操作，每次操作都问同样的问题（我需要做什么来排序这个数组？）并回答它（分成两个子数组，进行递归调用，合并结果），直到我们到达树的底部。</li>
+<li>自下而上的迭代：不需要递归。它直接从树的底部开始，然后通过遍历这些片段再将它们合并起来。</li>
+</ul>
+<p>在《数据结构与算法 JavaScript 描述》中，作者给出了自下而上的迭代方法。但是对于递归法，作者却认为：</p>
+<blockquote>
+<p>However, it is not possible to do so in JavaScript, as the recursion goes too deep …</p></blockquote> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-merge-sort.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-insert-sort.html"><h1>数据结构与算法——插入排序（扑克牌排序）</h1></a>
 <span class="metadata">
 2020-10-26 Mon&nbsp;&nbsp;&nbsp;
@@ -121,7 +157,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i …</span></code></pre></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-insert-sort.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -637,40 +673,6 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 </ul>
 <p>必须始终至少有一个TaskManager。</p>
 <p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/big-data-flink-FAQ.html"><h1>Flink FAQ</h1></a>
-<span class="metadata">
-2019-06-21 Fri&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<h3 id="apache-flink">Apache Flink仅用于（近）实时处理用例吗？</h3>
-<p>Flink是一个非常通用的系统，用于数据处理和数据驱动的应用程序，<em>数据流</em>作为核心构建块。这些数据流可以是实时数据流或存储的历史数据流。例如，在Flink的视图中，文件是存储的字节流。因此，Flink支持实时数据处理和应用程序，以及批处理应用程序。</p>
-<p>流可以是<em>无界的</em>（没有结束，事件不断发生）或受<em>限制</em>（流有开始和结束）。例如，来自消息队列的Twitter馈送或事件流通常是无界的流，而来自文件的字节流是有界流。</p>
-<h3 id="flinkdatastreamdataset-api">如果一切都是流，为什么Flink中有DataStream和DataSet API？</h3>
-<p>有界流通常比无界流更高效。在（近）实时处理无限事件流需要系统能够立即对事件起作用并产生中间结果（通常具有低延迟）。处理有界流通常不需要产生低延迟结果，因为无论如何数据都是旧的（相对而言）。这允许Flink以简单且更高效的方式处理数据。</p>
-<p>DataStream API 捕获无界和有界的流的连续处理，以支持低等待时间的结果以及对事件和时间（包括事件时间）灵活反应的模型。</p>
-<p>DataSet API 具有加快有界的数据流的处理的技术。将来，社区计划将这些优化与DataStream API中的技术相结合。</p>
-<h3 id="flinkhadoop">Flink如何与Hadoop栈相关联 …</h3> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-FAQ.html">read more</a></div>
         <hr />
     </div>
 				

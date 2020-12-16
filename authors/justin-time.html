@@ -91,9 +91,38 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-quick-sort.html"><h1>数据结构与算法——快速排序</h1></a>
+<span class="metadata">
+2020-12-10 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<p>快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序 n 个项目要 Ο(nlogn) 次比较。在最坏状况下则需要 Ο(n2) 次比较，但这种状况并不常见。事实上，快速排序通常明显比其他 Ο(nlogn) 算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来。</p>
+<p>快速排序使用分治法（Divide and conquer）策略来把一个串行（list）分为两个子串行（sub-lists）。</p>
+<p>快速排序又是一种分而治之思想在排序算法上的典型应用。本质上来看，快速排序应该算是在冒泡排序基础上的递归分治法。</p>
+<p>快速排序的名字起的是简单粗暴，因为一听到这个名字你就知道它存在的意义，就是快，而且效率高！它是处理大数据最快的排序算法之一了。虽然 Worst Case 的时间复杂度达到了 O(n²)，但是人家就是优秀，在大多数情况下都比平均时间复杂度为 O(n logn …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-quick-sort.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-merge-sort.html"><h1>数据结构与算法——归并排序: 数组&链表&递归&非递归解法全家桶</h1></a>
 <span class="metadata">
-2020-10-29 Thu&nbsp;&nbsp;&nbsp;
+2020-11-29 Sun&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -121,7 +150,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 <p>However, it is not possible to do so in JavaScript, as the recursion goes too deep …</p></blockquote> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-merge-sort.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -635,47 +664,6 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>然而，当用户访问量持续增加时，就需要考虑读写分离技术（Master－Slave）架构则如下图，分库分表技术。现在，架构变得越来越复杂了，增加队列、分区、复制等处理逻辑。应用程序需要了解数据库的schema，才能访问到正确的数据。</p>
 <p><img alt="" src="https://i.loli.net/2019/11/01/lvg2m1LXJNna6Mj.png"/></p>
 <p>商业现实已经发生了变化，所以现在更快做出的决定更有价值。除此之外，技术也在不断发展。Kafka，Storm，Trident，Samza …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-lambda-architecture.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/big-data-flink-distributed-runtime.html"><h1>Flink 分布式运行时环境</h1></a>
-<span class="metadata">
-2019-07-01 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/flink.html">Flink</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<h2 id="tasks-and-operator-chains">Tasks and Operator Chains</h2>
-<p>对于分布式执行，Flink将多个算子子任务链串联成任务。每个任务由一个线程执行。将算子链接到任务是一项有用的优化：它可以减少线程到线程切换和缓冲的开销，并在降低延迟的同时提高整体吞吐量。可以配置链接行为; 有关详细信息，请参阅<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/stream/operators/#task-chaining-and-resource-groups">链接文档</a>。</p>
-<p>下图中的示例数据流由五个子任务执行，因此具有五个并行线程。</p>
-<p><img alt="算子链接到任务" src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/tasks_chains.svg"/></p>
-<h2 id="job-managers-task-managers-clients">Job Managers, Task Managers, Clients</h2>
-<p>Flink运行时包含两种类型的进程：</p>
-<ul>
-<li><strong>JobManagers</strong>（也称为<em>masters</em>）协调分布式执行。他们安排任务，协调检查点，协调故障恢复等。</li>
-</ul>
-<p>Job Manager总是至少有一个。高可用性设置将具有多个JobManagers，其中一个始终是<em>领导者</em>，其他处于<em>待机状态</em>。</p>
-<ul>
-<li><strong>TaskManagers</strong>（也叫<em>workers</em>）执行dataflow的<em>任务</em>（或者更具体地说应该是子任务），以及缓冲和交换data <em>streams</em>。</li>
-</ul>
-<p>必须始终至少有一个TaskManager。</p>
-<p>JobManagers和TaskManagers可以通过多种方式启动：作为<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/deployment/cluster_setup.html">独立集群</a>直接在计算机上，在容器中 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-distributed-runtime.html">read more</a></div>
         <hr />
     </div>
 				

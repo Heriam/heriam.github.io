@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 数据结构与算法——快速排序</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin Time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="OGeiccsh1O" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+    <script src="https://jiang-hao.com/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="https://jiang-hao.com/theme/tipuesearch/tipuesearch.css">
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="https://jiang-hao.com/theme/bootstrap-collapse.js"></script>
+
+    <!-- Le styles -->
+    <link href="https://jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="dropdown-jh"><a>Categories</a>
+                <ul class="dropdown-content-jh">
+                    <li><a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a></li>
+                    <li><a href="https://jiang-hao.com/categories/backend.html">Backend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
+                    <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
+                    <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
+                    <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
+                    <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            <li><a href="/pages/aboutme">AboutMe</a></li>
+            
+        </ul>
+
+        <form class="navbar-search pull-right" action="https://jiang-hao.com/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
+        </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>数据结构与算法——快速排序</h1>
+<span class="metadata">
+2020-12-10 Thu&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span>        </div>
+
+        <hr />
+
+        <div class="copyright-claim">
+        	<span>
+    			<p>版权声明：本文为<a href="https://jiang-hao.com">Heriam</a>博主原创文章，遵循<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。</p>
+    			<p>原文链接：<a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-quick-sort.html">https://jiang-hao.com/articles/2020/algorithms-algorithms-quick-sort.html</a></p>
+    		</span>
+        </div>
+
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
+<li><a href="#1">1. 算法步骤</a></li>
+<li><a href="#2">2. 动图演示</a></li>
+<li><a href="#3">3. 算法原理</a></li>
+<li><a href="#4">4. 算法实现</a><ul>
+<li><a href="#_1">实现一</a></li>
+<li><a href="#_2">实现二</a></li>
+</ul>
+</li>
+<li><a href="#5">5. 快速排序的特点及性能</a></li>
+</ul>
+</div>
+			</nav>
+
+			<hr />
+
+
+        <div>
+<p>快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序 n 个项目要 Ο(nlogn) 次比较。在最坏状况下则需要 Ο(n2) 次比较，但这种状况并不常见。事实上，快速排序通常明显比其他 Ο(nlogn) 算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地被实现出来。</p>
+<p>快速排序使用分治法（Divide and conquer）策略来把一个串行（list）分为两个子串行（sub-lists）。</p>
+<p>快速排序又是一种分而治之思想在排序算法上的典型应用。本质上来看，快速排序应该算是在冒泡排序基础上的递归分治法。</p>
+<p>快速排序的名字起的是简单粗暴，因为一听到这个名字你就知道它存在的意义，就是快，而且效率高！它是处理大数据最快的排序算法之一了。虽然 Worst Case 的时间复杂度达到了 O(n²)，但是人家就是优秀，在大多数情况下都比平均时间复杂度为 O(n logn) 的排序算法表现要更好，可是这是为什么呢，我也不知道。好在我的强迫症又犯了，查了 N 多资料终于在《算法艺术与信息学竞赛》上找到了满意的答案：</p>
+<blockquote>
+<p>快速排序的最坏运行情况是 O(n²)，比如说顺序数列的快排。但它的平摊期望时间是 O(nlogn)，且 O(nlogn) 记号中隐含的常数因子很小，比复杂度稳定等于 O(nlogn) 的归并排序要小很多。所以，对绝大多数顺序性较弱的随机数列而言，快速排序总是优于归并排序。</p>
+</blockquote>
+<h3 id="1">1. 算法步骤</h3>
+<ol>
+<li>从数列中挑出一个元素，称为 "基准"（pivot）;</li>
+<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</li>
+<li>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</li>
+</ol>
+<h3 id="2">2. 动图演示</h3>
+<p><img alt="img" src="https://www.runoob.com/wp-content/uploads/2019/03/quickSort.gif"/></p>
+<h3 id="3">3. 算法原理</h3>
+<p>排序算法的思想非常简单，在待排序的数列中，我们首先要找一个数字作为基准数（这只是个专用名词）。为了方便，我们一般选择第 1 个数字作为基准数（其实选择第几个并没有关系）。接下来我们需要把这个待排序的数列中小于基准数的元素移动到待排序的数列的左边，把大于基准数的元素移动到待排序的数列的右边。这时，左右两个分区的元素就相对有序了；接着把两个分区的元素分别按照上面两种方法继续对每个分区找出基准数，然后移动，直到各个分区只有一个数时为止。</p>
+<p>这是典型的分治思想，即分治法。下面我们对一个实际例子进行算法描述，讲解快速排序的排序步骤。</p>
+<p>以 47、29、71、99、78、19、24、47 的待排序的数列为例进行排序，即待排序的数列为 47、29、71、99、78、19、24、47。</p>
+<p>首先我们需要在数列中选择一个基准数，我们一般会选择中间的一个数或者头尾的数，这里直接选择第 1 个数 47 作为基准数，接着把比 47 小的数字移动到左边，把比 47 大的数字移动到右边，对于相等的数字不做移动。所以实际上我们需要找到中间的某个位置 k，这样 k 左边的值全部比 k 上的值小，k 右边的值全部比 k 上的值大。</p>
+<p>接下来开始移动元素。怎么移动呢？其实冒泡排序也涉及对元素的移动，但是那样移动起来很累，比如把最后一个元素移动到第 1 个，就需要比较 n-1 次，同时交换 n-1 次，效率很低。其实，只需把第 1 个元素和最后一个元素交换就好了，这种思想是不是在排序时可以借鉴呢？之前说快速排序就是对冒泡排序的一个改进，就是这个原因。</p>
+<p>快速排序的操作是这样的：首先从数列的右边开始往左边找，我们设这个下标为 i，也就是进行减减操作（i--），找到第 1 个比基准数小的值，让它与基准值交换；接着从左边开始往右边找，设这个下标为 j，然后执行加加操作（j++），找到第 1 个比基准数大的值，让它与基准值交换；然后继续寻找，直到 i 与 j 相遇时结束，最后基准值所在的位置即 k 的位置，也就是说 k 左边的值均比 k 上的值小，而 k 右边的值都比 k 上的值大。</p>
+<p>所以对于上面的数列 47、29、71、99、78、19、24、47，进行第 1 趟第 1 个交换的排序情况如下，第 1 次的操作情况如图1所示。</p>
+<p><img alt="img" src="http://data.biancheng.net/uploads/allimg/181002/1-1Q00220010V16.jpg"/>
+图 1 第 1 次发现可以交换的数</p>
+<p>交换之后，j 移动到了下标为 6 的位置，对 i 继续扫描，如图 2 所示。</p>
+<p><img alt="img" src="http://data.biancheng.net/uploads/allimg/181002/1-1Q00220013M46.jpg"/>
+图 2 第 2 次发现可交换的值</p>
+<p>此时交换后的数列变为 24、29、47、99、78、19、71、47。接下来我们继续对 i、j 进行操作，如图 3 所示，继续进行 i-- 及 j++ 的比较操作。</p>
+<p><img alt="img" src="http://data.biancheng.net/uploads/allimg/181002/1-1Q00220025I54.jpg"/>
+图 3 继续进行 i 与 j 的移动</p>
+<p>进行了这两次 i、j 的移动、比较、交换之后，我们最终得到的数列是 24、29、19、47、78、99、71、47。接下来我们继续进行 i-- 的操作，发现在 i 为 4 时比 47 大不用交换，在 i 为 3 时与 j 相遇，这时就不需要继续移动、比较了，已经找到 k 了，并且 k 的值为 3。我们可以确认一下当前的数列是不是 k 左边的值都比 47 小，而 k 右边的值都比 47 大（由于要保持相对位置不变，所以 47 同样在基准值 47 的右边）。</p>
+<p>47 这个值已经落到了它该在的位置，第 1 趟排序完成了。接下来就是以 k 为基准，分为两部分，然后在左右两部分分别执行上述排序操作，最后数据会分为 4 部分；接着对每部分进行操作，直到每部分都只有一个值为止。</p>
+<p>接下来进行第 2 趟排序，现在左边部分为 24、29、19，我们选择第 1 个数 24 作为基准数，接着进行 i--、j++ 的操作，我们发现 i 最初的值为 19，比 24 这个基准值小，所以与基准值进行交换，得到的数列为 19、29、24；当 j 为 1 时，我们发现 29 比 24 大，所以与基准值进行交换，得到的数列 19、24、29，此时 i 为 2，j 为 1；继续 i-- 时发现 i 为 1，与 j 相遇，左边部分的数列的 k 为 1，并且左右两部分分别只有一个元素，此时第 2 轮排序的左边部分的排序结束，同时左边部分的所有数据都排序完成。</p>
+<p>我们接着看右边部分的排序，待排序的数列为 78、99、71、47，我们同样选择第 1 个值 78 为基准值，接下来进行 i 与 j 的移动与比较，发现 47 比 78 小，进行交换，得到的数列 47、99、71、78；从左往右发现 99 比基准值 78 大，进行交换，得到的数列为 47、78、71、99；继续从右向左看，发现 71 比基准值 78 小，进行交换，得到的数列为 47、71、78、99。此时 i 在整体数组中的下标为 6，j 为 5，若继续 j++ 则与 i 相遇，所以完成此轮排序。</p>
+<p>此时右边数列的 k 为 6，一般会是相遇的位置，也就是基准值所在的位置，这时数列又被分为两部分，左边是 47、71，右边是 99，需要继续对左边部分的数据进行排序，虽然只有两个数据，但我们还是继续按照快速排序的思想操作一下，选择 47 作为基准数，将i进行从右向左的移动、比较，发现 i 与 j 相等时没有产生移动，完成第 2 轮排序。</p>
+<p>至此，所有排序都已经完成，最终数列的结果是 19、24、29、47、47、71、78、99。</p>
+<h3 id="4">4. 算法实现</h3>
+<h4 id="_1">实现一</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="o">&lt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">partitionIndex</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+        <span class="n">quick_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">partitionIndex</span><span class="p">);</span>
+        <span class="c1">// 一次partition后partitionIndex位置已经是正确的元素。不需要再参与quick_sort，否则会无限循环。</span>
+        <span class="n">quick_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">partitionIndex</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">partition</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">left</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">index</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">right</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">nums</span><span class="o">[</span><span class="n">pivot</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">index</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// 不能是index，因为索引为index的数大于或等于索引为pivot的数，将被置换到前面。</span>
+    <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">pivot</span><span class="p">,</span> <span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">index1</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">nums</span><span class="o">[</span><span class="n">index1</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">index2</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">nums</span><span class="o">[</span><span class="n">index2</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="_2">实现二</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">quick_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="o">&lt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">partitionIndex</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+        <span class="n">quick_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">partitionIndex</span><span class="p">);</span>
+        <span class="c1">// 一次partition后partitionIndex位置已经是正确的元素。不需要再参与quick_sort，否则会无限循环。</span>
+        <span class="n">quick_sort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">partitionIndex</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">partition</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">right</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">key</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">key</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="5">5. 快速排序的特点及性能</h3>
+<p>快速排序是在冒泡排序的基础上改进而来的，冒泡排序每次只能交换相邻的两个元素，而快速排序是跳跃式的交换，交换的距离很大，因此总的比较和交换次数少了很多，速度也快了不少。</p>
+<p>但是快速排序在最坏情况下的</p>
+<p><a href="http://data.biancheng.net/view/2.html">时间复杂度</a></p>
+<p>和冒泡排序一样，是 <code>O(n2)</code>，实际上每次比较都需要交换，但是这种情况并不常见。我们可以思考一下如果每次比较都需要交换，那么数列的平均时间复杂度是 <code>O(nlogn)</code>，事实上在大多数时候，排序的速度要快于这个平均时间复杂度。这种算法实际上是一种分治法思想，也就是分而治之，把问题分为一个个的小部分来分别解决，再把结果组合起来。</p>
+<p>快速排序只是使用数组原本的空间进行排序，所以所占用的空间应该是常量级的，但是由于每次划分之后是递归调用，所以递归调用在运行的过程中会消耗一定的空间，在一般情况下的</p>
+<p><a href="http://data.biancheng.net/view/2.html">空间复杂度</a></p>
+<p>为 <code>O(logn)</code>，在最差的情况下，若每次只完成了一个元素，那么空间复杂度为 <code>O(n)</code>。所以我们一般认为快速排序的空间复杂度为 <code>O(logn)</code>。</p>
+<p>快速排序是一个不稳定的算法，在经过排序之后，可能会对相同值的元素的相对位置造成改变。</p>
+<p>快速排序基本上被认为是相同数量级的所有排序算法中，平均性能最好的。</p></div>
+	
+        <hr />
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+    			<div style="width:80%; margin:0 auto;">
+                    <div style="text-align: center;">
+						<a href="/" class="profilepic">
+                            <img src="https://i.loli.net/2019/10/31/TRSQt7aKkx6DdBA.png" οnerrοr="this.onerror=null;this.src='https://raw.githubusercontent.com/Heriam/images/master/portrait/photo-zzz.png';" alt="photo-zzz.png" title="photo-zzz.png" />
+						</a>
+						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
+						<p class="motto">We only live once, and time just goes by.</p>
+						<ul class="biography">
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+
+					<hr>
+
+						<div class="tooltip">
+							<span class="tooltiptext">Facebook</span>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Facebook.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">微博</span>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/微博.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Linkedin</span>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Linkedin.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Github</span>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Github.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Email</span>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Email.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Instagram</span>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Instagram.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">ResearchGate</span>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">知乎</span>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/知乎.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">OSChina</span>
+							<a href="https://my.oschina.net/heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/OSChina.svg) center no-repeat"></a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+<!--            <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8958123988900703"
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div> -->
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
+</footer>
+
+</div> <!-- /container -->
+<script>var _gaq=[['_setAccount','UA-137721527-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<script>
+    function validateForm(query)
+    {
+        return (query.length > 0);
+    }
+</script>
+<meting-js
+    server="netease"
+    type="playlist"
+    id="43561591"
+    fixed="true"
+    order="list"
+    volume="1.0"
+    list-folded="true"
+    >
+</meting-js>
+</body>
+</html>

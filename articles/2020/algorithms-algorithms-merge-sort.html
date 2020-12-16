@@ -88,7 +88,7 @@
         <div class="content-title">
             <h1>数据结构与算法——归并排序: 数组&链表&递归&非递归解法全家桶</h1>
 <span class="metadata">
-2020-10-29 Thu&nbsp;&nbsp;&nbsp;
+2020-11-29 Sun&nbsp;&nbsp;&nbsp;
 
 by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
  
@@ -526,21 +526,26 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 </table>
 <h4 id="_8">非递归实现(从底至顶直接合并)</h4>
 <div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">ListNode</span> <span class="nf">sortList</span><span class="p">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 求链表长度</span>
     <span class="n">ListNode</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
         <span class="n">length</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
+    <span class="c1">// 初始化准备</span>
+    <span class="kt">int</span> <span class="n">blockSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">// 结果链表哨兵</span>
     <span class="n">ListNode</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
     <span class="n">res</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
     <span class="c1">// 从1到length迭代单元块大小</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">blockSize</span><span class="o">&lt;</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 结果链表游标</span>
         <span class="n">ListNode</span> <span class="n">pre</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
         <span class="c1">// 两两遍历所有单元块</span>
         <span class="k">while</span> <span class="p">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 求第一个子链</span>
             <span class="n">ListNode</span> <span class="n">h1</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
             <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
             <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
@@ -548,12 +553,14 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
                 <span class="n">i</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
             <span class="p">}</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+            <span class="c1">// 求第二个子链</span>
             <span class="n">ListNode</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
             <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
                 <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
                 <span class="n">i</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
             <span class="p">}</span>
+            <span class="c1">// 合并两个子链</span>
             <span class="kt">int</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">blockSize</span><span class="p">;</span>
             <span class="kt">int</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">blockSize</span><span class="o">-</span><span class="n">i</span><span class="p">;</span>
             <span class="k">while</span> <span class="p">(</span><span class="n">c1</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">c2</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -568,12 +575,15 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
                 <span class="p">}</span>
                 <span class="n">pre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
             <span class="p">}</span>
+            <span class="c1">// 将比较完后其中剩下的那个子链所有节点直接尾接到结果链表</span>
             <span class="n">pre</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">c1</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">?</span> <span class="n">h1</span> <span class="p">:</span> <span class="n">h2</span><span class="p">;</span>
+            <span class="c1">// 归正游标</span>
             <span class="k">while</span> <span class="p">(</span><span class="n">c1</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">c2</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
                 <span class="n">pre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
                 <span class="n">c1</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
                 <span class="n">c2</span><span class="o">-=</span><span class="mi">1</span><span class="p">;</span>
             <span class="p">}</span>
+            <span class="c1">// 归正归并后的链表尾节点回原链表</span>
             <span class="n">pre</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="n">blockSize</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>

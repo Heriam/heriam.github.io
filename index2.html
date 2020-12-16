@@ -92,6 +92,42 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2019/big-data-lambda-architecture.html"><h1>深入理解大数据之——Lambda架构</h1></a>
+<span class="metadata">
+2019-07-05 Fri&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&nbsp;&nbsp;&nbsp;
+
+ 
+ 
+    Tags: <a href="https://jiang-hao.com/tags/lambda.html">Lambda</a>,&nbsp;<a href="https://jiang-hao.com/tags/kappa.html">Kappa</a>,&nbsp;</span> 
+        </div>
+        
+        <div class="summary">
+<h3 id="_1">传统系统的问题</h3>
+<blockquote>
+<p>“我们正在从IT时代走向DT时代(数据时代)。IT和DT之间，不仅仅是技术的变革，更是思想意识的变革，IT主要是为自我服务，用来更好地自我控制和管理，DT则是激活生产力，让别人活得比你好”</p>
+<p>——阿里巴巴董事局主席马云。 </p>
+</blockquote>
+<p>数据量从M的级别到G的级别到现在T的级、P的级别。数据量的变化数据管理系统（DBMS）和数仓系统（DW）也在悄然的变化着。 传统应用的数据系统架构设计时，应用直接访问数据库系统。当用户访问量增加时，数据库无法支撑日益增长的用户请求的负载时，从而导致数据库服务器无法及时响应用户请求，出现超时的错误。出现这种情况以后，在系统架构上就采用下图的架构，在数据库和应用中间过一层缓冲隔离，缓解数据库的读写压力。</p>
+<p><img alt="" src="https://i.loli.net/2019/11/01/UlbBAWMcGzLiCp6.png"/></p>
+<p>然而，当用户访问量持续增加时，就需要考虑读写分离技术（Master－Slave）架构则如下图，分库分表技术。现在，架构变得越来越复杂了，增加队列、分区、复制等处理逻辑。应用程序需要了解数据库的schema，才能访问到正确的数据。</p>
+<p><img alt="" src="https://i.loli.net/2019/11/01/lvg2m1LXJNna6Mj.png"/></p>
+<p>商业现实已经发生了变化，所以现在更快做出的决定更有价值。除此之外，技术也在不断发展。Kafka，Storm，Trident，Samza …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-lambda-architecture.html">read more</a></div>
+        <hr />
+    </div>
+				
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2019/big-data-flink-distributed-runtime.html"><h1>Flink 分布式运行时环境</h1></a>
 <span class="metadata">
 2019-07-01 Mon&nbsp;&nbsp;&nbsp;
@@ -639,43 +675,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 11.Sitemap——站点地图，供谷歌，百度等搜索引擎收录<br>
 12.七牛云存储——静态资源管理，上传自动生成网盘直链    <br>
 <strong>最终效果展示 …</strong></p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/frontend-使用Pelican基于GithubPages搭建博客教程.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html"><h1>Build and Install OpenDaylight on Ubuntu</h1></a>
-<span class="metadata">
-2018-01-01 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/opendaylight.html">OpenDaylight</a>,&nbsp;<a href="https://jiang-hao.com/tags/ubuntu.html">Ubuntu</a>,&nbsp;<a href="https://jiang-hao.com/tags/sdn.html">SDN</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary"><div><font face="Times New Roman">
-<p><em><font face = "Times New Roman">Operating System：Linux x64 / Ubuntu 14.04</font></em>   <br />
-<em><font face = "Times New Roman">Prerequisites：Linux system with Java and Maven installed</font></em>   <br />
-<em><font face = "Times New Roman" color="red">Chinese version is also available at <a href="http://www.cnblogs.com/cciejh/p/opendaylight1.html">Ubuntu系统下OpenDaylight源码编译安装</a></font></em>       </p>
-<hr />
-<p><font face = "Times New Roman"><strong>STEP 1, Environment Tuning</strong></font></p>
-<hr />
-<p><font face = "Times New Roman">1. Install Git tool by command line: </font>   </p>
-<div class="highlight"><pre><span></span>sudo apt-get install git-core
-</pre></div>
-
-<p><font face = "Times New Roman">2. After the installation of Java and Maven, you need to edit a …</font></p></font></div> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2018/backend-BuildandInstallOpenDaylightonUbuntu.html">read more</a></div>
         <hr />
     </div>
 				

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <title>Heriam - 数据结构与算法——基数排序</title>
+    <meta name="description" content="">
+    <meta name="author" content="Justin Time">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="baidu-site-verification" content="OGeiccsh1O" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="https://jiang-hao.com/theme/html5.js"></script>
+    <![endif]-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+    <script src="https://jiang-hao.com/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="https://jiang-hao.com/theme/tipuesearch/tipuesearch.css">
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script src="https://jiang-hao.com/theme/tipuesearch/tipuesearch.min.js"></script>
+	<script src="https://jiang-hao.com/theme/bootstrap-collapse.js"></script>
+
+    <!-- Le styles -->
+    <link href="https://jiang-hao.com/theme/bootstrap.min.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/bootstrap.min.responsive.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/local.css" rel="stylesheet">
+    <link href="https://jiang-hao.com/theme/pygments.css" rel="stylesheet">
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
+</head>
+
+<body>
+<a href="javascript:void(0);" id="scroll" title="Scroll to Top" style="display: none;">Top<span></span></a>
+<div class="navbar">
+    <div class="navbar-inner">
+    <div class="container">
+
+         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </a>
+
+        <a class="brand" href="https://jiang-hao.com">Heriam</a>
+
+        <div class="nav-collapse">
+        <ul class="nav">
+            <li class="dropdown-jh"><a>Categories</a>
+                <ul class="dropdown-content-jh">
+                    <li><a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a></li>
+                    <li><a href="https://jiang-hao.com/categories/backend.html">Backend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/big-data.html">Big Data</a></li>
+                    <li><a href="https://jiang-hao.com/categories/cloud.html">Cloud</a></li>
+                    <li><a href="https://jiang-hao.com/categories/frontend.html">Frontend</a></li>
+                    <li><a href="https://jiang-hao.com/categories/networking.html">Networking</a></li>
+                    <li><a href="https://jiang-hao.com/categories/notes.html">Notes</a></li>
+                    <li><a href="https://jiang-hao.com/categories/tools.html">Tools</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/articles">Archives</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li><a href="/pages/publications">Publications</a></li>
+            <li><a href="/pages/aboutme">AboutMe</a></li>
+            
+        </ul>
+
+        <form class="navbar-search pull-right" action="https://jiang-hao.com/search.html" onsubmit="return validateForm(this.elements['q'].value);">
+            <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input">
+        </form>
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+    <div class="row">
+
+        <div class="span9">
+    <div class='article'>
+        <div class="content-title">
+            <h1>数据结构与算法——基数排序</h1>
+<span class="metadata">
+2020-12-20 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span>        </div>
+
+        <hr />
+
+        <div class="copyright-claim">
+        	<span>
+    			<p>版权声明：本文为<a href="https://jiang-hao.com">Heriam</a>博主原创文章，遵循<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。</p>
+    			<p>原文链接：<a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-radix-sort.html">https://jiang-hao.com/articles/2020/algorithms-algorithms-radix-sort.html</a></p>
+    		</span>
+        </div>
+
+			<nav class="toc">
+			<div class="toc"><span class="toctitle">目录</span><ul>
+<li><a href="#_1">算法介绍</a></li>
+<li><a href="#_2">算法思想</a></li>
+<li><a href="#_3">算法实现</a><ul>
+<li><a href="#python">Python实现</a></li>
+<li><a href="#java">Java实现: 兼顾负数暴力解法</a></li>
+<li><a href="#java_1">Java实现: 兼顾负数优化性能</a></li>
+</ul>
+</li>
+<li><a href="#_4">复杂度分析</a></li>
+</ul>
+</div>
+			</nav>
+
+			<hr />
+
+
+        <div>
+<h2 id="_1">算法介绍</h2>
+<p>基数排序（英语：Radix sort）是一种非比较型整数排序算法，其原理是将整数按位数切割成不同的数字，然后按每个位数分别比较。由于整数也可以表达字符串（比如名字或日期）和特定格式的浮点数，所以基数排序也不是只能使用于整数。基数排序是稳定性的排序。</p>
+<p>基数排序和桶排序、计数排序算法一样，都属于非比较型排序算法，且都利用了桶的概念，但对桶的使用方法上有明显差异：</p>
+<ul>
+<li>基数排序：根据键值的每位数字来分配桶；</li>
+<li>计数排序：每个桶只存储单一键值；</li>
+<li>桶排序：每个桶存储一定范围的数值；</li>
+</ul>
+<p>冒泡、选择、插入、归并、希尔、堆、快速排序都是基于比较的排序，平均时间复杂度最低O(nlogn)；</p>
+<p>计数排序、桶排序、基数排序不是基于比较的排序，使用空间换时间，某些时候，平均时间复杂度可以低于O(nlogn)。</p>
+<p>它是这样实现的：将所有待比较数值（正整数）统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后，数列就变成一个有序序列。</p>
+<p>基数排序的方式可以采用LSD（Least significant digital）或MSD（Most significant digital），LSD的排序方式由键值的最右边开始，而MSD则相反，由键值的最左边开始。</p>
+<p>LSD的基数排序适用于位数小的数列，如果位数多的话，使用MSD的效率会比较好。MSD的方式与LSD相反，是由高位数为基底开始进行分配，但在分配之后并不马上合并回一个数组中，而是在每个“桶”中建立“子桶”，将每个桶子中的数值按照下一数位的值分配到“子桶”中。在进行完最低位数的分配后再合并回单一的数组中。</p>
+<h2 id="_2">算法思想</h2>
+<p>以LSD为例，假设原来有一串数值如下所示：</p>
+<div class="highlight"><pre><span></span><code><span class="mi">73</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">81</span> 
+</code></pre></div>
+<p>首先根据个位数的数值，在走访数值时将它们分配至编号0到9的桶子中：</p>
+<div class="highlight"><pre><span></span><code><span class="n">分配过程</span><span class="err">：</span>
+<span class="mi">0</span> 
+<span class="mi">1</span> <span class="mi">81</span>
+<span class="mi">2</span> <span class="mi">22</span>
+<span class="mi">3</span> <span class="mi">73</span> <span class="mi">93</span> <span class="mi">43</span>
+<span class="mi">4</span> <span class="mi">14</span>
+<span class="mi">5</span> <span class="mi">55</span> <span class="mi">65</span>
+<span class="mi">6</span>
+<span class="mi">7</span>
+<span class="mi">8</span> <span class="mi">28</span>
+<span class="mi">9</span> <span class="mi">39</span> 
+</code></pre></div>
+<p>接下来将这些桶子中的数值重新串接起来，成为以下的数列：</p>
+<div class="highlight"><pre><span></span><code><span class="n">收集过程</span><span class="err">：</span>
+<span class="mi">81</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">39</span> 
+</code></pre></div>
+<p>接着再进行一次分配，这次是根据十位数来分配：</p>
+<div class="highlight"><pre><span></span><code><span class="n">分配过程</span><span class="err">：</span>
+<span class="mi">0</span>
+<span class="mi">1</span> <span class="mi">14</span>
+<span class="mi">2</span> <span class="mi">22</span> <span class="mi">28</span>
+<span class="mi">3</span> <span class="mi">39</span>
+<span class="mi">4</span> <span class="mi">43</span>
+<span class="mi">5</span> <span class="mi">55</span>
+<span class="mi">6</span> <span class="mi">65</span>
+<span class="mi">7</span> <span class="mi">73</span>
+<span class="mi">8</span> <span class="mi">81</span>
+<span class="mi">9</span> <span class="mi">93</span>
+</code></pre></div>
+<p>接下来将这些桶子中的数值重新串接起来，成为以下的数列：</p>
+<div class="highlight"><pre><span></span><code><span class="n">收集过程</span><span class="err">：</span>
+<span class="mi">14</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">93</span> 
+</code></pre></div>
+<p>这时候整个数列已经排序完毕；如果排序的对象有三位数以上，则持续进行以上的动作直至最高位数为止。</p>
+<p><img alt="img" src="https://www.runoob.com/wp-content/uploads/2019/03/radixSort.gif"/></p>
+<h2 id="_3">算法实现</h2>
+<h3 id="python">Python实现</h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="c1">#encoding=utf-8</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">radix</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">"""a为整数列表， radix为基数"""</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">radix</span><span class="p">)))</span> <span class="c1"># 用K位数可表示任意整数</span>
+    <span class="n">bucket</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">radix</span><span class="p">)]</span> <span class="c1"># 不能用 [[]]*radix</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># K次循环</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+            <span class="n">bucket</span><span class="p">[</span><span class="n">val</span><span class="o">%</span><span class="p">(</span><span class="n">radix</span><span class="o">**</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">radix</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="c1"># 析取整数第K位数字 （从低到高）</span>
+        <span class="k">del</span> <span class="n">a</span><span class="p">[:]</span>
+        <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">bucket</span><span class="p">:</span>
+            <span class="n">a</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">each</span><span class="p">)</span> <span class="c1"># 桶合并</span>
+        <span class="n">bucket</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">radix</span><span class="p">)]</span>
+</code></pre></div>
+<h3 id="java">Java实现: 兼顾负数暴力解法</h3>
+<p>有负数时，只需要把桶扩大为20，同时将桶索引index += 10。负数从小到大在 0-9 号桶，正数从小到大在 10 - 19 号桶。</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">sortArray</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">value</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">value</span> <span class="o">=-</span><span class="n">value</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">max</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">)</span> <span class="n">max</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">max</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">K</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">max</span> <span class="o">=</span> <span class="p">(</span><span class="n">max</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">li</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">li</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">bucketList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">20</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">bucketList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">K</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">:</span> <span class="n">li</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">val</span><span class="o">%</span><span class="n">a</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">/</span><span class="n">b</span><span class="p">;</span>
+            <span class="n">bucketList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">d</span><span class="o">+</span><span class="mi">10</span><span class="p">).</span><span class="na">add</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>  <span class="c1">// 这里是加 10 ，即正数用后 10 个桶，负数用前 10 个桶</span>
+        <span class="p">}</span>
+        <span class="n">li</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">bucket</span><span class="p">:</span> <span class="n">bucketList</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">li</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">bucket</span><span class="p">);</span>
+            <span class="n">bucket</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">li</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">]</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">li</span><span class="p">.</span><span class="na">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">li</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>力扣执行结果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">提交时间</th>
+<th align="left">提交结果</th>
+<th align="left">运行时间</th>
+<th align="left">内存消耗</th>
+<th align="left">语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/132465670/">通过</a></td>
+<td align="left">28 ms</td>
+<td align="left">47.3 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/132465634/">通过</a></td>
+<td align="left">32 ms</td>
+<td align="left">47.3 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/132465617/">通过</a></td>
+<td align="left">28 ms</td>
+<td align="left">47.5 MB</td>
+<td align="left">Java</td>
+</tr>
+</tbody>
+</table>
+<h3 id="java_1">Java实现: 兼顾负数优化性能</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="c1">// 求最大绝对值 max</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">value</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">value</span> <span class="o">=-</span><span class="n">value</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">max</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">)</span> <span class="n">max</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 求分配总轮次 K</span>
+    <span class="kt">int</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">max</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">K</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">max</span> <span class="o">=</span> <span class="p">(</span><span class="n">max</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// 新建桶</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">bucketMatrix</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">20</span><span class="o">][</span><span class="n">arr</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="c1">// base代表当前循环用来排序的基数，如 1,10，100....</span>
+    <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">K</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">20</span><span class="o">]</span><span class="p">;</span>
+        <span class="c1">// 放入桶中</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>  
+            <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span><span class="o">%</span><span class="p">(</span><span class="n">base</span><span class="o">*</span><span class="mi">10</span><span class="p">))</span><span class="o">/</span><span class="n">base</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span>  <span class="c1">// index 表示 val 要放在 20 个桶中的哪一个</span>
+            <span class="n">bucketMatrix</span><span class="o">[</span><span class="n">index</span><span class="o">][</span><span class="n">order</span><span class="o">[</span><span class="n">index</span><span class="o">]++]</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// 收集回数组</span>
+        <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="mi">20</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">order</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">arr</span><span class="o">[</span><span class="n">h</span><span class="o">++]</span> <span class="o">=</span> <span class="n">bucketMatrix</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">base</span> <span class="o">*=</span><span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>力扣执行结果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">提交时间</th>
+<th align="left">提交结果</th>
+<th align="left">运行时间</th>
+<th align="left">内存消耗</th>
+<th align="left">语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">几秒前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/132467281/">通过</a></td>
+<td align="left">5 ms</td>
+<td align="left">46.3 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">1 分钟前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/132467105/">通过</a></td>
+<td align="left">5 ms</td>
+<td align="left">46.2 MB</td>
+<td align="left">Java</td>
+</tr>
+<tr>
+<td align="left">1 分钟前</td>
+<td align="left"><a href="https://leetcode-cn.com/submissions/detail/132467063/">通过</a></td>
+<td align="left">5 ms</td>
+<td align="left">46.6 MB</td>
+<td align="left">Java</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">复杂度分析</h2>
+<p>时间复杂度：O(k*N)
+空间复杂度：O(k + N)
+稳定性：稳定</p>
+<p>基数排序的时间复杂度是O(k*n)}，其中n是排序元素个数，k是数字位数。注意这不是说这个时间复杂度一定优于O(NlogN)，k的大小取决于数字位的选择（比如比特位数），和待排序数据所属数据类型的全集的大小；k决定了进行多少轮处理，而n是每轮处理的操作数目。 以排序n个不同整数来举例，假定这些整数以B为底，这样每位数都有B个不同的数字，N是待排序数据类型全集的势。虽然有B个不同的数字，需要B个不同的桶，但在每一轮处理中，判断每个待排序数据项只需要一次计算确定对应数位的值，因此在每一轮处理的时候都需要平均n次操作来把整数放到合适的桶中去。如果考虑和比较排序进行对照，基数排序的形式复杂度虽然不一定更小，但由于不进行比较，因此其基本操作的代价较小，而且在适当选择的B之下，k一般不大于log n，所以基数排序一般要快过基于比较的排序，比如快速排序。</p></div>
+	
+        <hr />
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	var gitalk = new Gitalk({
+		clientID: 'da84a60f2d38accc2888',
+		clientSecret: '55fbc34a7e9fd0f956be286ed189fd4c4201f4f7',
+		repo: 'heriam.github.io',
+		owner: 'Heriam',
+		admin: ['Heriam'],
+		id: md5(window.location.pathname),      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>    </div>
+        </div>
+        
+        <div class="span3">
+		
+		    <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
+    			<div style="width:80%; margin:0 auto;">
+                    <div style="text-align: center;">
+						<a href="/" class="profilepic">
+                            <img src="https://i.loli.net/2019/10/31/TRSQt7aKkx6DdBA.png" οnerrοr="this.onerror=null;this.src='https://raw.githubusercontent.com/Heriam/images/master/portrait/photo-zzz.png';" alt="photo-zzz.png" title="photo-zzz.png" />
+						</a>
+						<h1><span class="mainTitle">Hao Jiang</span><span class="subTitle">Justin Time</span></h1>
+						<p class="motto">We only live once, and time just goes by.</p>
+						<ul class="biography">
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/work.svg" class="listIcon"></span><span>R&amp;D Engineer <a href="http://www.h3c.com" target="_blank">@H3C</a></span></li>
+						<li><span><img src="https://jiang-hao.com/theme/images/icons/location.svg" class="listIcon"></span><span>Hangzhou, China</span></li>
+
+					<hr>
+
+						<div class="tooltip">
+							<span class="tooltiptext">Facebook</span>
+							<a href="https://www.facebook.com/hao.zju" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Facebook.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">微博</span>
+							<a href="http://weibo.com/207575725" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/微博.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Linkedin</span>
+							<a href="http://www.linkedin.com/in/haochiang" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Linkedin.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Github</span>
+							<a href="https://github.com/Heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Github.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Email</span>
+							<a href="mailto:jiang.haoa@h3c.com" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Email.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">Instagram</span>
+							<a href="https://www.instagram.com/heriam_j/" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/Instagram.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">ResearchGate</span>
+							<a href="https://www.researchgate.net/profile/Hao_Jiang59" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/ResearchGate.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">知乎</span>
+							<a href="https://www.zhihu.com/people/justin-time" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/知乎.svg) center no-repeat"></a>
+						</div>
+						<div class="tooltip">
+							<span class="tooltiptext">OSChina</span>
+							<a href="https://my.oschina.net/heriam" target="_blank" class="socialLink" style="background: url(https://jiang-hao.com/theme/images/icons/OSChina.svg) center no-repeat"></a>
+						</div>
+					</div>
+                </div>
+            </div>
+
+	        <div class="well" style="padding: 0 0; background-color: #FBFBFB;">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8185340840770803"
+                     data-ad-slot="5123679766"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+        </div>  
+    </div>     </div> 
+<footer>
+<br />
+<p><a href="https://jiang-hao.com">Heriam</a> &copy; Justin Time 2020.&nbsp;All rights reserved.</p>
+</footer>
+
+</div> <!-- /container -->
+<script>var _gaq=[['_setAccount','UA-137721527-1'],['_trackPageview']];(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='//www.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))</script>
+ 
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+<script>
+    function validateForm(query)
+    {
+        return (query.length > 0);
+    }
+</script>
+<meting-js
+    server="netease"
+    type="playlist"
+    id="43561591"
+    fixed="true"
+    order="list"
+    volume="1.0"
+    list-folded="true"
+    >
+</meting-js>
+</body>
+</html>

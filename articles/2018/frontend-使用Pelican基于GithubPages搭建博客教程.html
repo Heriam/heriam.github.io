@@ -146,18 +146,15 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">sh bin/activate            # 激活虚拟环境</span>
 </code></pre></div>
 
-
 <p>从github克隆最新代码安装Pelican：      </p>
 <div class="highlight"><pre><span></span><code><span class="err">git clone git://github.com/getpelican/pelican.git          # 下载代码</span>
 <span class="err">cd pelican</span>
 <span class="err">python setup.py install</span>
 </code></pre></div>
 
-
 <p>3.安装Markdown:        </p>
 <div class="highlight"><pre><span></span><code><span class="err">pip install markdown</span>
 </code></pre></div>
-
 
 <hr>
 <p><strong>三、创建博客骨架</strong>     </p>
@@ -170,7 +167,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">pelican-quickstart</span>
 </code></pre></div>
 
-
 <p>2.根据提示一步步输入相应的配置项，不知道如何设置的接受默认即可，后续可以通过编辑pelicanconf.py文件更改配置。完成后将会在根目录生成以下文件：     </p>
 <div class="highlight"><pre><span></span><code><span class="err">.</span>
 <span class="err">|-- content                # 所有文章放于此目录</span>
@@ -182,12 +178,10 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">|-- publishconf.py         # 配置文件</span>
 </code></pre></div>
 
-
 <p>3.进入output文件夹，把自己刚刚建好的username.github.io版本库clone下来，注意这里以及后文中的username要替换成自己的Github用户名：      </p>
 <div class="highlight"><pre><span></span><code><span class="err">cd output</span>
 <span class="err">git clone https://github.com/username/username.github.io.git</span>
 </code></pre></div>
-
 
 <p>4.设置一键上传部署到Github。打开根目录下的Makefile文件，修改以下三个地方：     </p>
 <div class="highlight"><pre><span></span><code><span class="err"> OUTPUTDIR=$(BASEDIR)/output/username.github.io    </span>
@@ -196,7 +190,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err"> github: publish    </span>
 <span class="err"> cd OUTPUTDIR ; git add . ;  git commit -am &#39;your comments&#39; ; git push    </span>
 </code></pre></div>
-
 
 <p>5.设置完后，以后写完文章就可以通过在blog根目录下执行“make github”进行一键部署了。     </p>
 <hr>
@@ -209,11 +202,9 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">make serve</span>
 </code></pre></div>
 
-
 <p>2.创建一个页面：这里以创建 About页面为例。在content目录创建pages子目录：    </p>
 <div class="highlight"><pre><span></span><code><span class="err">mkdir content/pages</span>
 </code></pre></div>
-
 
 <p>*然后创建About.md并填入下面内容：     </p>
 <div class="highlight"><pre><span></span><code><span class="n">title</span><span class="o">:</span> <span class="n">About</span> <span class="n">Me</span>        
@@ -221,7 +212,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 
 <span class="n">About</span> <span class="n">me</span> <span class="n">content</span>
 </code></pre></div>
-
 
 <p>*注意上面title和date是.md文件的重要参数，需要写在文档开头。比如：    </p>
 <div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="o">:</span> <span class="n">Pelican</span><span class="o">+</span><span class="n">Github</span>
@@ -234,7 +224,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="n">Status</span><span class="o">:</span> <span class="n">draft</span>
 </code></pre></div>
 
-
 <p>相关介绍请参见官方文档：http://pelican-zh.readthedocs.org/en/latest/zh-cn/ 。完成后同样可以在本机http://127.0.0.1:8000看效果。  <br>
 ​    <br>
 3.创建导航目录项：Menu Item设置。在你的博客中，可设置相应的菜单项，菜单项是通过pelicanconf.py设置的，具体如下所示：      </p>
@@ -242,7 +231,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">             (&quot;ITEM2&quot;,URL),</span>
 <span class="err">            ......)</span>
 </code></pre></div>
-
 
 <hr>
 <p><strong>五、安装主题</strong>    </p>
@@ -253,11 +241,9 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">pelican-themes -i bootstrap2</span>
 </code></pre></div>
 
-
 <p>对应在在pelicanconf.py中添加主题选择条目：    </p>
 <div class="highlight"><pre><span></span><code><span class="err">THEME = &#39;bootstrap2&#39;</span>
 </code></pre></div>
-
 
 <hr>
 <p><strong>六、安装第三方评论系统Disqus</strong>    </p>
@@ -266,14 +252,12 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <div class="highlight"><pre><span></span><code><span class="err">DISQUS_SITENAME = Shortname</span>
 </code></pre></div>
 
-
 <hr>
 <p><strong>七、添加Google Analytics</strong>    </p>
 <hr>
 <p>去Google Analytics申请账号并通过验证，记下跟踪ID（Track ID）， 在pelicanconf.py添加：    </p>
 <div class="highlight"><pre><span></span><code><span class="err">GOOGLE_ANALYTICS = &#39;跟踪ID&#39;</span>
 </code></pre></div>
-
 
 <hr>
 <p><strong>八、添加Google Webmasters和百度站长收录</strong>    </p>
@@ -286,7 +270,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <div class="highlight"><pre><span></span><code><span class="err">cd ~/blog</span>
 <span class="err">git clone git://github.com/getpelican/pelican-plugins.git</span>
 </code></pre></div>
-
 
 <p>*然后在pelicanconf.py里配置如下：    </p>
 <div class="highlight"><pre><span></span><code><span class="err">PLUGIN_PATH = u&quot;pelican-plugins&quot;</span>
@@ -306,7 +289,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">}</span>
 </code></pre></div>
 
-
 <p>3.将make github命令后在output目录下生成的sitemap文件上传到Google Webmasters。    <br>
 ​  <br>
 4.对于百度。它是宣称支持sitemap的，但是网上相关问题一大堆，要么格式不对要么就是抓取失败，要么突然不开放支持。在几次尝试失败以后，我是通过添加JavaScript代码来自动推送网站链接的。具体是在主题模板（base.html）面最后添加代码：    </p>
@@ -320,7 +302,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="nt">&lt;/script&gt;</span>
 </code></pre></div>
 
-
 <p>*我还是比较推崇这种方法的，因为比sitemap方法被抓取收录的时间短很多。谷歌的sitemap是xml格式。  </p>
 <hr>
 <p><strong>九、添加谷歌／百度站内搜索</strong>    </p>
@@ -331,7 +312,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">class=</span><span class="s">&quot;search-query&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Search&quot;</span> <span class="na">name=</span><span class="s">&quot;q&quot;</span> <span class="na">id=</span><span class="s">&quot;s&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
 </code></pre></div>
-
 
 <p>2.创建search.html。之后，在output目录下，新建一个名为search.html的文件，写入下面的内容，其中需要你自己修改的是google站内搜索的ID号，需要自己在<a href="https://cse.google.com">google站内搜索</a>的网站上自己申请。     </p>
 <div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">html</span><span class="w"> </span><span class="n">lang</span><span class="o">=</span><span class="ss">&quot;zh_CN&quot;</span><span class="o">&gt;</span><span class="w"></span>
@@ -412,7 +392,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span><span class="w"></span>
 </code></pre></div>
 
-
 <p>3.将GOOGLE_CUSTOM_SEARCH_SIDEBAR = "001578481551708017171:axpo6yvtdyg" 添加到pelicanconf.py文件。注意, 引号里的那一串字符是之前申请的自定义搜索引擎的id。  <br>
 4.最后发布后就可以看到搜索框了。      </p>
 <hr>
@@ -426,7 +405,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
     <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </code></pre></div>
-
 
 <p>3.发布验证。    </p>
 <hr>
@@ -450,7 +428,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </code></pre></div>
 
-
 <p>2.在这段后面添加：    </p>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">if</span> <span class="nv">tags</span> <span class="cp">%}</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;well&quot;</span> <span class="na">style=</span><span class="s">&quot;padding: 8px 0; background-color: #FBFBFB;&quot;</span><span class="nt">&gt;</span>
@@ -467,7 +444,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 </code></pre></div>
 
-
 <p>3.保存，重新发布网页验证。    </p>
 <hr>
 <p><strong>十一、插入视频</strong>    </p>
@@ -482,7 +458,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">)</span>
 </code></pre></div>
 
-
 <p>这样在每次生成html的时候都会把 content/extra下的 sitelogo.ico 拷贝到 output目录下。    </p>
 <hr>
 <p><strong>十三、资源目录管理</strong>    </p>
@@ -491,11 +466,9 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <div class="highlight"><pre><span></span><code><span class="err">USE_FOLDER_AS_CATEGORY = True</span>
 </code></pre></div>
 
-
 <p>使用文件名作为文章或页面的<code>slug（url）</code>    </p>
 <div class="highlight"><pre><span></span><code><span class="err">FILENAME_METADATA = &#39;(?P&lt;slug&gt;.*)&#39;</span>
 </code></pre></div>
-
 
 <p>页面的显示路径和保存路径，推荐下面的方式     </p>
 <div class="highlight"><pre><span></span><code><span class="err">ARTICLE_URL = &#39;{category}/{slug}.html&#39;</span>
@@ -509,7 +482,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">TAGS_SAVE_AS = &#39;tag/index.html&#39;</span>
 </code></pre></div>
 
-
 <hr>
 <p><strong>十四、指定文章或页面URL</strong>    </p>
 <hr>
@@ -517,7 +489,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <div class="highlight"><pre><span></span><code><span class="n">url</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/</span>
 <span class="n">save_as</span><span class="o">:</span> <span class="n">pages</span><span class="sr">/url/i</span><span class="n">ndex</span><span class="o">.</span><span class="na">html</span>
 </code></pre></div>
-
 
 <p>*这个代码指定了本篇文章的url为pages/url/index.html     <br>
 ​   <br>
@@ -528,7 +499,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="c">URL:</span>
 <span class="c">save_as: index.html</span>
 </code></pre></div>
-
 
 <p>*另外还可以通过template:关键字来指定要使用的模板。    </p>
 <hr>
@@ -541,11 +511,9 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">f1g1ns2.dnspod.net</span>
 </code></pre></div>
 
-
 <p>步骤2：在Dnspod中添加一条A记录，指向Github URL      </p>
 <div class="highlight"><pre><span></span><code><span class="err">username.github.io</span>
 </code></pre></div>
-
 
 <p>步骤3：在Pelican主目录，即上面创建的blog/output/username.github.io目录，添加CNAME文件，在文件中添加你的独立域名。    <br>
 ​  <br>
@@ -576,7 +544,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="err">RELATED_POSTS_MAX = 10</span>
 </code></pre></div>
 
-
 <p>2.邻居导航，在主题模版中调用如下代码，可根据自己的情况修改：     </p>
 <div class="highlight"><pre><span></span><code>   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;pagination&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;ul&gt;</span>
@@ -595,7 +562,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
     <span class="nt">&lt;/div&gt;</span>
 </code></pre></div>
 
-
 <p>3.相关文章：    </p>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">if</span> <span class="nv">article.related_posts</span> <span class="cp">%}</span>
     <span class="nt">&lt;h4&gt;</span>Related Articles<span class="nt">&lt;/h4&gt;</span>
@@ -606,7 +572,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
     <span class="nt">&lt;/ul&gt;</span>
 <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span> 
 </code></pre></div>
-
 
 <p><br>
 <br>

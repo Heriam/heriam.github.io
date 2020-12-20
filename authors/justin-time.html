@@ -91,6 +91,36 @@
 
     <div class='article'>
         <div class="content-title">
+            <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-bucket-sort.html"><h1>数据结构与算法——桶排序</h1></a>
+<span class="metadata">
+2020-12-20 Sun&nbsp;&nbsp;&nbsp;
+
+by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
+ 
+
+Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms</a>&nbsp;&nbsp;&nbsp;
+
+ 
+</span> 
+        </div>
+        
+        <div class="summary">
+<h2 id="_1">算法简介</h2>
+<p>桶排序（Bucket sort）或所谓的箱排序，是一个排序算法，适用于待排序数据值域较大但分布比较均匀的情况。工作的原理是将数组元素分到有限数量的桶里，每个桶再各自排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序），最后依次把各个桶中的记录列出来记得到有序序列。桶排序是鸽巢排序的一种归纳结果。当要被排序的数组内的数值是均匀分配的时候，桶排序使用线性时间（Θ(n)）。但桶排序并不是比较排序，他不受到O(n log n)下限的影响。</p>
+<p>桶排序的思想近乎彻底的<strong>分治思想</strong>。它是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。</p>
+<p><img alt="img" src="https://img-blog.csdnimg.cn/20190219081232815.png"/></p>
+<p>桶排序假设待排序的一组数均匀独立的分布在一个范围中，并将这一范围划分成几个子范围（桶）。然后基于某种映射函数f ，将待排序列的关键字 k 映射到第i个桶中 (即桶数组B 的下标i) ，那么该关键字k 就作为 B[i]中的元素 (每个桶B[i]都是一组大小为N/M 的序列 )。接着将各个桶中的数据有序的合并起来 : 对每个桶B[i] 中的所有元素进行比较排序 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-bucket-sort.html">read more</a></div>
+        <hr />
+    </div>
+		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <div class="content-title">
             <a href="https://jiang-hao.com/articles/2020/algorithms-algorithms-count-sort.html"><h1>数据结构与算法——计数排序</h1></a>
 <span class="metadata">
 2020-12-18 Fri&nbsp;&nbsp;&nbsp;
@@ -115,7 +145,7 @@ Category: <a href="https://jiang-hao.com/categories/algorithms.html">Algorithms<
 <p>假设我们要遍历的20个随机数为 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2020/algorithms-algorithms-count-sort.html">read more</a></div>
         <hr />
     </div>
-		
+				
 
  
         
@@ -594,77 +624,6 @@ Category: <a href="https://jiang-hao.com/categories/big-data.html">Big Data</a>&
 <p>函数由用户实现，并封装Flink程序的应用程序逻辑。大多数函数由相应的<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#operator">算子</a>包装 。</p>
 <h4 id="_4">实例</h4>
 <p>术语<em>实例</em>用于描述在运行期间特定类型的特定实例（通常是 <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#operator">算子</a>或<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/glossary.html#function">函数</a>）。由于Apache Flink主要是用Java编写的 …</p> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/big-data-flink-glossary.html">read more</a></div>
-        <hr />
-    </div>
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="https://jiang-hao.com/articles/2019/tools-Vultr-Nodes-Speed-Tests.html"><h1>大陆访问Vultr各节点VPS网速测试综合报告</h1></a>
-<span class="metadata">
-2019-09-30 Mon&nbsp;&nbsp;&nbsp;
-
-by <a class="url fn" href="https://jiang-hao.com/authors/justin-time.html">Justin Time</a>&nbsp;&nbsp;&nbsp;
- 
-
-Category: <a href="https://jiang-hao.com/categories/tools.html">Tools</a>&nbsp;&nbsp;&nbsp;
-
- 
- 
-    Tags: <a href="https://jiang-hao.com/tags/vps.html">VPS</a>,&nbsp;<a href="https://jiang-hao.com/tags/vultr.html">Vultr</a>,&nbsp;</span> 
-        </div>
-        
-        <div class="summary">
-<h2 id="_1">限时福利</h2>
-<p><a href="https://www.vultr.com/promo/try50/?service=try50">Vultr新用户赠送$50活动入口</a></p>
-<p><img alt="vultr-promotion" src="https://s2.ax1x.com/2019/11/01/KHBPSK.png"/></p>
-<h2 id="_2">测试方法</h2>
-<p>采用以下方法：</p>
-<ul>
-<li>本地Ping测试</li>
-<li>腾讯云主机Ping测试</li>
-<li>本地下载测试</li>
-<li>腾讯云主机下载测试</li>
-<li>站长工具综合测试</li>
-</ul>
-<h2 id="_3"><a href="https://www.vultr.com/resources/faq/#downloadspeedtests">节点列表</a></h2>
-<table>
-<thead>
-<tr>
-<th align="left">Location</th>
-<th align="left">Looking Glass</th>
-<th align="left">Download Test File:    IPv4</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Frankfurt, DE</td>
-<td align="left"><a href="http://fra-de-ping.vultr.com/">fra-de-ping.vultr.com</a></td>
-<td align="left"><a href="https://fra-de-ping.vultr.com/vultr.com.100MB.bin">100MB</a> <a href="https://fra-de-ping.vultr.com/vultr.com.1000MB.bin">1GB</a></td>
-</tr>
-<tr>
-<td align="left">Amsterdam, NL</td>
-<td align="left"><a href="http://ams-nl-ping.vultr.com/">ams-nl-ping.vultr.com</a></td>
-<td align="left"><a href="https://ams-nl-ping.vultr.com/vultr.com.100MB.bin">100MB</a> <a href="https://ams-nl-ping.vultr.com/vultr.com.1000MB.bin">1GB</a></td>
-</tr>
-<tr>
-<td align="left">Paris, France</td>
-<td align="left"><a href="http://par-fr-ping.vultr.com/">par-fr-ping.vultr.com</a></td>
-<td align="left"><a href="https://par-fr-ping.vultr.com/vultr.com.100MB.bin">100MB</a> <a href="https://par-fr-ping.vultr.com/vultr.com.1000MB.bin">1GB</a></td>
-</tr>
-<tr>
-<td align="left">London, UK</td>
-<td align="left"><a href="http://lon-gb-ping.vultr.com/">lon-gb-ping.vultr.com</a></td>
-<td align="left"><a href="https://lon-gb-ping.vultr.com/vultr.com.100MB.bin">100MB</a> <a href="https://lon-gb-ping.vultr.com/vultr.com.1000MB.bin">1GB</a></td>
-</tr>
-<tr>
-<td align="left">Singapore</td>
-<td align="left"><a href="http://sgp-ping.vultr.com/">sgp-ping.vultr.com …</a></td></tr></tbody></table> <a class="btn btn-info xsmall" href="https://jiang-hao.com/articles/2019/tools-Vultr-Nodes-Speed-Tests.html">read more</a></div>
         <hr />
     </div>
 				

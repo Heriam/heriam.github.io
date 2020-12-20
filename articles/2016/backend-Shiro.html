@@ -107,15 +107,15 @@ Category: <a href="https://jiang-hao.com/categories/backend.html">Backend</a>&nb
 - Provide easy-to-maintain data storage with only <strong>one database</strong>    <br> <br />
 - Provide <strong>domain-differentiated, credential-based</strong> authentication    <br> <br />
 - Provide <strong>domain-differentiated, role-based, service-specific</strong> authorization;    <br>   </p>
-
-<p><p><br><br><br><b>1. QuickStart with Apache Shiro</b><hr>
+<p><br><br><br><b>1. QuickStart with Apache Shiro</b><hr>
 - <a href="http://shiro.apache.org/reference.html">English Documentation</a>    <br> <br />
 - <a href="http://jinnianshilongnian.iteye.com/blog/2018398">Chinese Documentation</a>    <br> <br />
 - <a href="https://github.com/zhangkaitao/shiro-example">Example Applications</a>    <br><br />
 - <a href="http://shiro.apache.org/architecture.html">Architecture:</a>    <br><br>  <br />
   <img alt="Shiro Architecture" src="http://shiro.apache.org/assets/images/ShiroArchitecture.png" />  <br />
   <br><br>    </p>
-  <p><br><b>2. Environment Prerequisites</b><hr></p></p>
+<p><br><b>2. Environment Prerequisites</b><hr></p>
+
 <div class="highlight"><pre><span></span>Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T17:41:47+01:00)
 Maven home: /Library/Maven
 Java version: 1.7.0_79, vendor: Oracle Corporation
@@ -125,7 +125,6 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 </pre></div>
 
 <p><br><br><br><b>3. Apache Shiro Maven Dependency</b><hr></p>
-
 <div class="highlight"><pre><span></span>        <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>org.apache.shiro<span class="nt">&lt;/groupId&gt;</span>
             <span class="nt">&lt;artifactId&gt;</span>shiro-core<span class="nt">&lt;/artifactId&gt;</span>
@@ -145,9 +144,8 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 3. <a href="http://www.w3schools.com/sql/default.asp">W3Schools SQL Tutorial</a>   <br> <br />
 4. <a href="http://www.w3school.com.cn/sql/index.asp">W3School中文SQL教程</a>    <br> <br />
 5. <a href="http://www.runoob.com/mysql/mysql-tutorial.html">RUNOOB MySQL教程</a>    <br>   </p>
-
-<p><p><br><br><br><b>5. Create Tables</b>  <hr>  </p>
-  <p>1.User Table:  <br />
+<p><br><br><br><b>5. Create Tables</b>  <hr>  </p>
+<p>1.User Table:  <br />
   <img alt="user table" src="http://7xq8q3.com1.z0.glb.clouddn.com/user" />  <br />
    <br>  <br />
   2.Domain_User Table:  <br />
@@ -159,7 +157,8 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
   4.Permission_Domain_Role Table:  <br />
   <img alt="permission domain role table" src="http://7xq8q3.com1.z0.glb.clouddn.com/perms_dom_role" />
   <br><br><br><b>6. JDBC Setup and Code Customization</b>  <hr>  </p>
-  <p>1.Maven Dependency:</p></p>
+<p>1.Maven Dependency:</p>
+
 <div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>  
     <span class="nt">&lt;groupId&gt;</span>mysql<span class="nt">&lt;/groupId&gt;</span>  
     <span class="nt">&lt;artifactId&gt;</span>mysql-connector-java<span class="nt">&lt;/artifactId&gt;</span>  
@@ -174,7 +173,6 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 
 <p><br>  <br />
 2.Rewrite getPermissions method in jdbcRealm</p>
-
 <div class="highlight"><pre><span></span><span class="kd">protected</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getPermissions</span><span class="o">(</span><span class="n">Connection</span> <span class="n">conn</span><span class="o">,</span> <span class="n">String</span> <span class="n">username</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SQLException</span> <span class="o">{</span>
     <span class="n">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
     <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">permissions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashSet</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;();</span>
@@ -210,7 +208,6 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 
 <p><br>
 3.Add getUserDomain method in jdbcRealm</p>
-
 <div class="highlight"><pre><span></span>    <span class="kd">public</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getUserDomain</span><span class="o">(</span><span class="n">Connection</span> <span class="n">conn</span><span class="o">,</span> <span class="n">String</span> <span class="n">username</span><span class="o">){</span>
 
         <span class="n">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
@@ -242,7 +239,6 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 </pre></div>
 
 <p><br>4.Rewrite doGetAuthenticationInfo method in jdbcRealm</p>
-
 <div class="highlight"><pre><span></span><span class="kd">protected</span> <span class="n">AuthenticationInfo</span> <span class="nf">doGetAuthenticationInfo</span><span class="o">(</span><span class="n">AuthenticationToken</span> <span class="n">token</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">AuthenticationException</span> <span class="o">{</span>
 
         <span class="n">VTNAuthNToken</span> <span class="n">upToken</span> <span class="o">=</span> <span class="o">(</span><span class="n">VTNAuthNToken</span><span class="o">)</span> <span class="n">token</span><span class="o">;</span>
@@ -309,7 +305,6 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 </pre></div>
 
 <p><br><br><br><b>7. Setup Shiro.ini Configuration File</b>  <hr>  </p>
-
 <div class="highlight"><pre><span></span><span class="k">[main]</span>
 <span class="c1">#authenticator</span>
 <span class="na">authenticator</span><span class="o">=</span><span class="s">aaa.authn.VTNAuthenticator   #(Customized)</span>
@@ -342,10 +337,8 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 </pre></div>
 
 <p><br><b>8. Tips about SQL permissionsQuery in INI file:</b><hr><br></p>
-
 <p>1. Query with same parameter at two places:    </p>
-
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">T</span><span class="p">.</span><span class="n">P</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">T</span><span class="p">.</span><span class="n">P</span> 
 
 <span class="k">FROM</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">distinct</span> <span class="n">permission_id</span> <span class="k">as</span> <span class="n">P</span><span class="p">,</span> <span class="n">role_id</span> <span class="k">AS</span> <span class="n">R</span> 
       <span class="k">FROM</span> <span class="n">perm_domain_role</span> 
@@ -362,8 +355,7 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 
 <p><br>
 2.Optimization with only one parameter:     </p>
-
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">permission_id</span>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">permission_id</span> 
 
 <span class="k">FROM</span> <span class="n">perm_domain_role</span> 
      <span class="k">left</span> <span class="k">join</span> <span class="n">domain_user</span> <span class="k">using</span><span class="p">(</span><span class="n">domain_id</span><span class="p">)</span> 
@@ -379,9 +371,7 @@ OS name: &quot;mac os x&quot;, version: &quot;10.11.2&quot;, arch: &quot;x86_64&
 
 <p><br><br>
 <strong>9. Result:</strong></p>
-
-<p><hr>
-<p>Finally,  you can easily test that each user has different services  authorized by Shiro according to its tenant domain and its role.</p>
+<hr><p>Finally,  you can easily test that each user has different services  authorized by Shiro according to its tenant domain and its role.</p>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="o">(</span><span class="n">VTNAuthNToken</span> <span class="n">token</span><span class="o">:</span> <span class="n">userTokenList</span><span class="o">)</span> <span class="o">{</span>
       <span class="n">Mappable</span> <span class="n">userRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MappableMsg</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="n">token</span><span class="o">);</span>
       <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">service</span><span class="o">:</span> <span class="n">servList</span><span class="o">){</span>
@@ -425,7 +415,7 @@ Domain 3: tenant2: vtn:topo:read
 Domain 3: tenant2: vtn:topo:update
 Domain 3: tenant2: vtn:topo:delete
 Domain 3: guest2: vtn:topo:read
-</pre></div></p></div>
+</pre></div></div>
 	
         <hr />
 

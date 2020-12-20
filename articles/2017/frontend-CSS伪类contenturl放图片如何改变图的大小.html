@@ -108,7 +108,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
 <span class="p">}</span>
 </code></pre></div>
 
-
 <p>事实上，如果想要设置前端页面通过content：url显示出来的图片大小，那只能修改图片的大小。因为它是直接读取的图片，并不是代入到html中再显示出来。但可以采用background的方式调整图片的大小，比如本博客中学术社交网站ResearchGate的Logo的CSS显示代码如下：</p>
 <div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">social</span> <span class="nt">a</span><span class="o">[</span><span class="nt">href</span><span class="o">*=</span><span class="s1">&#39;researchgate.net&#39;</span><span class="o">]</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span>
   <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="s1">&#39;./images/icons/researchgate.png&#39;</span><span class="p">);</span> 
@@ -121,7 +120,6 @@ Category: <a href="https://jiang-hao.com/categories/frontend.html">Frontend</a>&
   <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>其中 content="", height, width, background-size, display, background-image 都必须显示指定。这样，就可以通过 height, width 来分别设置图片的长和宽了。</p></div>
 	
